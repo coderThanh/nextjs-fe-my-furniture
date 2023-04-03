@@ -1,0 +1,11 @@
+.wrap {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+}
+
+.item {
+    margin: 0 4px 6px;
+}

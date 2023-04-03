@@ -1,0 +1,27 @@
+.wrap {
+    position: relative;
+    z-index: 10;
+}
+
+.sub {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background-color: var(--background);
+    box-shadow: var(--box-shadown1);
+    width: var(--drop-down-width);
+    border-radius: 0 0 4px 4px;
+    padding: 5px;
+    z-index: 100;
+
+    &.subFull {
+        --subFull-width: 100vw;
+        --subFull-height: 70vh;
+
+        width: var(--subFull-width);
+        left: 0;
+        padding: 0;
+        max-height: var(--subFull-height);
+        overflow: hidden;
+    }
+}

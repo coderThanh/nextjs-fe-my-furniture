@@ -1,0 +1,31 @@
+.wrap {
+    position: relative;
+    z-index: 10;
+}
+
+.inner {
+    text-align: center;
+    position: relative;
+    z-index: 10;
+    padding: var(--gap) 0;
+
+    p {
+        font-size: 0.95rem;
+        margin-bottom: 12px;
+
+        &:last-of-type {
+            margin-bottom: 0;
+        }
+    }
+}
+
+.bg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    background-color: var(--surface);
+    opacity: var(--opacity-bg);
+}
