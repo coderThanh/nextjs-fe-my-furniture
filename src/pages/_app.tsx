@@ -1,4 +1,10 @@
-import "@/styles/globals.css";
+import "@/styles/reset.css";
+import "@/styles/bootstrap-grid.css";
+import "@/styles/globals.scss";
+
+import "@/components/header/header.scss";
+import "@/styles/page/home.scss";
+
 import type { AppProps } from "next/app";
 import Script from "next/script";
 

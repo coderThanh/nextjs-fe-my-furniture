@@ -6,6 +6,9 @@ import _IconSearch from "/public/svgs/search.svg";
 import _IconFavour from "/public/svgs/favour.svg";
 import _IconNotify from "/public/svgs/notify.svg";
 import _IconEsc from "/public/svgs/esc.svg";
+import _IconArrowNext from "/public/svgs/arrow-next.svg";
+import _IconArrowPrevious from "/public/svgs/arrow-previous.svg";
+import _IconClose from "/public/svgs/close.svg";
 
 import { CSSProperties } from "react";
 
@@ -45,4 +48,23 @@ export function IconNotify(props: IconSvgProps) {
 
 export function IconEsc(props: IconSvgProps) {
   return <_IconEsc className={props.className} style={{ ...props.style }} />;
+}
+
+export function IconArrowNext(props: IconSvgProps) {
+  return (
+    <_IconArrowNext className={props.className} style={{ ...props.style }} />
+  );
+}
+
+export function IconArrowPrevious(props: IconSvgProps) {
+  return (
+    <_IconArrowPrevious
+      className={props.className}
+      style={{ ...props.style }}
+    />
+  );
+}
+
+export function IconClose(props: IconSvgProps) {
+  return <_IconClose className={props.className} style={{ ...props.style }} />;
 }

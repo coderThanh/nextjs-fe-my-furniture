@@ -10,7 +10,7 @@
     padding: var(--gap) 0;
 
     p {
-        font-size: 0.95rem;
+        font-size: max(13px, 0.9rem);
         margin-bottom: 12px;
 
         &:last-of-type {

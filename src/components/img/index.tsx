@@ -23,14 +23,18 @@ type ImgPropsType = ImageProps & {
 export default function AppImage(props: ImgPropsType) {
   return (
     <div
-      className={classNames("imgWrap", props.className)}
+      className={classNames(
+        "imgWrap",
+        props.className,
+        props.ratio ? styles.ratio : "",
+        styles.wrap
+      )}
       style={{
-        width: props.width,
         ...props.style,
       }}
     >
       <div
-        className={classNames(styles.imgInner)}
+        className={classNames(styles.imgInner, "img-inner")}
         style={{
           paddingTop: props.ratio ? `${props.ratio}%` : undefined,
           borderRadius: props.radius,
@@ -45,6 +49,7 @@ export default function AppImage(props: ImgPropsType) {
           style={{ ...props.styleImg }}
           priority={props.priority}
           sizes={props.ratio ? props.sizes ?? "100%" : undefined}
+          className={classNames(styles.img)}
         />
         <div
           className={classNames(styles.imgOverlay)}

@@ -1,3 +1,12 @@
+.wrap {
+    &.ratio {
+        .img {
+            object-fit: cover;
+            object-position: center;
+        }
+    }
+}
+
 .imgInner {
     position: relative;
     z-index: 1;
@@ -11,4 +20,8 @@
     left: 0;
     right: 0;
     bottom: 0;
+}
+
+.img {
+    max-width: 100%;
 }

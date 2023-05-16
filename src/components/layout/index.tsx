@@ -18,6 +18,7 @@ type LayoutProps = {
   headerType: LayoutHeaderType;
   footerType: LayoutFooterType;
   asideType: LayoutAsideType;
+  classMain?: string;
 };
 
 export enum LayoutType {
@@ -38,6 +39,8 @@ export enum LayoutFooterType {
 
 export enum LayoutAsideType {
   left = "left",
+  leftFix = "leftFix",
+  right = "right",
   no = "no",
 }
 
@@ -61,37 +64,42 @@ export default function Layout(props: LayoutProps) {
 
   return (
     <>
-      <Head>
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
-      </Head>
+      <main id="main" className={classNames(styles.main, props.classMain)}>
+        <Head>
+          <meta name="viewport" content="width=device-width, initial-scale=1" />
+        </Head>
 
-      {props.headerType == LayoutHeaderType.default && <Header />}
-      {props.asideType == LayoutAsideType.left && <Aside />}
-
-      <main
-        id="main"
-        className={classNames(
-          styles.main,
-          props.headerType == LayoutHeaderType.default ? styles.hasHeader : "",
-          props.asideType == LayoutAsideType.left ? styles.hasAsideLeft : "",
-          !isAsideLeftOpen ? styles.asideLeftClose : ""
-        )}
-        onClick={(event) => mainOnClick(event)}
-      >
+        {props.headerType == LayoutHeaderType.default && <Header />}
+        {props.asideType == LayoutAsideType.leftFix && <Aside />}
         <div
           className={classNames(
-            { "container-fluid": props.type == LayoutType.containerFluid },
-            props.type == LayoutType.container ? "container" : "",
-            styles.inner
+            styles.layoutWrap,
+            props.headerType == LayoutHeaderType.default
+              ? styles.hasHeader
+              : "",
+            props.asideType == LayoutAsideType.leftFix
+              ? styles.hasAsideLefFix
+              : "",
+            !isAsideLeftOpen ? styles.asideLeftClose : "",
+            "layout-wrap"
           )}
+          onClick={(event) => mainOnClick(event)}
         >
-          {props.children}
-        </div>
+          <div
+            className={classNames(
+              { "container-fluid": props.type == LayoutType.containerFluid },
+              props.type == LayoutType.container ? "container-lg" : "",
+              styles.inner,
+              "layout-inner"
+            )}
+          >
+            {props.children}
+          </div>
 
+          <div className={classNames(styles.bg, "layout-bg")}></div>
+        </div>
         {props.footerType == LayoutFooterType.default && <Footer />}
       </main>
-
-      <div className={classNames(styles.bg)}></div>
     </>
   );
 }

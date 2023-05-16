@@ -1,17 +1,21 @@
-@import url("reset.css");
-@import url("bootstrap-grid.css");
-
+/*
+  Const
+  --mediaMaxSmall: 576px;
+  --mediaMaxMedium: 768px;
+  --mediaMaxLarge: 1024px;
+*/
 :root {
   --max-width: 1200px;
   --aside-width: 240px;
   --drop-down-width: 200px;
   --header-height: 70px;
   --font-family: "Open Sans", sans-serif;
-  /* --font-family: "Barlow Condensed", sans-serif; */
   --font-family-title: "Josefin Sans", "Barlow Condensed", sans-serif;
 
   --size-l1: 3rem;
   --size-l2: 2rem;
+  --size-l3: 1.6rem;
+  --size-l4: 1.25rem;
 
   font-size: 100%;
 }
@@ -45,6 +49,7 @@ p {
 a {
   line-height: inherit;
   font-weight: inherit;
+  color: var(--text-basic);
 }
 
 button {
@@ -77,8 +82,31 @@ body::-webkit-scrollbar-thumb {
 }
 
 body::-webkit-scrollbar-track {
-  background-color: #eee;
+  background-color: #ccc;
+  border-left: 1px solid #eee;
 }
+
+/* Row - Ui */
+.row-mt {
+  --bs-gutter-y: 24px;
+}
+
+.row-equal>.col>.col-inner {
+  min-height: 100%;
+}
+
+.row-large {
+  --bs-gutter-x: 35px;
+
+
+}
+
+.row-collapse {
+  --bs-gutter-x: 0;
+  --bs-gutter-y: 0;
+}
+
+
 
 /* Responsive --- */
 @media only screen and (min-width: 1024px) {
@@ -91,13 +119,20 @@ body::-webkit-scrollbar-track {
   :root {
     --size-l1: 2.6rem;
     --size-l2: 1.8rem;
+    --size-l3: 1.4rem;
+    --size-l4: 1.2rem;
+
     font-size: 97%;
   }
 }
-@media only screen and (max-width: 575px) {
+
+@media only screen and (max-width: 576px) {
   :root {
     --size-l1: 2rem;
-    --size-l2: 1.2rem;
+    --size-l2: 1.6rem;
+    --size-l3: 1.3rem;
+    --size-l4: 1.1rem;
+
     font-size: 92%;
   }
 }

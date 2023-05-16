@@ -1,33 +1,15 @@
 import classNames from "classnames";
 
-import styles from "./header.module.scss";
-import {
-  MouseEvent,
-  use,
-  useCallback,
-  useEffect,
-  useRef,
-  useState,
-} from "react";
+import { MouseEvent, useCallback, useEffect, useRef, useState } from "react";
 
 import { useDispatch } from "react-redux";
 import { debounce } from "@/controllers/debounce";
 import { clickHeader } from "@/redux/features/root_click/slice";
-import {
-  easeIn,
-  easeInOut,
-  motion,
-  Target,
-  useMotionValueEvent,
-  useScroll,
-  Variant,
-  Variants,
-} from "framer-motion";
 
 import HeaderMid from "./header-mid";
-import AppLink from "../link";
 import HeaderBottom from "./header-bottom";
-import { latest } from "immer/dist/internal";
+import HeaderMobileMid from "./header-mobile-mid";
+import WindownE from "../windown";
 
 export default function Header() {
   const dispatch = useDispatch();
@@ -40,70 +22,42 @@ export default function Header() {
   // Windown scroll to sticky
   const headerRef = useRef<HTMLDivElement>(null);
 
-  const [isSticky, setSticky] = useState<boolean>(false);
   const [headerHeight, setHeaderHeight] = useState<number>(0);
 
-  useEffect(() => {
-    windowResize();
+  // Check resize chagne height
+  const setHeightHeader = useCallback(() => {
+    const headerHeight: number | undefined =
+      headerRef.current?.getBoundingClientRect().height;
 
-    window.addEventListener("resize", windowResize);
+    headerHeight && setHeaderHeight(headerHeight);
+  }, []);
+
+  useEffect(() => {
+    setHeightHeader();
+
+    window.addEventListener("resize", setHeightHeader);
     // component didmount
     return () => {
-      window.removeEventListener("resize", windowResize);
+      window.removeEventListener("resize", setHeightHeader);
     };
-  }, [headerHeight]);
-
-  // useEffect(() => {
-  //   window.addEventListener("scroll", windownScroll);
-
-  //   // component didmount
-  //   return () => {
-  //     window.removeEventListener("scroll", windownScroll);
-  //   };
-  //   // eslint-disable-next-line react-hooks/exhaustive-deps
-  // }, [isSticky]);
+  }, [headerHeight, setHeightHeader]);
 
   // method
   function onClick(event: MouseEvent<HTMLElement>) {
     headerDebouncer();
   }
 
-  const windownScroll = useCallback(
-    (event: Event) => {
-      const windowY: number | undefined = window.scrollY;
-
-      if (windowY == undefined || headerHeight == undefined) {
-        return;
-      }
-
-      if (windowY > 0 && !isSticky) {
-        setSticky(true);
-      }
-
-      if (windowY <= 0 && isSticky) {
-        setSticky(false);
-      }
-    },
-    [isSticky, headerHeight]
-  );
-
-  const windowResize = () => {
-    const headerHeight: number | undefined =
-      headerRef.current?.getBoundingClientRect().height;
-
-    headerHeight && setHeaderHeight(headerHeight);
-  };
-
   return (
     <header
-      className={classNames(styles.wrap, styles.sticky)}
+      className={classNames("header-wrap", "sticky")}
       onClick={(event) => onClick(event)}
       style={{
         height: headerHeight,
       }}
     >
-      <div ref={headerRef} className={classNames(styles.headerInner)}>
+      <div ref={headerRef} className={classNames("header-inner")}>
         <HeaderMid />
+        <HeaderMobileMid />
         <HeaderBottom />
       </div>
     </header>

@@ -1,0 +1,101 @@
+.wrap {
+    isolation: isolate;
+    position: relative;
+}
+
+.view {
+    overflow: hidden;
+}
+
+.inner {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    overflow-x: visible;
+}
+
+.btn {
+    width: 40px;
+    height: 40px;
+    cursor: pointer;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    padding: 5px;
+    z-index: 100;
+    border-radius: 7px;
+    transition: 220ms color;
+
+    color: var(--on-background);
+
+    &:hover {
+        color: var(--primary);
+    }
+
+
+
+    &.btnPrev {
+        left: 20px;
+
+    }
+
+    &.btnNext {
+        right: 20px;
+    }
+
+    svg {
+        width: 100%;
+        height: 100%;
+    }
+
+
+}
+
+.footer {
+    display: flex;
+    width: 100%;
+    align-items: center;
+    justify-content: center;
+    gap: 10px 10px;
+    position: absolute;
+    z-index: 100;
+    bottom: 20px;
+}
+
+.dot {
+    display: block;
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background-color: var(--on-background);
+    transition: 220ms all;
+    opacity: 0.2;
+
+    &.current {
+        opacity: 1;
+    }
+}
+
+@media only screen and (max-width: 768px) {}
+
+@media only screen and (max-width: 575px) {
+    .btn {
+        width: 30px;
+        height: 30px;
+        padding: 5px 0px;
+
+        &.btnPrev {
+            left: 0px;
+
+        }
+
+        &.btnNext {
+            right: 0px;
+        }
+
+    }
+
+    .footer {
+        display: none;
+    }
+}

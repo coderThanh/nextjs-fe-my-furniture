@@ -1,7 +1,7 @@
 export default class AppConst {
   static titleDefault: string = "My blog";
 
-  static mediaMaxSmall: number = 575;
+  static mediaMaxSmall: number = 576;
   static mediaMaxMedium: number = 768;
   static mediaMaxLarge: number = 1024;
 

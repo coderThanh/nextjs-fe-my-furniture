@@ -12,13 +12,16 @@ export default function Search(props: SearchProp): JSX.Element {
   return (
     <>
       <form action="" className={props.classForm} style={props.styleForm}>
-        <div className={classNames(styles.inputWrap)}>
-          <button type="submit" className={classNames(styles.submit)}>
+        <div className={classNames(styles.inputWrap, "search-wrap")}>
+          <button
+            type="submit"
+            className={classNames(styles.submit, "search-submit")}
+          >
             <IconSearch />
           </button>
           <input
             type="text"
-            className={classNames(styles.inputText)}
+            className={classNames(styles.inputText, "search-input")}
             placeholder="Search"
           />
         </div>

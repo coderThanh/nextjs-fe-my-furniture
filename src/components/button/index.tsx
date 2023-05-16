@@ -73,5 +73,13 @@ export default function AppButton(props: AppButtonProps) {
     </button>
   );
 
-  return <>{<AppLink url={props.url}>{_buttonElement}</AppLink>}</>;
+  return (
+    <>
+      {
+        <AppLink classLink="button-link-out" url={props.url}>
+          {_buttonElement}
+        </AppLink>
+      }
+    </>
+  );
 }

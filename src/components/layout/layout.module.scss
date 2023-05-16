@@ -1,14 +1,13 @@
 // Css Layout fluid
 
 .main {
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    flex-wrap: nowrap;
-    justify-content: space-between;
-    transition: 220ms all;
+    max-width: 100vw;
+    overflow: hidden;
+}
 
-    &.hasAsideLeft {
+.layoutWrap {
+
+    &.hasAsideLefFix {
         margin-left: var(--aside-width);
 
         &.asideLeftClose {

@@ -1,9 +1,5 @@
 import AppConst from "@/models/const";
 import classNames from "classnames";
-import { ReactNode } from "react";
-import Responsive from "../responsive";
-
-import styles from "./gap.module.scss";
 
 type GapProps = {
   large: number;

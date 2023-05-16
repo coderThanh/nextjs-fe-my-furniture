@@ -102,7 +102,7 @@ export default function HeaderMenuDropDown(props: HeaderMenuDropDownProps) {
       >
         <div
           onClick={(event) => onClickTitle(!isOpen)}
-          className={classNames(styles.title)}
+          className={classNames(styles.title, "dropdown-title")}
         >
           {props.title}
         </div>
@@ -113,7 +113,8 @@ export default function HeaderMenuDropDown(props: HeaderMenuDropDownProps) {
           className={classNames(
             styles.sub,
             props.classChildren,
-            props.isSubFullWidth ? styles.subFull : ""
+            props.isSubFullWidth ? styles.subFull : "",
+            "sub-menu"
           )}
           transition={{
             duration: AppConst.duration1,

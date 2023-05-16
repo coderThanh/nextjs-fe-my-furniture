@@ -1,5 +1,4 @@
 import AppButton, { AppButtonColor, AppButtonKind } from "../button";
-import styles from "./header.module.scss";
 
 import classNames from "classnames";
 import AppImage from "../img";
@@ -15,22 +14,35 @@ import {
   IconAccount,
   IconHearth,
   IconCart,
-  IconMenu,
   IconEsc,
 } from "../icon";
 import { motion, Variants } from "framer-motion";
+import CardBlog from "../card-blog";
 
 export default function HeaderMid(): JSX.Element {
-  const [isAccountOpen, setIsAccountOpen] = useState<boolean>(false);
+  // Defint class tag
+  const classMenuItem: string = "menu-item";
+  const classMenuLink: string = "menu-link";
+  const classMenuIcon: string = "menu-icon";
+  const classMenuSub: string = "menu-sub";
+  const classMenuSubFull: string = "menu-sub_full";
+  const classNav: string = "nav";
+  const classNavInner: string = "nav-inner";
+  const classCurrent: string = "current";
+  const classHasChildren: string = "has-children";
+  const classChildrenLink: string = "children-link";
+  const classFull: string = "full";
 
+  // Define useState
+  const [isAccountOpen, setIsAccountOpen] = useState<boolean>(false);
   const [isShowSearch, setShowSearch] = useState<boolean>(false);
 
-  // Menthode
+  // Method event
   function searchClick() {
     setShowSearch(!isShowSearch);
   }
 
-  // Variants
+  // Variants framer motion
   const navCenterVariants: Variants = {
     onSearchShow: {
       x: -100,
@@ -40,6 +52,7 @@ export default function HeaderMid(): JSX.Element {
       width: 0,
       flexWrap: "nowrap",
       overflow: "hidden",
+      display: "none",
     },
     onSearchHidden: {},
   };
@@ -63,157 +76,287 @@ export default function HeaderMid(): JSX.Element {
 
   return (
     <>
-      <div className={classNames("container ", styles.mid)}>
-        <div className={classNames(styles.logo)}>
-          <AppLink>
+      <div
+        className={classNames(
+          "container-lg",
+          "header-mid desk d-none d-md-block"
+        )}
+      >
+        <div className={classNames("mid-inner")}>
+          <AppLink classLink={classNames("logo")}>
             <AppImage
               src={AppAssets.imgLogoDark}
               alt={AppConst.titleDefault}
-              width={240}
+              width={200}
               height={60}
               styleImg={{ objectFit: "contain", objectPosition: "left" }}
               priority={true}
             />
           </AppLink>
-        </div>
 
-        <div className={classNames(styles.midNavCenter)}>
-          <motion.nav
-            variants={navCenterVariants}
-            animate={isShowSearch ? "onSearchShow" : "onSearchHidden"}
-            initial={"onSearchHidden"}
-            transition={{
-              width: {
-                duration: 0,
-              },
-            }}
-            className={classNames(styles.navInner)}
-          >
-            <div className={classNames(styles.item, styles.current)}>
-              <AppLink url={"/"} classLink={styles.link}>
-                Cộng đồng
-              </AppLink>
-            </div>
-            <div className={classNames(styles.item)}>
-              <AppLink classLink={styles.link}> Shop</AppLink>
-            </div>
-            <div className={classNames(styles.item)}>
-              <AppLink classLink={styles.link}> Chuyên gia</AppLink>
-            </div>
-          </motion.nav>
-          <motion.div
-            variants={searchVariants}
-            animate={isShowSearch ? "onShow" : "onHidden"}
-            initial="onHidden"
-            transition={{
-              width: {
-                duration: 0,
-              },
-            }}
-            className={classNames(styles.searchForm)}
-          >
-            <Search />
-          </motion.div>
-        </div>
-
-        <div className={classNames(styles.midNavRight)}>
-          <div className={classNames(styles.item)}>
-            <AppButton
-              kind={AppButtonKind.default}
-              color={isShowSearch ? AppButtonColor.dark : AppButtonColor.white}
-              classContentWrap={classNames(styles.itemIconWrap)}
-              onClick={searchClick}
+          <div className={classNames("mid-nav_center", classNav)}>
+            <motion.nav
+              variants={navCenterVariants}
+              animate={isShowSearch ? "onSearchShow" : "onSearchHidden"}
+              initial={"onSearchHidden"}
+              transition={{
+                width: {
+                  duration: 0,
+                },
+              }}
+              className={classNames(classNavInner)}
             >
-              <>
-                {!isShowSearch && (
-                  <IconSearch className={classNames(styles.itemIcon)} />
+              <div
+                className={classNames(
+                  classMenuItem,
+                  classHasChildren,
+                  classCurrent
                 )}
-                {isShowSearch && (
-                  <IconEsc className={classNames(styles.itemIcon)} />
-                )}
-              </>
-            </AppButton>
-          </div>
-          <div className={classNames(styles.item)}>
-            <HeaderMenuDropDown
-              title={
-                <AppButton
-                  kind={AppButtonKind.default}
-                  color={AppButtonColor.white}
+              >
+                <HeaderMenuDropDown
+                  title={
+                    <AppLink classLink={classNames(classMenuLink, "parent")}>
+                      Dropdown
+                    </AppLink>
+                  }
+                  classChildren={classNames(classMenuSub)}
+                  isCloseWhenMainClick={true}
+                  isShowHover={true}
+                  isOpen={false}
                 >
-                  <IconAccount className={classNames(styles.itemIcon)} />
-                </AppButton>
-              }
-              isOpen={isAccountOpen}
-              onClick={() => setIsAccountOpen(!isAccountOpen)}
-              classChildren={classNames(styles.menuSub)}
-              isCloseWhenMainClick={true}
-              isShowHover={true}
+                  <>
+                    <AppLink
+                      classLink={classNames(classChildrenLink, classMenuLink)}
+                    >
+                      About us
+                    </AppLink>
+                    <AppLink
+                      url={"#"}
+                      classLink={classNames(classChildrenLink, classMenuLink)}
+                    >
+                      About me
+                    </AppLink>
+                    <AppLink
+                      classLink={classNames(classChildrenLink, classMenuLink)}
+                    >
+                      Contact
+                    </AppLink>
+                  </>
+                </HeaderMenuDropDown>
+              </div>
+              <div className={classNames(classMenuItem, classHasChildren)}>
+                <HeaderMenuDropDown
+                  title={
+                    <AppLink classLink={classNames(classMenuLink, "parent")}>
+                      Dropdown full
+                    </AppLink>
+                  }
+                  classChildren={classNames(classMenuSub, classMenuSubFull)}
+                  isCloseWhenMainClick={false}
+                  isShowHover={true}
+                  isSubFullWidth={true}
+                  isOpen={false}
+                >
+                  <>
+                    <div className={classNames("container-lg")}>
+                      <div className={classNames("row")}>
+                        <div className="col col-12 col-md-2">
+                          <div className={classNames("sub-nav")}>
+                            <div className={classNames("sub-title")}>
+                              Shop By
+                            </div>
+                            <AppLink
+                              classLink={classNames(
+                                classChildrenLink,
+                                classFull,
+                                classMenuLink
+                              )}
+                            >
+                              Plants
+                            </AppLink>
+                            <AppLink
+                              url={"#"}
+                              classLink={classNames(
+                                classChildrenLink,
+                                classFull,
+                                classMenuLink
+                              )}
+                            >
+                              Furniture
+                            </AppLink>
+                            <AppLink
+                              classLink={classNames(
+                                classChildrenLink,
+                                classFull,
+                                classMenuLink
+                              )}
+                            >
+                              Interior
+                            </AppLink>
+                            <AppLink
+                              classLink={classNames(
+                                classChildrenLink,
+                                classFull,
+                                classMenuLink
+                              )}
+                            >
+                              Design
+                            </AppLink>
+                            <AppLink
+                              classLink={classNames(
+                                classChildrenLink,
+                                classFull,
+                                classMenuLink
+                              )}
+                            >
+                              Home
+                            </AppLink>
+                            <AppLink
+                              classLink={classNames(
+                                classChildrenLink,
+                                classFull,
+                                classMenuLink
+                              )}
+                            >
+                              styles
+                            </AppLink>
+                          </div>
+                        </div>
+                        <div className="col col-md-10">
+                          <div className={classNames("sub-showcase")}>
+                            <CardBlog
+                              isShowCate={true}
+                              imgRadius={7}
+                              thumbnail={"/images/products/prd_1.jpg"}
+                            />
+                            <CardBlog
+                              isShowCate={true}
+                              imgRadius={7}
+                              thumbnail={"/images/products/prd_2.jpg"}
+                            />
+                            <CardBlog
+                              isShowCate={true}
+                              imgRadius={7}
+                              thumbnail={"/images/products/prd_3.jpg"}
+                            />
+                            <CardBlog
+                              classBoxWrap="d-lg-block d-none"
+                              isShowCate={true}
+                              imgRadius={7}
+                              thumbnail={"/images/products/prd_4.jpg"}
+                            />
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </>
+                </HeaderMenuDropDown>
+              </div>
+
+              <div className={classNames(classMenuItem)}>
+                <AppLink classLink={classMenuLink}> Chuyên gia</AppLink>
+              </div>
+            </motion.nav>
+            <motion.div
+              variants={searchVariants}
+              animate={isShowSearch ? "onShow" : "onHidden"}
+              initial="onHidden"
+              transition={{
+                width: {
+                  duration: 0,
+                },
+              }}
+              className={classNames("search-form")}
             >
-              <ListTitle
-                classNameText={styles.listText}
-                text={"Đăng nhập"}
-                style={{ borderRadius: 5 }}
-                iconMaterial={
-                  <span className="material-icons-outlined">play_circle</span>
-                }
-              ></ListTitle>
-              <ListTitle
-                text={"Đăng xuất"}
-                style={{ borderRadius: 5 }}
-                classNameText={styles.listText}
-                iconMaterial={
-                  <span className="material-icons-outlined">open_in_new</span>
-                }
-              ></ListTitle>
-              <ListTitle
-                classNameText={styles.listText}
-                text={"Thông tin"}
-                style={{ borderRadius: 5 }}
-                iconMaterial={
-                  <span className="material-icons-outlined">settings</span>
-                }
-              ></ListTitle>
-              <ListTitle
-                classNameText={styles.listText}
-                text={"Đơn hàng"}
-                style={{ borderRadius: 5 }}
-              ></ListTitle>
-            </HeaderMenuDropDown>
-          </div>
-          <div className={classNames(styles.item)}>
-            <AppButton
-              kind={AppButtonKind.default}
-              color={AppButtonColor.white}
-              classContentWrap={classNames(styles.itemIconWrap)}
-            >
-              <>
-                <IconHearth className={classNames(styles.itemIcon)} />
-                <span className={classNames(styles.number)}>3</span>
-              </>
-            </AppButton>
-          </div>
-          <div className={classNames(styles.item)}>
-            <AppButton
-              kind={AppButtonKind.default}
-              color={AppButtonColor.white}
-              classContentWrap={classNames(styles.itemIconWrap)}
-            >
-              <>
-                <IconCart className={classNames(styles.itemIcon)} />
-                <span className={classNames(styles.number)}>30</span>
-              </>
-            </AppButton>
+              <Search />
+            </motion.div>
           </div>
 
-          <div className={classNames(styles.item)}>
-            <AppButton
-              kind={AppButtonKind.default}
-              color={AppButtonColor.white}
-              classContentWrap={classNames(styles.itemIconWrap)}
-            >
-              <IconMenu />
-            </AppButton>
+          <div className={classNames("mid-nav_right")}>
+            <div className={classNames(classMenuItem)}>
+              <AppButton
+                kind={AppButtonKind.default}
+                color={
+                  isShowSearch ? AppButtonColor.dark : AppButtonColor.white
+                }
+                classContentWrap={classNames("btn-icon")}
+                onClick={searchClick}
+              >
+                <>
+                  {!isShowSearch && (
+                    <IconSearch className={classNames("icon")} />
+                  )}
+                  {isShowSearch && <IconEsc className={classNames("icon")} />}
+                </>
+              </AppButton>
+            </div>
+            <div className={classNames(classMenuItem)}>
+              <HeaderMenuDropDown
+                title={
+                  <AppButton
+                    kind={AppButtonKind.default}
+                    color={AppButtonColor.white}
+                  >
+                    <IconAccount className={classNames("icon")} />
+                  </AppButton>
+                }
+                isOpen={isAccountOpen}
+                onClick={() => setIsAccountOpen(!isAccountOpen)}
+                classChildren={classNames(classMenuSub)}
+                isCloseWhenMainClick={true}
+                isShowHover={true}
+              >
+                <ListTitle
+                  classNameText={"list-title"}
+                  text={"Đăng nhập"}
+                  iconMaterial={
+                    <span className="material-icons-outlined">play_circle</span>
+                  }
+                ></ListTitle>
+                <ListTitle
+                  text={"Đăng xuất"}
+                  classNameText={"list-title"}
+                  iconMaterial={
+                    <span className="material-icons-outlined">open_in_new</span>
+                  }
+                ></ListTitle>
+                <ListTitle
+                  classNameText={"list-title"}
+                  text={"Thông tin"}
+                  iconMaterial={
+                    <span className="material-icons-outlined">settings</span>
+                  }
+                ></ListTitle>
+                <ListTitle
+                  classNameText={"list-title"}
+                  text={"Đơn hàng"}
+                ></ListTitle>
+              </HeaderMenuDropDown>
+            </div>
+            <div className={classNames(classMenuItem)}>
+              <AppButton
+                kind={AppButtonKind.default}
+                color={AppButtonColor.white}
+                classContentWrap={classNames(classMenuIcon)}
+              >
+                <>
+                  <IconHearth className={classNames("icon")} />
+                  <span className={classNames("number")}>3</span>
+                </>
+              </AppButton>
+            </div>
+            <div className={classNames(classMenuItem)}>
+              <AppButton
+                kind={AppButtonKind.default}
+                color={AppButtonColor.white}
+                classContentWrap={classNames(classMenuIcon)}
+              >
+                <>
+                  <IconCart className={classNames("icon")} />
+                  <span className={classNames("number")}>30</span>
+                </>
+              </AppButton>
+            </div>
           </div>
         </div>
       </div>
