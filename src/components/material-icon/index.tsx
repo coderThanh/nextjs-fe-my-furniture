@@ -5,7 +5,6 @@ import { UrlWithStringQuery } from "url";
 export type AppMaterialIcon = {
   children: string;
   type: AppMaterialIconType;
-  style?: CSSProperties;
   className?: string;
   size?: string | number;
 };
@@ -20,11 +19,9 @@ export default function AppMaterialIcon(props: AppMaterialIcon): JSX.Element {
   return (
     <span
       style={{
-        ...props.style,
-        verticalAlign: "text-bottom",
         fontSize: props.size,
       }}
-      className={classNames(props.type, props.className)}
+      className={classNames(props.type, props.className, "mater-icon")}
     >
       {props.children}
     </span>

@@ -18,6 +18,7 @@ import {
 } from "../icon";
 import { motion, Variants } from "framer-motion";
 import CardBlog from "../card-blog";
+import AppMaterialIcon, { AppMaterialIconType } from "../material-icon";
 
 export default function HeaderMid(): JSX.Element {
   // Defint class tag
@@ -83,7 +84,7 @@ export default function HeaderMid(): JSX.Element {
         )}
       >
         <div className={classNames("mid-inner")}>
-          <AppLink classLink={classNames("logo")}>
+          <AppLink classLink={classNames("logo")} url={"/"}>
             <AppImage
               src={AppAssets.imgLogoDark}
               alt={AppConst.titleDefault}
@@ -279,7 +280,7 @@ export default function HeaderMid(): JSX.Element {
                 color={
                   isShowSearch ? AppButtonColor.dark : AppButtonColor.white
                 }
-                classContentWrap={classNames("btn-icon")}
+                className={classNames("btn-icon")}
                 onClick={searchClick}
               >
                 <>
@@ -310,21 +311,27 @@ export default function HeaderMid(): JSX.Element {
                   classNameText={"list-title"}
                   text={"Đăng nhập"}
                   iconMaterial={
-                    <span className="material-icons-outlined">play_circle</span>
+                    <AppMaterialIcon type={AppMaterialIconType.outlined}>
+                      play_circle
+                    </AppMaterialIcon>
                   }
                 ></ListTitle>
                 <ListTitle
                   text={"Đăng xuất"}
                   classNameText={"list-title"}
                   iconMaterial={
-                    <span className="material-icons-outlined">open_in_new</span>
+                    <AppMaterialIcon type={AppMaterialIconType.outlined}>
+                      open_in_new
+                    </AppMaterialIcon>
                   }
                 ></ListTitle>
                 <ListTitle
                   classNameText={"list-title"}
                   text={"Thông tin"}
                   iconMaterial={
-                    <span className="material-icons-outlined">settings</span>
+                    <AppMaterialIcon type={AppMaterialIconType.outlined}>
+                      settings
+                    </AppMaterialIcon>
                   }
                 ></ListTitle>
                 <ListTitle
@@ -337,7 +344,7 @@ export default function HeaderMid(): JSX.Element {
               <AppButton
                 kind={AppButtonKind.default}
                 color={AppButtonColor.white}
-                classContentWrap={classNames(classMenuIcon)}
+                className={classNames(classMenuIcon)}
               >
                 <>
                   <IconHearth className={classNames("icon")} />
@@ -349,7 +356,7 @@ export default function HeaderMid(): JSX.Element {
               <AppButton
                 kind={AppButtonKind.default}
                 color={AppButtonColor.white}
-                classContentWrap={classNames(classMenuIcon)}
+                className={classNames(classMenuIcon)}
               >
                 <>
                   <IconCart className={classNames("icon")} />

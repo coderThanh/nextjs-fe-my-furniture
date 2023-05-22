@@ -1,0 +1,26 @@
+.wrap {
+    font-size: 14px;
+    color: var(--color-basic);
+    line-height: 1.6;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    text-overflow: ellipsis;
+    overflow: hidden;
+}
+
+.item {
+    font-size: 14px;
+    color: var(--color-basic);
+    line-height: 1.43;
+    display: inline;
+}
+
+.link {
+    color: var(--color-title);
+    transition: 320ms all;
+
+    &:hover {
+        color: var(--primary);
+    }
+}

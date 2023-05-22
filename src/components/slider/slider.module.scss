@@ -64,12 +64,12 @@
 
 .dot {
     display: block;
-    width: 6px;
-    height: 6px;
+    width: 10px;
+    height: 10px;
     border-radius: 50%;
     background-color: var(--on-background);
     transition: 220ms all;
-    opacity: 0.2;
+    opacity: 0.5;
 
     &.current {
         opacity: 1;

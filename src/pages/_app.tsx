@@ -4,6 +4,8 @@ import "@/styles/globals.scss";
 
 import "@/components/header/header.scss";
 import "@/styles/page/home.scss";
+import "@/styles/page/archive.scss";
+import "@/styles/page/single.scss";
 
 import type { AppProps } from "next/app";
 import Script from "next/script";
@@ -45,7 +47,9 @@ export default function App({ Component, pageProps }: AppProps) {
           --color-neutral3: #eeeeee;
 
           --color-title: #000;
-          --color-basic: #797878;
+          --color-basic: #333;
+          --link-basic: #007bff;
+          --link-hover: #6cd2bc;
 
           --box-shadown1: 3px 0px 7px 1px rgb(0 0 0 / 5%);
           --box-shadown2: 0 0.75rem 6rem rgba(56, 65, 74, 0.03);

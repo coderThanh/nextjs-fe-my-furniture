@@ -1,8 +1,9 @@
 import Link from "next/link";
-import { ReactNode } from "react";
+import { Key, ReactNode } from "react";
 import { Url } from "url";
 
 export type AppLinkProps = {
+  key?: Key;
   url?: Url | string;
   classLink?: string;
   children?: ReactNode;

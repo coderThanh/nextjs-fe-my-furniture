@@ -19,32 +19,44 @@ export default function HeaderBottom(): JSX.Element {
       <div className={"bot-inner"}>
         <div className={classNames("bot-nav_left", classNav)}>
           <div className={classNames(classMenuItem, classCurrent)}>
-            <AppLink classLink={classMenuLink}>Trang chủ</AppLink>
+            <AppLink url={"/category"} classLink={classMenuLink}>
+              Trang chủ
+            </AppLink>
           </div>
           <div className={classMenuItem}>
-            <AppLink url={"#"} classLink={classMenuLink}>
+            <AppLink url={"/category"} classLink={classMenuLink}>
               Chuyện nhà
             </AppLink>
           </div>
           <div className={classMenuItem}>
-            <AppLink url={"#"} classLink={classMenuLink}>
+            <AppLink url={"/category"} classLink={classMenuLink}>
               Wabi sabi
             </AppLink>
           </div>
           <div className={classMenuItem}>
-            <AppLink classLink={classMenuLink}>Mid Centry</AppLink>
+            <AppLink url={"/category"} classLink={classMenuLink}>
+              Mid Centry
+            </AppLink>
           </div>
           <div className={classMenuItem}>
-            <AppLink classLink={classMenuLink}>Product name</AppLink>
+            <AppLink url={"/category"} classLink={classMenuLink}>
+              Product name
+            </AppLink>
           </div>
           <div className={classMenuItem}>
-            <AppLink classLink={classMenuLink}>Minimalism</AppLink>
+            <AppLink url={"/category"} classLink={classMenuLink}>
+              Minimalism
+            </AppLink>
           </div>
           <div className={classMenuItem}>
-            <AppLink classLink={classMenuLink}>Japandi</AppLink>
+            <AppLink url={"/category"} classLink={classMenuLink}>
+              Japandi
+            </AppLink>
           </div>
           <div className={classMenuItem}>
-            <AppLink classLink={classMenuLink}>Scandinavian</AppLink>
+            <AppLink url={"/category"} classLink={classMenuLink}>
+              Scandinavian
+            </AppLink>
           </div>
         </div>
       </div>

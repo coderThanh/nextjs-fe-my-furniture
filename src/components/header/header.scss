@@ -35,10 +35,12 @@
 
 
 .menu-icon {
-    display: flex;
-    flex-direction: row;
-    flex-wrap: nowrap;
-    align-items: center;
+    .btn-content {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: nowrap;
+        align-items: center;
+    }
 
     .number {
         margin-left: 5px;
@@ -46,7 +48,7 @@
     }
 }
 
-.btn-icon {
+.btn-icon .btn-content {
     height: 18px;
     display: block;
 }
@@ -196,10 +198,8 @@ header {
         flex: 1 1;
     }
 
-    .blog-box {
-        .name {
-            font-size: max(13px, 0.9rem);
-        }
+    .blog-box-name {
+        font-size: max(13px, 0.9rem);
     }
 
 }
@@ -324,7 +324,7 @@ body .windown-wrap {
     --menu-item-py: 16px;
     --content-w: 100%;
     --content-mw: 900px;
-    --btn-close-color: var(--text-title);
+    --btn-close-color: var(--color-title);
 }
 
 .windown-logo {

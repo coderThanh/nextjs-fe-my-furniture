@@ -31,7 +31,7 @@ export default function Home() {
         type={LayoutType.container}
         headerType={LayoutHeaderType.default}
         footerType={LayoutFooterType.default}
-        asideType={LayoutAsideType.left}
+        asideType={LayoutAsideType.no}
         classMain="home-page"
       >
         <Gap large={30} small={20} />
@@ -59,7 +59,7 @@ export function HomeHotBlog(): JSX.Element {
               md={1}
               sm={1}
               isShowButton={true}
-              count={7}
+              count={4}
               build={function (index: number): ReactNode {
                 return (
                   <>
@@ -114,7 +114,7 @@ export function HomePostByCategory(
             <div className="col-inner">
               <div className={classNames("title_default")}>
                 <h3>{props.title}</h3>
-                <AppLink classLink="title-more" url={"#"}>
+                <AppLink classLink="title-more" url={"/category"}>
                   Xem tất cả
                 </AppLink>
               </div>

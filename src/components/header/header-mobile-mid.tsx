@@ -24,25 +24,39 @@ export default function HeaderMobileMid(): JSX.Element {
   const demoMenuItem: ReactElement = (
     <>
       <div className={classNames(classMenuItem)}>
-        <AppLink classLink={classNames(classMenuLink)}>Scandinavian</AppLink>
+        <AppLink url={"/category"} classLink={classNames(classMenuLink)}>
+          Scandinavian
+        </AppLink>
       </div>
       <div className={classNames(classMenuItem)}>
-        <AppLink classLink={classNames(classMenuLink)}>Japandi</AppLink>
+        <AppLink url={"/category"} classLink={classNames(classMenuLink)}>
+          Japandi
+        </AppLink>
       </div>
       <div className={classNames(classMenuItem)}>
-        <AppLink classLink={classNames(classMenuLink)}>Minimalism</AppLink>
+        <AppLink url={"/category"} classLink={classNames(classMenuLink)}>
+          Minimalism
+        </AppLink>
       </div>
       <div className={classNames(classMenuItem)}>
-        <AppLink classLink={classNames(classMenuLink)}>Xu hướng</AppLink>
+        <AppLink url={"/category"} classLink={classNames(classMenuLink)}>
+          Xu hướng
+        </AppLink>
       </div>
       <div className={classNames(classMenuItem)}>
-        <AppLink classLink={classNames(classMenuLink)}>Thảo luận</AppLink>
+        <AppLink url={"/category"} classLink={classNames(classMenuLink)}>
+          Thảo luận
+        </AppLink>
       </div>
       <div className={classNames(classMenuItem)}>
-        <AppLink classLink={classNames(classMenuLink)}>Mid centry</AppLink>
+        <AppLink url={"/category"} classLink={classNames(classMenuLink)}>
+          Mid centry
+        </AppLink>
       </div>
       <div className={classNames(classMenuItem)}>
-        <AppLink classLink={classNames(classMenuLink)}>Ngẫu nhiên</AppLink>
+        <AppLink url={"/category"} classLink={classNames(classMenuLink)}>
+          Ngẫu nhiên
+        </AppLink>
       </div>
     </>
   );
@@ -69,7 +83,7 @@ export default function HeaderMobileMid(): JSX.Element {
                 <AppButton
                   kind={AppButtonKind.default}
                   color={AppButtonColor.white}
-                  classContentWrap={classNames(classMenuIcon)}
+                  className={classNames(classMenuIcon)}
                 >
                   <>
                     <IconCart className={classNames("icon")} />
@@ -85,7 +99,7 @@ export default function HeaderMobileMid(): JSX.Element {
                     <AppButton
                       kind={AppButtonKind.default}
                       color={AppButtonColor.white}
-                      classContentWrap={classNames(classMenuIcon)}
+                      className={classNames(classMenuIcon)}
                     >
                       <>
                         <IconMenu className={classNames("icon")} />

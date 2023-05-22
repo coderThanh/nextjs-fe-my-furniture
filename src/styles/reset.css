@@ -133,4 +133,26 @@ q:after {
 table {
   border-collapse: collapse;
   border-spacing: 0;
-} /*# sourceMappingURL=globals.css.map */
+}
+
+label {
+  display: block;
+  margin-bottom: 12px;
+}
+
+input,
+select,
+textarea {
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
+  margin-bottom: 16px;
+  font-size: 16px;
+  padding: 5px 10px;
+  outline: none;
+}
+
+input[type="radio"],
+input[type="checkbox"] {
+  width: fit-content;
+}

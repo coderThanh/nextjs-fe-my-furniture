@@ -1,12 +1,9 @@
 import classNames from "classnames";
 import React from "react";
 import { CSSProperties } from "react";
-import AppButton, {
-  AppButtonColor,
-  AppButtonKind,
-  AppButtonSize,
-} from "../button";
+import AppButton, { AppButtonColor, AppButtonKind } from "../button";
 import AppMaterialIcon, { AppMaterialIconType } from "../material-icon";
+import { Url } from "url";
 
 import styles from "./pagination.module.scss";
 
@@ -16,13 +13,13 @@ export type PaginationProps = {
   showLength: number;
   isHiddenNav?: boolean;
   className?: string;
-  style?: CSSProperties;
   onClick?: PaginationOnClick;
 };
 
 export type PaginationOnClick = (value: number) => void;
 
 export default function Pagination(props: PaginationProps): JSX.Element {
+  // Event onclick
   function onClick(value: number) {
     props.onClick && props.onClick(value);
   }
@@ -37,6 +34,7 @@ export default function Pagination(props: PaginationProps): JSX.Element {
   var listBefore: number[] = [];
   var listAfter: number[] = [];
 
+  // Devide list to before and after current
   if (props.count - props.current > Math.floor(props.showLength / 2)) {
     listBefore = initList.slice(
       Math.max(props.current - Math.floor(props.showLength / 2), 0),
@@ -59,13 +57,10 @@ export default function Pagination(props: PaginationProps): JSX.Element {
   const listShow: number[] = [...listBefore, props.current, ...listAfter];
 
   return (
-    <div
-      style={{ ...props.style }}
-      className={classNames(props.className, styles.wrap)}
-    >
+    <div className={classNames(props.className, styles.wrap, "pagi-wrap")}>
       {!props.isHiddenNav && !isFirst && (
         <AppButton
-          className={classNames(styles.item)}
+          className={classNames(styles.item, "pagi-item")}
           kind={AppButtonKind.text}
           color={AppButtonColor.secondary}
           onClick={() => onClick(props.current - 1)}
@@ -79,7 +74,7 @@ export default function Pagination(props: PaginationProps): JSX.Element {
         return (
           <AppButton
             key={index}
-            className={classNames(styles.item)}
+            className={classNames(styles.item, "pagi-item")}
             kind={
               item == props.current ? AppButtonKind.default : AppButtonKind.text
             }
@@ -91,7 +86,7 @@ export default function Pagination(props: PaginationProps): JSX.Element {
       })}
       {!props.isHiddenNav && !isLast && (
         <AppButton
-          className={classNames(styles.item)}
+          className={classNames(styles.item, "pagi-item")}
           kind={AppButtonKind.text}
           color={AppButtonColor.secondary}
           onClick={() => onClick(props.current + 1)}
