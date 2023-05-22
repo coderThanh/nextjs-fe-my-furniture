@@ -241,7 +241,7 @@ export default function HeaderMid(): JSX.Element {
                               thumbnail={"/images/products/prd_3.jpg"}
                             />
                             <CardBlog
-                              classBoxWrap="d-lg-block d-none"
+                              className="d-lg-block d-none"
                               isShowCate={true}
                               imgRadius={7}
                               thumbnail={"/images/products/prd_4.jpg"}
