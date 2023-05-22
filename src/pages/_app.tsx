@@ -1,3 +1,4 @@
+import "@/styles/material-icon.css";
 import "@/styles/reset.css";
 import "@/styles/bootstrap-grid.css";
 import "@/styles/globals.scss";
