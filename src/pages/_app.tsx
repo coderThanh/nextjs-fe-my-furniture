@@ -8,7 +8,6 @@ import "@/styles/page/archive.scss";
 import "@/styles/page/single.scss";
 
 import type { AppProps } from "next/app";
-import Script from "next/script";
 
 import Providers from "@/redux/provider";
 
@@ -62,8 +61,6 @@ export default function App({ Component, pageProps }: AppProps) {
           --opacity: 72%;
         }
       `}</style>
-
-      <Script src="/js/jquery-3.6.3.min.js"></Script>
 
       <Providers>
         <Component {...pageProps} />
