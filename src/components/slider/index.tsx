@@ -110,42 +110,40 @@ export default function Slider(props: SliderProps): JSX.Element {
   );
 
   // Handle poiter up + touch end
-  const whenActionUp = useCallback(
-    (pointerEnd: number): void => {
-      if (!isDragging.current) return;
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  function whenActionUp(pointerEnd: number): void {
+    if (!isDragging.current) return;
 
-      var maxX: number = (props.count - numberItemShow.current) * itemWidth;
+    var maxX: number = (props.count - numberItemShow.current) * itemWidth;
 
-      transTime.current = 0.6;
+    transTime.current = 0.6;
 
-      if (translateXCurrent > 0) {
-        // go to first item
-        setIndexNext(0);
-      } else if (translateXCurrent + maxX < 0) {
-        // go to last item
-        var lastIndex = props.count - Math.floor(numberItemShow.current);
+    if (translateXCurrent > 0) {
+      // go to first item
+      setIndexNext(0);
+    } else if (translateXCurrent + maxX < 0) {
+      // go to last item
+      var lastIndex = props.count - Math.floor(numberItemShow.current);
 
-        setIndexNext(lastIndex);
-        // setTranslateXNext((props.count - numberItemShow) * itemWidth * -1);
-      } else if (translateXWhenStart.current - translateXCurrent > 0) {
-        // go right
-        var lengthGone = translateXCurrent - translateXWhenStart.current;
+      setIndexNext(lastIndex);
+      // setTranslateXNext((props.count - numberItemShow) * itemWidth * -1);
+    } else if (translateXWhenStart.current - translateXCurrent > 0) {
+      // go right
+      var lengthGone = translateXCurrent - translateXWhenStart.current;
 
-        setIndexNext(currentIndex + Math.floor(lengthGone / itemWidth) * -1);
-      } else if (translateXWhenStart.current - translateXCurrent < 0) {
-        // go left
-        var lengthGone = translateXCurrent - translateXWhenStart.current;
+      setIndexNext(currentIndex + Math.floor(lengthGone / itemWidth) * -1);
+    } else if (translateXWhenStart.current - translateXCurrent < 0) {
+      // go left
+      var lengthGone = translateXCurrent - translateXWhenStart.current;
 
-        setIndexNext(currentIndex - Math.ceil(lengthGone / itemWidth));
-      }
+      setIndexNext(currentIndex - Math.ceil(lengthGone / itemWidth));
+    }
 
-      isDragging.current = false;
-      isUseTouch.current = false;
-      translateXWhenStart.current = 0;
-      pointerStart.current = 0;
-    },
-    [currentIndex, itemWidth, props.count, setIndexNext, translateXCurrent]
-  );
+    isDragging.current = false;
+    isUseTouch.current = false;
+    translateXWhenStart.current = 0;
+    pointerStart.current = 0;
+  }
 
   // When event poiter down
   const onPointerDown = useCallback(
