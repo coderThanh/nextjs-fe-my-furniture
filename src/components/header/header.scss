@@ -338,6 +338,11 @@ body .windown-wrap {
     padding-top: var(--content-py);
     padding-bottom: 60px;
 
+    .search-submit {
+        color: var(--color-basic);
+    }
+
+
     .l-title-wrap {
         --hover-bg-op: 0;
     }
