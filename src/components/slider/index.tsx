@@ -11,7 +11,7 @@ import {
   TouchEvent,
 } from "react";
 import AppConst from "@/models/const";
-import { motion } from "framer-motion";
+import { PanInfo, motion } from "framer-motion";
 import { IconArrowNext, IconArrowPrevious } from "../icon";
 
 export type SliderProps = {
@@ -30,12 +30,13 @@ export type SliderProps = {
 export type SliderBuild = (index: number) => ReactNode;
 
 export default function Slider(props: SliderProps): JSX.Element {
+  const DEFAULT_DURATION: number = 0.4;
+
   const [itemWidth, setItemWidth] = useState(0);
   const [currentIndex, setCurrentIndex] = useState(0);
   const [translateXCurrent, setTranslateXCurrent] = useState(0);
 
   const isDragging = useRef(false);
-  const isUseTouch = useRef(false);
 
   const pointerStart = useRef(0);
   const translateXWhenStart = useRef(0);
@@ -43,7 +44,7 @@ export default function Slider(props: SliderProps): JSX.Element {
   const sliderWidth = useRef(0);
   const numberItemShow = useRef(props.lg);
 
-  const transTime = useRef(0.6);
+  const transTime = useRef(DEFAULT_DURATION);
 
   const sliderRef = useRef<HTMLDivElement>(null);
 
@@ -73,142 +74,98 @@ export default function Slider(props: SliderProps): JSX.Element {
     setItemWidth(sliderWidth.current / props.lg);
   }, [props.lg, props.md, props.sm]);
 
-  // Set Translate with validate
-  const setTranslateXNext = useCallback(
-    (nextMargin: number): void => {
+  //  Change current index with validate
+  const setIndexNext = useCallback(
+    (nextIndex: number) => {
       var maxX: number = (props.count - numberItemShow.current) * itemWidth;
 
-      if (nextMargin < maxX * -1) {
-        setTranslateXCurrent(
-          (props.count - numberItemShow.current) * itemWidth * -1
-        );
-        return;
+      if (nextIndex > props.count - Math.floor(numberItemShow.current)) {
+        setCurrentIndex(0);
+        setTranslateXCurrent(0);
+      } else if (nextIndex < 0) {
+        setCurrentIndex(props.count - Math.floor(numberItemShow.current));
+        setTranslateXCurrent(maxX * -1);
+      } else {
+        setCurrentIndex(nextIndex);
+        var nextMargin = nextIndex * itemWidth * -1;
+        if (nextMargin < maxX * -1) {
+          setTranslateXCurrent(maxX * -1);
+        } else {
+          setTranslateXCurrent(nextMargin);
+        }
       }
-
-      setTranslateXCurrent(nextMargin);
     },
     [itemWidth, props.count]
   );
 
-  //  Change current index with validate
-  const setIndexNext = useCallback(
-    (nextIndex: number) => {
-      if (nextIndex > props.count - Math.floor(numberItemShow.current)) {
-        setCurrentIndex(0);
-        setTranslateXNext(0);
-      } else if (nextIndex < 0) {
-        setCurrentIndex(props.count - Math.floor(numberItemShow.current));
-        setTranslateXNext(
-          (props.count - numberItemShow.current) * itemWidth * -1
-        );
-      } else {
-        setCurrentIndex(nextIndex);
-        setTranslateXNext(nextIndex * itemWidth * -1);
-      }
-    },
-    [itemWidth, props.count, setTranslateXNext]
-  );
-
   // Handle poiter up + touch end
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  function whenActionUp(pointerEnd: number): void {
+  const whenActionUp = useCallback((): void => {
     if (!isDragging.current) return;
 
     var maxX: number = (props.count - numberItemShow.current) * itemWidth;
 
-    transTime.current = 0.6;
+    transTime.current = DEFAULT_DURATION;
 
     if (translateXCurrent > 0) {
       // go to first item
+
       setIndexNext(0);
     } else if (translateXCurrent + maxX < 0) {
       // go to last item
       var lastIndex = props.count - Math.floor(numberItemShow.current);
 
       setIndexNext(lastIndex);
-      // setTranslateXNext((props.count - numberItemShow) * itemWidth * -1);
     } else if (translateXWhenStart.current - translateXCurrent > 0) {
       // go right
-      var lengthGone = translateXCurrent - translateXWhenStart.current;
-
-      setIndexNext(currentIndex + Math.floor(lengthGone / itemWidth) * -1);
+      setIndexNext(
+        currentIndex -
+          Math.floor(
+            (translateXCurrent - translateXWhenStart.current) / itemWidth
+          )
+      );
     } else if (translateXWhenStart.current - translateXCurrent < 0) {
       // go left
-      var lengthGone = translateXCurrent - translateXWhenStart.current;
-
-      setIndexNext(currentIndex - Math.ceil(lengthGone / itemWidth));
+      setIndexNext(
+        currentIndex -
+          Math.ceil(
+            (translateXCurrent - translateXWhenStart.current) / itemWidth
+          )
+      );
     }
 
     isDragging.current = false;
-    isUseTouch.current = false;
+    // isUseTouch.current = false;
     translateXWhenStart.current = 0;
     pointerStart.current = 0;
-  }
+  }, [currentIndex, itemWidth, props.count, setIndexNext, translateXCurrent]);
 
-  // When event poiter down
-  const onPointerDown = useCallback(
-    (event: PointerEvent<HTMLDivElement>) => {
-      pointerStart.current = event.pageX;
+  const onPan = useCallback((event: globalThis.PointerEvent, info: PanInfo) => {
+    if (!isDragging.current) return;
+
+    // Reset transition
+    transTime.current = 0;
+
+    setTranslateXCurrent(
+      translateXWhenStart.current - (pointerStart.current - info.point.x)
+    );
+  }, []);
+
+  const onPanStart = useCallback(
+    (event: globalThis.PointerEvent, info: PanInfo) => {
+      pointerStart.current = info.point.x;
       translateXWhenStart.current = translateXCurrent;
       isDragging.current = true;
     },
     [translateXCurrent]
   );
 
-  const onTouchDown = useCallback((event: TouchEvent<HTMLDivElement>) => {
-    isUseTouch.current = true;
-  }, []);
-
-  // When event poiter up / touch end
-  const onPointerUp = useCallback(
-    (event: PointerEvent<HTMLDivElement>) => {
+  const onPanEnd = useCallback(
+    (event: globalThis.PointerEvent, info: PanInfo) => {
       if (!isDragging.current) return;
-      if (isUseTouch.current) return;
 
-      const pointerEnd: number = event.pageX;
-      whenActionUp(pointerEnd);
+      whenActionUp();
     },
     [whenActionUp]
-  );
-
-  const onTouchEnd = useCallback(
-    (event: TouchEvent) => {
-      if (!isDragging.current) return;
-
-      const pointerEnd: number = event.changedTouches[0].clientX;
-
-      whenActionUp(pointerEnd);
-    },
-    [whenActionUp]
-  );
-
-  // Handle poiter move / touch move
-  const whenPointerMove = useCallback((pageX: number): void => {
-    if (!isDragging.current) return;
-
-    var lengthMouseMoved = pointerStart.current - pageX;
-
-    // Reset transition
-    transTime.current = 0;
-
-    setTranslateXCurrent(translateXWhenStart.current + lengthMouseMoved * -1);
-  }, []);
-
-  // When poiter move / touch move
-  const onPointerMove = useCallback(
-    (event: PointerEvent<HTMLDivElement>): void => {
-      if (!isDragging.current) return;
-      whenPointerMove(event.pageX);
-    },
-    [whenPointerMove]
-  );
-
-  const onTouchMove = useCallback(
-    (event: TouchEvent<HTMLDivElement>): void => {
-      if (!isDragging.current) return;
-      whenPointerMove(event.changedTouches[0].clientX);
-    },
-    [whenPointerMove]
   );
 
   // When button click
@@ -238,26 +195,18 @@ export default function Slider(props: SliderProps): JSX.Element {
         className={classNames(props.classWrap, "slider", styles.wrap)}
       >
         <motion.div
-          onPointerDown={(event) => onPointerDown(event)}
-          onPointerMove={(event) => onPointerMove(event)}
-          onPointerLeave={(event) => onPointerUp(event)}
-          onPointerUp={(event) => onPointerUp(event)}
-          onTouchStart={(event) => onTouchDown(event)}
-          onTouchMove={(event) => onTouchMove(event)}
-          onTouchEnd={(event) => onTouchEnd(event)}
-          onTouchCancel={(event) => onTouchEnd(event)}
+          onPan={(event, info) => onPan(event, info)}
+          onPanStart={(event, info) => onPanStart(event, info)}
+          onPanEnd={(event, info) => onPanEnd(event, info)}
           className={classNames(styles.view, "slider-view")}
         >
           <motion.div
             layout
             className={classNames(styles.inner, "slider-inner")}
-            animate={{
-              x: translateXCurrent,
-              transition: {
-                duration: transTime.current,
-                // ease: "spring",
-                type: "spring",
-              },
+            animate={{ x: translateXCurrent }}
+            transition={{
+              type: "tween",
+              duration: transTime.current,
             }}
           >
             {Array(props.count)

@@ -5,6 +5,8 @@
 
 .view {
     overflow: hidden;
+    touch-action: none;
+    cursor: grab;
 }
 
 .inner {
@@ -34,21 +36,21 @@
 
 
 
-    &.btnPrev {
-        left: 20px;
-
-    }
-
-    &.btnNext {
-        right: 20px;
-    }
-
     svg {
         width: 100%;
         height: 100%;
     }
 
 
+}
+
+.btnPrev {
+    left: 20px;
+
+}
+
+.btnNext {
+    right: 20px;
 }
 
 .footer {
@@ -83,16 +85,15 @@
         width: 30px;
         height: 30px;
         padding: 5px 0px;
+    }
 
-        &.btnPrev {
-            left: 0px;
+    .btnPrev {
+        left: 0px;
 
-        }
+    }
 
-        &.btnNext {
-            right: 0px;
-        }
-
+    .btnNext {
+        right: 0px;
     }
 
     .footer {
