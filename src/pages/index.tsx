@@ -4,19 +4,19 @@ import Layout, {
   LayoutFooterType,
   LayoutHeaderType,
   LayoutType,
-} from "@/components/layout";
+} from "@/components-root/layout";
 
-import Gap from "@/components/gap";
+import Gap from "@/components-root/gap";
 
-import Slider from "@/components/slider";
-import AppImage from "@/components/img";
+import Slider from "@/components-root/slider";
+import AppImage from "@/components-root/img";
 import AppAssets from "@/models/assets";
 import { ReactNode } from "react";
-import CardBlog, { CardBlogType } from "@/components/card-blog";
+import CardBlog, { CardBlogType } from "@/components-child/card-blog";
 import classNames from "classnames";
 
 import Image from "next/image";
-import AppLink from "@/components/link";
+import AppLink from "@/components-root/link";
 import AppConst from "@/models/const";
 
 export default function Home() {

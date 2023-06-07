@@ -24,6 +24,7 @@ const nextConfig = {
       },
     ],
   },
+  output: "standalone", // use in docker / product ev
   webpack(config) {
     // Grab the existing rule that handles SVG imports
     const fileLoaderRule = config.module.rules.find((rule) =>

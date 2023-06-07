@@ -3,13 +3,12 @@ import classNames from "classnames";
 import { MouseEvent, useCallback, useEffect, useRef, useState } from "react";
 
 import { useDispatch } from "react-redux";
-import { debounce } from "@/controllers/debounce";
-import { clickHeader } from "@/redux/features/root_click/slice";
+import { debounce } from "@/controllers-root/debounce";
+import { clickHeader } from "@/redux/features-root/root_click/slice";
 
 import HeaderMid from "./header-mid";
 import HeaderBottom from "./header-bottom";
 import HeaderMobileMid from "./header-mobile-mid";
-import WindownE from "../windown";
 
 export default function Header() {
   const dispatch = useDispatch();

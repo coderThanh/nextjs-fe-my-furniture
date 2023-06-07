@@ -1,6 +1,6 @@
 import classNames from "classnames";
 import { CSSProperties } from "react";
-import { IconSearch } from "../icon";
+import { IconSearch } from "../../components-child/icon";
 import styles from "./search.module.scss";
 
 export type SearchProp = {

@@ -1,6 +1,6 @@
 import { configureStore } from "@reduxjs/toolkit";
-import asideReducer from "./features/aside/slice";
-import rootClickReducer from "./features/root_click/slice";
+import asideReducer from "./features-root/aside/slice";
+import rootClickReducer from "./features-root/root_click/slice";
 
 const store = configureStore({
   reducer: {

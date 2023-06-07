@@ -1,8 +1,8 @@
 import classNames from "classnames";
 import { useState } from "react";
 import CardBlog from "../card-blog";
-import HeaderMenuDropDown from "../header-menu-dropdown";
-import AppLink from "../link";
+import HeaderMenuDropDown from "../../components-root/header-menu-dropdown";
+import AppLink from "../../components-root/link";
 import { current } from "@reduxjs/toolkit";
 
 export default function HeaderBottom(): JSX.Element {

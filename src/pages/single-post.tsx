@@ -1,15 +1,15 @@
 /* eslint-disable @next/next/no-img-element */
-import BreadCrumb from "@/components/breadcrumb";
-import CardBlog, { CardBlogType } from "@/components/card-blog";
+import BreadCrumb from "@/components-root/breadcrumb";
+import CardBlog, { CardBlogType } from "@/components-child/card-blog";
 import Layout, {
   LayoutAsideType,
   LayoutFooterType,
   LayoutHeaderType,
   LayoutType,
-} from "@/components/layout";
+} from "@/components-root/layout";
 import AppMaterialIcon, {
   AppMaterialIconType,
-} from "@/components/material-icon";
+} from "@/components-root/material-icon";
 import Head from "next/head";
 
 export default function CategoryPage(): JSX.Element {

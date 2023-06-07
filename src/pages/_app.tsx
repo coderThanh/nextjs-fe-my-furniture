@@ -3,7 +3,7 @@ import "@/styles/reset.css";
 import "@/styles/bootstrap-grid.css";
 import "@/styles/globals.scss";
 
-import "@/components/header/header.scss";
+import "@/components-child/header/header.scss";
 import "@/styles/page/home.scss";
 import "@/styles/page/archive.scss";
 import "@/styles/page/single.scss";

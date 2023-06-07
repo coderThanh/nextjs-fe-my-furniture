@@ -2,7 +2,7 @@ import classNames from "classnames";
 import { ReactElement, MouseEvent, useState, useEffect } from "react";
 
 import styles from "./windown.module.scss";
-import { IconArrowPrevious } from "../icon";
+import { IconArrowPrevious } from "../../components-child/icon";
 
 export type WindownSecondEProps = {
   classWrap?: string;

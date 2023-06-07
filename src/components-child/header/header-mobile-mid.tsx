@@ -1,15 +1,18 @@
 import classNames from "classnames";
-import AppLink from "../link";
-import AppImage from "../img";
+import AppLink from "../../components-root/link";
+import AppImage from "../../components-root/img";
 import AppAssets from "@/models/assets";
 import AppConst from "@/models/const";
-import AppButton, { AppButtonColor, AppButtonKind } from "../button";
+import AppButton, {
+  AppButtonColor,
+  AppButtonKind,
+} from "../../components-root/button";
 import { IconCart, IconMenu } from "../icon";
-import WindownE from "../windown";
+import WindownE from "../../components-root/windown";
 import { ReactElement } from "react";
-import ListTitle from "../list-title";
-import WindownSecondE from "../windown/windown-second";
-import Search from "../search";
+import ListTitle from "../../components-root/list-title";
+import WindownSecondE from "../../components-root/windown/windown-second";
+import Search from "../../components-root/search";
 
 export default function HeaderMobileMid(): JSX.Element {
   // Defint class tag

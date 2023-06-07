@@ -1,8 +1,8 @@
 import classNames from "classnames";
-import AppImage from "../img";
+import AppImage from "../../components-root/img";
 
 import styles from "./card-blog.module.scss";
-import AppLink from "../link";
+import AppLink from "../../components-root/link";
 
 export type CardBlogProps = {
   thumbnail: string;

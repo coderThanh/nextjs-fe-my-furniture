@@ -1,12 +1,12 @@
-import CardBlog, { CardBlogType } from "@/components/card-blog";
+import CardBlog, { CardBlogType } from "@/components-child/card-blog";
 import Layout, {
   LayoutAsideType,
   LayoutFooterType,
   LayoutHeaderType,
   LayoutType,
-} from "@/components/layout";
-import AppLink from "@/components/link";
-import Pagination from "@/components/pagination";
+} from "@/components-root/layout";
+import AppLink from "@/components-root/link";
+import Pagination from "@/components-root/pagination";
 import classNames from "classnames";
 import Head from "next/head";
 

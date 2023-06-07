@@ -2,7 +2,7 @@ import classNames from "classnames";
 import React, { MouseEvent, ReactElement, useEffect, useState } from "react";
 
 import styles from "./windown.module.scss";
-import { IconClose } from "../icon";
+import { IconClose } from "../../components-child/icon";
 
 export type WindownEProps = {
   classWrap?: string;

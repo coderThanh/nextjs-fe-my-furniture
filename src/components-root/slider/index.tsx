@@ -12,7 +12,7 @@ import {
 } from "react";
 import AppConst from "@/models/const";
 import { PanInfo, motion } from "framer-motion";
-import { IconArrowNext, IconArrowPrevious } from "../icon";
+import { IconArrowNext, IconArrowPrevious } from "../../components-child/icon";
 
 export type SliderProps = {
   count: number;
