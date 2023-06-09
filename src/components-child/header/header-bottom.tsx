@@ -1,63 +1,67 @@
 import classNames from "classnames";
-import { useState } from "react";
-import CardBlog from "../card-blog";
-import HeaderMenuDropDown from "../../components-root/header-menu-dropdown";
-import AppLink from "../../components-root/link";
-import { current } from "@reduxjs/toolkit";
+import AppLink from "@/components-root/link";
+import { MenuItemResType, MenuItemType } from "@/models/menu-item";
+import useSWR from "swr";
+import { fetcher } from "@/services/fetcher";
+import {
+  parseToMenuItem,
+  sortMenuResByOrder,
+} from "@/models/menu-item/controller";
+
+const dataDemo: Array<MenuItemType> = [
+  { title: "Trang chủ", url: "/", target: "" },
+  {
+    title: "Chuyện nhà",
+    url: "/category",
+    target: "_blank",
+    rel: "nofollow",
+  },
+  { title: "Xu hướng", url: "/category", target: "" },
+  { title: "Zen", url: "/category", target: "" },
+  { title: "Wabi sabi", url: "/category", target: "" },
+  { title: "Mid Centry", url: "/category", target: "" },
+  { title: "Minimalism", url: "/category", target: "" },
+  { title: "Scandinavian", url: "/category", target: "" },
+  { title: "Tin tức", url: "/category", target: "" },
+  { title: "Liên hệ", url: "#", target: "" },
+];
 
 export default function HeaderBottom(): JSX.Element {
-  const [isDropDownOpen, setIsDropDownOpen] = useState<boolean>(false);
+  var listMenu: Array<MenuItemType> = [];
 
-  // Defint class tag
-  const classMenuItem: string = "menu-item";
-  const classMenuLink: string = "menu-link";
-  const classNav = "nav";
-  const classCurrent = "current";
+  const { data } = useSWR<any, Error>(
+    process.env.NEXT_PUBLIC_API_MENU_HEADER_BOTTOM,
+    fetcher
+  );
+
+  if (!process.env.NEXT_PUBLIC_HAS_API_DB_CONECT) {
+    listMenu.push(...dataDemo);
+  } else if (data) {
+    const dataMenuBottom: Array<MenuItemResType> = sortMenuResByOrder(
+      data.data.attributes.items.data
+    );
+
+    dataMenuBottom.forEach((item: MenuItemResType) => {
+      listMenu.push(parseToMenuItem(item));
+    });
+  }
 
   return (
     <div className={"container-lg header-bot desk"}>
       <div className={"bot-inner"}>
-        <div className={classNames("bot-nav_left", classNav)}>
-          <div className={classNames(classMenuItem, classCurrent)}>
-            <AppLink url={"/category"} classLink={classMenuLink}>
-              Trang chủ
-            </AppLink>
-          </div>
-          <div className={classMenuItem}>
-            <AppLink url={"/category"} classLink={classMenuLink}>
-              Chuyện nhà
-            </AppLink>
-          </div>
-          <div className={classMenuItem}>
-            <AppLink url={"/category"} classLink={classMenuLink}>
-              Wabi sabi
-            </AppLink>
-          </div>
-          <div className={classMenuItem}>
-            <AppLink url={"/category"} classLink={classMenuLink}>
-              Mid Centry
-            </AppLink>
-          </div>
-          <div className={classMenuItem}>
-            <AppLink url={"/category"} classLink={classMenuLink}>
-              Product name
-            </AppLink>
-          </div>
-          <div className={classMenuItem}>
-            <AppLink url={"/category"} classLink={classMenuLink}>
-              Minimalism
-            </AppLink>
-          </div>
-          <div className={classMenuItem}>
-            <AppLink url={"/category"} classLink={classMenuLink}>
-              Japandi
-            </AppLink>
-          </div>
-          <div className={classMenuItem}>
-            <AppLink url={"/category"} classLink={classMenuLink}>
-              Scandinavian
-            </AppLink>
-          </div>
+        <div className={classNames("bot-nav_left", "nav")}>
+          {listMenu.map((item, index) => (
+            <div key={index} className={classNames("menu-item")}>
+              <AppLink
+                url={item.url}
+                classLink={"menu-link"}
+                target={item.target}
+                rel={item.rel}
+              >
+                {item.title}
+              </AppLink>
+            </div>
+          ))}
         </div>
       </div>
     </div>

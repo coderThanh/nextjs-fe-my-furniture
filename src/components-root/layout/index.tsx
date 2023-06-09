@@ -7,7 +7,6 @@ import { ReactNode } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "@/redux/store";
 import { MouseEvent } from "react";
-import { clickMain } from "@/redux/features-root/root_click/slice";
 import { debounce } from "@/controllers-root/debounce";
 
 type LayoutProps = {
@@ -47,18 +46,6 @@ export default function Layout(props: LayoutProps) {
     (state: RootState) => state.aside.isLeftOpen
   );
 
-  const dispatch = useDispatch();
-
-  // interior
-
-  const debouncer = debounce(() => {
-    dispatch(clickMain());
-  }, 220);
-
-  function mainOnClick(event: MouseEvent<HTMLElement>): void {
-    debouncer();
-  }
-
   return (
     <>
       <main id="main" className={classNames(styles.main, props.classMain)}>
@@ -76,7 +63,6 @@ export default function Layout(props: LayoutProps) {
             !isAsideLeftOpen ? styles.asideLeftClose : "",
             "layout-wrap"
           )}
-          onClick={(event) => mainOnClick(event)}
         >
           <div
             className={classNames(

@@ -11,10 +11,15 @@ import "@/styles/page/single.scss";
 import type { AppProps } from "next/app";
 
 import Providers from "@/redux/provider";
+import Head from "next/head";
 
 export default function App({ Component, pageProps }: AppProps) {
   return (
     <>
+      <Head>
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+      </Head>
+
       <style jsx global>{`
         :root {
           --primary: #6cd2bc;

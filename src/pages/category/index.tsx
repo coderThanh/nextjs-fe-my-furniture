@@ -22,7 +22,7 @@ export default function CategoryPage(): JSX.Element {
         type={LayoutType.container}
         headerType={LayoutHeaderType.default}
         footerType={LayoutFooterType.default}
-        asideType={LayoutAsideType.left}
+        asideType={LayoutAsideType.no}
         classMain="archive-page"
       >
         <section className="archive-head">
