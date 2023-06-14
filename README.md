@@ -2,7 +2,17 @@
 
 This version 1.01
 
-## Slug Menu for CMS Strapi to Nextjs get data menu
+## How to run project
+
+Run dev with connect API
+
+    NEXT_PUBLIC_HAS_API_DB_CONECT=true npm run dev
+
+Run rev with data demo local
+
+    npm run dev
+
+### Slug Menu for CMS Strapi to Nextjs get data menu
 
 or change env default
 

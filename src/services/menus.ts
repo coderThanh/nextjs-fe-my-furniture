@@ -20,21 +20,27 @@ export async function getMenuAndchildrent(
     menuParent.push(...dataRes.menusMenus.data[0].attributes.items.data);
   }
 
-  for (let index = 0; index < menuParent.length; index++) {
+  const menuParentWithChildPromise = menuParent.map(async (item, index) => {
     const itemDataRes: fetcherMenusItems = await fetcherGraphSQL(
       GraphQLQuery.getMenuItemsByIdParent,
       {
-        id: menuParent[index].id,
+        id: item.id,
         isShowDataRelate: isShowDataRelate,
       }
     );
 
     if (itemDataRes.menusMenuItems?.data) {
-      menuParent[index].attributes.children = {
+      item.attributes.children = {
         data: itemDataRes.menusMenuItems.data,
       };
     }
-  }
 
-  return menuParent;
+    return item;
+  });
+
+  const result: MenuItemResType[] = await Promise.all(
+    menuParentWithChildPromise
+  );
+
+  return result;
 }
