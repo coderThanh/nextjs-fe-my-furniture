@@ -1,3 +1,6 @@
+import request, { Variables } from "graphql-request";
+import { GraphQLClientRequestHeaders } from "graphql-request/build/esm/types";
+
 export async function fetcher(
   input: RequestDestination | URL | string,
   options?: RequestInit
@@ -21,3 +24,21 @@ export async function fetcher(
 
   return data;
 }
+
+export const fetcherGraphSQL = async <T>(
+  query: string,
+  variables?: Variables,
+  requestHeaders?: GraphQLClientRequestHeaders
+): Promise<T> => {
+  const res = await request<T>(
+    process.env.NEXT_PUBLIC_HOST_ROOT + "/graphql",
+    query,
+    variables,
+    {
+      Authorization: "Bearer " + process.env.NEXT_PUBLIC_API_TOKEN,
+      ...requestHeaders,
+    }
+  );
+
+  return res;
+};

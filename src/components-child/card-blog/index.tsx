@@ -3,9 +3,10 @@ import AppImage from "../../components-root/img";
 
 import styles from "./card-blog.module.scss";
 import AppLink from "../../components-root/link";
+import AppAssets from "@/models/assets";
 
 export type CardBlogProps = {
-  thumbnail: string;
+  thumbnail?: string;
   desc?: string;
   type?: CardBlogType;
   imgRatio?: number;
@@ -24,6 +25,10 @@ export enum CardBlogType {
 }
 
 export default function CardBlog(props: CardBlogProps): JSX.Element {
+  var imgSrc: string = AppAssets.placeholderGray;
+
+  if (props.thumbnail) imgSrc = props.thumbnail;
+
   return (
     <>
       <div
@@ -39,7 +44,7 @@ export default function CardBlog(props: CardBlogProps): JSX.Element {
         {props.isShowCate && (
           <div className={classNames("blog-box-cate", styles.cateWrap)}>
             <AppImage
-              src={props.thumbnail}
+              src={imgSrc}
               ratio={100}
               alt={""}
               radius={100}
@@ -65,7 +70,7 @@ export default function CardBlog(props: CardBlogProps): JSX.Element {
           classLink={classNames(styles.imgWrap, "blog-box-img")}
         >
           <AppImage
-            src={props.thumbnail}
+            src={imgSrc}
             ratio={props.imgRatio || 100}
             radius={props.imgRadius}
             alt={""}

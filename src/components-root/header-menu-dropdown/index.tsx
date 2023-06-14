@@ -18,8 +18,6 @@ export type HeaderMenuDropDownProps = {
   onClick?: HeaderMenuDropDownOnClick;
   classChildren?: string;
   classWrap?: string;
-  isCloseWhenMainClick?: boolean; // Dư thừa
-  isCloseWhenHeaderClick?: boolean; //
   isShowHover?: boolean;
   isSubFullWidth?: boolean;
 };

@@ -12,6 +12,10 @@ import type { AppProps } from "next/app";
 
 import Providers from "@/redux/provider";
 import Head from "next/head";
+import { SWRConfig } from "swr";
+import { fetcherGraphSQL } from "@/services/fetcher";
+import { Variables } from "graphql-request";
+import { GraphQLClientRequestHeaders } from "graphql-request/build/esm/types";
 
 export default function App({ Component, pageProps }: AppProps) {
   return (
@@ -67,10 +71,28 @@ export default function App({ Component, pageProps }: AppProps) {
           --opacity: 72%;
         }
       `}</style>
-
-      <Providers>
-        <Component {...pageProps} />
-      </Providers>
+      <SWRConfig
+        value={{
+          revalidateOnFocus: false,
+          revalidateIfStale: false,
+          revalidateOnReconnect: true,
+          fetcher: async ([key, query, variants, requestHeader]) => {
+            // console.log(
+            //   "key, query, variants, requestHeader  ",
+            //   key,
+            //   query,
+            //   variants,
+            //   requestHeader
+            // );
+            const res = await fetcherGraphSQL(query, variants, requestHeader);
+            return res;
+          },
+        }}
+      >
+        <Providers>
+          <Component {...pageProps} />
+        </Providers>
+      </SWRConfig>
     </>
   );
 }

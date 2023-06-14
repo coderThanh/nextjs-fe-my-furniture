@@ -24,7 +24,7 @@ export default function CategoryPage(): JSX.Element {
         type={LayoutType.full}
         headerType={LayoutHeaderType.default}
         footerType={LayoutFooterType.default}
-        asideType={LayoutAsideType.left}
+        asideType={LayoutAsideType.no}
         classMain="single-page"
       >
         <section className="single-breadcrumb breadcrumb-page">

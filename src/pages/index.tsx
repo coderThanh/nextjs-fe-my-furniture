@@ -9,20 +9,37 @@ import Layout, {
 import Gap from "@/components-root/gap";
 
 import Slider from "@/components-root/slider";
-import { ReactNode } from "react";
+import { ReactNode, useEffect } from "react";
 import CardBlog, { CardBlogType } from "@/components-child/card-blog";
 import classNames from "classnames";
 
 import Image from "next/image";
 import AppLink from "@/components-root/link";
-import useSWR, { SWRConfig } from "swr";
-import { fetcher } from "@/services/fetcher";
+import { SWRConfig } from "swr";
+import { fetcherGraphSQL } from "@/services/fetcher";
+import GraphQLQuery from "@/models/graphql/graphql-query";
+import { getMenuAndchildrent } from "@/services/menus";
+import SWRKey from "@/models/swr-key";
 
 export type HomeProps = {
   fallback: { string: Promise<any> };
 };
 
 export default function Home(props: HomeProps) {
+  useEffect(() => {
+    async function testApi() {
+      const menuParents = await getMenuAndchildrent(
+        process.env.NEXT_PUBLIC_MENU_HEADER_MIDDLE_SLUG,
+        true
+      );
+
+      console.log("menuParents ", menuParents);
+    }
+    // testApi();
+  }, []);
+
+  // console.log("props.fallback", props.fallback);
+
   return (
     <>
       <Head>
@@ -59,29 +76,38 @@ export async function getStaticProps() {
   //hook getStaticProps can't run swr
 
   if (process.env.NEXT_PUBLIC_HAS_API_DB_CONECT) {
-    const menuHeaderBottomWait = fetcher(
-      process.env.NEXT_PUBLIC_API_MENU_HEADER_BOTTOM
+    const menuHeaderBottomRes = fetcherGraphSQL(
+      GraphQLQuery.getMenuHeaderParent,
+      {
+        slug: process.env.NEXT_PUBLIC_MENU_HEADER_BOTTOM_SLUG,
+      },
+      {
+        Authorization: "Bearer " + process.env.NEXT_PUBLIC_API_TOKEN,
+      }
     );
 
-    const [menuHeaderBottomData] = await Promise.all([menuHeaderBottomWait]);
+    const menuHeaderMiddleRes = await getMenuAndchildrent(
+      process.env.NEXT_PUBLIC_MENU_HEADER_MIDDLE_SLUG,
+      true
+    );
+
+    // const menuHeaderMiddleRes = fetcher(AppApi.menuHeaderMiddle);
+
+    const [menuHeaderBottomData, menuHeaderMiddleData] = await Promise.all([
+      menuHeaderBottomRes,
+      menuHeaderMiddleRes,
+    ]);
 
     return {
       props: {
         fallback: {
-          [process.env.NEXT_PUBLIC_API_MENU_HEADER_BOTTOM]:
-            menuHeaderBottomData,
+          [SWRKey.headerBottom]: menuHeaderBottomData,
+          [SWRKey.headerMiddle]: menuHeaderMiddleData,
         },
       },
     };
   }
-
-  return {
-    props: {
-      fallback: {
-        [process.env.NEXT_PUBLIC_API_MENU_HEADER_BOTTOM]: {},
-      },
-    },
-  };
+  return { props: { fallback: {} } };
 }
 
 //

@@ -1,12 +1,12 @@
 import classNames from "classnames";
 import AppLink from "@/components-root/link";
-import { MenuItemResType, MenuItemType } from "@/models/menu-item";
+import { MenuItemResType, MenuItemType } from "@/models/menus/menu-item";
+import { parseToMenuItem } from "@/models/menus/controller";
+import { useRouter } from "next/router";
+import GraphQLQuery from "@/models/graphql/graphql-query";
+import { fetcherMenus } from "@/models/menus/menu";
+import SWRKey from "@/models/swr-key";
 import useSWR from "swr";
-import { fetcher } from "@/services/fetcher";
-import {
-  parseToMenuItem,
-  sortMenuResByOrder,
-} from "@/models/menu-item/controller";
 
 const dataDemo: Array<MenuItemType> = [
   { title: "Trang chủ", url: "/", target: "" },
@@ -29,17 +29,23 @@ const dataDemo: Array<MenuItemType> = [
 export default function HeaderBottom(): JSX.Element {
   var listMenu: Array<MenuItemType> = [];
 
-  const { data } = useSWR<any, Error>(
-    process.env.NEXT_PUBLIC_API_MENU_HEADER_BOTTOM,
-    fetcher
-  );
+  const router = useRouter();
+
+  const { data } = useSWR<fetcherMenus>([
+    SWRKey.headerBottom,
+    GraphQLQuery.getMenuHeaderParent,
+    {
+      slug: process.env.NEXT_PUBLIC_MENU_HEADER_BOTTOM_SLUG,
+    },
+  ]);
+
+  // console.log("HeaderBottom data ", data);
 
   if (!process.env.NEXT_PUBLIC_HAS_API_DB_CONECT) {
     listMenu.push(...dataDemo);
-  } else if (data) {
-    const dataMenuBottom: Array<MenuItemResType> = sortMenuResByOrder(
-      data.data.attributes.items.data
-    );
+  } else if (data && data.menusMenus && data.menusMenus.data) {
+    const dataMenuBottom: Array<MenuItemResType> =
+      data.menusMenus.data[0].attributes.items.data;
 
     dataMenuBottom.forEach((item: MenuItemResType) => {
       listMenu.push(parseToMenuItem(item));
@@ -51,7 +57,12 @@ export default function HeaderBottom(): JSX.Element {
       <div className={"bot-inner"}>
         <div className={classNames("bot-nav_left", "nav")}>
           {listMenu.map((item, index) => (
-            <div key={index} className={classNames("menu-item")}>
+            <div
+              key={index}
+              className={classNames("menu-item", {
+                current: router.pathname == item.url,
+              })}
+            >
               <AppLink
                 url={item.url}
                 classLink={"menu-link"}
