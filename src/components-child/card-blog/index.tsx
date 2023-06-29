@@ -6,12 +6,15 @@ import AppLink from "../../components-root/link";
 import AppAssets from "@/models/assets";
 
 export type CardBlogProps = {
+  title?: string;
   thumbnail?: string;
   desc?: string;
   type?: CardBlogType;
   imgRatio?: number;
   imgRadius?: number;
   className?: string;
+  cateTitle?: string;
+  styleTitle?: string;
   isShowCate?: boolean;
   isShowDesc?: boolean;
   isShowDate?: boolean;
@@ -56,10 +59,10 @@ export default function CardBlog(props: CardBlogProps): JSX.Element {
               <div
                 className={classNames(styles.cateName, "blog-box-cate-name")}
               >
-                Category name
+                {props.cateTitle}
               </div>
               <div className={classNames(styles.cateSub, "blog-box-cate-sub")}>
-                Contemporary
+                {props.styleTitle}
               </div>
             </div>
           </div>
@@ -87,8 +90,7 @@ export default function CardBlog(props: CardBlogProps): JSX.Element {
             url={"/single-post"}
             classLink={classNames(styles.name, "blog-box-name")}
           >
-            Nhà trong ngõ nhỏ nhưng có đến 4 mặt tiền, không ồn ào và rất sáng
-            sủa
+            {props.title}
           </AppLink>
           {(props.isShowDate || props.isShowView) && (
             <div className={classNames(styles.meta, "blog-box-meta")}>

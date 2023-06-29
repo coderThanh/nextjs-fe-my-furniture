@@ -18,9 +18,9 @@ import {
   IconHearth,
   IconCart,
   IconEsc,
-} from "../icon";
+} from "../../components-child/icon";
 import { motion, Variants } from "framer-motion";
-import CardBlog from "../card-blog";
+import CardBlog from "../../components-child/card-blog";
 import AppMaterialIcon, {
   AppMaterialIconType,
 } from "../../components-root/material-icon";
@@ -35,6 +35,17 @@ import { parseToMenuItemTypeDocs } from "@/models/menus/controller";
 import SWRKey from "@/models/swr-key";
 import { getMenuAndchildrent } from "@/services/menus";
 import { BlogEntity } from "@/models/blog";
+import {
+  classChildrenLink,
+  classHasChildren,
+  classMenuIcon,
+  classMenuItem,
+  classMenuLink,
+  classMenuSub,
+  classNav,
+} from ".";
+import { HeaderMidMenuDropdownFull } from "./header-mid-menu-dropdown-full";
+import { HeaderMidMenuDropdown } from "./header-mid-menu-dropdown";
 
 const dataDemo: Array<MenuItemTypeDocs> = [
   {
@@ -134,17 +145,6 @@ const dataDemo: Array<MenuItemTypeDocs> = [
   { title: "Chuyên gia", url: "", target: "" },
 ];
 
-// Defint class tag
-const classMenuItem: string = "menu-item";
-const classMenuLink: string = "menu-link";
-const classMenuIcon: string = "menu-icon";
-const classMenuSub: string = "menu-sub";
-const classMenuSubFull: string = "menu-sub_full";
-const classNav: string = "nav";
-const classHasChildren: string = "has-children";
-const classChildrenLink: string = "children-link";
-const classFull: string = "full";
-
 export default function HeaderMid(): JSX.Element {
   // Define useState
   const [isAccountOpen, setIsAccountOpen] = useState<boolean>(false);
@@ -220,20 +220,20 @@ export default function HeaderMid(): JSX.Element {
                   item.children &&
                   item.children.data.length > 0
                 ) {
-                  outPut = <ElementMenuDropdown item={item} />;
+                  outPut = <HeaderMidMenuDropdown item={item} />;
                 } else if (
                   item.subLayout ==
                     MenuItemSubLayout.dropdownFullWithPostRight &&
                   item.children &&
                   item.children.data.length > 0
                 ) {
-                  outPut = <ElementMenuDropdownFull item={item} />;
+                  outPut = <HeaderMidMenuDropdownFull item={item} />;
                 } else {
                   outPut = (
                     <AppLink
                       url={item.url}
                       target={item.target}
-                      rel={item.rel}
+                      rel={item.target ? "_" + item.target : ""}
                       classLink={classNames(classMenuLink)}
                     >
                       {item.title}
@@ -362,145 +362,6 @@ export default function HeaderMid(): JSX.Element {
           </div>
         </div>
       </div>
-    </>
-  );
-}
-
-function ElementMenuDropdown(props: { item: MenuItemTypeDocs }): JSX.Element {
-  return (
-    <>
-      <HeaderMenuDropDown
-        title={
-          <AppLink
-            url={props.item.url}
-            target={props.item.target}
-            rel={props.item.rel}
-            classLink={classNames(classMenuLink, "parent")}
-          >
-            {props.item.title}
-          </AppLink>
-        }
-        classChildren={classNames(classMenuSub)}
-        isShowHover={true}
-        isOpen={false}
-      >
-        <>
-          {props.item.children?.data.map((child, index) => (
-            <AppLink
-              key={index}
-              url={child.url}
-              classLink={classNames(classChildrenLink, classMenuLink)}
-              target={child.target}
-              rel={child.rel}
-            >
-              {child.title}
-            </AppLink>
-          ))}
-        </>
-      </HeaderMenuDropDown>
-    </>
-  );
-}
-
-export function ElementMenuDropdownFull(props: {
-  item: MenuItemTypeDocs;
-}): JSX.Element {
-  const [stateIndexDocsShow, setIndexDocShow] = useState<number>();
-
-  function onHoverSubItem(docIndex?: number) {
-    if (docIndex != undefined) {
-      setIndexDocShow(docIndex);
-    }
-  }
-
-  return (
-    <>
-      <HeaderMenuDropDown
-        title={
-          <AppLink
-            url={props.item.url}
-            classLink={classNames(classMenuLink, "parent")}
-          >
-            {props.item.title}
-          </AppLink>
-        }
-        classChildren={classNames(classMenuSub, classMenuSubFull)}
-        isShowHover={true}
-        isSubFullWidth={true}
-        isOpen={false}
-      >
-        <>
-          <div className={classNames("container-lg")}>
-            <div className={classNames("row")}>
-              <div className="col col-12 col-md-2">
-                <div className={classNames("sub-nav")}>
-                  <div className={classNames("sub-title")}>
-                    {props.item.title}
-                  </div>
-                  {props.item.children?.data.map((item, index) => (
-                    <div
-                      key={index}
-                      className="sub-menu-item"
-                      onMouseEnter={(event) =>
-                        onHoverSubItem(item.docs?.length ? index : undefined)
-                      }
-                    >
-                      <AppLink
-                        url={item.url}
-                        classLink={classNames(
-                          classChildrenLink,
-                          classFull,
-                          classMenuLink
-                        )}
-                      >
-                        {item.title}
-                      </AppLink>
-                    </div>
-                  ))}
-                </div>
-              </div>
-              <div className="col col-md-10">
-                <div className={classNames("sub-showcase")}>
-                  {props.item.children?.data.map((item, index) => {
-                    const docsShow: ReactNode = item.docs?.map(
-                      (itemDoc: BlogEntity, indexChild) => {
-                        return (
-                          <CardBlog
-                            key={indexChild}
-                            isShowCate={true}
-                            imgRadius={7}
-                            thumbnail={`/images/products/prd_${Math.min(
-                              indexChild + 1,
-                              7
-                            )}.jpg`}
-                          />
-                        );
-                      }
-                    );
-
-                    if (item.docs && item.docs.length <= 0) return;
-
-                    if (stateIndexDocsShow == undefined) setIndexDocShow(index);
-
-                    return (
-                      <div
-                        key={index}
-                        className={classNames(
-                          "sub-showcase-item",
-                          stateIndexDocsShow == index ? "active" : ""
-                        )}
-                        data-parent={index}
-                      >
-                        {docsShow}
-                      </div>
-                    );
-                  })}
-                </div>
-              </div>
-            </div>
-          </div>
-        </>
-      </HeaderMenuDropDown>
     </>
   );
 }

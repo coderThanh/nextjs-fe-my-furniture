@@ -7,7 +7,7 @@ import AppButton, {
   AppButtonColor,
   AppButtonKind,
 } from "../../components-root/button";
-import { IconCart, IconMenu } from "../icon";
+import { IconCart, IconMenu } from "../../components-child/icon";
 import WindownE from "../../components-root/windown";
 import { ReactElement } from "react";
 import ListTitle from "../../components-root/list-title";

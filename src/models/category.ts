@@ -1,3 +1,4 @@
+import { BlogEntity } from "./blog";
 import { UploadFileEntry } from "./upload-file";
 
 export interface CategoryEntry {
@@ -5,8 +6,10 @@ export interface CategoryEntry {
   attributes: {
     title: string;
     slug: string;
-    thumbnail: UploadFileEntry;
+    thumbnail: UploadFileEntry | undefined;
     content: string;
     createdAt: string;
+    updatedAt: string;
+    blogs: { data: BlogEntity[] | undefined };
   };
 }

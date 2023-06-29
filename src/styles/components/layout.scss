@@ -1,0 +1,25 @@
+/* Row - Ui */
+.row-mt {
+    --bs-gutter-y: 24px;
+}
+
+.row-equal>.col>.col-inner {
+    min-height: 100%;
+}
+
+.row-large {
+    --bs-gutter-x: 35px;
+}
+
+.row-collapse {
+    --bs-gutter-x: 0;
+    --bs-gutter-y: 0;
+}
+
+/* Reset max width of boostrap ----*/
+.container-lg,
+.container-md,
+.container-sm,
+.container {
+    max-width: var(--max-width);
+}

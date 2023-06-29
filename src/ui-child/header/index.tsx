@@ -7,6 +7,17 @@ import HeaderBottom from "./header-bottom";
 import HeaderMobileMid from "./header-mobile-mid";
 import { motion, useMotionValueEvent, useScroll } from "framer-motion";
 
+// Defint class tag
+export const classMenuItem: string = "menu-item";
+export const classMenuLink: string = "menu-link";
+export const classMenuIcon: string = "menu-icon";
+export const classMenuSub: string = "menu-sub";
+export const classMenuSubFull: string = "menu-sub_full";
+export const classNav: string = "nav";
+export const classHasChildren: string = "has-children";
+export const classChildrenLink: string = "children-link";
+export const classFull: string = "full";
+
 export default function Header() {
   // Windown scroll to sticky
   const headerRef = useRef<HTMLDivElement>(null);

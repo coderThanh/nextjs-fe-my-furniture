@@ -1,20 +1,16 @@
-import Header from "../../components-child/header";
-import Footer from "../../components-child/footer";
-
 import styles from "./layout.module.scss";
 import classNames from "classnames";
 import { ReactNode } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "@/redux/store";
-import { MouseEvent } from "react";
-import { debounce } from "@/controllers-root/debounce";
 
 type LayoutProps = {
   children?: ReactNode;
   aside?: ReactNode;
   type: LayoutType;
-  headerType: LayoutHeaderType;
-  footerType: LayoutFooterType;
+
+  header?: ReactNode;
+  footer?: ReactNode;
   asideType: LayoutAsideType;
   classMain?: string;
 };
@@ -23,16 +19,6 @@ export enum LayoutType {
   container = "container",
   containerFluid = "container-fluid",
   full = "full",
-}
-
-export enum LayoutHeaderType {
-  default = "default",
-  no = "no",
-}
-
-export enum LayoutFooterType {
-  default = "default",
-  no = "no",
 }
 
 export enum LayoutAsideType {
@@ -49,14 +35,11 @@ export default function Layout(props: LayoutProps) {
   return (
     <>
       <main id="main" className={classNames(styles.main, props.classMain)}>
-        {props.headerType == LayoutHeaderType.default && <Header />}
+        {props.header}
         {props.asideType == LayoutAsideType.leftFix && props.aside}
         <div
           className={classNames(
             styles.layoutWrap,
-            props.headerType == LayoutHeaderType.default
-              ? styles.hasHeader
-              : "",
             props.asideType == LayoutAsideType.leftFix
               ? styles.hasAsideLefFix
               : "",
@@ -77,7 +60,7 @@ export default function Layout(props: LayoutProps) {
 
           <div className={classNames(styles.bg, "layout-bg")}></div>
         </div>
-        {props.footerType == LayoutFooterType.default && <Footer />}
+        {props.footer}
       </main>
     </>
   );

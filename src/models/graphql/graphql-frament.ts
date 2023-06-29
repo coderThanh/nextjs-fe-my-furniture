@@ -39,6 +39,17 @@ export class GraphQLFrament {
             }
           }
         }
+        styles(pagination: { pageSize: 1 }) {
+          data {
+            id
+            attributes {
+              title
+              slug
+              createdAt
+              updatedAt
+            }
+          }
+        }
       }
     }
 

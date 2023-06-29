@@ -1,12 +1,4 @@
-import "@/styles/material-icon.css";
-import "@/styles/reset.css";
-import "@/styles/bootstrap-grid.css";
 import "@/styles/globals.scss";
-
-import "@/components-child/header/header.scss";
-import "@/styles/page/home.scss";
-import "@/styles/page/archive.scss";
-import "@/styles/page/single.scss";
 
 import type { AppProps } from "next/app";
 
@@ -14,8 +6,6 @@ import Providers from "@/redux/provider";
 import Head from "next/head";
 import { SWRConfig } from "swr";
 import { fetcherGraphSQL } from "@/services/fetcher";
-import { Variables } from "graphql-request";
-import { GraphQLClientRequestHeaders } from "graphql-request/build/esm/types";
 
 export default function App({ Component, pageProps }: AppProps) {
   return (

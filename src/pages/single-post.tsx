@@ -1,16 +1,13 @@
 /* eslint-disable @next/next/no-img-element */
 import BreadCrumb from "@/components-root/breadcrumb";
 import CardBlog, { CardBlogType } from "@/components-child/card-blog";
-import Layout, {
-  LayoutAsideType,
-  LayoutFooterType,
-  LayoutHeaderType,
-  LayoutType,
-} from "@/components-root/layout";
+import Layout, { LayoutAsideType, LayoutType } from "@/components-root/layout";
 import AppMaterialIcon, {
   AppMaterialIconType,
 } from "@/components-root/material-icon";
 import Head from "next/head";
+import Header from "@/ui-child/header";
+import Footer from "@/ui-child/footer";
 
 export default function CategoryPage(): JSX.Element {
   return (
@@ -22,8 +19,8 @@ export default function CategoryPage(): JSX.Element {
 
       <Layout
         type={LayoutType.full}
-        headerType={LayoutHeaderType.default}
-        footerType={LayoutFooterType.default}
+        header={<Header />}
+        footer={<Footer />}
         asideType={LayoutAsideType.no}
         classMain="single-page"
       >
@@ -343,6 +340,9 @@ export default function CategoryPage(): JSX.Element {
                               type={CardBlogType.vertical}
                               isShowDate={true}
                               isShowView={true}
+                              title="Giảm vật liệu công nghiệp, tăng chất liệu tự nhiên - cách KTS thay đổi không gian sống cho gia chủ"
+                              cateTitle="Category name"
+                              styleTitle="Style name"
                             />
                           );
                         })}

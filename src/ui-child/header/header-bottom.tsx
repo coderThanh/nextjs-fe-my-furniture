@@ -66,7 +66,7 @@ export default function HeaderBottom(): JSX.Element {
               <AppLink
                 url={item.url}
                 classLink={"menu-link"}
-                target={item.target}
+                target={item.target ? "_" + item.target : ""}
                 rel={item.rel}
               >
                 {item.title}

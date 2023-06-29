@@ -194,7 +194,7 @@ header {
         display: flex;
         flex-direction: row;
         flex-wrap: wrap;
-        gap: 0px 20px;
+        gap: 0px 40px;
         flex: 1 1;
     }
 
@@ -427,9 +427,18 @@ body .windown-wrap {
         flex: 0 0 120px;
     }
 
+
+
+}
+
+@media only screen and (max-width: 992px) {
+    .sub-showcase {
+        grid-template-columns: 1fr 1fr 1fr;
+    }
+
     .mid-nav_center {
         .nav-inner {
-            gap: 5px 16px;
+            gap: 5px 15px;
         }
 
         .menu-link {
@@ -437,11 +446,12 @@ body .windown-wrap {
             letter-spacing: 1px;
         }
     }
-}
 
-@media only screen and (max-width: 992px) {
-    .sub-showcase {
-        grid-template-columns: 1fr 1fr 1fr;
+    .mid-nav_right {
+
+        .btn-inner {
+            padding: 5px;
+        }
     }
 }
 

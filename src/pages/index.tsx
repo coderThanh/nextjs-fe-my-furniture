@@ -1,25 +1,23 @@
 import Head from "next/head";
-import Layout, {
-  LayoutAsideType,
-  LayoutFooterType,
-  LayoutHeaderType,
-  LayoutType,
-} from "@/components-root/layout";
+import Layout, { LayoutAsideType, LayoutType } from "@/components-root/layout";
 
 import Gap from "@/components-root/gap";
 
-import Slider from "@/components-root/slider";
-import { ReactNode, useEffect } from "react";
-import CardBlog, { CardBlogType } from "@/components-child/card-blog";
+import { useEffect } from "react";
 import classNames from "classnames";
 
-import Image from "next/image";
-import AppLink from "@/components-root/link";
-import { SWRConfig } from "swr";
+import useSWR, { SWRConfig } from "swr";
 import { fetcherGraphSQL } from "@/services/fetcher";
 import GraphQLQuery from "@/models/graphql/graphql-query";
 import { getMenuAndchildrent } from "@/services/menus";
 import SWRKey from "@/models/swr-key";
+import { PageHomeRes } from "@/models/page-home-res";
+import { HomeHotBlog } from "@/ui-child/page-home/home-hot-blog";
+import { HomePostByCategoryAndStyle } from "@/ui-child/page-home/home-category-style-blog";
+import { HomePostByCategoryDemo } from "@/ui-child/page-home/home-demo-category-blog";
+import { HomeHotBlogDemo } from "@/ui-child/page-home/home-demo-hot-blog";
+import Header from "@/ui-child/header";
+import Footer from "@/ui-child/footer";
 
 export type HomeProps = {
   fallback: { string: Promise<any> };
@@ -28,12 +26,14 @@ export type HomeProps = {
 export default function Home(props: HomeProps) {
   useEffect(() => {
     async function testApi() {
-      const menuParents = await getMenuAndchildrent(
-        process.env.NEXT_PUBLIC_MENU_HEADER_MIDDLE_SLUG,
-        true
+      const homeRes = await fetcherGraphSQL<PageHomeRes>(
+        GraphQLQuery.getPageHomeData,
+        {
+          numbers: 6,
+        }
       );
 
-      console.log("menuParents ", menuParents);
+      console.log("homeRes ", homeRes.pageHome.data.attributes);
     }
     // testApi();
   }, []);
@@ -49,20 +49,28 @@ export default function Home(props: HomeProps) {
 
       <SWRConfig value={{ fallback: props.fallback }}>
         <Layout
-          type={LayoutType.container}
-          headerType={LayoutHeaderType.default}
-          footerType={LayoutFooterType.default}
-          asideType={LayoutAsideType.no}
           classMain="home-page"
+          type={LayoutType.container}
+          asideType={LayoutAsideType.no}
+          header={<Header />}
+          footer={<Footer />}
         >
           <Gap large={30} small={20} />
           <HomeHotBlog />
-          <Gap large={50} small={30} />
-          <HomePostByCategory title={"Chuyện nhà"} />
-          <Gap large={70} medium={50} small={30} />
-          <HomePostByCategory title={"Kho ảnh"} />
-          <Gap large={70} medium={50} small={30} />
-          <HomePostByCategory title={"Bài viết mới"} />
+          <HomePostByCategoryAndStyle />
+          {!process.env.NEXT_PUBLIC_HAS_API_DB_CONECT && <HomeHotBlogDemo />}
+          {!process.env.NEXT_PUBLIC_HAS_API_DB_CONECT && (
+            <HomePostByCategoryDemo title="Chuyện nhà" />
+          )}
+          {!process.env.NEXT_PUBLIC_HAS_API_DB_CONECT && (
+            <HomePostByCategoryDemo title="Xu hướng" />
+          )}
+          {!process.env.NEXT_PUBLIC_HAS_API_DB_CONECT && (
+            <HomePostByCategoryDemo title="Minimalism" />
+          )}
+          {!process.env.NEXT_PUBLIC_HAS_API_DB_CONECT && (
+            <HomePostByCategoryDemo title="Zen" />
+          )}
           <Gap large={70} medium={50} small={30} />
         </Layout>
       </SWRConfig>
@@ -71,18 +79,15 @@ export default function Home(props: HomeProps) {
 }
 
 // fetching
-
 export async function getStaticProps() {
   //hook getStaticProps can't run swr
 
   if (process.env.NEXT_PUBLIC_HAS_API_DB_CONECT) {
+    // Get menus res
     const menuHeaderBottomRes = fetcherGraphSQL(
       GraphQLQuery.getMenuHeaderParent,
       {
         slug: process.env.NEXT_PUBLIC_MENU_HEADER_BOTTOM_SLUG,
-      },
-      {
-        Authorization: "Bearer " + process.env.NEXT_PUBLIC_API_TOKEN,
       }
     );
 
@@ -91,120 +96,31 @@ export async function getStaticProps() {
       true
     );
 
+    // Get page home res
+    const pageHomeRes = await fetcherGraphSQL<PageHomeRes>(
+      GraphQLQuery.getPageHomeData,
+      { numbers: 6 }
+    );
+
     // const menuHeaderMiddleRes = fetcher(AppApi.menuHeaderMiddle);
 
-    const [menuHeaderBottomData, menuHeaderMiddleData] = await Promise.all([
-      menuHeaderBottomRes,
-      menuHeaderMiddleRes,
-    ]);
+    const [menuHeaderBottomData, menuHeaderMiddleData, pageHomeData] =
+      await Promise.all([
+        menuHeaderBottomRes,
+        menuHeaderMiddleRes,
+        pageHomeRes,
+      ]);
 
     return {
       props: {
         fallback: {
           [SWRKey.headerBottom]: menuHeaderBottomData,
           [SWRKey.headerMiddle]: menuHeaderMiddleData,
+          [SWRKey.pageHomeRes]: pageHomeData,
         },
       },
     };
   }
+
   return { props: { fallback: {} } };
-}
-
-//
-export function HomeHotBlog(): JSX.Element {
-  return (
-    <>
-      <div className={classNames("row row-equal", "home-hot-blog")}>
-        <div className="col col-sm-12 col-md-9 col-lg-9 ">
-          <div className="col-inner">
-            <Slider
-              lg={1}
-              md={1}
-              sm={1}
-              isShowButton={true}
-              count={4}
-              build={function (index: number): ReactNode {
-                return (
-                  <>
-                    <CardBlog
-                      thumbnail={`/images/blogs/blog_${index + 1}.jpg`}
-                      imgRatio={55}
-                      imgRadius={10}
-                      type={CardBlogType.overlay}
-                    />
-                  </>
-                );
-              }}
-            />
-          </div>
-        </div>
-        <div className={classNames("col col-12 col-md-3 d-none d-md-block")}>
-          <div
-            className="col-inner"
-            style={{
-              position: "relative",
-            }}
-          >
-            <AppLink>
-              <Image
-                src={"/images/banner/banner_1.jpg"}
-                fill={true}
-                sizes="100%"
-                alt={""}
-                priority={true}
-                style={{ borderRadius: 10, objectFit: "cover" }}
-              />
-            </AppLink>
-          </div>
-        </div>
-      </div>
-    </>
-  );
-}
-
-//
-export type HomePostByCategoryProps = {
-  title: string;
-};
-
-export function HomePostByCategory(
-  props: HomePostByCategoryProps
-): JSX.Element {
-  return (
-    <>
-      <section className="home-posts">
-        <div className="row ">
-          <div className="col">
-            <div className="col-inner">
-              <div className={classNames("title_default")}>
-                <h3>{props.title}</h3>
-                <AppLink classLink="title-more" url={"/category"}>
-                  Xem tất cả
-                </AppLink>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div className="post-wrap row row-mt row-large">
-          {Array(6)
-            .fill(null)
-            .map((item, index: number) => {
-              return (
-                <div className="col col-12 col-sm-6 col-md-4" key={index}>
-                  <div className="col-inner">
-                    <CardBlog
-                      thumbnail={`/images/blogs/blog_${index + 1}.jpg`}
-                      imgRatio={56.2}
-                      imgRadius={10}
-                      type={CardBlogType.default}
-                      isShowCate={true}
-                    />
-                  </div>
-                </div>
-              );
-            })}
-        </div>
-      </section>
-    </>
-  );
 }
