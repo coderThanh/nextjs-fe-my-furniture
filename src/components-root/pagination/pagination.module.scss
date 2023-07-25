@@ -6,3 +6,27 @@
     justify-content: center;
     gap: 10px;
 }
+
+.item {
+    padding: 3px 10px;
+    font-size: 0.95rem;
+    line-height: 1;
+    background-color: var(--color-neutral1);
+    min-width: 38px;
+    height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 4px;
+    transition: 320ms all;
+    cursor: pointer;
+
+    &.active {
+        background-color: var(--surface);
+        color: var(--on-surface);
+    }
+
+    &:hover {
+        color: var(--primary);
+    }
+}

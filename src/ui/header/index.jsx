@@ -1,66 +1,26 @@
 import classNames from 'classnames'
 
-import { useCallback, useEffect, useRef, useState } from 'react'
-
-import { motion, useMotionValueEvent, useScroll } from 'framer-motion'
+import { useHeaderSticky } from '@/hooks'
+import { motion } from 'framer-motion'
 import HeaderBottom from './header-bottom'
 import HeaderMid from './header-mid'
 import HeaderMobileMid from './header-mobile-mid'
 
-// Defint class tag
+// Define class tag
 export const classMenuItem = 'menu-item'
 export const classMenuLink = 'menu-link'
 export const classMenuIcon = 'menu-icon'
 export const classMenuSub = 'menu-sub'
 export const classMenuSubFull = 'menu-sub_full'
 export const classNav = 'nav'
+export const classNavInner = 'nav-inner'
 export const classHasChildren = 'has-children'
 export const classChildrenLink = 'children-link'
 export const classFull = 'full'
 
 export default function Header() {
-  // Windown scroll to sticky
-  const headerRef = useRef(null)
-
-  const [headerHeight, setHeaderHeight] = useState(0)
-  const [stateIsSticky, setIsSticky] = useState(false)
-
-  // Check resize chagne height
-  const setHeightHeader = useCallback(() => {
-    const headerHeight = headerRef.current?.getBoundingClientRect().height
-
-    headerHeight && setHeaderHeight(headerHeight)
-  }, [headerRef, setHeaderHeight])
-
-  // Run CLient first
-  useEffect(() => {
-    window.addEventListener('resize', setHeightHeader)
-
-    // component didmount
-    return () => {
-      window.removeEventListener('resize', setHeightHeader)
-    }
-  }, [setHeightHeader])
-
-  // Set sticky on sctroll
-  const { scrollY } = useScroll()
-
-  const spaceToRun = 800
-
-  useMotionValueEvent(scrollY, 'change', (latest) => {
-    if (
-      headerHeight < latest &&
-      latest < headerHeight + spaceToRun &&
-      !stateIsSticky
-    ) {
-      // Some time get data delay height header
-      setHeightHeader()
-    } else if (latest >= headerHeight + spaceToRun && !stateIsSticky) {
-      setIsSticky(true)
-    } else if (latest < headerHeight + spaceToRun && stateIsSticky) {
-      setIsSticky(false)
-    }
-  })
+  // hook
+  const { headerRef, stIsSticky, headerHeight } = useHeaderSticky()
 
   // Animation variabnle
   const variants = {
@@ -70,15 +30,15 @@ export default function Header() {
 
   return (
     <header
-      className={classNames('header-wrap', { sticky: stateIsSticky })}
+      className={classNames('header-wrap', { sticky: stIsSticky })}
       style={{
-        height: stateIsSticky ? headerHeight : undefined,
+        height: stIsSticky ? headerHeight : undefined,
       }}
     >
       <motion.div
         ref={headerRef}
         className={classNames('header-inner ')}
-        animate={stateIsSticky ? 'sticking' : 'normal'}
+        animate={stIsSticky ? 'sticking' : 'normal'}
         variants={variants}
         transition={{
           type: 'tween',

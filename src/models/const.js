@@ -8,4 +8,6 @@ export default class AppConst {
   static duration1 = 0.15
   static duration2 = 0.22
   static duration3 = 0.32
+
+  static pageDescription = 'My blog'
 }

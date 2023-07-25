@@ -1,144 +1,20 @@
-import AppButton, {
-  AppButtonColor,
-  AppButtonKind,
-} from '../../components-root/button'
-
-import AppAssets from '@/models/assets'
+import AppAssets from '@/consts/assets'
 import AppConst from '@/models/const'
 import { parseToMenuItemTypeDocs } from '@/models/menus/controller'
-import SWRKey from '@/models/swr-key'
-import { getMenuAndchildrent } from '@/services/hooks/hookMenus'
 import classNames from 'classnames'
 import { motion } from 'framer-motion'
 import { useState } from 'react'
-import useSWR from 'swr'
-import {
-  classHasChildren,
-  classMenuIcon,
-  classMenuItem,
-  classMenuLink,
-  classMenuSub,
-  classNav,
-} from '.'
-import {
-  IconAccount,
-  IconCart,
-  IconEsc,
-  IconHearth,
-  IconSearch,
-} from '../../components-child/icon'
-import HeaderMenuDropDown from '../../components-root/header-menu-dropdown'
-import AppImage from '../../components-root/img'
-import AppLink from '../../components-root/link'
-import ListTitle from '../../components-root/list-title'
-import AppMaterialIcon, {
-  AppMaterialIconType,
-} from '../../components-root/material-icon'
-import Search from '../../components-root/search'
+import { classHasChildren, classMenuItem, classMenuLink, classNav } from '.'
+import AppImage from '@/components-root/img'
+import AppLink from '@/components-root/link'
+import Search from '@/components-root/search'
 import { HeaderMidMenuDropdown } from './header-mid-menu-dropdown'
 import { HeaderMidMenuDropdownFull } from './header-mid-menu-dropdown-full'
-
-const dataDemo = [
-  {
-    children: {
-      data: [
-        {
-          children: { data: [] },
-          docType: undefined,
-          docs: [],
-          subLayout: 'dropdown',
-          title: 'About',
-          url: '',
-        },
-        {
-          children: { data: [] },
-          docType: undefined,
-          docs: [],
-          subLayout: 'dropdown',
-          title: 'Contact',
-          url: '',
-        },
-        {
-          children: { data: [] },
-          docType: undefined,
-          docs: [],
-          subLayout: 'dropdown',
-          title: 'About me',
-          url: '',
-        },
-      ],
-    },
-    docType: undefined,
-    docs: [],
-    subLayout: 'dropdown',
-    title: 'Dropdown',
-    url: '',
-  },
-  {
-    title: 'Dropdown full',
-    children: {
-      data: [
-        {
-          docType: 'blog',
-          docs: [1, 3, 4, 4],
-          subLayout: 'dropdown',
-          title: 'Chuyện nhà',
-          url: '',
-          children: { data: [] },
-        },
-        {
-          docType: 'blog',
-          docs: [1, 3, 4],
-          subLayout: 'dropdown',
-          title: 'Kho ảnh',
-          url: '',
-          children: { data: [] },
-        },
-        {
-          docType: 'blog',
-          docs: [1, 3, 4, 4],
-          subLayout: 'dropdown',
-          title: 'Trang chủ',
-          url: '',
-          children: { data: [] },
-        },
-        {
-          docType: 'blog',
-          docs: [1, 3, 4],
-          subLayout: 'dropdown',
-          title: 'Indochine',
-          url: '',
-          children: { data: [] },
-        },
-        {
-          docType: 'blog',
-          docs: [1, 2, 3, 4],
-          subLayout: 'dropdown',
-          title: 'Minimalism',
-          url: '',
-          children: { data: [] },
-        },
-        {
-          docType: 'blog',
-          docs: [],
-          subLayout: 'dropdown',
-          title: 'Emagazine',
-          url: '',
-          children: { data: [] },
-        },
-      ],
-    },
-    docType: undefined,
-    docs: [],
-    subLayout: 'dropdown-full',
-    url: '',
-  },
-  { title: 'Chuyên gia', url: '', target: '' },
-]
+import HeaderMidRight from '@/ui/header/header-mid-right'
+import { data_menu_mid } from '@/data/menu'
 
 export default function HeaderMid() {
   // Define useState
-  const [isAccountOpen, setIsAccountOpen] = useState(false)
   const [isShowSearch, setShowSearch] = useState(false)
 
   // menu
@@ -161,7 +37,7 @@ export default function HeaderMid() {
   const data = {}
 
   if (!process.env.NEXT_PUBLIC_HAS_API_DB_CONECT) {
-    menuData.push(...dataDemo)
+    menuData.push(...data_menu_mid)
   } else if (data) {
     data.forEach((item) => {
       menuData.push(parseToMenuItemTypeDocs(item))
@@ -176,10 +52,7 @@ export default function HeaderMid() {
   return (
     <>
       <div
-        className={classNames(
-          'container-lg',
-          'header-mid desk d-none d-md-block',
-        )}
+        className={classNames('container', 'header-mid desk d-none d-md-block')}
       >
         <div className={classNames('mid-inner')}>
           <AppLink classLink={classNames('logo')} url={'/'}>
@@ -215,7 +88,7 @@ export default function HeaderMid() {
                 ) {
                   outPut = <HeaderMidMenuDropdown item={item} />
                 } else if (
-                  item.subLayout == 'dropdown' &&
+                  item.subLayout == 'dropdown-full' &&
                   item.children &&
                   item.children.data.length > 0
                 ) {
@@ -260,98 +133,11 @@ export default function HeaderMid() {
               <Search />
             </motion.div>
           </div>
-
-          <div className={classNames('mid-nav_right')}>
-            <div className={classNames(classMenuItem)}>
-              <AppButton
-                kind={AppButtonKind.default}
-                color={
-                  isShowSearch ? AppButtonColor.dark : AppButtonColor.white
-                }
-                className={classNames('btn-icon')}
-                onClick={searchClick}
-              >
-                <>
-                  {!isShowSearch && (
-                    <IconSearch className={classNames('icon')} />
-                  )}
-                  {isShowSearch && <IconEsc className={classNames('icon')} />}
-                </>
-              </AppButton>
-            </div>
-            <div className={classNames(classMenuItem)}>
-              <HeaderMenuDropDown
-                title={
-                  <AppButton
-                    kind={AppButtonKind.default}
-                    color={AppButtonColor.white}
-                  >
-                    <IconAccount className={classNames('icon')} />
-                  </AppButton>
-                }
-                isOpen={isAccountOpen}
-                onClick={() => setIsAccountOpen(!isAccountOpen)}
-                classChildren={classNames(classMenuSub)}
-                isShowHover={true}
-              >
-                <ListTitle
-                  classNameText={'list-title'}
-                  text={'Đăng nhập'}
-                  iconMaterial={
-                    <AppMaterialIcon type={AppMaterialIconType.outlined}>
-                      play_circle
-                    </AppMaterialIcon>
-                  }
-                ></ListTitle>
-                <ListTitle
-                  text={'Đăng xuất'}
-                  classNameText={'list-title'}
-                  iconMaterial={
-                    <AppMaterialIcon type={AppMaterialIconType.outlined}>
-                      open_in_new
-                    </AppMaterialIcon>
-                  }
-                ></ListTitle>
-                <ListTitle
-                  classNameText={'list-title'}
-                  text={'Thông tin'}
-                  iconMaterial={
-                    <AppMaterialIcon type={AppMaterialIconType.outlined}>
-                      settings
-                    </AppMaterialIcon>
-                  }
-                ></ListTitle>
-                <ListTitle
-                  classNameText={'list-title'}
-                  text={'Đơn hàng'}
-                ></ListTitle>
-              </HeaderMenuDropDown>
-            </div>
-            <div className={classNames(classMenuItem)}>
-              <AppButton
-                kind={AppButtonKind.default}
-                color={AppButtonColor.white}
-                className={classNames(classMenuIcon)}
-              >
-                <>
-                  <IconHearth className={classNames('icon')} />
-                  <span className={classNames('number')}>3</span>
-                </>
-              </AppButton>
-            </div>
-            <div className={classNames(classMenuItem)}>
-              <AppButton
-                kind={AppButtonKind.default}
-                color={AppButtonColor.white}
-                className={classNames(classMenuIcon)}
-              >
-                <>
-                  <IconCart className={classNames('icon')} />
-                  <span className={classNames('number')}>30</span>
-                </>
-              </AppButton>
-            </div>
-          </div>
+          {/* Header middle Right */}
+          <HeaderMidRight
+            isShowSearch={isShowSearch}
+            handleSearchClick={searchClick}
+          />
         </div>
       </div>
     </>

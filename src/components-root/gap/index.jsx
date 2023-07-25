@@ -1,7 +1,7 @@
 import AppConst from '@/models/const'
 import classNames from 'classnames'
 
-export default function Gap({ large, medium, small }) {
+export default function Gap({ large = 30, medium, small }) {
   return (
     <>
       <style jsx>

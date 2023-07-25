@@ -1,5 +1,5 @@
 import Providers from '@/redux/provider'
-import '@/styles/globals.scss'
+import '@/styles/index.scss'
 
 import Head from 'next/head'
 

@@ -2,18 +2,18 @@ import classNames from 'classnames'
 import AppLink from '../link'
 import styles from './breadcrumb.module.scss'
 
-export default function BreadCrumb(props) {
-  const divider = (
+export default function BreadCrumb({ divider, listLink, name }) {
+  const dividerContent = (
     <span className={classNames(styles.divi, 'breadcrumb-divi')}>
-      {props.divider || ' / '}
+      {divider || ' / '}
     </span>
   )
 
   return (
     <>
       <div className={classNames(styles.wrap, 'breadcrumb-wrap')}>
-        {props.listLink &&
-          props.listLink.map((item, index) => (
+        {listLink &&
+          listLink.map((item, index) => (
             <div
               key={index}
               className={classNames(styles.item, 'breadcrumb-item')}
@@ -24,15 +24,13 @@ export default function BreadCrumb(props) {
               >
                 {item.name}
               </AppLink>
-              {props.listLink && index < props.listLink?.length - 1
-                ? divider
-                : null}
+              {listLink && index < listLink?.length - 1 ? dividerContent : null}
             </div>
           ))}
-        {props.name && props.listLink && divider}
-        {props.name && (
+        {name && listLink && dividerContent}
+        {name && (
           <span className={classNames(styles.item, 'breadcrumb-item current')}>
-            {props.name}
+            {name}
           </span>
         )}
       </div>

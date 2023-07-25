@@ -3,7 +3,7 @@ import AppImage from '../../components-root/img'
 
 import styles from './card-blog.module.scss'
 import AppLink from '../../components-root/link'
-import AppAssets from '@/models/assets'
+import AppAssets from '@/consts/assets'
 
 export const CardBlogType = {
   default: 'default',

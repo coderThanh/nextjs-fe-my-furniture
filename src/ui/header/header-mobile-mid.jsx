@@ -1,18 +1,17 @@
-import classNames from 'classnames'
-import AppLink from '../../components-root/link'
-import AppImage from '../../components-root/img'
-import AppAssets from '@/models/assets'
+import AppAssets from '@/consts/assets'
 import AppConst from '@/models/const'
+import classNames from 'classnames'
+import { IconCart, IconMenu } from '@/components-child/icon'
 import AppButton, {
   AppButtonColor,
   AppButtonKind,
-} from '../../components-root/button'
-import { IconCart, IconMenu } from '../../components-child/icon'
-import WindownE from '../../components-root/windown'
-import { ReactElement } from 'react'
-import ListTitle from '../../components-root/list-title'
-import WindownSecondE from '../../components-root/windown/windown-second'
-import Search from '../../components-root/search'
+} from '@/components-root/button'
+import AppImage from '@/components-root/img'
+import AppLink from '@/components-root/link'
+import ListTitle from '@/components-root/list-title'
+import Search from '@/components-root/search'
+import WindownE from '@/components-root/windown'
+import WindownSecondE from '@/components-root/windown/windown-second'
 
 export default function HeaderMobileMid() {
   // Defint class tag
@@ -67,7 +66,7 @@ export default function HeaderMobileMid() {
   return (
     <>
       <div
-        className={classNames('container-lg', 'd-md-none', 'header-mid mobile')}
+        className={classNames('container', 'd-md-none', 'header-mid mobile')}
       >
         <div className={classNames('header-mid-inner')}>
           <AppLink classLink={classNames('logo')} url={'/'}>

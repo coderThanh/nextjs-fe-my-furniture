@@ -1,7 +1,7 @@
 import AppLink from '@/components-root/link'
 import GraphQLQuery from '@/models/graphql/graphql-query'
 import { parseToMenuItem } from '@/models/menus/controller'
-import SWRKey from '@/models/swr-key'
+import SWRKey from '@/consts/swr-key'
 import classNames from 'classnames'
 import { useRouter } from 'next/router'
 import useSWR from 'swr'
@@ -52,7 +52,7 @@ export default function HeaderBottom() {
   }
 
   return (
-    <div className={'container-lg header-bot desk'}>
+    <div className={'container header-bot desk'}>
       <div className={'bot-inner'}>
         <div className={classNames('bot-nav_left', 'nav')}>
           {listMenu.map((item, index) => (

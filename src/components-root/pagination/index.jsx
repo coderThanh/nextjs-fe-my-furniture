@@ -1,89 +1,86 @@
 import classNames from 'classnames'
-import React from 'react'
-import { CSSProperties } from 'react'
-import AppButton, { AppButtonColor, AppButtonKind } from '../button'
 import AppMaterialIcon, { AppMaterialIconType } from '../material-icon'
-import { Url } from 'url'
 
 import styles from './pagination.module.scss'
 
-export default function Pagination(props) {
+export default function Pagination({
+  handleClick,
+  current,
+  count,
+  showLength,
+  className,
+  isHiddenNav = false,
+}) {
   // Event onclick
   function onClick(value) {
-    props.onClick && props.onClick(value)
+    handleClick && handleClick(value)
   }
 
-  const isFirst = props.current == 1
-  const isLast = props.current == props.count
+  const isFirst = current == 1
+  const isLast = current == count
 
-  const initList = new Array(props.count)
-    .fill(0)
-    .map((item, index) => index + 1)
+  const initList = new Array(count).fill(0).map((item, index) => index + 1)
 
   var listBefore = []
   var listAfter = []
 
   // Devide list to before and after current
-  if (props.count - props.current > Math.floor(props.showLength / 2)) {
+  if (count - current > Math.floor(showLength / 2)) {
     listBefore = initList.slice(
-      Math.max(props.current - Math.floor(props.showLength / 2), 0),
-      props.current - 1,
+      Math.max(current - Math.floor(showLength / 2), 0),
+      current - 1,
     )
 
     listAfter = initList.slice(
-      props.current,
-      Math.max(props.current + props.showLength - listBefore.length - 1, -1),
+      current,
+      Math.max(current + showLength - listBefore.length - 1, -1),
     )
   } else {
-    listAfter = initList.slice(props.current, props.count)
+    listAfter = initList.slice(current, count)
 
     listBefore = initList.slice(
-      Math.max(props.current - props.showLength + listAfter.length, 0),
-      props.current - 1,
+      Math.max(current - showLength + listAfter.length, 0),
+      current - 1,
     )
   }
 
-  const listShow = [...listBefore, props.current, ...listAfter]
+  const listShow = [...listBefore, current, ...listAfter]
 
   return (
-    <div className={classNames(props.className, styles.wrap, 'pagi-wrap')}>
-      {!props.isHiddenNav && !isFirst && (
-        <AppButton
+    <div className={classNames(className, styles.wrap, 'pagi-wrap')}>
+      {!isHiddenNav && !isFirst && (
+        <div
           className={classNames(styles.item, 'pagi-item')}
-          kind={AppButtonKind.text}
-          color={AppButtonColor.secondary}
-          onClick={() => onClick(props.current - 1)}
+          onClick={() => onClick(current - 1)}
         >
           <AppMaterialIcon size={20} type={AppMaterialIconType.filled}>
             chevron_left
           </AppMaterialIcon>
-        </AppButton>
+        </div>
       )}
       {listShow.map((item, index) => {
         return (
-          <AppButton
+          <div
             key={index}
-            className={classNames(styles.item, 'pagi-item')}
-            kind={
-              item == props.current ? AppButtonKind.default : AppButtonKind.text
-            }
-            color={AppButtonColor.secondary}
-            onClick={item != props.current ? () => onClick(item) : () => {}}
-            text={`${item}`}
-          ></AppButton>
+            className={classNames(
+              styles.item,
+              'pagi-item',
+              { active: current == index },
+              current == index ? styles.active : '',
+            )}
+            onClick={item != current ? () => onClick(item) : () => {}}
+          >{`${item}`}</div>
         )
       })}
-      {!props.isHiddenNav && !isLast && (
-        <AppButton
+      {!isHiddenNav && !isLast && (
+        <div
           className={classNames(styles.item, 'pagi-item')}
-          kind={AppButtonKind.text}
-          color={AppButtonColor.secondary}
-          onClick={() => onClick(props.current + 1)}
+          onClick={() => onClick(current + 1)}
         >
           <AppMaterialIcon size={20} type={AppMaterialIconType.filled}>
             navigate_next
           </AppMaterialIcon>
-        </AppButton>
+        </div>
       )}
     </div>
   )

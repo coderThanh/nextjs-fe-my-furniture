@@ -37,7 +37,7 @@ export function HeaderMidMenuDropdownFull(props) {
         isOpen={false}
       >
         <>
-          <div className={classNames('container-lg')}>
+          <div className={classNames('container')}>
             <div className={classNames('row')}>
               <div className="col col-12 col-md-2">
                 <div className={classNames('sub-nav')}>

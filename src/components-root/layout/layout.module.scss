@@ -2,33 +2,5 @@
 
 .main {
     max-width: 100vw;
-    overflow: hidden;
-}
-
-.layoutWrap {
-
-    &.hasAsideLefFix {
-        margin-left: var(--aside-width);
-
-        &.asideLeftClose {
-            margin-left: 0;
-        }
-    }
-
-
-}
-
-.bg {
-    background-color: var(--surface);
-    opacity: var(--opacity-bg);
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    z-index: -1;
-}
-
-.inner {
     min-height: 100vh;
 }
