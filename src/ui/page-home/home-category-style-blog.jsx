@@ -1,7 +1,6 @@
 import CardBlog, { CardBlogType } from '@/components-child/card-blog'
 import Gap from '@/components-root/gap'
 import AppLink from '@/components-root/link'
-import GraphQLQuery from '@/models/graphql/graphql-query'
 import SWRKey from '@/consts/swr-key'
 import classNames from 'classnames'
 import useSWR from 'swr'

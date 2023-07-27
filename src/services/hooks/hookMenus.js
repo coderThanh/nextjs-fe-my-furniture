@@ -1,5 +1,11 @@
-import GraphQLQuery from '@/models/graphql/graphql-query'
+import { menuList } from '@/services/apis/menu'
+import { useGetList, usePostAPI } from '@/services/hooks/hookAPI'
 import { fetcherGraphSQL } from '@/services/hooks/hookServerAPI'
+
+export const useMenuList = () => {
+  const { data, loading, post: fetchMenu } = usePostAPI(menuList)
+  return { data, loading, fetchMenu }
+}
 
 export async function getMenuAndchildrent(slugMenu, isShowDataRelate = false) {
   const dataRes = await fetcherGraphSQL(GraphQLQuery.getMenuHeaderParent, {

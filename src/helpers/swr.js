@@ -37,7 +37,7 @@ export const getOptionsQuery = (query, searchField = []) => {
 export const useSWRFetch = (key, options, action, config = {}) => {
   const { isLoading, data, error } = useSWR(
     unstable_serialize([key, options]),
-    async (args) => {
+    async () => {
       return await action(options)
     },
     { ...config },

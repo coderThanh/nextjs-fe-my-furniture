@@ -1,9 +1,8 @@
 import { notifyError, notifySuccess } from '@/helpers/toast'
 import { useCallback, useState } from 'react'
-import { useGoogleReCaptcha } from 'react-google-recaptcha-v3'
 
 const usePostAPI = (action) => {
-  const { executeRecaptcha } = useGoogleReCaptcha()
+  // const { executeRecaptcha } = useGoogleReCaptcha()
 
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState(null)
@@ -16,16 +15,16 @@ const usePostAPI = (action) => {
 
         let gRecaptchaToken = undefined
 
-        if (body?.isRecaptcha === true) {
-          if (!executeRecaptcha) {
-            notifyError('Lỗi không có ReCaptcha')
-            return
-          }
+        // if (body?.isRecaptcha === true) {
+        //   if (!executeRecaptcha) {
+        //     notifyError('Lỗi không có ReCaptcha')
+        //     return
+        //   }
 
-          gRecaptchaToken = await executeRecaptcha('enquiryFormSubmit')
-        }
+        //   gRecaptchaToken = await executeRecaptcha('enquiryFormSubmit')
+        // }
 
-        delete body?.isRecaptcha
+        // delete body?.isRecaptcha
 
         const { data, errors, message, statusCode } = await action({
           ...body,
@@ -49,7 +48,7 @@ const usePostAPI = (action) => {
         setLoading(false)
       }
     },
-    [action, executeRecaptcha],
+    [action],
   )
   return {
     loading,
@@ -106,7 +105,8 @@ const useGetList = (action) => {
         setError(null)
         let res = null
         res = await action({ ...searchOption, ...pagination })
-        if (res?.data) {
+
+        if (res) {
           return res.data
         }
         handleError(res?.data?.errors, setError)
@@ -124,7 +124,7 @@ const useGetList = (action) => {
 }
 
 const usePutAPIById = (action) => {
-  const { executeRecaptcha } = useGoogleReCaptcha()
+  // const { executeRecaptcha } = useGoogleReCaptcha()
 
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState(null)
@@ -136,14 +136,14 @@ const usePutAPIById = (action) => {
 
         let gRecaptchaToken = undefined
 
-        if (param?.isRecaptcha === true) {
-          if (!executeRecaptcha) {
-            notifyError('Lỗi không có ReCaptcha')
-            return
-          }
+        // if (param?.isRecaptcha === true) {
+        //   if (!executeRecaptcha) {
+        //     notifyError('Lỗi không có ReCaptcha')
+        //     return
+        //   }
 
-          gRecaptchaToken = await executeRecaptcha('enquiryFormSubmit')
-        }
+        //   gRecaptchaToken = await executeRecaptcha('enquiryFormSubmit')
+        // }
 
         delete param?.isRecaptcha
 
@@ -168,7 +168,7 @@ const usePutAPIById = (action) => {
         setLoading(false)
       }
     },
-    [action, executeRecaptcha],
+    [action],
   )
   return {
     loading,

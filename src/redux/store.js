@@ -1,5 +1,7 @@
 import { configureStore } from '@reduxjs/toolkit'
-import asideReducer from './features-root/aside/slice'
+
+// root
+import asideReducer from './features-root/aside-slice'
 
 const store = configureStore({
   reducer: {

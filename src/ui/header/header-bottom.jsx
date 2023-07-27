@@ -1,5 +1,4 @@
 import AppLink from '@/components-root/link'
-import GraphQLQuery from '@/models/graphql/graphql-query'
 import { parseToMenuItem } from '@/models/menus/controller'
 import SWRKey from '@/consts/swr-key'
 import classNames from 'classnames'

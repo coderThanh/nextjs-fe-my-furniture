@@ -1,7 +1,7 @@
 import { TOKEN, TIME_OUT_API } from '@/constants/common.constant'
 import axios, { AxiosError } from 'axios'
 import Router from 'next/router'
-import { getItemLocalStorage, removeItemLocalStorage } from '@/utils/helper'
+import { getItemLocalStorage, removeItemLocalStorage } from '.'
 
 export const isServer = () => {
   return typeof window === 'undefined'
@@ -11,7 +11,7 @@ const context = {}
 
 export const restTransport = () => {
   const client = axios.create({
-    baseURL: process.env.NEXT_PUBLIC_HOST_ROOT,
+    baseURL: process.env.NEXT_PUBLIC_HOST_API,
     timeout: TIME_OUT_API,
   })
 

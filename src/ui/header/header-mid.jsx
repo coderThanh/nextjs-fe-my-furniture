@@ -1,17 +1,20 @@
+import AppImage from '@/components-root/img'
+import AppLink from '@/components-root/link'
+import Search from '@/components-root/search'
 import AppAssets from '@/consts/assets'
+import { data_menu_mid } from '@/data/menu'
+import { useSWRFetch } from '@/helpers/swr'
 import AppConst from '@/models/const'
 import { parseToMenuItemTypeDocs } from '@/models/menus/controller'
+import { docMenu } from '@/services/graphql-query'
+import { useMenuList } from '@/services/hooks'
+import HeaderMidRight from '@/ui/header/header-mid-right'
 import classNames from 'classnames'
 import { motion } from 'framer-motion'
 import { useState } from 'react'
 import { classHasChildren, classMenuItem, classMenuLink, classNav } from '.'
-import AppImage from '@/components-root/img'
-import AppLink from '@/components-root/link'
-import Search from '@/components-root/search'
 import { HeaderMidMenuDropdown } from './header-mid-menu-dropdown'
 import { HeaderMidMenuDropdownFull } from './header-mid-menu-dropdown-full'
-import HeaderMidRight from '@/ui/header/header-mid-right'
-import { data_menu_mid } from '@/data/menu'
 
 export default function HeaderMid() {
   // Define useState
@@ -20,6 +23,33 @@ export default function HeaderMid() {
   // menu
   var menuData = []
 
+  const { fetchMenu } = useMenuList()
+
+  // const fetching = async () => {
+  //   const data = await fetchMenu({})
+
+  //   console.log('data', data)
+  // }
+
+  // useEffect(() => {
+  //   fetching()
+  // }, [])
+
+  const { data, isLoading, error } = useSWRFetch(
+    docMenu,
+    {
+      searchOption: {
+        slug: process.env.NEXT_PUBLIC_MENU_HEADER_MIDDLE_SLUG,
+        menuSize: 100,
+        isShowDataRelate: true,
+        dataSize: 4,
+      },
+    },
+    fetchMenu,
+  )
+
+  // const data = null
+  console.log('data', data)
   // const { data } = useSWR(
   //   SWRKey.headerMiddle,
   //   () =>
@@ -34,14 +64,14 @@ export default function HeaderMid() {
   //   },
   // )
 
-  const data = {}
+  // const data = null
 
   if (!process.env.NEXT_PUBLIC_HAS_API_DB_CONECT) {
     menuData.push(...data_menu_mid)
   } else if (data) {
-    data.forEach((item) => {
-      menuData.push(parseToMenuItemTypeDocs(item))
-    })
+    // data.forEach((item) => {
+    //   menuData.push(parseToMenuItemTypeDocs(item))
+    // })
   }
 
   // Method event

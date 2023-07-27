@@ -4,6 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
+    "devapi": "NEXT_PUBLIC_HAS_API_DB_CONECT=true next dev",
     "build": "next build",
     "start": "next start",
     "lint": "next lint"

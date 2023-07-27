@@ -1,25 +1,15 @@
-import Layout, { LayoutAsideType, LayoutType } from '@/components-root/layout'
-
-import Head from 'next/head'
+import Layout from '@/components-root/layout'
 
 import Gap from '@/components-root/gap'
 
 import { useEffect } from 'react'
 
-import { notifySuccess } from '@/helpers/toast'
-import GraphQLQuery from '@/models/graphql/graphql-query'
-import SWRKey from '@/consts/swr-key'
-import { getMenuAndchildrent } from '@/services/hooks/hookMenus'
+import SEO from '@/components-root/seo'
 import Footer from '@/ui/footer'
-import Header from '@/ui/header'
-import { HomePostByCategoryAndStyle } from '@/ui/page-home/home-category-style-blog'
 import { HomePostByCategoryDemo } from '@/ui/page-home/home-demo-category-blog'
 import { HomeHotBlogDemo } from '@/ui/page-home/home-demo-hot-blog'
-import { HomeHotBlog } from '@/ui/page-home/home-hot-blog'
-import { ToastContainer } from 'react-toastify'
 import { SWRConfig } from 'swr'
-import { fetcherGraphSQL } from '@/services/hooks'
-import SEO from '@/components-root/seo'
+import Header from '../ui/header'
 
 export default function Home({ fallback }) {
   useEffect(() => {

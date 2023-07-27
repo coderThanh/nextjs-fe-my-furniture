@@ -1,7 +1,6 @@
 import CardBlog, { CardBlogType } from '@/components-child/card-blog'
 import AppLink from '@/components-root/link'
 import Slider from '@/components-root/slider'
-import GraphQLQuery from '@/models/graphql/graphql-query'
 import SWRKey from '@/consts/swr-key'
 import classNames from 'classnames'
 import Image from 'next/image'

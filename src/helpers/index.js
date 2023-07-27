@@ -200,3 +200,13 @@ export const copyBoard = (value = null) => {
   }
   navigator.clipboard.writeText(value)
 }
+
+// debounce
+export const debounce = (func, waitFor = 300) => {
+  let timeout
+
+  return (...args) => {
+    clearTimeout(timeout)
+    timeout = setTimeout(() => func(...args), waitFor)
+  }
+}

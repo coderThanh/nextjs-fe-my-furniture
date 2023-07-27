@@ -1,7 +1,7 @@
-import Providers from '@/redux/provider'
 import '@/styles/index.scss'
 
 import Head from 'next/head'
+import WrapProvider from '@/redux/provider'
 
 export default function App({ Component, pageProps }) {
   return (
@@ -58,9 +58,9 @@ export default function App({ Component, pageProps }) {
         }
       `}</style>
 
-      <Providers>
+      <WrapProvider>
         <Component {...pageProps} />
-      </Providers>
+      </WrapProvider>
     </>
   )
 }
