@@ -26,24 +26,23 @@ const usePostAPI = (action) => {
 
         // delete body?.isRecaptcha
 
-        const { data, errors, message, statusCode } = await action({
+        const res = await action({
           ...body,
           gRecaptchaToken,
         })
 
-        if (statusCode === 200) {
-          if (message?.content) {
-            notifySuccess(message?.content)
+        if (res) {
+          if (res?.message?.content) {
+            notifySuccess(res?.message?.content)
           }
-          return data
+          return res
         }
 
         notifyError(message?.content)
-        handleError(errors, setError)
-        return undefined
+        return null
       } catch (errorAPI) {
-        setError(errorAPI)
-        return undefined
+        handleError(errorAPI, setError)
+        return null
       } finally {
         setLoading(false)
       }
@@ -80,10 +79,10 @@ const useGetDetailById = (action) => {
         notifyError(message?.content)
 
         handleError(errors, setError)
-        return undefined
+        return null
       } catch (errorAPI) {
-        setError(errorAPI)
-        return undefined
+        handleError(errorAPI, setError)
+        return null
       } finally {
         setLoading(false)
       }
@@ -110,10 +109,10 @@ const useGetList = (action) => {
           return res.data
         }
         handleError(res?.data?.errors, setError)
-        return undefined
+        return null
       } catch (errorAPI) {
-        setError(errorAPI)
-        return undefined
+        handleError(errorAPI, setError)
+        return null
       } finally {
         // _addLoadingTime(startTime, setLoading)
       }
@@ -160,10 +159,10 @@ const usePutAPIById = (action) => {
         notifyError(message?.content)
 
         handleError(errors, setError)
-        return undefined
+        return null
       } catch (errorAPI) {
-        setError(errorAPI)
-        return undefined
+        handleError(errorAPI, setError)
+        return null
       } finally {
         setLoading(false)
       }

@@ -1,5 +1,3 @@
-import useSWR, { unstable_serialize } from 'swr'
-
 export const useServerGetList = (action) => {
   const get = async ({ searchOption, pagination }) => {
     // const startTime = new Date().getTime();
@@ -7,15 +5,13 @@ export const useServerGetList = (action) => {
     try {
       let res = null
       res = await action({ ...searchOption, ...pagination })
-      if (res?.data) {
-        return res.data
+      if (res) {
+        return res
       }
-
-      handleError(res?.data?.errors)
 
       return null // useSWR require return null if error
     } catch (errorAPI) {
-      console.log(errorAPI)
+      handleError(errorAPI)
       return null
     } finally {
       // _addLoadingTime(startTime, setLoading)
@@ -27,19 +23,18 @@ export const useServerGetList = (action) => {
 export const useServerGetDetailById = (action) => {
   const get = async ({ id, options }) => {
     try {
-      const { data, errors, statusCode } = await action({
+      const res = await action({
         id,
         ...options,
       })
 
-      if (statusCode === 200) {
-        return data
+      if (res) {
+        return res
       }
 
-      handleError(errors)
       return null
     } catch (errorAPI) {
-      console.log(errorAPI)
+      handleError(errorAPI)
       return null
     }
   }
@@ -53,8 +48,4 @@ const handleError = (errors) => {
   } else {
     console.log(new Error('Something went wrong'))
   }
-}
-
-export const fetcherGraphSQL = (key, options) => {
-  return null
 }

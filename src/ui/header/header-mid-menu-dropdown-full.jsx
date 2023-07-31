@@ -44,7 +44,7 @@ export function HeaderMidMenuDropdownFull(props) {
                   <div className={classNames('sub-title')}>
                     {props.item.title}
                   </div>
-                  {props.item.children?.data.map((item, index) => (
+                  {props.item.children?.map((item, index) => (
                     <div
                       key={index}
                       className="sub-menu-item"
@@ -68,7 +68,7 @@ export function HeaderMidMenuDropdownFull(props) {
               </div>
               <div className="col col-md-10">
                 <div className={classNames('sub-showcase')}>
-                  {props.item.children?.data.map((item, index) => {
+                  {props.item.children?.map((item, index) => {
                     const docsShow = item.docs?.map((itemDoc, indexChild) => {
                       // Demo if product not connect API
                       if (!process.env.NEXT_PUBLIC_HAS_API_DB_CONECT) {

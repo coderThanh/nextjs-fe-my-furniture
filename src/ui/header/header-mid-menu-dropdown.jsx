@@ -22,7 +22,7 @@ export function HeaderMidMenuDropdown(props) {
         isOpen={false}
       >
         <>
-          {props.item.children?.data.map((child, index) => (
+          {props.item.children?.map((child, index) => (
             <AppLink
               key={index}
               url={child.url}

@@ -2,8 +2,6 @@ import Layout from '@/components-root/layout'
 
 import Gap from '@/components-root/gap'
 
-import { useEffect } from 'react'
-
 import SEO from '@/components-root/seo'
 import Footer from '@/ui/footer'
 import { HomePostByCategoryDemo } from '@/ui/page-home/home-demo-category-blog'
@@ -12,10 +10,6 @@ import { SWRConfig } from 'swr'
 import Header from '../ui/header'
 
 export default function Home({ fallback }) {
-  useEffect(() => {
-    // testApi();
-  }, [])
-
   return (
     <>
       <SEO

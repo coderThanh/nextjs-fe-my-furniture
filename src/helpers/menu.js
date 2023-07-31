@@ -1,29 +1,74 @@
+import { MenuLinkType } from '@/consts/type'
+
+export const parseMenu = (list = []) => {
+  let loopMenu = list.map((item) => {
+    return parseMenuItem(item)
+  })
+
+  loopMenu = loopMenu.sort((a, b) => {
+    if (a.order < b.order) return -1
+    if (a.order > b.order) return 1
+
+    return 0
+  })
+
+  loopMenu = loopMenu.map((item, index) => {
+    if (item.parentId) {
+      const indexOf = loopMenu.findIndex((parent) => {
+        return parent.id == item.parentId
+      })
+
+      if (indexOf != -1) {
+        loopMenu[indexOf].children.push(item)
+        return null
+      }
+
+      return item
+    }
+
+    return item
+  })
+
+  loopMenu = loopMenu.filter((n) => n)
+
+  return loopMenu
+}
+
 //
-export function parseToMenuItem(args) {
-  var outUrl = args.attributes.url
-  var outChildren = []
+export function parseMenuItem(args) {
+  var outUrl = args.attributes?.url
 
-  if (args.attributes.attr_type_link == MenuItemTypeLink.blog) {
-    outUrl = '/single-post'
-  } else if (args.attributes.attr_type_link == MenuItemTypeLink.category) {
-    outUrl = '/category'
-  } else if (args.attributes.attr_type_link == MenuItemTypeLink.style) {
-    outUrl = '/category'
-  }
+  var outDocs = []
 
-  if (args.attributes.children && args.attributes.children.data.length > 0) {
-    args.attributes.children.data.forEach((child) => {
-      outChildren.push(parseToMenuItem(child))
-    })
+  if (
+    args.attributes?.attr_type_link &&
+    args.attributes?.attr_type_link != MenuLinkType.link
+  ) {
+    outUrl =
+      args?.attributes[args.attributes.attr_type_link]?.data?.attributes?.slug
+
+    if (
+      args?.attributes[args.attributes.attr_type_link]?.data?.attributes?.blogs
+        ?.data
+    ) {
+      outDocs =
+        args?.attributes[args.attributes.attr_type_link]?.data?.attributes
+          ?.blogs?.data
+    }
   }
 
   return {
-    title: args.attributes.title,
+    id: args?.id,
     url: outUrl,
-    target: args.attributes.target,
-    rel: args.attributes.attr_rel,
-    children: { data: outChildren },
-    subLayout: args.attributes.attr_layout_sub,
+    parentId: args?.attributes?.parent?.data?.id,
+    title: args?.attributes?.title,
+    order: args?.attributes?.order,
+    target: args?.attributes?.target,
+    rel: args?.attributes?.attr_rel,
+    children: [],
+    subLayout: args?.attributes?.attr_layout_sub,
+    docs: outDocs,
+    typeLink: args?.attributes?.attr_type_link,
   }
 }
 
@@ -82,19 +127,4 @@ export function parseToMenuItemTypeDocs(args) {
     docs: outDocs,
     docType: outDocType,
   }
-}
-
-export function sortMenuResByOrder(data = []) {
-  // sort by order
-  return data.sort((current, next) => {
-    if (current.attributes.order > next.attributes.order) {
-      return 1
-    }
-
-    if (current.attributes.order < next.attributes.order) {
-      return -1
-    }
-
-    return 0
-  })
 }

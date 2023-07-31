@@ -3,9 +3,9 @@ import AppLink from '@/components-root/link'
 import Search from '@/components-root/search'
 import AppAssets from '@/consts/assets'
 import { data_menu_mid } from '@/data/menu'
+import { parseMenu } from '@/helpers/menu'
 import { useSWRFetch } from '@/helpers/swr'
 import AppConst from '@/models/const'
-import { parseToMenuItemTypeDocs } from '@/models/menus/controller'
 import { docMenu } from '@/services/graphql-query'
 import { useMenuList } from '@/services/hooks'
 import HeaderMidRight from '@/ui/header/header-mid-right'
@@ -15,69 +15,22 @@ import { useState } from 'react'
 import { classHasChildren, classMenuItem, classMenuLink, classNav } from '.'
 import { HeaderMidMenuDropdown } from './header-mid-menu-dropdown'
 import { HeaderMidMenuDropdownFull } from './header-mid-menu-dropdown-full'
+import { useMenuMiddle } from '@/hooks'
+import { MenuSubLayout } from '@/consts/type'
 
 export default function HeaderMid() {
   // Define useState
   const [isShowSearch, setShowSearch] = useState(false)
 
-  // menu
-  var menuData = []
-
-  const { fetchMenu } = useMenuList()
-
-  // const fetching = async () => {
-  //   const data = await fetchMenu({})
-
-  //   console.log('data', data)
-  // }
-
-  // useEffect(() => {
-  //   fetching()
-  // }, [])
-
-  const { data, isLoading, error } = useSWRFetch(
-    docMenu,
-    {
-      searchOption: {
-        slug: process.env.NEXT_PUBLIC_MENU_HEADER_MIDDLE_SLUG,
-        menuSize: 100,
-        isShowDataRelate: true,
-        dataSize: 4,
-      },
-    },
-    fetchMenu,
-  )
-
-  // const data = null
-  console.log('data', data)
-  // const { data } = useSWR(
-  //   SWRKey.headerMiddle,
-  //   () =>
-  //     getMenuAndchildrent(
-  //       process.env.NEXT_PUBLIC_MENU_HEADER_MIDDLE_SLUG,
-  //       true,
-  //     ),
-  //   {
-  //     revalidateIfStale: false,
-  //     revalidateOnFocus: false,
-  //     revalidateOnReconnect: true,
-  //   },
-  // )
-
-  // const data = null
-
-  if (!process.env.NEXT_PUBLIC_HAS_API_DB_CONECT) {
-    menuData.push(...data_menu_mid)
-  } else if (data) {
-    // data.forEach((item) => {
-    //   menuData.push(parseToMenuItemTypeDocs(item))
-    // })
-  }
-
   // Method event
   function searchClick() {
     setShowSearch(!isShowSearch)
   }
+
+  // hook
+  const { menuData } = useMenuMiddle()
+
+  console.log('menuData', menuData)
 
   return (
     <>
@@ -111,27 +64,26 @@ export default function HeaderMid() {
               {menuData.map((item, index) => {
                 var outPut = <></>
 
+                // choice layout ui
                 if (
-                  item.subLayout == 'dropdown' &&
-                  item.children &&
-                  item.children.data.length > 0
+                  item?.subLayout == MenuSubLayout.dropdown &&
+                  item?.children.length > 0
                 ) {
                   outPut = <HeaderMidMenuDropdown item={item} />
                 } else if (
-                  item.subLayout == 'dropdown-full' &&
-                  item.children &&
-                  item.children.data.length > 0
+                  item?.subLayout == MenuSubLayout.dropdownPosts &&
+                  item?.children.length > 0
                 ) {
                   outPut = <HeaderMidMenuDropdownFull item={item} />
                 } else {
                   outPut = (
                     <AppLink
-                      url={item.url}
-                      target={item.target}
-                      rel={item.target ? '_' + item.target : ''}
+                      url={item?.url}
+                      target={item?.target}
+                      rel={item?.target ? '_' + item?.target : ''}
                       classLink={classNames(classMenuLink)}
                     >
-                      {item.title}
+                      {item?.title}
                     </AppLink>
                   )
                 }
@@ -141,7 +93,7 @@ export default function HeaderMid() {
                     key={index}
                     className={classNames(
                       classMenuItem,
-                      item.children?.data?.length ? classHasChildren : '',
+                      item.children.length ? classHasChildren : '',
                     )}
                   >
                     {outPut}

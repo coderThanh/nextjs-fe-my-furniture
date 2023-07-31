@@ -1,9 +1,6 @@
 import AppLink from '@/components-root/link'
-import { parseToMenuItem } from '@/models/menus/controller'
-import SWRKey from '@/consts/swr-key'
 import classNames from 'classnames'
 import { useRouter } from 'next/router'
-import useSWR from 'swr'
 
 const dataDemo = [
   { title: 'Trang chủ', url: '/', target: '' },

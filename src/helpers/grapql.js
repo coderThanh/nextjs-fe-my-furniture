@@ -17,8 +17,6 @@ export const grapTransport = () => {
         ...config,
       })
 
-      console.log(res)
-
       if (res) return res
 
       if (res?.error?.message) {
@@ -41,15 +39,6 @@ export const grapTransport = () => {
 
       return null
     }
-
-    // await client
-    //   .request(document, variabale, {
-    //     ...config,
-    //   })
-    //   .then((res, reject) => {
-    //     console.log(res)
-    //     console.error(reject)
-    //   })
   }
 
   return { get }
