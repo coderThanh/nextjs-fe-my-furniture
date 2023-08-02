@@ -1,3 +1,4 @@
+import { ROUTER_URL } from '@/consts/router'
 import { MenuSubLayoutType } from '@/consts/type'
 
 export const data_menu_mid = [
@@ -42,7 +43,7 @@ export const data_menu_mid = [
         docs: [1, 3, 4, 4],
         subLayout: 'dropdown',
         title: 'Chuyện nhà',
-        url: '',
+        url: ROUTER_URL.categoryDemo,
         children: [],
       },
       {
@@ -50,7 +51,7 @@ export const data_menu_mid = [
         docs: [1, 3, 4],
         subLayout: 'dropdown',
         title: 'Kho ảnh',
-        url: '',
+        url: ROUTER_URL.categoryDemo,
         children: [],
       },
       {
@@ -58,7 +59,7 @@ export const data_menu_mid = [
         docs: [1, 3, 4, 4],
         subLayout: 'dropdown',
         title: 'Trang chủ',
-        url: '',
+        url: ROUTER_URL.categoryDemo,
         children: [],
       },
       {
@@ -66,7 +67,7 @@ export const data_menu_mid = [
         docs: [1, 3, 4],
         subLayout: 'dropdown',
         title: 'Indochine',
-        url: '',
+        url: ROUTER_URL.categoryDemo,
         children: [],
       },
       {
@@ -74,7 +75,7 @@ export const data_menu_mid = [
         docs: [1, 2, 3, 4],
         subLayout: 'dropdown',
         title: 'Minimalism',
-        url: '',
+        url: ROUTER_URL.categoryDemo,
         children: [],
       },
       {
@@ -82,7 +83,7 @@ export const data_menu_mid = [
         docs: [],
         subLayout: 'dropdown',
         title: 'Emagazine',
-        url: '',
+        url: ROUTER_URL.categoryDemo,
         children: [],
       },
     ],
@@ -91,7 +92,7 @@ export const data_menu_mid = [
     subLayout: MenuSubLayoutType.dropdownPosts,
     url: '',
   },
-  { title: 'Chuyên gia', url: '', target: '' },
+  { title: 'Chuyên gia', url: ROUTER_URL.categoryDemo, target: '' },
 ]
 
 export const data_menu_mobile = [
@@ -103,7 +104,7 @@ export const data_menu_mobile = [
         docs: [],
         subLayout: 'dropdown',
         title: 'About',
-        url: '',
+        url: ROUTER_URL.categoryDemo,
       },
       {
         children: [],
@@ -111,7 +112,7 @@ export const data_menu_mobile = [
         docs: [],
         subLayout: 'dropdown',
         title: 'Contact',
-        url: '',
+        url: ROUTER_URL.categoryDemo,
       },
       {
         children: [],
@@ -119,14 +120,14 @@ export const data_menu_mobile = [
         docs: [],
         subLayout: 'dropdown',
         title: 'About me',
-        url: '',
+        url: ROUTER_URL.categoryDemo,
       },
     ],
     docType: undefined,
     docs: [],
     subLayout: MenuSubLayoutType.dropdown,
     title: 'Category 1',
-    url: '',
+    url: ROUTER_URL.categoryDemo,
   },
   {
     children: [
@@ -136,7 +137,7 @@ export const data_menu_mobile = [
         docs: [],
         subLayout: 'dropdown',
         title: 'About',
-        url: '',
+        url: ROUTER_URL.categoryDemo,
       },
       {
         children: [],
@@ -144,7 +145,7 @@ export const data_menu_mobile = [
         docs: [],
         subLayout: 'dropdown',
         title: 'Contact',
-        url: '',
+        url: ROUTER_URL.categoryDemo,
       },
       {
         children: [],
@@ -152,14 +153,14 @@ export const data_menu_mobile = [
         docs: [],
         subLayout: 'dropdown',
         title: 'About me',
-        url: '',
+        url: ROUTER_URL.categoryDemo,
       },
     ],
     docType: undefined,
     docs: [],
     subLayout: MenuSubLayoutType.dropdown,
     title: 'Category 2',
-    url: '',
+    url: ROUTER_URL.categoryDemo,
   },
   {
     children: [
@@ -169,7 +170,7 @@ export const data_menu_mobile = [
         docs: [],
         subLayout: 'dropdown',
         title: 'About',
-        url: '',
+        url: ROUTER_URL.categoryDemo,
       },
       {
         children: [],
@@ -177,7 +178,7 @@ export const data_menu_mobile = [
         docs: [],
         subLayout: 'dropdown',
         title: 'Contact',
-        url: '',
+        url: ROUTER_URL.categoryDemo,
       },
       {
         children: [],
@@ -185,14 +186,14 @@ export const data_menu_mobile = [
         docs: [],
         subLayout: 'dropdown',
         title: 'About me',
-        url: '',
+        url: ROUTER_URL.categoryDemo,
       },
     ],
     docType: undefined,
     docs: [],
     subLayout: MenuSubLayoutType.dropdown,
     title: 'Category 3',
-    url: '',
+    url: ROUTER_URL.categoryDemo,
   },
   {
     title: 'Category 4',
@@ -202,7 +203,7 @@ export const data_menu_mobile = [
         docs: [1, 3, 4, 4],
         subLayout: 'dropdown',
         title: 'Chuyện nhà',
-        url: '',
+        url: ROUTER_URL.categoryDemo,
         children: [],
       },
       {
@@ -210,7 +211,7 @@ export const data_menu_mobile = [
         docs: [1, 3, 4],
         subLayout: 'dropdown',
         title: 'Kho ảnh',
-        url: '',
+        url: ROUTER_URL.categoryDemo,
         children: [],
       },
       {
@@ -218,7 +219,7 @@ export const data_menu_mobile = [
         docs: [1, 3, 4, 4],
         subLayout: 'dropdown',
         title: 'Trang chủ',
-        url: '',
+        url: ROUTER_URL.categoryDemo,
         children: [],
       },
       {
@@ -226,7 +227,7 @@ export const data_menu_mobile = [
         docs: [1, 3, 4],
         subLayout: 'dropdown',
         title: 'Indochine',
-        url: '',
+        url: ROUTER_URL.categoryDemo,
         children: [],
       },
       {
@@ -234,7 +235,7 @@ export const data_menu_mobile = [
         docs: [1, 2, 3, 4],
         subLayout: 'dropdown',
         title: 'Minimalism',
-        url: '',
+        url: ROUTER_URL.categoryDemo,
         children: [],
       },
       {
@@ -242,18 +243,35 @@ export const data_menu_mobile = [
         docs: [],
         subLayout: 'dropdown',
         title: 'Emagazine',
-        url: '',
+        url: ROUTER_URL.categoryDemo,
         children: [],
       },
     ],
     docType: undefined,
     docs: [],
     subLayout: MenuSubLayoutType.dropdownPosts,
-    url: '',
+    url: ROUTER_URL.categoryDemo,
   },
-  { title: 'Chuyên gia', url: '', target: '' },
-  { title: 'Phong cach', url: '', target: '' },
-  { title: 'Xu huong', url: '', target: '' },
-  { title: 'Kho kiến thức', url: '', target: '' },
-  { title: 'Liên hệ', url: '', target: '' },
+  { title: 'Chuyên gia', url: ROUTER_URL.categoryDemo, target: '' },
+  { title: 'Chuyên gia', url: ROUTER_URL.categoryDemo, target: '' },
+  { title: 'Phong cach', url: ROUTER_URL.categoryDemo, target: '' },
+  { title: 'Xu huong', url: ROUTER_URL.categoryDemo, target: '' },
+  { title: 'Kho kiến thức', url: ROUTER_URL.categoryDemo, target: '' },
+  { title: 'Liên hệ', url: ROUTER_URL.categoryDemo, target: '' },
+]
+
+export const data_menu_bottom = [
+  { title: 'Trang chủ', url: '/', target: '' },
+  {
+    title: 'Chuyện nhà link',
+    url: ROUTER_URL.categoryDemo,
+  },
+  { title: 'Xu hướng', url: ROUTER_URL.categoryDemo, target: '' },
+  { title: 'Zen', url: ROUTER_URL.categoryDemo, target: '' },
+  { title: 'Wabi sabi', url: ROUTER_URL.categoryDemo, target: '' },
+  { title: 'Mid Centry', url: ROUTER_URL.categoryDemo, target: '' },
+  { title: 'Minimalism', url: ROUTER_URL.categoryDemo, target: '' },
+  { title: 'Scandinavian', url: ROUTER_URL.categoryDemo, target: '' },
+  { title: 'Tin tức', url: ROUTER_URL.categoryDemo, target: '' },
+  { title: 'Liên hệ', url: '#', target: '' },
 ]

@@ -1,4 +1,4 @@
-import { data_menu_mid, data_menu_mobile } from '@/data/menu'
+import { data_menu_bottom, data_menu_mid, data_menu_mobile } from '@/data/menu'
 import { parseMenu } from '@/helpers/menu'
 import { useSWRFetch } from '@/helpers/swr'
 import { docMenu } from '@/services/graphql-query'
@@ -79,6 +79,38 @@ export const useMenuHeaderMobile = () => {
     menuData.push(...data_menu_mobile)
   } else if (isConnectAPI && menuSortByChilren) {
     menuData.push(...menuSortByChilren)
+  }
+
+  return { menuData }
+}
+
+export const useMenuHeaderBottom = () => {
+  // menu
+  var menuData = []
+
+  const { fetchMenu } = useMenuList()
+
+  const isConnectAPI = process.env.NEXT_PUBLIC_HAS_API_DB_CONECT
+
+  const { data } = useSWRFetch(
+    isConnectAPI ? docMenu : null,
+    {
+      slug: process.env.NEXT_PUBLIC_MENU_HEADER_BOTTOM_SLUG,
+      menuSize: 20,
+      isShowDataRelate: false,
+      dataSize: 0,
+    },
+    isConnectAPI ? fetchMenu : () => {},
+  )
+
+  const resData = data?.menusMenuItems?.data || []
+
+  const menuParsed = parseMenu(resData)
+
+  if (!isConnectAPI) {
+    menuData.push(...data_menu_bottom)
+  } else if (isConnectAPI && menuParsed) {
+    menuData.push(...menuParsed)
   }
 
   return { menuData }
