@@ -1,7 +1,4 @@
-import AppAssets from '@/consts/assets'
-import AppConst from '@/models/const'
-import classNames from 'classnames'
-import { IconCart, IconMenu } from '@/components-child/icon'
+import { IconCart, IconHearth, IconMenu } from '@/components-child/icon'
 import AppButton, {
   AppButtonColor,
   AppButtonKind,
@@ -12,61 +9,27 @@ import ListTitle from '@/components-root/list-title'
 import Search from '@/components-root/search'
 import WindownE from '@/components-root/windown'
 import WindownSecondE from '@/components-root/windown/windown-second'
+import AppAssets from '@/consts/assets'
+import { useMenuHeaderMobile } from '@/hooks'
+import AppConst from '@/models/const'
+import {
+  classMenuIcon,
+  classMenuItem,
+  classMenuLink,
+  classMenuListTitle,
+  classNav,
+  classNavInner,
+} from '@/ui/header'
+import classNames from 'classnames'
 
 export default function HeaderMobileMid() {
-  // Defint class tag
-  const classMenuItem = 'menu-item'
-  const classMenuLink = 'menu-link'
-  const classMenuIcon = 'menu-icon'
-  const classMenuListTitle = 'menu-l-title'
-  const classNav = 'nav'
-  const classNavInner = 'nav-inner'
-
-  // Demo menu item
-  const demoMenuItem = (
-    <>
-      <div className={classNames(classMenuItem)}>
-        <AppLink url={'/category'} classLink={classNames(classMenuLink)}>
-          Scandinavian
-        </AppLink>
-      </div>
-      <div className={classNames(classMenuItem)}>
-        <AppLink url={'/category'} classLink={classNames(classMenuLink)}>
-          Japandi
-        </AppLink>
-      </div>
-      <div className={classNames(classMenuItem)}>
-        <AppLink url={'/category'} classLink={classNames(classMenuLink)}>
-          Minimalism
-        </AppLink>
-      </div>
-      <div className={classNames(classMenuItem)}>
-        <AppLink url={'/category'} classLink={classNames(classMenuLink)}>
-          Xu hướng
-        </AppLink>
-      </div>
-      <div className={classNames(classMenuItem)}>
-        <AppLink url={'/category'} classLink={classNames(classMenuLink)}>
-          Thảo luận
-        </AppLink>
-      </div>
-      <div className={classNames(classMenuItem)}>
-        <AppLink url={'/category'} classLink={classNames(classMenuLink)}>
-          Mid centry
-        </AppLink>
-      </div>
-      <div className={classNames(classMenuItem)}>
-        <AppLink url={'/category'} classLink={classNames(classMenuLink)}>
-          Ngẫu nhiên
-        </AppLink>
-      </div>
-    </>
-  )
+  // fetch
+  const { menuData } = useMenuHeaderMobile()
 
   return (
     <>
       <div
-        className={classNames('container', 'd-md-none', 'header-mid mobile')}
+        className={classNames('container', 'd-lg-none', 'header-mid mobile')}
       >
         <div className={classNames('header-mid-inner')}>
           <AppLink classLink={classNames('logo')} url={'/'}>
@@ -88,16 +51,29 @@ export default function HeaderMobileMid() {
                   className={classNames(classMenuIcon)}
                 >
                   <>
-                    <IconCart className={classNames('icon')} />
-                    <span className={classNames('number')}>30</span>
+                    <IconHearth className={classNames('icon')} />
+                    <span className={classNames('number')}>0</span>
                   </>
                 </AppButton>
               </div>
               <div className={classNames(classMenuItem)}>
+                <AppButton
+                  kind={AppButtonKind.default}
+                  color={AppButtonColor.white}
+                  className={classNames(classMenuIcon)}
+                >
+                  <>
+                    <IconCart className={classNames('icon')} />
+                    <span className={classNames('number')}>0</span>
+                  </>
+                </AppButton>
+              </div>
+              <div className={classNames(classMenuItem)}>
+                {/* Windown nav */}
                 <WindownE
                   classWrap="header-windown"
                   isShow={false}
-                  neighbor={
+                  before={
                     <AppButton
                       kind={AppButtonKind.default}
                       color={AppButtonColor.white}
@@ -131,168 +107,65 @@ export default function HeaderMobileMid() {
                         <Search />
                       </div>
 
-                      <div className={classNames(classMenuItem, 'highlight')}>
-                        <WindownSecondE
-                          isShow={false}
-                          title={'Chuyện nhà'}
-                          neighbor={
-                            <ListTitle
-                              text={' Chuyện nhà '}
-                              isShowToggle={true}
-                              classNameWrap={classMenuListTitle}
-                            ></ListTitle>
-                          }
-                        >
-                          <>
-                            <div
-                              className={classNames(classMenuItem, 'highlight')}
-                            >
-                              <WindownSecondE
-                                isShow={false}
-                                title={'Chuyện nhà'}
-                                neighbor={
-                                  <ListTitle
-                                    text={' Chuyện nhà '}
-                                    isShowToggle={true}
-                                    classNameWrap={classMenuListTitle}
-                                  ></ListTitle>
-                                }
-                              >
-                                <>{demoMenuItem}</>
-                              </WindownSecondE>
-                            </div>
-                            <div
-                              className={classNames(classMenuItem, 'highlight')}
-                            >
-                              <WindownSecondE
-                                isShow={false}
-                                title={'Chuyện nhà'}
-                                neighbor={
-                                  <ListTitle
-                                    text={' Chuyện nhà '}
-                                    isShowToggle={true}
-                                    classNameWrap={classMenuListTitle}
-                                  ></ListTitle>
-                                }
-                              >
-                                <>{demoMenuItem}</>
-                              </WindownSecondE>
-                            </div>
-                            <div className={classNames(classMenuItem)}>
-                              <WindownSecondE
-                                isShow={false}
-                                title={'Chuyện nhà'}
-                                neighbor={
-                                  <ListTitle
-                                    text={' Chuyện nhà '}
-                                    isShowToggle={true}
-                                    classNameWrap={classMenuListTitle}
-                                  ></ListTitle>
-                                }
-                              >
-                                <>{demoMenuItem}</>
-                              </WindownSecondE>
-                            </div>
-                            <div className={classNames(classMenuItem)}>
-                              <WindownSecondE
-                                isShow={false}
-                                title={'Chuyện nhà'}
-                                neighbor={
-                                  <ListTitle
-                                    text={' Chuyện nhà '}
-                                    isShowToggle={true}
-                                    classNameWrap={classMenuListTitle}
-                                  ></ListTitle>
-                                }
-                              >
-                                <>{demoMenuItem}</>
-                              </WindownSecondE>
-                            </div>
-                            <div className={classNames('nav-2nd')}>
-                              {demoMenuItem}
-                            </div>
-                          </>
-                        </WindownSecondE>
-                      </div>
-                      <div className={classNames(classMenuItem, 'highlight')}>
-                        <WindownSecondE
-                          isShow={false}
-                          title={'Chuyện nhà 1'}
-                          neighbor={
-                            <ListTitle
-                              text={' Chuyện nhà 1'}
-                              isShowToggle={true}
-                              classNameWrap={classMenuListTitle}
-                            ></ListTitle>
-                          }
-                        >
-                          <>{demoMenuItem}</>
-                        </WindownSecondE>
-                      </div>
-                      <div className={classNames(classMenuItem, 'highlight')}>
-                        <WindownSecondE
-                          isShow={false}
-                          title={'Chuyện nhà 2'}
-                          neighbor={
-                            <ListTitle
-                              text={' Chuyện nhà 2'}
-                              isShowToggle={true}
-                              classNameWrap={classMenuListTitle}
-                            ></ListTitle>
-                          }
-                        >
-                          <>{demoMenuItem}</>
-                        </WindownSecondE>
-                      </div>
-                      <div className={classNames(classMenuItem)}>
-                        <WindownSecondE
-                          isShow={false}
-                          title={'Chuyện nhà 3'}
-                          neighbor={
-                            <ListTitle
-                              text={' Chuyện nhà 3'}
-                              isShowToggle={true}
-                              classNameWrap={classMenuListTitle}
-                            ></ListTitle>
-                          }
-                        >
-                          <>{demoMenuItem}</>
-                        </WindownSecondE>
-                      </div>
-                      <div className={classNames(classMenuItem)}>
-                        <WindownSecondE
-                          isShow={false}
-                          title={'Chuyện nhà 4'}
-                          neighbor={
-                            <ListTitle
-                              text={' Chuyện nhà 4'}
-                              isShowToggle={true}
-                              classNameWrap={classMenuListTitle}
-                            ></ListTitle>
-                          }
-                        >
-                          <>{demoMenuItem}</>
-                        </WindownSecondE>
-                      </div>
-                      <div className={classNames(classMenuItem)}>
-                        <WindownSecondE
-                          isShow={false}
-                          title={'Chuyện nhà 5'}
-                          neighbor={
-                            <ListTitle
-                              text={' Chuyện nhà 5'}
-                              isShowToggle={true}
-                              classNameWrap={classMenuListTitle}
-                            ></ListTitle>
-                          }
-                        >
-                          <>{demoMenuItem}</>
-                        </WindownSecondE>
-                      </div>
+                      {/* Nav item */}
+                      {menuData?.map((item, index) => {
+                        var content = null
 
-                      <div className={classNames('nav-2nd')}>
-                        {demoMenuItem}
-                      </div>
+                        if (item?.children?.length > 0) {
+                          content = (
+                            <div
+                              key={index}
+                              className={classNames(classMenuItem, 'highlight')}
+                            >
+                              <WindownSecondE
+                                isShow={false}
+                                title={item.title}
+                                neighbor={
+                                  <ListTitle
+                                    text={item.title}
+                                    isShowToggle={true}
+                                    classNameWrap={classMenuListTitle}
+                                  ></ListTitle>
+                                }
+                              >
+                                <>
+                                  {item.children.map((children, indexChild) => {
+                                    return (
+                                      <div
+                                        key={indexChild}
+                                        className={classNames(classMenuItem)}
+                                      >
+                                        <AppLink
+                                          url={children?.url}
+                                          classLink={classNames(classMenuLink)}
+                                        >
+                                          {children?.title}
+                                        </AppLink>
+                                      </div>
+                                    )
+                                  })}
+                                </>
+                              </WindownSecondE>
+                            </div>
+                          )
+                        } else {
+                          content = (
+                            <div
+                              key={index}
+                              className={classNames(classMenuItem)}
+                            >
+                              <AppLink
+                                url={item?.url}
+                                classLink={classNames(classMenuLink)}
+                              >
+                                {item?.title}
+                              </AppLink>
+                            </div>
+                          )
+                        }
+
+                        return content
+                      })}
                     </div>
                   </>
                 </WindownE>

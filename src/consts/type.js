@@ -5,7 +5,7 @@ export const MenuLinkType = {
   link: 'link',
 }
 
-export const MenuSubLayout = {
+export const MenuSubLayoutType = {
   dropdown: 'dropdown',
   dropdownPosts: 'dropdownPosts',
 }

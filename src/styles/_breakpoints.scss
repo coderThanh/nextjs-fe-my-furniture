@@ -1,8 +1,8 @@
 // Do not inclue in file source
 // This just varibale file
 // Example to use:
-// b1. @use './utils//breakpoints' as breakPoint;
-// b2. #{breakPoint.$max-w-md}
+// b1. @use '@/styles/_breakpoints.scss' as bp;
+// b2. #{bp.$max-w-md}
 
 // Responsive Variables for bootstrap
 $x4l: 'only screen and (min-width: 1700px) and (max-width: 1800px)';

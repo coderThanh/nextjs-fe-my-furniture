@@ -1,3 +1,5 @@
+@use '@/styles/_breakpoints.scss' as bp;
+
 .header-wrap {
     --gap-x: 14px;
 
@@ -421,41 +423,14 @@ body .windown-wrap {
     padding-bottom: 60px;
 }
 
-
-@media only screen and (max-width: 1024px) {
+@media #{bp.$max-w-lg} {
     .logo {
         flex: 0 0 120px;
     }
-
-
-
 }
 
-@media only screen and (max-width: 992px) {
-    .sub-showcase {
-        grid-template-columns: 1fr 1fr 1fr;
-    }
 
-    .mid-nav_center {
-        .nav-inner {
-            gap: 5px 15px;
-        }
-
-        .menu-link {
-            font-size: max(0.85rem, 12px);
-            letter-spacing: 1px;
-        }
-    }
-
-    .mid-nav_right {
-
-        .btn-inner {
-            padding: 5px;
-        }
-    }
-}
-
-@media only screen and (max-width: 768px) {
+@media #{bp.$max-w-sm} {
     .bot-nav_left {
         gap: 10px 20px;
     }
@@ -465,4 +440,12 @@ body .windown-wrap {
     }
 }
 
-@media only screen and (max-width: 576px) {}
+@media #{bp.$max-w-xs} {
+    .header-wrap {
+        .menu-icon {
+            .btn-inner {
+                padding: 9px 6px;
+            }
+        }
+    }
+}

@@ -1,8 +1,8 @@
 import classNames from 'classnames'
-import React, { MouseEvent, ReactElement, useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 
-import styles from './windown.module.scss'
 import { IconClose } from '../../components-child/icon'
+import styles from './windown.module.scss'
 
 export default function WindownE(props) {
   const [isShow, setShow] = useState(props.isShow)
@@ -18,12 +18,12 @@ export default function WindownE(props) {
 
   return (
     <>
-      {props.neighbor && (
+      {props.before && (
         <div
-          className={classNames('windown-neighb', props.classNeighbor)}
+          className={classNames('windown-before', props.classBefore)}
           onClick={(e) => onClick(e)}
         >
-          {props.neighbor}
+          {props.before}
         </div>
       )}
       <div

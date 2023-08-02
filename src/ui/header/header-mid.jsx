@@ -15,8 +15,8 @@ import { useState } from 'react'
 import { classHasChildren, classMenuItem, classMenuLink, classNav } from '.'
 import { HeaderMidMenuDropdown } from './header-mid-menu-dropdown'
 import { HeaderMidMenuDropdownFull } from './header-mid-menu-dropdown-full'
-import { useMenuMiddle } from '@/hooks'
-import { MenuSubLayout } from '@/consts/type'
+import { useMenuHeaderMiddle } from '@/hooks'
+import { MenuSubLayoutType } from '@/consts/type'
 
 export default function HeaderMid() {
   // Define useState
@@ -28,14 +28,12 @@ export default function HeaderMid() {
   }
 
   // hook
-  const { menuData } = useMenuMiddle()
-
-  console.log('menuData', menuData)
+  const { menuData } = useMenuHeaderMiddle()
 
   return (
     <>
       <div
-        className={classNames('container', 'header-mid desk d-none d-md-block')}
+        className={classNames('container', 'header-mid desk d-none d-lg-block')}
       >
         <div className={classNames('mid-inner')}>
           <AppLink classLink={classNames('logo')} url={'/'}>
@@ -66,12 +64,12 @@ export default function HeaderMid() {
 
                 // choice layout ui
                 if (
-                  item?.subLayout == MenuSubLayout.dropdown &&
+                  item?.subLayout == MenuSubLayoutType.dropdown &&
                   item?.children.length > 0
                 ) {
                   outPut = <HeaderMidMenuDropdown item={item} />
                 } else if (
-                  item?.subLayout == MenuSubLayout.dropdownPosts &&
+                  item?.subLayout == MenuSubLayoutType.dropdownPosts &&
                   item?.children.length > 0
                 ) {
                   outPut = <HeaderMidMenuDropdownFull item={item} />
@@ -93,7 +91,7 @@ export default function HeaderMid() {
                     key={index}
                     className={classNames(
                       classMenuItem,
-                      item.children.length ? classHasChildren : '',
+                      item?.children?.length ? classHasChildren : '',
                     )}
                   >
                     {outPut}

@@ -17,6 +17,7 @@ export const classNavInner = 'nav-inner'
 export const classHasChildren = 'has-children'
 export const classChildrenLink = 'children-link'
 export const classFull = 'full'
+export const classMenuListTitle = 'menu-list-title'
 
 export default function Header() {
   // hook
