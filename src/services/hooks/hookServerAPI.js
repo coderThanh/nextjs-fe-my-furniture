@@ -42,6 +42,27 @@ export const useServerGetDetailById = (action) => {
   return { get }
 }
 
+export const useServerPostAPI = (action) => {
+  const post = async (body) => {
+    try {
+      const res = await action({
+        ...body,
+      })
+
+      console.log(res)
+
+      if (res) return res
+
+      return null
+    } catch (errorAPI) {
+      handleError(errorAPI)
+      return null
+    }
+  }
+
+  return { post }
+}
+
 const handleError = (errors) => {
   if (Array.isArray(errors) && errors.length > 0) {
     console.log(errors[0])

@@ -1,6 +1,6 @@
 import classNames from 'classnames'
 
-import AppConst from '@/models/const'
+import { MEDIA_MAX_MD, MEDIA_MAX_XS } from '@/consts/const'
 import { motion } from 'framer-motion'
 import { useCallback, useEffect, useRef, useState } from 'react'
 import { IconArrowNext, IconArrowPrevious } from '../../components-child/icon'
@@ -21,7 +21,7 @@ export default function Slider(props) {
   const sliderWidth = useRef(0)
   const numberItemShow = useRef(props.lg)
 
-  const transTime = useRef(DEFAULT_DURATION)
+  const transTime = useRef(0)
 
   const sliderRef = useRef(null)
 
@@ -34,14 +34,14 @@ export default function Slider(props) {
     }
 
     if (
-      windowWidth.current <= AppConst.mediaMaxMedium &&
-      windowWidth.current > AppConst.mediaMaxSmall
+      windowWidth.current <= MEDIA_MAX_MD &&
+      windowWidth.current > MEDIA_MAX_XS
     ) {
       numberItemShow.current = props.md
       setItemWidth(sliderWidth.current / props.md)
 
       return
-    } else if (windowWidth.current <= AppConst.mediaMaxSmall) {
+    } else if (windowWidth.current <= MEDIA_MAX_XS) {
       numberItemShow.current = props.sm
       setItemWidth(sliderWidth.current / props.sm)
       return

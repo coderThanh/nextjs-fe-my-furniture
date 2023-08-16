@@ -1,31 +1,21 @@
 import CardBlog, { CardBlogType } from '@/components-child/card-blog'
 import AppLink from '@/components-root/link'
 import Slider from '@/components-root/slider'
-import SWRKey from '@/consts/swr-key'
+import AppAssets from '@/consts/assets'
+import { useFetchHomeHotBanner, useFetchHomeHotBlog } from '@/hooks'
 import classNames from 'classnames'
 import Image from 'next/image'
-import useSWR from 'swr'
 
 export function HomeHotBlog() {
-  // const { data } = useSWR([
-  //   SWRKey.pageHomeRes,
-  //   GraphQLQuery.getPageHomeData,
-  //   { numbers: 6 },
-  // ])
+  // Hook
+  const { isLoading: iLoadingBanner, data: banner } = useFetchHomeHotBanner()
 
-  const data = {}
-
-  if (!data?.pageHome.data.attributes) {
-    return <></>
-  }
-
-  const hotBlogsData = data.pageHome.data.attributes.hot_blogs.data
-  const hotBanner = data.pageHome.data.attributes.hot_banner
+  const { isLoading: isLoaddingBlogs, data: blogs } = useFetchHomeHotBlog()
 
   return (
-    <>
+    <div className="container">
       <div className={classNames('row row-equal', 'home-hot-blog')}>
-        {hotBlogsData.length > 0 && (
+        {!isLoaddingBlogs && blogs?.length > 0 ? (
           <div className="col col-sm-12 col-md-9 col-lg-9 ">
             <div className="col-inner">
               <Slider
@@ -33,19 +23,20 @@ export function HomeHotBlog() {
                 md={1}
                 sm={1}
                 isShowButton={true}
-                count={hotBlogsData.length}
+                count={blogs.length}
                 build={function (index) {
                   return (
                     <>
                       <CardBlog
-                        thumbnail={`/images/blogs/blog_${Math.min(
-                          index + 1,
-                          6,
-                        )}.jpg`}
+                        thumbnail={
+                          blogs[index]?.thumbnail?.url ||
+                          AppAssets.placeholderGray
+                        }
                         imgRatio={55}
                         imgRadius={10}
                         type={CardBlogType.overlay}
-                        title={hotBlogsData[index].attributes.title}
+                        title={blogs[index]?.title}
+                        slug={blogs[index].slug}
                       />
                     </>
                   )
@@ -53,8 +44,10 @@ export function HomeHotBlog() {
               />
             </div>
           </div>
+        ) : (
+          ''
         )}
-        {hotBanner.data.attributes.url && (
+        {!iLoadingBanner && (
           <div className={classNames('col col-12 col-md-3 d-none d-md-block')}>
             <div
               className="col-inner"
@@ -64,7 +57,7 @@ export function HomeHotBlog() {
             >
               <AppLink>
                 <Image
-                  src={'/images/banner/banner_1.jpg'}
+                  src={banner?.url ?? AppAssets.placeholderGray}
                   fill={true}
                   sizes="100%"
                   alt={''}
@@ -76,6 +69,6 @@ export function HomeHotBlog() {
           </div>
         )}
       </div>
-    </>
+    </div>
   )
 }

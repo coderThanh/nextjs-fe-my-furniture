@@ -1,9 +1,8 @@
 import classNames from 'classnames'
-import React, { LegacyRef, ReactNode, useEffect, useRef, useState } from 'react'
-import { motion, Variants } from 'framer-motion'
+import { motion } from 'framer-motion'
+import { useEffect, useRef, useState } from 'react'
 
 import styles from './header-menu-dropdown.module.scss'
-import AppConst from '@/models/const'
 
 export default function HeaderMenuDropDown(props) {
   const relWrap = useRef(null) // nho them null
@@ -95,7 +94,7 @@ export default function HeaderMenuDropDown(props) {
             'sub-menu',
           )}
           transition={{
-            duration: AppConst.duration1,
+            duration: 0.32,
             opacity: {
               duration: isOpen ? 0.1 : 0.05,
             },

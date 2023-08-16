@@ -10,8 +10,8 @@ import Search from '@/components-root/search'
 import WindownE from '@/components-root/windown'
 import WindownSecondE from '@/components-root/windown/windown-second'
 import AppAssets from '@/consts/assets'
+import { TITLE_PAGE } from '@/consts/const'
 import { useMenuHeaderMobile } from '@/hooks'
-import AppConst from '@/models/const'
 import {
   classMenuIcon,
   classMenuItem,
@@ -35,7 +35,7 @@ export default function HeaderMobileMid() {
           <AppLink classLink={classNames('logo')} url={'/'}>
             <AppImage
               src={AppAssets.imgLogoDark}
-              alt={AppConst.titleDefault}
+              alt={TITLE_PAGE}
               width={200}
               height={60}
               styleImg={{ objectFit: 'contain', objectPosition: 'left' }}
@@ -90,7 +90,7 @@ export default function HeaderMobileMid() {
                       <AppLink classLink={classNames('logo')} url={'/'}>
                         <AppImage
                           src={AppAssets.imgLogoDark}
-                          alt={AppConst.titleDefault}
+                          alt={TITLE_PAGE}
                           width={200}
                           height={40}
                           styleImg={{

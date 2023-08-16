@@ -20,3 +20,11 @@ export const LIMIT_FETCH = 4
 export const LIMIT_CART_FETCH = 100
 
 //
+export const MEDIA_MAX_XS = 576
+export const MEDIA_MAX_SM = 768
+export const MEDIA_MAX_MD = 991
+export const MEDIA_MAX_LG = 1199
+
+//
+export const TITLE_PAGE = 'My blog'
+export const DESCRIPTION_PAGE = 'My blog'

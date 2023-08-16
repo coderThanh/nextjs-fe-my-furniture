@@ -2,7 +2,6 @@ import CardBlog, { CardBlogType } from '@/components-child/card-blog'
 import AppLink from '@/components-root/link'
 import Slider from '@/components-root/slider'
 import classNames from 'classnames'
-import { ReactNode } from 'react'
 import Image from 'next/image'
 
 export function HomeHotBlogDemo() {

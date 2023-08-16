@@ -2,12 +2,9 @@ import AppImage from '@/components-root/img'
 import AppLink from '@/components-root/link'
 import Search from '@/components-root/search'
 import AppAssets from '@/consts/assets'
-import { data_menu_mid } from '@/data/menu'
-import { parseMenu } from '@/helpers/menu'
-import { useSWRFetch } from '@/helpers/swr'
-import AppConst from '@/models/const'
-import { docMenu } from '@/services/graphql-query'
-import { useMenuList } from '@/services/hooks'
+import { TITLE_PAGE } from '@/consts/const'
+import { MenuSubLayoutType } from '@/consts/type'
+import { useMenuHeaderMiddle } from '@/hooks'
 import HeaderMidRight from '@/ui/header/header-mid-right'
 import classNames from 'classnames'
 import { motion } from 'framer-motion'
@@ -15,8 +12,6 @@ import { useState } from 'react'
 import { classHasChildren, classMenuItem, classMenuLink, classNav } from '.'
 import { HeaderMidMenuDropdown } from './header-mid-menu-dropdown'
 import { HeaderMidMenuDropdownFull } from './header-mid-menu-dropdown-full'
-import { useMenuHeaderMiddle } from '@/hooks'
-import { MenuSubLayoutType } from '@/consts/type'
 
 export default function HeaderMid() {
   // Define useState
@@ -39,7 +34,7 @@ export default function HeaderMid() {
           <AppLink classLink={classNames('logo')} url={'/'}>
             <AppImage
               src={AppAssets.imgLogoDark}
-              alt={AppConst.titleDefault}
+              alt={TITLE_PAGE}
               width={200}
               height={60}
               styleImg={{ objectFit: 'contain', objectPosition: 'left' }}
@@ -48,7 +43,7 @@ export default function HeaderMid() {
           </AppLink>
 
           <div className={classNames('mid-nav_center', classNav)}>
-            <motion.nav
+            <motion.div
               variants={VariantHeaderMiddle.navCenterVariants}
               animate={isShowSearch ? 'onSearchShow' : 'onSearchHidden'}
               initial={'onSearchHidden'}
@@ -98,7 +93,7 @@ export default function HeaderMid() {
                   </div>
                 )
               })}
-            </motion.nav>
+            </motion.div>
             <motion.div
               variants={VariantHeaderMiddle.searchVariants}
               animate={isShowSearch ? 'onShow' : 'onHidden'}

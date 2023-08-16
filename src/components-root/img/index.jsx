@@ -1,8 +1,7 @@
-import AppConst from '@/models/const'
 import classNames from 'classnames'
-import Image, { ImageProps } from 'next/image'
-import { CSSProperties } from 'react'
+import Image from 'next/image'
 
+import { TITLE_PAGE } from '@/consts/const'
 import styles from './img.module.scss'
 
 export default function AppImage(props) {
@@ -27,7 +26,7 @@ export default function AppImage(props) {
       >
         <Image
           src={props.src}
-          alt={props.alt && AppConst.titleDefault}
+          alt={props.alt || TITLE_PAGE}
           fill={props.ratio ? true : false}
           width={props.ratio ? undefined : props.width}
           height={props.ratio ? undefined : props.height}

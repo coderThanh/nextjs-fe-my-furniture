@@ -1,5 +1,5 @@
 import { data_menu_bottom, data_menu_mid, data_menu_mobile } from '@/data/menu'
-import { parseMenu } from '@/helpers/menu'
+import { parseMenu } from '@/helpers/parseGQL'
 import { useSWRFetch } from '@/helpers/swr'
 import { docMenu } from '@/services/graphql-query'
 import { useMenuList } from '@/services/hooks'

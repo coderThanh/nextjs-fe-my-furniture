@@ -11,21 +11,26 @@ const nextConfig = {
     includePaths: [path.join(__dirname, "styles")],
   },
   images: {
-    formats: ["image/avif", "image/webp"],
-    remotePatterns: [
-      {
-        protocol: "https",
-        hostname: "unsplash.com",
-        port: "",
-        pathname: "**",
-      },
-      {
-        protocol: "https",
-        hostname: "images.unsplash.com",
-        port: "",
-        pathname: "**",
-      },
+    domains: [
+      '127.0.0.1',
+      'unsplash.com',
+      'images.unsplash.com'
     ],
+    formats: ["image/avif", "image/webp"],
+    // remotePatterns: [
+    //   {
+    //     protocol: "https",
+    //     hostname: "unsplash.com",
+    //     port: "",
+    //     pathname: "**",
+    //   },
+    //   {
+    //     protocol: "https",
+    //     hostname: "images.unsplash.com",
+    //     port: "",
+    //     pathname: "**",
+    //   },
+    // ],
   },
   output: "standalone", // use in docker / product ev
   webpack(config) {

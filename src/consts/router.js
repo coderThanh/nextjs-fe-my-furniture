@@ -1,7 +1,7 @@
 export const ROUTER_URL = {
   home: '/',
   category: '/danh-muc',
-  style: '/style',
+  style: '/phong-cach',
   blogDetail: '/bai-viet',
   search: '/search',
 
