@@ -147,10 +147,12 @@ export default function Slider(props) {
 
   // When button click
   const onClickNext = () => {
+    transTime.current = DEFAULT_DURATION
     setIndexNext(currentIndex + 1)
   }
 
   const onClickPrevious = () => {
+    transTime.current = DEFAULT_DURATION
     setIndexNext(currentIndex - 1)
   }
 

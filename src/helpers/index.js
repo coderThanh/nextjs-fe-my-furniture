@@ -1,5 +1,8 @@
 import { TOKEN } from '@/consts/const'
 
+//  --------
+export const isConnectAPI = () => process.env.NEXT_PUBLIC_HAS_API_DB_CONECT
+
 // -------------------------Check login------------------------------------
 export const isLogin = () => !!getItemLocalStorage(TOKEN)
 

@@ -1,8 +1,13 @@
 import CardBlog, { CardBlogType } from '@/components-child/card-blog'
 import AppLink from '@/components-root/link'
 import Slider from '@/components-root/slider'
+import { ROUTER_URL } from '@/consts/router'
 import classNames from 'classnames'
 import Image from 'next/image'
+
+import { register } from 'swiper/element/bundle'
+
+register()
 
 export function HomeHotBlogDemo() {
   return (
@@ -32,6 +37,7 @@ export function HomeHotBlogDemo() {
                           title={
                             'Giảm vật liệu công nghiệp, tăng chất liệu tự nhiên - cách KTS thay đổi không gian sống cho gia chủ'
                           }
+                          slug={ROUTER_URL.blogDetailDemo}
                         />
                       </>
                     )

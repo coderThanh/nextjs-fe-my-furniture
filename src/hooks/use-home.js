@@ -18,10 +18,14 @@ import {
   parseBlogEnity,
   parseImgEnity,
 } from '@/helpers/parseGQL'
+import { isConnectAPI } from '@/helpers'
 
 //
 export const UseFallbackHomeHotBlog = async () => {
   const { fetch } = useServerHomeHotBlogs()
+
+  const isAccept = isConnectAPI()
+  if (!isAccept) return {}
 
   const data = await fetch()
 
@@ -30,14 +34,14 @@ export const UseFallbackHomeHotBlog = async () => {
 
 //
 export const useFetchHomeHotBlog = () => {
-  const isConnectAPI = process.env.NEXT_PUBLIC_HAS_API_DB_CONECT
+  const isAccept = isConnectAPI()
 
   const { fetch } = useHomeHotBlogs()
 
   var { data, isLoading } = useSWRFetch(
-    isConnectAPI ? docHomeHotBlogs : null,
+    isAccept ? docHomeHotBlogs : null,
     {},
-    isConnectAPI ? fetch : () => {},
+    isAccept ? fetch : () => {},
   )
 
   if (data?.pageHome?.data?.attributes?.hot_blogs?.data) {
@@ -53,6 +57,10 @@ export const useFetchHomeHotBlog = () => {
 export const UseFallbackHomeHotBanner = async () => {
   const { fetch } = useServerHomeHotBanner()
 
+  const isAccept = isConnectAPI()
+
+  if (!isAccept) return
+
   const data = await fetch()
 
   return { [unstable_serialize([docHomeHotBanner, {}])]: data }
@@ -62,12 +70,12 @@ export const UseFallbackHomeHotBanner = async () => {
 export const useFetchHomeHotBanner = () => {
   const { fetch } = useHomeHotBanner()
 
-  const isConnectAPI = process.env.NEXT_PUBLIC_HAS_API_DB_CONECT
+  const isAccept = isConnectAPI()
 
   var { data, isLoading } = useSWRFetch(
-    isConnectAPI ? docHomeHotBanner : null,
+    isAccept ? docHomeHotBanner : null,
     {},
-    isConnectAPI ? fetch : () => {},
+    isAccept ? fetch : () => {},
   )
 
   if (data?.pageHome?.data?.attributes?.hot_banner?.data)
@@ -82,19 +90,23 @@ export const useFetchHomeHotBanner = () => {
 export const UseFallbackHomeBlogBy = async () => {
   const { fetch } = useServerHomeBlogBy()
 
+  const isAccept = isConnectAPI()
+
+  if (!isAccept) return
+
   var data = await fetch()
 
   return { [unstable_serialize([docHomeBlogBy, {}])]: data }
 }
 
 export const useFetchHomeBlogBy = () => {
-  const isConnectAPI = process.env.NEXT_PUBLIC_HAS_API_DB_CONECT
+  const isAccept = isConnectAPI()
   const { fetch } = useHomeBlogBy()
 
   var { isLoading, data } = useSWRFetch(
-    isConnectAPI ? docHomeBlogBy : null,
+    isAccept ? docHomeBlogBy : null,
     {},
-    isConnectAPI ? fetch : () => {},
+    isAccept ? fetch : () => {},
   )
 
   if (data?.pageHome?.data?.attributes?.blog_by) {

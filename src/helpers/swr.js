@@ -1,7 +1,7 @@
 import { LIMIT_FETCH } from '@/consts/const'
 import useSWR, { unstable_serialize } from 'swr'
 
-export const getOptionsQuery = (query, searchField = []) => {
+export const getOptionsQuery = (query, searchField = [], isMerge = false) => {
   const searchOption = {}
 
   const pagination = {}
@@ -26,6 +26,13 @@ export const getOptionsQuery = (query, searchField = []) => {
   // pagination
   if (query?.skip) {
     pagination.skip = query.skip
+  }
+
+  if (isMerge) {
+    return {
+      ...searchOption,
+      ...pagination,
+    }
   }
 
   return {

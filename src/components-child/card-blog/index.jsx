@@ -31,6 +31,8 @@ export default function CardBlog({
   desc,
   date,
   view,
+  slugCate,
+  slugStyle,
 }) {
   return (
     <>
@@ -56,14 +58,18 @@ export default function CardBlog({
             <div
               className={classNames(styles.cateInfoWrap, 'blog-box-cate-info')}
             >
-              <div
-                className={classNames(styles.cateName, 'blog-box-cate-name')}
+              <AppLink
+                url={slugCate}
+                classLink={classNames(styles.cateName, 'blog-box-cate-name')}
               >
                 {cateTitle}
-              </div>
-              <div className={classNames(styles.cateSub, 'blog-box-cate-sub')}>
+              </AppLink>
+              <AppLink
+                url={slugStyle}
+                classLink={classNames(styles.cateSub, 'blog-box-cate-sub')}
+              >
                 {styleTitle}
-              </div>
+              </AppLink>
             </div>
           </div>
         )}

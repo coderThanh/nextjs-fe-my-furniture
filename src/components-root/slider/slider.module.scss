@@ -16,6 +16,11 @@
     overflow-x: visible;
 }
 
+.item {
+    touch-action: none;
+    user-select: none;
+}
+
 .btn {
     width: 40px;
     height: 40px;

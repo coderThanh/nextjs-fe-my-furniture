@@ -49,8 +49,6 @@ export const useServerPostAPI = (action) => {
         ...body,
       })
 
-      console.log(res)
-
       if (res) return res
 
       return null

@@ -104,6 +104,7 @@ export const docHomeBlogBy = gql`
           id
           attributes {
             title
+            slug
           }
         }
       }
@@ -112,6 +113,7 @@ export const docHomeBlogBy = gql`
           id
           attributes {
             title
+            slug
             thumbnail {
               data {
                 ...thumEntity

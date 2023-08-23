@@ -195,3 +195,25 @@ export const parseBlogByEntity = (blogByItemGQL) => {
     id: id,
   }
 }
+
+// ---------
+export const parsePagination = (pagiGQL) => {
+  return {
+    limit: pagiGQL?.pageSize,
+    total: pagiGQL?.total,
+  }
+}
+
+// ---------
+export const parseQueryBlogList = (blogsGQL, pagiGQL) => {
+  var items = []
+
+  if (blogsGQL) {
+    items = blogsGQL.map((item) => parseBlogEnity(item))
+  }
+
+  return {
+    items: items,
+    ...parsePagination(pagiGQL),
+  }
+}

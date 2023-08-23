@@ -54,6 +54,12 @@ export function HomeBlogsBy() {
                               blog?.styles ? blog?.styles[0]?.title : ''
                             }
                             slug={blog?.slug}
+                            slugCate={
+                              blog?.categories ? blog?.categories[0]?.slug : ''
+                            }
+                            slugStyle={
+                              blog?.styles ? blog?.styles[0]?.slug : ''
+                            }
                             cateImg={
                               blog?.categories
                                 ? blog?.categories[0]?.thumbnail?.url
