@@ -3,9 +3,10 @@ export const ROUTER_URL = {
   category: '/danh-muc',
   style: '/phong-cach',
   blogDetail: '/bai-viet',
-  search: '/search',
+  searchBlog: '/tim-kiem-bai-viet',
 
   // demo
   categoryDemo: '/danh-muc/demo',
   blogDetailDemo: '/bai-viet/demo',
+  searchBlogDemo: '/tim-kiem-bai-viet-demo',
 }

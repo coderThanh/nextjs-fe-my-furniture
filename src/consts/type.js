@@ -10,4 +10,4 @@ export const MenuSubLayoutType = {
   dropdownPosts: 'dropdownPosts',
 }
 
-export const BLOG_SEARCH_FIELD_NAME = ['categorySlug']
+export const BLOG_SEARCH_FIELD_NAME = ['categorySlug', 'styleSlug', 'keyword']

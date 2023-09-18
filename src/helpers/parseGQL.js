@@ -119,12 +119,16 @@ export const parseBlogEnity = (blogGQL) => {
   return {
     id: blogGQL?.id,
     title: attributes?.title,
+    createdAt: attributes?.createdAt,
+    updatedAt: attributes?.updatedAt,
     slug: attributes?.slug
       ? `${ROUTER_URL.blogDetail}/${attributes?.slug}`
       : null,
     thumbnail: parseImgEnity(attributes?.thumbnail?.data),
     styles: styles,
     categories: categories,
+    expect: attributes?.expect,
+    content: attributes?.content,
   }
 }
 
@@ -139,6 +143,8 @@ export const parseCategoryEnity = (categoryGQL) => {
       : null,
     id: categoryGQL?.id,
     thumbnail: parseImgEnity(attributes?.thumbnail?.data),
+    expect: attributes?.expect,
+    content: attributes?.content,
   }
 }
 
@@ -150,7 +156,8 @@ export const parseStyleyEnity = (styleGQL) => {
     title: attributes?.title,
     slug: attributes?.slug ? `${ROUTER_URL.style}/${attributes?.slug}` : null,
     id: styleGQL?.id,
-    thumbnail: parseImgEnity(attributes?.thumbnail?.data),
+    expect: attributes?.expect,
+    content: attributes?.content,
   }
 }
 

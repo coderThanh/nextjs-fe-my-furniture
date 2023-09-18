@@ -10,6 +10,7 @@ import {
   classMenuSubFull,
 } from '.'
 import CardBlog from '../../components-child/card-blog'
+import { parseBlogEnity } from '@/helpers/parseGQL'
 
 export function HeaderMidMenuDropdownFull(props) {
   const [stateIndexDocsShow, setIndexDocShow] = useState()
@@ -90,28 +91,37 @@ export function HeaderMidMenuDropdownFull(props) {
                         )
                       }
 
+                      const itemBlog = parseBlogEnity(itemDoc)
+
                       return (
                         <CardBlog
                           key={indexChild}
                           isShowCate={true}
                           imgRadius={7}
-                          thumbnail={`/images/products/prd_${Math.min(
-                            indexChild + 1,
-                            7,
-                          )}.jpg`}
-                          title={itemDoc.attributes.title}
+                          imgRatio={60}
+                          thumbnail={itemBlog?.thumbnail?.url}
+                          title={itemBlog?.title}
                           cateTitle={
-                            itemDoc.attributes.categories &&
-                            itemDoc.attributes.categories?.data.length > 0
-                              ? itemDoc.attributes.categories.data[0].attributes
-                                  .title
+                            itemBlog?.categories &&
+                            itemBlog?.categories?.length > 0
+                              ? itemBlog?.categories[0]?.title
+                              : ''
+                          }
+                          cateImgAlt={
+                            itemBlog?.categories &&
+                            itemBlog?.categories?.length > 0
+                              ? itemBlog?.categories[0]?.title
+                              : ''
+                          }
+                          cateImg={
+                            itemBlog?.categories &&
+                            itemBlog?.categories?.length > 0
+                              ? itemBlog?.categories[0]?.thumbnail?.url
                               : ''
                           }
                           styleTitle={
-                            itemDoc.attributes.styles &&
-                            itemDoc.attributes.styles?.data.length > 0
-                              ? itemDoc.attributes.styles.data[0].attributes
-                                  .title
+                            itemBlog?.styles && itemBlog?.styles?.length > 0
+                              ? itemBlog?.styles[0]?.title
                               : ''
                           }
                         />

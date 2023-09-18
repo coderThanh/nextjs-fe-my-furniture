@@ -1,21 +1,23 @@
 import Layout from '@/components-root/layout'
 import SEO from '@/components-root/seo'
 import WrapSWRConfig from '@/components-root/swr-wrap'
-import { parseCategoryEnity } from '@/helpers/parseGQL'
-import { UseFetchCategoryDetail } from '@/hooks'
+import { parseStyleyEnity } from '@/helpers/parseGQL'
 import { UseFallBackArchiveBlog } from '@/hooks/use-blog'
+import { UseFetchStyleDetail } from '@/hooks/use-style'
 import BodyArchiveBlogs from '@/ui/archive-blog/archive-body-loop'
 import UIBreadcrumb from '@/ui/breadcrumb'
 import Footer from '@/ui/footer'
 import Header from '@/ui/header'
 import classNames from 'classnames'
 
-export default function CategoryPage({ fallback, category }) {
+export default function CategoryPage({ fallback, styleEntity }) {
   return (
     <>
       <SEO
-        pageTitle={'Danh mục ' + (category?.title ? category?.title : '')}
-        description={category?.expect}
+        pageTitle={
+          'Phong cách ' + (styleEntity?.title ? styleEntity?.title : '')
+        }
+        description={styleEntity?.expect}
       />
 
       <WrapSWRConfig value={{ fallback: fallback }}>
@@ -23,8 +25,10 @@ export default function CategoryPage({ fallback, category }) {
           <Header />
           <UIBreadcrumb
             name={
-              'Danh mục ' +
-              (category?.title ? category?.title?.toLocaleLowerCase() : '')
+              'Phong cách ' +
+              (styleEntity?.title
+                ? styleEntity?.title?.toLocaleLowerCase()
+                : '')
             }
           />
           <section className="archive-head">
@@ -33,7 +37,7 @@ export default function CategoryPage({ fallback, category }) {
                 <div className="col">
                   <div className="col-inner">
                     <h1 className={classNames('archive-title')}>
-                      Danh mục {category?.title}
+                      Phong cách {styleEntity?.title}
                     </h1>
                   </div>
                 </div>
@@ -51,15 +55,15 @@ export default function CategoryPage({ fallback, category }) {
 export async function getServerSideProps(context) {
   const fallbackBlogs = await UseFallBackArchiveBlog(context.query)
 
-  var categoryDetail = await UseFetchCategoryDetail(context.query?.categorySlug)
+  var styleDetail = await UseFetchStyleDetail(context.query?.styleSlug)
 
-  if (categoryDetail != null) {
-    categoryDetail = parseCategoryEnity(categoryDetail)
+  if (styleDetail != null) {
+    styleDetail = parseStyleyEnity(styleDetail)
   }
 
   return {
     props: {
-      category: categoryDetail,
+      styleEntity: styleDetail,
       fallback: {
         ...fallbackBlogs,
       },

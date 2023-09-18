@@ -1,4 +1,5 @@
-import { TOKEN } from '@/consts/const'
+import { DATE_FORMAT_VI, TOKEN } from '@/consts/const'
+import dayjs from 'dayjs'
 
 //  --------
 export const isConnectAPI = () => process.env.NEXT_PUBLIC_HAS_API_DB_CONECT
@@ -270,4 +271,9 @@ export const isCurrentUrl = (url, routerUrl) => {
   }
 
   return isCurrent
+}
+
+//
+export const formatDate = (date) => {
+  return dayjs(date).format(DATE_FORMAT_VI)
 }

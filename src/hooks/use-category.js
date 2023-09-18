@@ -1,15 +1,19 @@
-import { docsCategoryDetail } from '@/services/graphql-query/category'
+import { isConnectAPI } from '@/helpers'
 import { useServerCategoryDetail } from '@/services/hooks'
 
 export const UseFetchCategoryDetail = async (slug) => {
   const { fetch } = useServerCategoryDetail()
 
   const isAccept = isConnectAPI()
-  if (!isAccept) return {}
+  if (!isAccept) return null
 
   const options = { slug: slug }
 
-  const data = await fetch(options)
+  const res = await fetch(options)
 
-  return { [unstable_serialize([docsCategoryDetail, options])]: data }
+  if (res?.categories?.data?.length > 0) {
+    return res?.categories?.data[0]
+  }
+
+  return null
 }

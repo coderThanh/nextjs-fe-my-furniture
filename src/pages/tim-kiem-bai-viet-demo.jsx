@@ -4,7 +4,7 @@ import SEO from '@/components-root/seo'
 import UIBreadcrumb from '@/ui/breadcrumb'
 import Footer from '@/ui/footer'
 import Header from '@/ui/header'
-import UIPaination from '@/ui/pagination'
+import UIPainationDemo from '@/ui/pagination/pagination-demo'
 import classNames from 'classnames'
 
 export default function SearchPage() {
@@ -21,7 +21,7 @@ export default function SearchPage() {
         <section className="search-head">
           <div className="container">
             <div className="row justify-content-center">
-              <div className="col col-12 col-sm-12 col-md-8 col-lg-9">
+              <div className="col col-12 col-sm-12 col-lg-9">
                 <div className="col-inner">
                   <h1 className={classNames('search-title')}>
                     Tìm thấy 52073 kết quả với từ khóa &quot;search key&quot;
@@ -38,10 +38,7 @@ export default function SearchPage() {
                 .fill(null)
                 .map((item, index) => {
                   return (
-                    <div
-                      className="col col-12 col-sm-12 col-md-8 col-lg-9"
-                      key={index}
-                    >
+                    <div className="col col-12  col-lg-9" key={index}>
                       <div className="col-inner">
                         <CardBlog
                           thumbnail={`/images/blogs/blog_${index + 1}.jpg`}
@@ -51,7 +48,7 @@ export default function SearchPage() {
                           title="'Giảm vật liệu công nghiệp, tăng chất liệu tự nhiên - cách KTS thay đổi không gian sống cho gia chủ"
                           isShowCate={false}
                           isShowDate={true}
-                          isShowView={true}
+                          date={'13/09/1995'}
                         />
                       </div>
                     </div>
@@ -60,7 +57,7 @@ export default function SearchPage() {
             </div>
           </div>
         </section>
-        {/* <UIPaination /> */}
+        <UIPainationDemo />
         <Footer />
       </Layout>
     </>

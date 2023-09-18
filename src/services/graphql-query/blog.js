@@ -4,7 +4,7 @@ export const docBlogs = gql`
   query blogs(
     $limit: Int!
     $skip: Int
-    $title: String
+    $keyword: String
     $categorySlug: String
     $categoryIds: [ID]
     $styleIds: [ID]
@@ -17,7 +17,7 @@ export const docBlogs = gql`
       filters: {
         and: [
           { id: { notIn: $exceptIds } }
-          { title: { contains: $title } }
+          { title: { contains: $keyword } }
           {
             categories: {
               or: { slug: { eq: $categorySlug }, id: { in: $categoryIds } }
@@ -45,6 +45,7 @@ export const docBlogs = gql`
     id
     attributes {
       createdAt
+      updatedAt
       title
       slug
       styles(pagination: { limit: 1 }) {

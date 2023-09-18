@@ -1,3 +1,5 @@
+@use '@/styles/_breakpoints.scss' as bp;
+
 .search-title {
     font-weight: 400;
     font-size: var(--size-l4);
@@ -11,12 +13,24 @@
     background-color: var(--background);
 
     .post-wrap {
-        --bs-gutter-y: 30px;
+        --bs-gutter-y: 40px;
     }
 }
 
-@media only screen and (max-width: 576px) {
+@media #{bp.$max-w-xs} {
     .search-head {
         margin: 20px 0 10px;
+    }
+
+    .search-page {
+        .post-wrap {
+            --bs-gutter-y: 32px;
+        }
+
+        .blog-box {
+            .blog-box-text .blog-box-name {
+                -webkit-line-clamp: 3;
+            }
+        }
     }
 }

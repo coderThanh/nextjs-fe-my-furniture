@@ -5,6 +5,7 @@ import UIBreadcrumb from '@/ui/breadcrumb'
 import Footer from '@/ui/footer'
 import Header from '@/ui/header'
 import UIPaination from '@/ui/pagination'
+import UIPainationDemo from '@/ui/pagination/pagination-demo'
 import classNames from 'classnames'
 
 export default function CategoryPage() {
@@ -55,7 +56,7 @@ export default function CategoryPage() {
             </div>
           </div>
         </section>
-        {/* <UIPaination /> */}
+        <UIPainationDemo />
         <Footer />
       </Layout>
     </>
