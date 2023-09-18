@@ -1,0 +1,8 @@
+.link {
+    color: var(--primary);
+    transition: 320ms color;
+
+    &:hover {
+        color: var(--color-basic);
+    }
+}

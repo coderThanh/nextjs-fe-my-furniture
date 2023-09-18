@@ -25,7 +25,7 @@ export const getOptionsQuery = (query, searchField = [], isMerge = false) => {
 
   // pagination
   if (query?.skip) {
-    pagination.skip = query.skip
+    pagination.skip = parseInt(query.skip)
   }
 
   if (isMerge) {

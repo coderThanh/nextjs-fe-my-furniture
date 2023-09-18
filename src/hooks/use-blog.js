@@ -7,6 +7,7 @@ import { useBlogList, useServerBlogList } from '@/services/hooks'
 import { useRouter } from 'next/router'
 import { unstable_serialize } from 'swr'
 
+//
 export const UseFallBackArchiveBlog = async (query) => {
   const { fetch } = useServerBlogList()
 
@@ -39,8 +40,6 @@ export const UseFetchArchiveBlog = () => {
   if (data?.blogs?.data && data?.blogs?.meta?.pagination) {
     data = parseQueryBlogList(data?.blogs?.data, data?.blogs?.meta?.pagination)
   }
-
-  console.log(options)
 
   return { isLoading, data }
 }

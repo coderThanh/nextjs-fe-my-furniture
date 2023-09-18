@@ -217,3 +217,11 @@ export const parseQueryBlogList = (blogsGQL, pagiGQL) => {
     ...parsePagination(pagiGQL),
   }
 }
+
+// -----
+export const parseSEO = (seoGQL) => {
+  return {
+    title: seoGQL?.metaTitle ?? '',
+    description: seoGQL?.metaDescription ?? '',
+  }
+}

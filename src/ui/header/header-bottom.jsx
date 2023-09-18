@@ -1,5 +1,5 @@
 import AppLink from '@/components-root/link'
-import { data_menu_bottom } from '@/data/menu'
+import { isCurrentUrl } from '@/helpers'
 import { useMenuHeaderBottom } from '@/hooks'
 import classNames from 'classnames'
 import { useRouter } from 'next/router'
@@ -20,7 +20,7 @@ export default function HeaderBottom() {
             <div
               key={index}
               className={classNames('menu-item', {
-                current: router.asPath == item.url,
+                current: isCurrentUrl(item.url, router.asPath),
               })}
             >
               <AppLink

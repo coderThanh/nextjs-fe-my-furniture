@@ -55,7 +55,7 @@ export default function CategoryPage() {
             </div>
           </div>
         </section>
-        <UIPaination />
+        {/* <UIPaination /> */}
         <Footer />
       </Layout>
     </>

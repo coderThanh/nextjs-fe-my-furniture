@@ -353,6 +353,8 @@ body .windown-wrap {
 .windown-nav.nav {
     padding-top: var(--content-py);
     padding-bottom: 60px;
+    flex-direction: column;
+    flex-wrap: nowrap;
 
     .search-submit {
         color: var(--color-basic);

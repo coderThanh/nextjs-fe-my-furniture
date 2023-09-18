@@ -1,3 +1,5 @@
+// import 'swiper/css'
+
 import '@/styles/index.scss'
 
 import Head from 'next/head'

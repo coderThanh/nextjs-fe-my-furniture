@@ -138,3 +138,18 @@ export const docHomeBlogBy = gql`
     }
   }
 `
+
+export const docHomeSEO = gql`
+  query {
+    pageHome {
+      data {
+        attributes {
+          seo {
+            metaTitle
+            metaDescription
+          }
+        }
+      }
+    }
+  }
+`

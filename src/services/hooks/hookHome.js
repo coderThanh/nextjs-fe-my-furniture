@@ -1,4 +1,9 @@
-import { homeBlogBy, homeHotBanner, homeHotBlog } from '@/services/apis/home'
+import {
+  homeBlogBy,
+  homeHotBanner,
+  homeHotBlog,
+  homeSEO,
+} from '@/services/apis/home'
 import { usePostAPI } from '@/services/hooks/hookAPI'
 import { useServerPostAPI } from '@/services/hooks/hookServerAPI'
 
@@ -36,6 +41,19 @@ export const useHomeBlogBy = () => {
 
 export const useServerHomeBlogBy = () => {
   const { post: fetch } = useServerPostAPI(homeBlogBy)
+
+  return { fetch }
+}
+
+//
+export const useHomeSEO = () => {
+  const { loading, post: fetch } = usePostAPI(homeSEO)
+
+  return { loading, fetch }
+}
+
+export const useServerHomeSEO = () => {
+  const { post: fetch } = useServerPostAPI(homeSEO)
 
   return { fetch }
 }

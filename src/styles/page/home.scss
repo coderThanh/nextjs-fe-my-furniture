@@ -1,3 +1,5 @@
+@use "@/styles/_breakpoints.scss" as bp;
+
 .home-page {
   .layout-bg {
     background-color: white;
@@ -70,23 +72,34 @@
 
 
 
-@media only screen and (max-width: 768px) {
+@media #{bp.$max-w-sm} {
   .home-posts {
     .post-wrap {
       --bs-gutter-x: 25px;
       --bs-gutter-y: 20px;
     }
   }
-}
-
-@media only screen and (max-width: 576px) {
-  .home-hot-blog .blog-box.overlay .blog-box-text {
-    padding: 16px 12px;
-  }
 
   .home-hot-blog .blog-box-name {
     font-size: 1rem;
   }
+}
 
+@media #{bp.$max-w-xs} {
+  .home-hot-blog .blog-box.overlay .blog-box-text {
+    padding: 16px 12px;
+  }
+
+
+
+  .home-hot-blog {
+    swiper-container {
+
+      &::part(button-prev),
+      &::part(button-next) {
+        display: none;
+      }
+    }
+  }
 
 }

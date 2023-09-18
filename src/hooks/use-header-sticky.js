@@ -28,21 +28,29 @@ export const useHeaderSticky = () => {
   // Set sticky on sctroll
   const { scrollY } = useScroll()
 
-  const spaceToRun = 1000
+  const spaceToRun = 0
 
   useMotionValueEvent(scrollY, 'change', (latest) => {
-    if (
-      headerHeight < latest &&
-      latest < headerHeight + spaceToRun &&
-      !stIsSticky
-    ) {
+    if (!stIsSticky && latest > spaceToRun) {
       // Some time get data delay height header
       setHeightHeader()
-    } else if (latest >= headerHeight + spaceToRun && !stIsSticky) {
       setIsSticky(true)
-    } else if (latest < headerHeight + spaceToRun && stIsSticky) {
+    } else if (stIsSticky && latest <= spaceToRun) {
       setIsSticky(false)
     }
+
+    // if (
+    //   headerHeight < latest &&
+    //   latest < headerHeight + spaceToRun &&
+    //   !stIsSticky
+    // ) {
+    //   // Some time get data delay height header
+    //   setHeightHeader()
+    // } else if (latest >= headerHeight + spaceToRun && !stIsSticky) {
+    //   setIsSticky(true)
+    // } else if (latest < headerHeight + spaceToRun && stIsSticky) {
+    //   setIsSticky(false)
+    // }
   })
 
   return { headerRef, stIsSticky, headerHeight, setIsSticky }

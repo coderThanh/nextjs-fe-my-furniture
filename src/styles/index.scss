@@ -3,12 +3,13 @@
 */
 
 // Import library
-@import './globals.scss';
 
-@import './library/reset.css';
 @import './library/bootstrap-grid.css';
+@import './library/reset.css';
 @import './library/material-icon.css';
 @import './library/space.css';
+
+@import './globals.scss';
 
 @import './components/base-tag.scss';
 @import './components/layout.scss';

@@ -10,7 +10,7 @@ import UIBreadcrumb from '@/ui/breadcrumb'
 import Footer from '@/ui/footer'
 import Header from '@/ui/header'
 
-export default function CategoryPage() {
+export default function PostDetailPage() {
   return (
     <>
       <SEO

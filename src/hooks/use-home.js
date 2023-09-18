@@ -2,6 +2,7 @@ import {
   docHomeBlogBy,
   docHomeHotBanner,
   docHomeHotBlogs,
+  docHomeSEO,
 } from '@/services/graphql-query'
 import {
   useHomeBlogBy,
@@ -10,6 +11,7 @@ import {
   useServerHomeBlogBy,
   useServerHomeHotBanner,
   useServerHomeHotBlogs,
+  useServerHomeSEO,
 } from '@/services/hooks'
 import { unstable_serialize } from 'swr'
 import { useSWRFetch } from '@/helpers/swr'
@@ -19,6 +21,19 @@ import {
   parseImgEnity,
 } from '@/helpers/parseGQL'
 import { isConnectAPI } from '@/helpers'
+
+//
+export const UseHomeSEO = async () => {
+  const { fetch } = useServerHomeSEO()
+
+  const isAccept = isConnectAPI()
+
+  if (!isAccept) return {}
+
+  const data = await fetch()
+
+  return data
+}
 
 //
 export const UseFallbackHomeHotBlog = async () => {

@@ -3,6 +3,7 @@ import {
   docHomeBlogBy,
   docHomeHotBanner,
   docHomeHotBlogs,
+  docHomeSEO,
 } from '@/services/graphql-query/home'
 
 const { get } = grapTransport()
@@ -17,4 +18,8 @@ export const homeHotBanner = async (body) => {
 
 export const homeBlogBy = async (body) => {
   return await get(docHomeBlogBy, body)
+}
+
+export const homeSEO = async (body) => {
+  return await get(docHomeSEO, body)
 }

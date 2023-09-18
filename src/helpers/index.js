@@ -183,20 +183,6 @@ export const formatVideoTime = (seconds) => {
     .padStart(2, '0')}:${remainingSeconds.toString().padStart(2, '0')}`
 }
 
-export const formatCash = (str) => {
-  if (typeof str !== 'number') {
-    return
-  }
-  return str.toLocaleString('vi-VN', { style: 'currency', currency: 'đ' })
-}
-
-export const formatPercent = (price, sellPrice) => {
-  if (typeof price !== 'number' && typeof sellPrice !== 'number') {
-    return
-  }
-  return `- ${Math.round((1 - sellPrice / price) * 100)}%`
-}
-
 export const copyBoard = (value = null) => {
   if (!value) {
     return
@@ -212,4 +198,76 @@ export const debounce = (func, waitFor = 300) => {
     clearTimeout(timeout)
     timeout = setTimeout(() => func(...args), waitFor)
   }
+}
+
+export function parseQuerySlug(string, isLowerCase = false) {
+  string.toString()
+
+  if (isLowerCase) string.toLowerCase()
+
+  return string.toString().replace('&', '').split(' ').join('-')
+}
+
+export function parseSlugToString(slug) {
+  return slug.toString().split('-').join(' ').trim()
+}
+
+export function removeObjectKeyEmpty(object) {
+  var newObject = {}
+
+  for (const key in object) {
+    if (Object.hasOwnProperty.call(object, key)) {
+      if (object[key]) {
+        newObject[key] = object[key]
+      }
+    }
+  }
+  return newObject
+}
+
+export function generatString(length) {
+  let result = ''
+  const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz'
+  const charactersLength = characters.length
+  let counter = 0
+  while (counter < length) {
+    result += characters.charAt(Math.floor(Math.random() * charactersLength))
+    counter += 1
+  }
+  return result
+}
+
+export function parseVietnameseRemoveSign(string) {
+  const a =
+    'àáäâãåăæąçćčđďèéěėëêęğǵḧìíïîįłḿǹńňñòóöôœøṕŕřßşśšșťțùúüûǘůűūųẃẍÿýźžż·/_,:;'
+  const b =
+    'aaaaaaaaacccddeeeeeeegghiiiiilmnnnnooooooprrsssssttuuuuuuuuuwxyyzzz------'
+  const p = new RegExp(a.split('').join('|'), 'g')
+
+  return string
+    .toString()
+    .toLowerCase()
+    .replace(/á|à|ả|ạ|ã|ă|ắ|ằ|ẳ|ẵ|ặ|â|ấ|ầ|ẩ|ẫ|ậ/gi, 'a')
+    .replace(/é|è|ẻ|ẽ|ẹ|ê|ế|ề|ể|ễ|ệ/gi, 'e')
+    .replace(/i|í|ì|ỉ|ĩ|ị/gi, 'i')
+    .replace(/ó|ò|ỏ|õ|ọ|ô|ố|ồ|ổ|ỗ|ộ|ơ|ớ|ờ|ở|ỡ|ợ/gi, 'o')
+    .replace(/ú|ù|ủ|ũ|ụ|ư|ứ|ừ|ử|ữ|ự/gi, 'u')
+    .replace(/ý|ỳ|ỷ|ỹ|ỵ/gi, 'y')
+    .replace(/đ/gi, 'd')
+    .replace(p, (c) => b.charAt(a.indexOf(c)))
+}
+
+export const isCurrentUrl = (url, routerUrl) => {
+  var isCurrent = false
+  const indexQuery = routerUrl.toString().indexOf('?')
+
+  if (indexQuery != -1) {
+    const asPath = routerUrl.slice(0, indexQuery)
+
+    isCurrent = asPath == url
+  } else {
+    isCurrent = routerUrl == url
+  }
+
+  return isCurrent
 }

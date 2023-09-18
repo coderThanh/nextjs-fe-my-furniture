@@ -34,6 +34,7 @@ export default function Header() {
       className={classNames('header-wrap', { sticky: stIsSticky })}
       style={{
         height: stIsSticky ? headerHeight : undefined,
+        // height: headerHeight,
       }}
     >
       <motion.div
@@ -43,6 +44,7 @@ export default function Header() {
         variants={variants}
         transition={{
           type: 'tween',
+          duration: 0,
         }}
       >
         <HeaderMid />

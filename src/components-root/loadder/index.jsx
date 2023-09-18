@@ -1,14 +1,15 @@
+import classNames from 'classnames'
 import React from 'react'
 import { FadeLoader, BarLoader } from 'react-spinners'
 
-const Loader = ({ loading, spinner = 'scale', color = '0989FF' }) => {
+const Loader = ({ loading, spinner = 'scale', color = '0989FF', isCenter }) => {
   return (
-    <div className="text-center">
+    <div className={classNames({ 'd-flex justify-content-center': isCenter })}>
       {spinner === 'scale' && (
         <BarLoader
           color={`#${color}`}
           loading={loading}
-          height={6}
+          height={5}
           width={70}
           margin={2}
         />

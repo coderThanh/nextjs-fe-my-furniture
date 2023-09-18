@@ -60,7 +60,7 @@ export default function SearchPage() {
             </div>
           </div>
         </section>
-        <UIPaination />
+        {/* <UIPaination /> */}
         <Footer />
       </Layout>
     </>

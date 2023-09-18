@@ -2,85 +2,114 @@ import classNames from 'classnames'
 import AppMaterialIcon, { AppMaterialIconType } from '../material-icon'
 
 import styles from './pagination.module.scss'
+import { useEffect } from 'react'
 
 export default function Pagination({
-  handleClick,
-  current,
-  count,
-  showLength,
+  totalItems,
+  countOfPage = 12,
+  paginatedData,
+  currPage,
+  setCurrPage,
+  isScrollTop = true,
   className,
-  isHiddenNav = false,
 }) {
-  // Event onclick
-  function onClick(value) {
-    handleClick && handleClick(value)
+  const pageStart = (currPage - 1) * countOfPage
+  const totalPage = Math.ceil(totalItems / countOfPage)
+
+  var listNumberShow = Array.from({ length: totalPage }, (_, i) => i + 1)
+
+  const showLength = 6 // so chan
+  const numberAround = Math.ceil(showLength / 2)
+  const lastIndex = listNumberShow.length
+
+  if (totalPage > showLength) {
+    // case start list
+    var listBefore = listNumberShow.slice(
+      Math.max(currPage - numberAround, 0),
+      currPage,
+    )
+
+    var listAfter = listNumberShow.slice(
+      currPage,
+      currPage + numberAround * 2 - listBefore.length,
+    )
+
+    listAfter.push(null)
+    listAfter.push(listNumberShow[lastIndex - 1])
+
+    // case end list
+    if (currPage > listNumberShow.length / 2) {
+      listAfter = listNumberShow.slice(currPage, currPage + numberAround)
+
+      listBefore = listNumberShow.slice(0, 1)
+      listBefore.push(null)
+
+      listBefore = listBefore.concat(
+        listNumberShow.slice(
+          currPage - numberAround * 2 + listAfter.length,
+          currPage,
+        ),
+      )
+    }
+
+    listNumberShow = [...listBefore, ...listAfter]
   }
 
-  const isFirst = current == 1
-  const isLast = current == count
+  function setPage(idx) {
+    if (idx <= 0 || idx > totalPage) {
+      return
+    }
+    setCurrPage(idx)
 
-  const initList = new Array(count).fill(0).map((item, index) => index + 1)
-
-  var listBefore = []
-  var listAfter = []
-
-  // Devide list to before and after current
-  if (count - current > Math.floor(showLength / 2)) {
-    listBefore = initList.slice(
-      Math.max(current - Math.floor(showLength / 2), 0),
-      current - 1,
-    )
-
-    listAfter = initList.slice(
-      current,
-      Math.max(current + showLength - listBefore.length - 1, -1),
-    )
-  } else {
-    listAfter = initList.slice(current, count)
-
-    listBefore = initList.slice(
-      Math.max(current - showLength + listAfter.length, 0),
-      current - 1,
-    )
+    if (isScrollTop) window.scrollTo(0, 0)
+    paginatedData(totalItems, pageStart, countOfPage)
   }
 
-  const listShow = [...listBefore, current, ...listAfter]
+  useEffect(() => {
+    paginatedData(totalItems, pageStart, countOfPage)
+  }, [totalItems, pageStart, countOfPage, paginatedData])
 
   return (
     <div className={classNames(className, styles.wrap, 'pagi-wrap')}>
-      {!isHiddenNav && !isFirst && (
+      {currPage > 1 ? (
         <div
           className={classNames(styles.item, 'pagi-item')}
-          onClick={() => onClick(current - 1)}
+          onClick={() => setPage(currPage - 1)}
         >
           <AppMaterialIcon size={20} type={AppMaterialIconType.filled}>
             chevron_left
           </AppMaterialIcon>
         </div>
+      ) : (
+        <></>
       )}
-      {listShow.map((item, index) => {
-        return (
-          <div
-            key={index}
-            className={classNames(
-              styles.item,
-              'pagi-item',
-              { active: current == index },
-              current == index ? styles.active : '',
-            )}
-            onClick={item != current ? () => onClick(item) : () => {}}
-          >{`${item}`}</div>
-        )
-      })}
-      {!isHiddenNav && !isLast && (
+      {listNumberShow.length > 1
+        ? listNumberShow.map((item, index) => {
+            return (
+              <div
+                key={index}
+                className={classNames(
+                  styles.item,
+                  'pagi-item',
+                  { active: currPage == item },
+                  currPage == item ? styles.active : '',
+                )}
+                onClick={item != currPage ? () => setPage(item) : () => {}}
+              >{`${item}`}</div>
+            )
+          })
+        : ''}
+      {currPage != totalPage ? (
         <div
           className={classNames(styles.item, 'pagi-item')}
-          onClick={() => onClick(current + 1)}
+          onClick={() => setPage(currPage + 1)}
         >
           <AppMaterialIcon size={20} type={AppMaterialIconType.filled}>
             navigate_next
           </AppMaterialIcon>
         </div>
+      ) : (
+        <></>
       )}
     </div>
   )

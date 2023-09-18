@@ -1,4 +1,39 @@
-.slider .slider-item a {
-    touch-action: none;
-    -webkit-user-drag: none;
+// .slider .slider-item a {
+//     touch-action: none;
+//     -webkit-user-drag: none;
+// }
+
+// Swiper
+
+@use "@/styles/_breakpoints.scss" as bp;
+
+swiper-container {
+    --swiper-navigation-size: 28px;
+    --swiper-navigation-sides-offset: 16px;
+    --swiper-theme-color: #222;
+
+    &.slider-light {
+        --swiper-theme-color: white;
+    }
+
+    &::part(button-prev),
+    &::part(button-next) {
+        opacity: 1;
+        visibility: visible;
+        pointer-events: all;
+        cursor: pointer;
+        transition: 320ms all;
+
+        &:hover {
+            --swiper-theme-color: var(--primary);
+        }
+    }
+
+}
+
+@media #{bp.$max-w-xs} {
+    swiper-container {
+        --swiper-navigation-size: 22px;
+        --swiper-navigation-sides-offset: 7px;
+    }
 }
