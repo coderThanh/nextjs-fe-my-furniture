@@ -273,7 +273,16 @@ export const isCurrentUrl = (url, routerUrl) => {
   return isCurrent
 }
 
-//
+// -----
 export const formatDate = (date) => {
   return dayjs(date).format(DATE_FORMAT_VI)
+}
+
+// ------
+export const parseStringTitle = (text) => {
+  if (!text) return text
+
+  var result = text[0].toUpperCase() + text.slice(1).toLowerCase()
+
+  return result
 }

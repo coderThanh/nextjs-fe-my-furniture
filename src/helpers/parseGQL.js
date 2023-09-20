@@ -12,11 +12,13 @@ export const middleWareUrl = (url) => {
   return url
 }
 
-export const parseImgEnity = (imgGQL = {}) => {
+export const parseImgEnity = (imgGQL) => {
+  if (!imgGQL) return null
+
   return {
-    id: imgGQL?.id,
-    alt: imgGQL?.attributes?.alternativeText,
-    url: middleWareUrl(imgGQL?.attributes?.url),
+    id: imgGQL.id,
+    alt: imgGQL?.attributes?.alternativeText ?? null,
+    url: middleWareUrl(imgGQL?.attributes?.url) ?? null,
   }
 }
 
@@ -84,7 +86,7 @@ export function parseMenuItem(args) {
   }
 
   return {
-    id: args?.id,
+    id: parseInt(args?.id),
     url: outUrl,
     parentId: attributes?.parent?.data?.id,
     title: attributes?.title,
@@ -103,12 +105,12 @@ export const parseBlogEnity = (blogGQL) => {
   const { attributes } = blogGQL || {}
 
   var styles = []
+  var categories = []
+  var tags = []
 
   if (attributes?.styles?.data) {
     styles = attributes?.styles?.data?.map((item) => parseStyleyEnity(item))
   }
-
-  var categories = []
 
   if (attributes?.categories?.data) {
     categories = attributes?.categories?.data?.map((item) =>
@@ -116,8 +118,12 @@ export const parseBlogEnity = (blogGQL) => {
     )
   }
 
+  if (attributes?.tags?.data) {
+    tags = attributes?.tags?.data?.map((item) => parseTagEnity(item))
+  }
+
   return {
-    id: blogGQL?.id,
+    id: parseInt(blogGQL?.id),
     title: attributes?.title,
     createdAt: attributes?.createdAt,
     updatedAt: attributes?.updatedAt,
@@ -127,6 +133,7 @@ export const parseBlogEnity = (blogGQL) => {
     thumbnail: parseImgEnity(attributes?.thumbnail?.data),
     styles: styles,
     categories: categories,
+    tags: tags,
     expect: attributes?.expect,
     content: attributes?.content,
   }
@@ -137,14 +144,14 @@ export const parseCategoryEnity = (categoryGQL) => {
   const { attributes } = categoryGQL || {}
 
   return {
-    title: attributes?.title,
+    title: attributes?.title ?? null,
     slug: attributes?.slug
       ? `${ROUTER_URL.category}/${attributes?.slug}`
       : null,
-    id: categoryGQL?.id,
-    thumbnail: parseImgEnity(attributes?.thumbnail?.data),
-    expect: attributes?.expect,
-    content: attributes?.content,
+    id: parseInt(categoryGQL.id),
+    thumbnail: parseImgEnity(attributes?.thumbnail?.data) ?? null,
+    expect: attributes?.expect ?? null,
+    content: attributes?.content ?? null,
   }
 }
 
@@ -153,11 +160,22 @@ export const parseStyleyEnity = (styleGQL) => {
   const { attributes } = styleGQL || {}
 
   return {
-    title: attributes?.title,
+    title: attributes?.title ?? null,
     slug: attributes?.slug ? `${ROUTER_URL.style}/${attributes?.slug}` : null,
-    id: styleGQL?.id,
-    expect: attributes?.expect,
-    content: attributes?.content,
+    id: parseInt(styleGQL.id),
+    expect: attributes?.expect ?? null,
+    content: attributes?.content ?? null,
+  }
+}
+
+// parse data
+export const parseTagEnity = (tagGQL) => {
+  const { attributes } = tagGQL || {}
+
+  return {
+    title: attributes?.title ?? null,
+    slug: attributes?.slug ?? null,
+    id: parseInt(tagGQL.id),
   }
 }
 
@@ -199,7 +217,7 @@ export const parseBlogByEntity = (blogByItemGQL) => {
     title: title,
     slug: slug,
     blogs: blogs,
-    id: id,
+    id: parseInt(id),
   }
 }
 

@@ -66,6 +66,7 @@ export default function BodySearchBlogs() {
                     <div className="col col-12 col-sm-12  col-lg-9" key={index}>
                       <div className="col-inner">
                         <CardBlog
+                          slug={blog?.slug ?? ''}
                           thumbnail={blog?.thumbnail?.url}
                           thumbnailAlt={blog?.thumbnail?.alt}
                           imgRatio={56.2}

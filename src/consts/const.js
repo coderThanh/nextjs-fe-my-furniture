@@ -17,6 +17,7 @@ export const CART_COUNTDOWN_TIME = 600
 
 //
 export const LIMIT_FETCH = 4
+export const LIMIT_RELATED_FETCH = 6
 export const LIMIT_CART_FETCH = 100
 
 //

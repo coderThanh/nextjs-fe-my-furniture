@@ -1,6 +1,7 @@
 import CardBlog, { CardBlogType } from '@/components-child/card-blog'
 import Layout from '@/components-root/layout'
 import SEO from '@/components-root/seo'
+import { ROUTER_URL } from '@/consts/router'
 import UIBreadcrumb from '@/ui/breadcrumb'
 import Footer from '@/ui/footer'
 import Header from '@/ui/header'
@@ -41,6 +42,7 @@ export default function SearchPage() {
                     <div className="col col-12  col-lg-9" key={index}>
                       <div className="col-inner">
                         <CardBlog
+                          slug={ROUTER_URL.blogDetailDemo}
                           thumbnail={`/images/blogs/blog_${index + 1}.jpg`}
                           imgRatio={56.2}
                           imgRadius={10}
@@ -48,7 +50,7 @@ export default function SearchPage() {
                           title="'Giảm vật liệu công nghiệp, tăng chất liệu tự nhiên - cách KTS thay đổi không gian sống cho gia chủ"
                           isShowCate={false}
                           isShowDate={true}
-                          date={'13/09/1995'}
+                          date={'13/09/2023'}
                         />
                       </div>
                     </div>

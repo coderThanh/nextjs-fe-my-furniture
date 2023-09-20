@@ -9,16 +9,7 @@
 
 .article-wrap {
     margin: 40px 0;
-    text-align: justify;
 
-    a {
-        color: var(--link-basic);
-        transition: 320ms color;
-
-        &:hover {
-            color: var(--link-hover);
-        }
-    }
 }
 
 .article-head {
@@ -38,23 +29,48 @@
     flex-direction: row;
     gap: 7px 20px;
     margin-top: 16px;
+    margin-bottom: 25px;
     color: var(--color-basic);
-    font-size: 13px;
+    font-size: 0.9rem;
+    line-height: 1.6;
+
 
     .mater-icon {
         margin-right: 3px;
     }
 }
 
+.article-cate {
+    .cate-item {
+        color: var(--color-basic);
+    }
+}
+
 .article-except {
     font-weight: 600;
-    margin-top: 20px;
+    margin-top: 25px;
+    margin-bottom: 25px;
     font-style: italic;
     color: var(--color-title);
     font-family: var(--font-family);
 }
 
 .article-content {
+    text-align: justify;
+
+    a {
+        color: var(--link-basic);
+        transition: 320ms color;
+        text-underline-offset: 2px;
+        // Overwrite CKEDIOR
+        text-decoration: underline 1px !important;
+        font-style: italic !important;
+
+        &:hover {
+            --link-basic: var(--link-hover);
+        }
+    }
+
     img {
         display: flex;
         max-width: 100%;
@@ -82,6 +98,37 @@
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 35px 60px;
+}
+
+.single-tag-title {
+    font-weight: 400;
+    font-size: var(--size-l4);
+}
+
+
+
+.tags-wrap {
+    display: inline-flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 10px;
+
+    .tag-item {
+        font-size: 0.95rem;
+        font-weight: normal;
+        line-height: 1.7;
+        letter-spacing: 0;
+        display: inline;
+        color: var(--color-basic);
+        background-color: var(--color-neutral1);
+        padding: 2px 8px;
+        border-radius: 5px;
+
+        &:hover {
+            text-decoration: underline 1px;
+            text-underline-offset: 2px;
+        }
+    }
 }
 
 @media only screen and (max-width: 768px) {

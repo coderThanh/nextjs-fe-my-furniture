@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "devapi": "NEXT_PUBLIC_HAS_API_DB_CONECT=true next dev",
+    "devapi": "env-cmd -f .env.api.local next dev",
     "build": "next build",
     "start": "next start",
     "lint": "next lint"
@@ -16,6 +16,7 @@
     "@types/react-dom": "18.0.11",
     "classnames": "^2.3.2",
     "dayjs": "^1.11.9",
+    "env-cmd": "^10.1.0",
     "eslint": "8.36.0",
     "eslint-config-next": "13.2.4",
     "framer-motion": "^10.8.5",

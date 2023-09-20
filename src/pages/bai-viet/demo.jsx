@@ -2,10 +2,13 @@
 import CardBlog, { CardBlogType } from '@/components-child/card-blog'
 import Gap from '@/components-root/gap'
 import Layout from '@/components-root/layout'
+import AppLink from '@/components-root/link'
 import AppMaterialIcon, {
   AppMaterialIconType,
 } from '@/components-root/material-icon'
 import SEO from '@/components-root/seo'
+import { ROUTER_URL } from '@/consts/router'
+import { formatDate } from '@/helpers'
 import UIBreadcrumb from '@/ui/breadcrumb'
 import Footer from '@/ui/footer'
 import Header from '@/ui/header'
@@ -23,8 +26,8 @@ export default function PostDetailPage() {
         <UIBreadcrumb name="Nhà trong ngõ nhỏ nhưng có đến 4 mặt tiền, không ồn ào và rất sáng sủa" />
         <section className="single-content">
           <div className="section-inner container">
-            <div className="row">
-              <div className="col col-content">
+            <div className="row justify-content-center">
+              <div className="col col-content col-lg-10">
                 <div className="col-inner">
                   <article className="article-wrap">
                     <div className="article-head">
@@ -33,12 +36,30 @@ export default function PostDetailPage() {
                         và rất sáng sủa
                       </h1>
                       <div className="article-meta">
-                        <span className="article-time">14/05/2023 08:00</span>
-                        <span className="article-view">
+                        <span className="article-time article-meta-item">
                           <AppMaterialIcon type={AppMaterialIconType.outlined}>
-                            visibility
+                            calendar_today
                           </AppMaterialIcon>
-                          137 lượt xem
+                          {formatDate(Date.now())}
+                        </span>
+                        <span className="article-cate article-meta-item">
+                          <AppMaterialIcon type={AppMaterialIconType.outlined}>
+                            attach_file
+                          </AppMaterialIcon>
+                          {[1, 1, 1, 1].map((item, index) => {
+                            return (
+                              <AppLink
+                                url={ROUTER_URL.categoryDemo}
+                                key={index}
+                                classLink="cate-item "
+                              >
+                                {index > 0 ? ', ' : ''}
+
+                                {index == 0 ? `Category name ${index}` : ''}
+                                {index > 0 ? `category name ${index}` : ''}
+                              </AppLink>
+                            )
+                          })}
                         </span>
                       </div>
                       <p className="article-except">
@@ -293,6 +314,27 @@ export default function PostDetailPage() {
                       </p>
                     </div>
                   </article>
+
+                  {/* Tags */}
+                  <div className="single-tag single-section">
+                    <div className="single-tag-title">
+                      <span className="me-2 d-inline-block mb-3">Tags:</span>
+
+                      <div className="tags-wrap">
+                        {Array(6)
+                          .fill(null)
+                          .map((item, index) => {
+                            return (
+                              <AppLink key={index} classLink="tag-item">
+                                tag {index}
+                              </AppLink>
+                            )
+                          })}
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Related */}
                   <div className="single-relate single-section">
                     <div className="single-relate-title single-section-title">
                       Bài viết liên quan
@@ -309,7 +351,7 @@ export default function PostDetailPage() {
                               imgRadius={7}
                               type={CardBlogType.vertical}
                               isShowDate={true}
-                              isShowView={true}
+                              date={formatDate(Date.now())}
                               title="Giảm vật liệu công nghiệp, tăng chất liệu tự nhiên - cách KTS thay đổi không gian sống cho gia chủ"
                               cateTitle="Category name"
                               styleTitle="Style name"

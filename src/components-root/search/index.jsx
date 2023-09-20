@@ -57,7 +57,7 @@ export default function Search(props) {
             type="text"
             value={stText}
             className={classNames(styles.inputText, 'search-input')}
-            placeholder="Search"
+            placeholder="Tìm kiếm.."
             onChange={(e) => setText(e.target.value)}
           />
         </div>

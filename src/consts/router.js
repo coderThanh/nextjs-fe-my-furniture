@@ -4,6 +4,7 @@ export const ROUTER_URL = {
   style: '/phong-cach',
   blogDetail: '/bai-viet',
   searchBlog: '/tim-kiem-bai-viet',
+  blogs: '/blogs',
 
   // demo
   categoryDemo: '/danh-muc/demo',

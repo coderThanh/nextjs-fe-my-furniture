@@ -45,7 +45,7 @@ export default function App({ Component, pageProps }) {
 
           --color-title: #000;
           --color-basic: #333;
-          --link-basic: #007bff;
+          --link-basic: #333;
           --link-hover: #6cd2bc;
 
           --box-shadown1: 3px 0px 7px 1px rgb(0 0 0 / 5%);
