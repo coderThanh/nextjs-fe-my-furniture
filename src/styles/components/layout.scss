@@ -1,14 +1,8 @@
-/* Row - Ui */
-.row-mt {
-    --bs-gutter-y: 24px;
-}
+@use "@/styles/_breakpoints.scss" as bp;
 
+/* Row - Ui */
 .row-equal>.col>.col-inner {
     min-height: 100%;
-}
-
-.row-large {
-    --bs-gutter-x: 35px;
 }
 
 .row-collapse {
@@ -16,7 +10,19 @@
     --bs-gutter-y: 0;
 }
 
-.container-collapse {
+
+
+.row-gap-y {
+    --bs-gutter-y: 24px;
+}
+
+.container-gap-collapse {
     --bs-gutter-x: 0;
     --bs-gutter-y: 0;
+}
+
+@media #{bp.$min-w-sm} {
+    .row-gap-large {
+        --bs-gutter-x: 35px;
+    }
 }

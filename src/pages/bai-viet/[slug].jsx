@@ -1,3 +1,4 @@
+import { Content404 } from '@/components-root/404'
 import Gap from '@/components-root/gap'
 import Layout from '@/components-root/layout'
 import AppLink from '@/components-root/link'
@@ -22,100 +23,103 @@ export default function PostDetailPage({ fallback, blog }) {
         <Layout className="single-page">
           <Header />
           <UIBreadcrumb name={parseStringTitle(blog?.title ?? '')} />
-          <section className="single-content">
-            <div className="section-inner container">
-              <div className="row justify-content-center">
-                <div className="col col-content col-lg-10">
-                  <div className="col-inner">
-                    <article className="article-wrap">
-                      {/* Header */}
-                      <div className="article-head">
-                        <h1 className="article-title">
-                          {parseStringTitle(blog?.title ?? '')}
-                        </h1>
-                        <div className="article-meta">
-                          <span className="article-time article-meta-item">
-                            <AppMaterialIcon
-                              type={AppMaterialIconType.outlined}
-                            >
-                              calendar_today
-                            </AppMaterialIcon>
-                            {formatDate(blog?.createdAt ?? Date.now())}
-                          </span>
-                          <span className="article-cate article-meta-item">
-                            <AppMaterialIcon
-                              type={AppMaterialIconType.outlined}
-                            >
-                              attach_file
-                            </AppMaterialIcon>
-                            {blog?.categories?.map((item, index) => {
-                              return (
-                                <AppLink
-                                  url={item?.slug ? item.slug : ''}
-                                  key={index}
-                                  classLink="cate-item"
-                                >
-                                  {index > 0 ? ', ' : ''}
-                                  {index == 0
-                                    ? parseStringTitle(item?.title) ?? ''
-                                    : ''}
-                                  {index > 0
-                                    ? item?.title.toLocaleLowerCase() ?? ''
-                                    : ''}
-                                </AppLink>
-                              )
-                            })}
-                          </span>
+          {!blog && <Content404 />}
+          {blog && (
+            <section className="single-content">
+              <div className="section-inner container">
+                <div className="row justify-content-center">
+                  <div className="col col-content col-lg-10">
+                    <div className="col-inner">
+                      <article className="article-wrap">
+                        {/* Header */}
+                        <div className="article-head">
+                          <h1 className="article-title">
+                            {parseStringTitle(blog?.title ?? '')}
+                          </h1>
+                          <div className="article-meta">
+                            <span className="article-time article-meta-item">
+                              <AppMaterialIcon
+                                type={AppMaterialIconType.outlined}
+                              >
+                                calendar_today
+                              </AppMaterialIcon>
+                              {formatDate(blog?.createdAt ?? Date.now())}
+                            </span>
+                            <span className="article-cate article-meta-item">
+                              <AppMaterialIcon
+                                type={AppMaterialIconType.outlined}
+                              >
+                                attach_file
+                              </AppMaterialIcon>
+                              {blog?.categories?.map((item, index) => {
+                                return (
+                                  <AppLink
+                                    url={item?.slug ? item.slug : ''}
+                                    key={index}
+                                    classLink="cate-item"
+                                  >
+                                    {index > 0 ? ', ' : ''}
+                                    {index == 0
+                                      ? parseStringTitle(item?.title) ?? ''
+                                      : ''}
+                                    {index > 0
+                                      ? item?.title.toLocaleLowerCase() ?? ''
+                                      : ''}
+                                  </AppLink>
+                                )
+                              })}
+                            </span>
+                          </div>
+                          {blog?.expect?.length > 0 ? (
+                            <p className="article-except">{blog.expect}</p>
+                          ) : (
+                            <></>
+                          )}
                         </div>
-                        {blog?.expect?.length > 0 ? (
-                          <p className="article-except">{blog.expect}</p>
-                        ) : (
-                          <></>
-                        )}
-                      </div>
-                      {/* Content */}
-                      <div
-                        className="article-content"
-                        dangerouslySetInnerHTML={{ __html: blog?.content }}
-                      />
-                    </article>
-                    {/* Tags */}
-                    {blog?.tags?.length > 0 ? (
-                      <div className="single-tag single-section">
-                        <div className="single-tag-title">
-                          <span className="me-2 d-inline-block mb-3">
-                            Tags:
-                          </span>
+                        {/* Content */}
+                        <div
+                          className="article-content"
+                          dangerouslySetInnerHTML={{ __html: blog?.content }}
+                        />
+                      </article>
+                      {/* Tags */}
+                      {blog?.tags?.length > 0 ? (
+                        <div className="single-tag single-section">
+                          <div className="single-tag-title">
+                            <span className="me-2 d-inline-block mb-3">
+                              Tags:
+                            </span>
 
-                          <div className="tags-wrap">
-                            {blog?.tags?.map((item, index) => {
-                              return (
-                                <AppLink
-                                  url={
-                                    item?.slug
-                                      ? `${ROUTER_URL.blogs}?tagSlug=${item.slug}`
-                                      : ''
-                                  }
-                                  key={index}
-                                  classLink="tag-item"
-                                >
-                                  {item?.title ?? ''}
-                                </AppLink>
-                              )
-                            })}
+                            <div className="tags-wrap">
+                              {blog?.tags?.map((item, index) => {
+                                return (
+                                  <AppLink
+                                    url={
+                                      item?.slug
+                                        ? `${ROUTER_URL.blogs}?tagSlug=${item.slug}`
+                                        : ''
+                                    }
+                                    key={index}
+                                    classLink="tag-item"
+                                  >
+                                    {item?.title ?? ''}
+                                  </AppLink>
+                                )
+                              })}
+                            </div>
                           </div>
                         </div>
-                      </div>
-                    ) : (
-                      <></>
-                    )}
-                    {/* Related */}
-                    <SingleBlogRelated blog={blog} />
+                      ) : (
+                        <></>
+                      )}
+                      {/* Related */}
+                      <SingleBlogRelated blog={blog} />
+                    </div>
                   </div>
                 </div>
               </div>
-            </div>
-          </section>
+            </section>
+          )}
           <Gap large={100} />
           <Footer />
         </Layout>
@@ -141,8 +145,6 @@ export const getServerSideProps = async (context) => {
       data?.blog?.styles?.map((item) => item.id) ?? [],
       data?.blog?.id ? [data?.blog?.id] : [],
     )
-
-    // console.log(fallbackRelated)
   }
 
   return {

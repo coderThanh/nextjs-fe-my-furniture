@@ -10,7 +10,7 @@ export const Content404 = () => {
   return (
     <>
       <section className="404-area">
-        <div className="container mb-150">
+        <div className="container mb-150 mt-40">
           <div className="row justify-content-center">
             <div className="col">
               <div className="text-center">

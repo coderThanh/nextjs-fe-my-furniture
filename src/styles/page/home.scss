@@ -19,6 +19,13 @@
   img {
     margin: 0;
   }
+
+  swiper-container {
+
+    &::part(pagination) {
+      display: none;
+    }
+  }
 }
 
 
@@ -64,21 +71,11 @@
   .title_default {
     margin-bottom: 28px;
   }
-
-  .post-wrap {
-    --bs-gutter-y: 30px;
-  }
 }
 
 
 
 @media #{bp.$max-w-sm} {
-  .home-posts {
-    .post-wrap {
-      --bs-gutter-x: 25px;
-      --bs-gutter-y: 20px;
-    }
-  }
 
   .home-hot-blog .blog-box-name {
     font-size: 1rem;
@@ -87,7 +84,7 @@
 
 @media #{bp.$max-w-xs} {
   .home-hot-blog .blog-box.overlay .blog-box-text {
-    padding: 16px 12px;
+    padding: 12px 12px 30px;
   }
 
 
@@ -98,6 +95,11 @@
       &::part(button-prev),
       &::part(button-next) {
         display: none;
+      }
+
+
+      &::part(pagination) {
+        display: block;
       }
     }
   }

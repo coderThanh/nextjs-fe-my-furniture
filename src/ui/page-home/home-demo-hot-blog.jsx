@@ -20,9 +20,10 @@ export function HomeHotBlogDemo() {
               <div className="col-inner">
                 <swiper-container
                   slides-per-view={1}
-                  navigation={true}
                   class="slider-light"
                   loop={true}
+                  navigation={true}
+                  pagination={true}
                 >
                   {...[1, 2, 3, 4].map((item, index) => (
                     <swiper-slide key={index}>

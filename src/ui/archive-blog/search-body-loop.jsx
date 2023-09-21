@@ -47,7 +47,7 @@ export default function BodySearchBlogs() {
       )}
       {!isLoading && data?.items?.length == 0 ? (
         <div className="container">
-          <div className="post-wrap row row-mt row-large justify-content-center">
+          <div className="row row-gap-y">
             <div className="col col-12 col-sm-12  col-lg-9">
               <MsgDefault text={'Không có bài viết nào'} />
             </div>
@@ -60,7 +60,7 @@ export default function BodySearchBlogs() {
         <>
           <section className="search-loop">
             <div className="container">
-              <div className="post-wrap row row-mt row-large justify-content-center">
+              <div className="post-wrap row row-gap-y justify-content-center">
                 {data?.items?.map((blog, index) => {
                   return (
                     <div className="col col-12 col-sm-12  col-lg-9" key={index}>

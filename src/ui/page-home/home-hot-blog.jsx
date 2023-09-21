@@ -30,6 +30,7 @@ export function HomeHotBlog() {
                 navigation={true}
                 class="slider-light"
                 loop={true}
+                pagination={true}
               >
                 {...blogs.map((item, index) => (
                   <swiper-slide key={index}>

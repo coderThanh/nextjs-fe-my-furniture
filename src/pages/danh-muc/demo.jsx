@@ -1,10 +1,10 @@
 import CardBlog, { CardBlogType } from '@/components-child/card-blog'
 import Layout from '@/components-root/layout'
 import SEO from '@/components-root/seo'
+import { ROUTER_URL } from '@/consts/router'
 import UIBreadcrumb from '@/ui/breadcrumb'
 import Footer from '@/ui/footer'
 import Header from '@/ui/header'
-import UIPaination from '@/ui/pagination'
 import UIPainationDemo from '@/ui/pagination/pagination-demo'
 import classNames from 'classnames'
 
@@ -32,7 +32,7 @@ export default function CategoryPage() {
         </section>
         <section className="archive-loop">
           <div className="container">
-            <div className="post-wrap row row-mt row-large">
+            <div className="post-wrap row row-gap-y row-gap-large">
               {Array(8)
                 .fill(null)
                 .map((item, index) => {
@@ -40,6 +40,7 @@ export default function CategoryPage() {
                     <div className="col col-12 col-sm-6 col-md-4" key={index}>
                       <div className="col-inner">
                         <CardBlog
+                          slug={ROUTER_URL.blogDetailDemo}
                           thumbnail={`/images/blogs/blog_${index + 1}.jpg`}
                           imgRatio={56.2}
                           imgRadius={10}

@@ -34,7 +34,7 @@ export default function SearchPage() {
         </section>
         <section className="search-loop">
           <div className="container">
-            <div className="post-wrap row row-mt row-large justify-content-center">
+            <div className="post-wrap row row-gap-y justify-content-center">
               {Array(8)
                 .fill(null)
                 .map((item, index) => {

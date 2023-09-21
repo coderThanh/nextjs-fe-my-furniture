@@ -1,13 +1,14 @@
 import CardBlog, { CardBlogType } from '@/components-child/card-blog'
 import Gap from '@/components-root/gap'
 import AppLink from '@/components-root/link'
+import { ROUTER_URL } from '@/consts/router'
 import classNames from 'classnames'
 
 export function HomePostByCategoryDemo(props) {
   return (
     <>
       <section className="home-posts">
-        <div className="container">
+        <div className="container ">
           <Gap large={50} small={30} />
           <div className="row ">
             <div className="col">
@@ -21,7 +22,7 @@ export function HomePostByCategoryDemo(props) {
               </div>
             </div>
           </div>
-          <div className="post-wrap row row-mt row-large">
+          <div className="post-wrap row row-gap-y row-gap-large">
             {Array(6)
               .fill(null)
               .map((blog, index) => {
@@ -29,6 +30,7 @@ export function HomePostByCategoryDemo(props) {
                   <div className="col col-12 col-sm-6 col-md-4" key={index}>
                     <div className="col-inner">
                       <CardBlog
+                        slug={ROUTER_URL.blogDetailDemo}
                         thumbnail={`/images/blogs/blog_${Math.min(
                           index + 1,
                           7,

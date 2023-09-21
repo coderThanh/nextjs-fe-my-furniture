@@ -34,7 +34,7 @@ export function HomeBlogsBy() {
                     </div>
                   </div>
                 </div>
-                <div className="post-wrap row row-mt row-large">
+                <div className="post-wrap row row-gap-y row-gap-large">
                   {item?.blogs?.map((blog, index) => {
                     return (
                       <div className="col col-12 col-sm-6 col-lg-4" key={index}>

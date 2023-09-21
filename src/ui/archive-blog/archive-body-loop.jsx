@@ -35,7 +35,7 @@ export default function BodyArchiveBlogs() {
         <>
           <section className="archive-loop">
             <div className="container">
-              <div className="post-wrap row row-mt row-large">
+              <div className="post-wrap row row-gap-y row-gap-large">
                 {data?.items?.map((blog, index) => {
                   return (
                     <div className="col col-12 col-sm-6 col-md-4" key={index}>

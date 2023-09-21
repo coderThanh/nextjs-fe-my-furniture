@@ -11,7 +11,7 @@ export default function HeaderBottom() {
   return (
     <div
       className={
-        'container-sm header-bot desk container-collapse pl-10 px-sm-2'
+        'container-sm header-bot desk container-gap-collapse pl-10 px-sm-2'
       }
     >
       <div className={'bot-inner'}>
