@@ -1,5 +1,6 @@
 import { ROUTER_URL } from '@/consts/router'
 import { MenuLinkType } from '@/consts/type'
+import { match } from 'assert'
 
 // ------ parseUrl - middleWare
 export const middleWareUrl = (url) => {
@@ -108,6 +109,14 @@ export const parseBlogEnity = (blogGQL) => {
   var categories = []
   var tags = []
 
+  // Replace NEXT_PUBLIC_HOST_IMG_API
+  const regex = /<img(.*?src=["|'])(.*?)(["|'])/gm
+
+  var content = attributes?.content?.replace(
+    regex,
+    `<img$1${process.env.NEXT_PUBLIC_HOST_IMG_API}$2$3`,
+  )
+
   if (attributes?.styles?.data) {
     styles = attributes?.styles?.data?.map((item) => parseStyleyEnity(item))
   }
@@ -135,7 +144,7 @@ export const parseBlogEnity = (blogGQL) => {
     categories: categories,
     tags: tags,
     expect: attributes?.expect,
-    content: attributes?.content,
+    content: content,
   }
 }
 
