@@ -15,7 +15,7 @@ export function HomePostByCategoryDemo(props) {
               <div className="col-inner">
                 <div className={classNames('title_default')}>
                   <h3>{props.title}</h3>
-                  <AppLink classLink="title-more" url={'/category'}>
+                  <AppLink classLink="title-more" url={ROUTER_URL.categoryDemo}>
                     Xem tất cả
                   </AppLink>
                 </div>
