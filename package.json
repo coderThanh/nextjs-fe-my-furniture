@@ -4,9 +4,9 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "devapi": "env-cmd -f .env.api.local next dev",
-    "build": "next build",
-    "start": "next start",
+    "devapi": "env-cmd -f .env.dev next dev",
+    "build": "env-cmd -f .env.product next build",
+    "start": "env-cmd -f .env.product next start",
     "lint": "next lint"
   },
   "dependencies": {
@@ -28,6 +28,7 @@
     "react-redux": "^8.0.5",
     "react-spinners": "^0.13.8",
     "react-toastify": "^9.1.3",
+    "sharp": "^0.32.6",
     "swiper": "^10.2.0",
     "swr": "^2.1.5"
   },
