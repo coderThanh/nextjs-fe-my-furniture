@@ -5,8 +5,8 @@
   "scripts": {
     "dev": "next dev",
     "devapi": "env-cmd -f .env.dev next dev",
-    "build": "env-cmd -f .env.product next build",
-    "start": "env-cmd -f .env.product next start",
+    "build": "next build",
+    "start": "next start",
     "lint": "next lint"
   },
   "dependencies": {

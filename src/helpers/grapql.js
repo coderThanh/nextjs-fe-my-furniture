@@ -1,7 +1,7 @@
-import request, { GraphQLClient } from 'graphql-request'
+import { GraphQLClient } from 'graphql-request'
 
 export const grapTransport = () => {
-  const endpoint = `${process.env.NEXT_PUBLIC_HOST_API}/graphql`
+  const endpoint = `${process.env.NEXT_PUBLIC_HOST_API}:${process.env.NEXT_PUBLIC_HOST_PORT}/graphql`
 
   const client = new GraphQLClient(endpoint)
 

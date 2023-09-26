@@ -7,7 +7,7 @@ export const middleWareUrl = (url) => {
   if (!url) return
 
   if (process.env.NEXT_PUBLIC_HAS_API_DB_CONECT) {
-    return `${process.env.NEXT_PUBLIC_HOST_API}${url}`
+    return `${process.env.NEXT_PUBLIC_HOST_API}:${process.env.NEXT_PUBLIC_HOST_PORT}${url}`
   }
 
   return url
@@ -114,7 +114,7 @@ export const parseBlogEnity = (blogGQL) => {
 
   var content = attributes?.content?.replace(
     regex,
-    `<img$1${process.env.NEXT_PUBLIC_HOST_IMG_API}$2$3`,
+    `<img$1${process.env.NEXT_PUBLIC_HOST_IMG_API}:${process.env.NEXT_PUBLIC_HOST_IMG_PORT}$2$3`,
   )
 
   if (attributes?.styles?.data) {

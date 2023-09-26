@@ -13,24 +13,13 @@ const nextConfig = {
   images: {
     domains: [
       '127.0.0.1',
+      'localhost',
       'unsplash.com',
-      'images.unsplash.com'
+      'images.unsplash.com',
+      process.env.NEXT_PUBLIC_HOST_IMG_API ?? ''
     ],
     formats: ["image/avif", "image/webp"],
-    // remotePatterns: [
-    //   {
-    //     protocol: "https",
-    //     hostname: "unsplash.com",
-    //     port: "",
-    //     pathname: "**",
-    //   },
-    //   {
-    //     protocol: "https",
-    //     hostname: "images.unsplash.com",
-    //     port: "",
-    //     pathname: "**",
-    //   },
-    // ],
+   
   },
   output: "standalone", // use in docker / product ev
   webpack(config) {
