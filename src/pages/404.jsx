@@ -8,7 +8,7 @@ import Header from '../ui/header'
 export default function PageNotFound() {
   return (
     <>
-      <SEO pageTitle={'404 Nội dung không tìm thấy'} />
+      <SEO pageTitle={'404 Nội dung không tìm thấy'} isNofollow={true} />
       <Layout className="home-page">
         <Header />
         <Content404 />

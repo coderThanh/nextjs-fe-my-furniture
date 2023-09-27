@@ -1,4 +1,5 @@
 import { data_menu_bottom, data_menu_mid, data_menu_mobile } from '@/data/menu'
+import { isConnectAPI } from '@/helpers'
 import { parseMenu } from '@/helpers/parseGQL'
 import { useSWRFetch } from '@/helpers/swr'
 import { docMenu } from '@/services/graphql-query'
@@ -10,26 +11,26 @@ export const useMenuHeaderMiddle = () => {
 
   const { fetchMenu } = useMenuList()
 
-  const isConnectAPI = process.env.NEXT_PUBLIC_HAS_API_DB_CONECT
+  const wasConnectAPI = isConnectAPI()
 
   const { data } = useSWRFetch(
-    isConnectAPI ? docMenu : null,
+    wasConnectAPI ? docMenu : null,
     {
       slug: process.env.NEXT_PUBLIC_MENU_HEADER_MIDDLE_SLUG,
       menuSize: 100,
       isShowDataRelate: true,
       dataSize: 4,
     },
-    isConnectAPI ? fetchMenu : () => {},
+    wasConnectAPI ? fetchMenu : () => {},
   )
 
   const resData = data?.menusMenuItems?.data || []
 
   const menuParsed = parseMenu(resData)
 
-  if (!isConnectAPI) {
+  if (!wasConnectAPI) {
     menuData.push(...data_menu_mid)
-  } else if (isConnectAPI && menuParsed) {
+  } else if (wasConnectAPI && menuParsed) {
     menuData.push(...menuParsed)
   }
 
@@ -42,17 +43,17 @@ export const useMenuHeaderMobile = () => {
 
   const { fetchMenu } = useMenuList()
 
-  const isConnectAPI = process.env.NEXT_PUBLIC_HAS_API_DB_CONECT
+  const wasConnectAPI = isConnectAPI()
 
   const { data } = useSWRFetch(
-    isConnectAPI ? docMenu : null,
+    wasConnectAPI ? docMenu : null,
     {
       slug: process.env.NEXT_PUBLIC_MENU_HEADER_MOBILE_SLUG,
       menuSize: 100,
       isShowDataRelate: false,
       dataSize: 0,
     },
-    isConnectAPI ? fetchMenu : () => {},
+    wasConnectAPI ? fetchMenu : () => {},
   )
 
   const resData = data?.menusMenuItems?.data || []
@@ -75,7 +76,7 @@ export const useMenuHeaderMobile = () => {
     return 0
   })
 
-  if (!isConnectAPI) {
+  if (!wasConnectAPI) {
     menuData.push(...data_menu_mobile)
   } else if (isConnectAPI && menuSortByChilren) {
     menuData.push(...menuSortByChilren)
@@ -90,26 +91,26 @@ export const useMenuHeaderBottom = () => {
 
   const { fetchMenu } = useMenuList()
 
-  const isConnectAPI = process.env.NEXT_PUBLIC_HAS_API_DB_CONECT
+  const wasConnectAPI = isConnectAPI()
 
   const { data } = useSWRFetch(
-    isConnectAPI ? docMenu : null,
+    wasConnectAPI ? docMenu : null,
     {
       slug: process.env.NEXT_PUBLIC_MENU_HEADER_BOTTOM_SLUG,
       menuSize: 20,
       isShowDataRelate: false,
       dataSize: 0,
     },
-    isConnectAPI ? fetchMenu : () => {},
+    wasConnectAPI ? fetchMenu : () => {},
   )
 
   const resData = data?.menusMenuItems?.data || []
 
   const menuParsed = parseMenu(resData)
 
-  if (!isConnectAPI) {
+  if (!wasConnectAPI) {
     menuData.push(...data_menu_bottom)
-  } else if (isConnectAPI && menuParsed) {
+  } else if (wasConnectAPI && menuParsed) {
     menuData.push(...menuParsed)
   }
 

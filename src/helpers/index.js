@@ -2,7 +2,8 @@ import { DATE_FORMAT_VI, TOKEN } from '@/consts/const'
 import dayjs from 'dayjs'
 
 //  --------
-export const isConnectAPI = () => process.env.NEXT_PUBLIC_HAS_API_DB_CONECT
+export const isConnectAPI = () =>
+  process.env.NEXT_PUBLIC_HAS_API_DB_CONECT == 'true'
 
 // -------------------------Check login------------------------------------
 export const isLogin = () => !!getItemLocalStorage(TOKEN)

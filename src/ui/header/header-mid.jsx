@@ -36,7 +36,7 @@ export default function HeaderMid() {
               src={AppAssets.imgLogoDark}
               alt={TITLE_PAGE}
               width={200}
-              height={60}
+              height={30}
               styleImg={{ objectFit: 'contain', objectPosition: 'left' }}
               priority={true}
             />

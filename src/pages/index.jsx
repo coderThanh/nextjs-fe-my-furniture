@@ -17,9 +17,10 @@ import { HomePostByCategoryDemo } from '@/ui/page-home/home-demo-category-blog'
 import { HomeHotBlogDemo } from '@/ui/page-home/home-demo-hot-blog'
 import { HomeHotBlog } from '@/ui/page-home/home-hot-blog'
 import Header from '../ui/header'
+import { isConnectAPI } from '@/helpers'
 
 export default function Home({ fallback, seo }) {
-  const isConnectAPI = process.env.NEXT_PUBLIC_HAS_API_DB_CONECT
+  const wasConnectAPI = isConnectAPI()
 
   const parsedSEO = parseSEO(seo?.pageHome?.data?.attributes?.seo)
 
@@ -31,13 +32,13 @@ export default function Home({ fallback, seo }) {
         <Layout className="home-page">
           <Header />
           <Gap large={30} small={20} />
-          {isConnectAPI && <HomeHotBlog />}
-          {isConnectAPI && <HomeBlogsBy />}
-          {!isConnectAPI && <HomeHotBlogDemo />}
-          {!isConnectAPI && <HomePostByCategoryDemo title="Chuyện nhà" />}
-          {!isConnectAPI && <HomePostByCategoryDemo title="Xu hướng" />}
-          {!isConnectAPI && <HomePostByCategoryDemo title="Minimalism" />}
-          {!isConnectAPI && <HomePostByCategoryDemo title="Zen" />}
+          {wasConnectAPI && <HomeHotBlog />}
+          {wasConnectAPI && <HomeBlogsBy />}
+          {!wasConnectAPI && <HomeHotBlogDemo />}
+          {!wasConnectAPI && <HomePostByCategoryDemo title="Chuyện nhà" />}
+          {!wasConnectAPI && <HomePostByCategoryDemo title="Xu hướng" />}
+          {!wasConnectAPI && <HomePostByCategoryDemo title="Minimalism" />}
+          {!wasConnectAPI && <HomePostByCategoryDemo title="Zen" />}
           <Gap large={70} medium={50} small={30} />
           <Footer />
         </Layout>
@@ -48,7 +49,8 @@ export default function Home({ fallback, seo }) {
 
 export async function getServerSideProps() {
   // Check
-  if (!process.env.NEXT_PUBLIC_HAS_API_DB_CONECT) {
+
+  if (!isConnectAPI()) {
     return {
       props: {
         fallback: {},

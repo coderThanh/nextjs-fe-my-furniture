@@ -37,7 +37,7 @@ export default function HeaderMobileMid() {
               src={AppAssets.imgLogoDark}
               alt={TITLE_PAGE}
               width={200}
-              height={60}
+              height={24}
               styleImg={{ objectFit: 'contain', objectPosition: 'left' }}
               priority={true}
             />
@@ -92,7 +92,7 @@ export default function HeaderMobileMid() {
                           src={AppAssets.imgLogoDark}
                           alt={TITLE_PAGE}
                           width={200}
-                          height={40}
+                          height={24}
                           styleImg={{
                             objectFit: 'contain',
                             objectPosition: 'center',

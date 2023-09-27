@@ -92,7 +92,7 @@ export const data_menu_mid = [
     subLayout: MenuSubLayoutType.dropdownPosts,
     url: '',
   },
-  { title: 'Chuyên gia', url: ROUTER_URL.categoryDemo, target: '' },
+  { title: 'Tìm kiếm', url: ROUTER_URL.searchBlogDemo, target: '' },
 ]
 
 export const data_menu_mobile = [
@@ -252,7 +252,7 @@ export const data_menu_mobile = [
     subLayout: MenuSubLayoutType.dropdownPosts,
     url: ROUTER_URL.categoryDemo,
   },
-  { title: 'Chuyên gia', url: ROUTER_URL.categoryDemo, target: '' },
+  { title: 'Tìm kiếm', url: ROUTER_URL.searchBlogDemo, target: '' },
   { title: 'Chuyên gia', url: ROUTER_URL.categoryDemo, target: '' },
   { title: 'Phong cach', url: ROUTER_URL.categoryDemo, target: '' },
   { title: 'Xu huong', url: ROUTER_URL.categoryDemo, target: '' },

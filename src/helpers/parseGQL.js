@@ -1,13 +1,13 @@
 import { ROUTER_URL } from '@/consts/router'
 import { MenuLinkType } from '@/consts/type'
-import { match } from 'assert'
+import { isConnectAPI } from '@/helpers'
 
 // ------ parseUrl - middleWare
 export const middleWareUrl = (url) => {
   if (!url) return
 
-  if (process.env.NEXT_PUBLIC_HAS_API_DB_CONECT) {
-    return `${process.env.NEXT_PUBLIC_HOST_API}:${process.env.NEXT_PUBLIC_HOST_PORT}${url}`
+  if (isConnectAPI()) {
+    return `${process.env.NEXT_PUBLIC_HOST_IMG_API}:${process.env.NEXT_PUBLIC_HOST_IMG_PORT}${url}`
   }
 
   return url
@@ -101,6 +101,18 @@ export function parseMenuItem(args) {
   }
 }
 
+// parse content
+export const parseContentEditor = (content) => {
+  const regex = /<img(.*?src=["|'])(.*?)(["|'])/gm
+
+  var result = content.replace(
+    regex,
+    `<img$1${process.env.NEXT_PUBLIC_HOST_IMG_API}:${process.env.NEXT_PUBLIC_HOST_IMG_PORT}$2$3`,
+  )
+
+  return result
+}
+
 // parse data
 export const parseBlogEnity = (blogGQL) => {
   const { attributes } = blogGQL || {}
@@ -108,14 +120,12 @@ export const parseBlogEnity = (blogGQL) => {
   var styles = []
   var categories = []
   var tags = []
+  var content
 
   // Replace NEXT_PUBLIC_HOST_IMG_API
-  const regex = /<img(.*?src=["|'])(.*?)(["|'])/gm
-
-  var content = attributes?.content?.replace(
-    regex,
-    `<img$1${process.env.NEXT_PUBLIC_HOST_IMG_API}:${process.env.NEXT_PUBLIC_HOST_IMG_PORT}$2$3`,
-  )
+  if (attributes?.content?.length > 0) {
+    content = parseContentEditor(attributes?.content)
+  }
 
   if (attributes?.styles?.data) {
     styles = attributes?.styles?.data?.map((item) => parseStyleyEnity(item))

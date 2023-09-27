@@ -1,7 +1,8 @@
 .box {
     &:hover {
         .name {
-            color: var(--primary);
+            text-decoration: underline 1px;
+            text-underline-offset: 2px;
         }
     }
 
@@ -78,6 +79,12 @@
     overflow: hidden;
     text-overflow: ellipsis;
     font-family: var(--font-family-title);
+
+    transition: 240ms color;
+
+    &:hover {
+        color: var(--primary);
+    }
 }
 
 .cateSub {
@@ -89,6 +96,11 @@
     overflow: hidden;
     text-overflow: ellipsis;
     line-height: 1.4;
+    transition: 240ms color;
+
+    &:hover {
+        color: var(--primary);
+    }
 }
 
 

@@ -1,5 +1,7 @@
 import HeaderMenuDropDown from '@/components-root/header-menu-dropdown'
 import AppLink from '@/components-root/link'
+import { isConnectAPI } from '@/helpers'
+import { parseBlogEnity } from '@/helpers/parseGQL'
 import classNames from 'classnames'
 import { useState } from 'react'
 import {
@@ -10,7 +12,6 @@ import {
   classMenuSubFull,
 } from '.'
 import CardBlog from '../../components-child/card-blog'
-import { parseBlogEnity } from '@/helpers/parseGQL'
 
 export function HeaderMidMenuDropdownFull(props) {
   const [stateIndexDocsShow, setIndexDocShow] = useState()
@@ -49,8 +50,9 @@ export function HeaderMidMenuDropdownFull(props) {
                     <div
                       key={index}
                       className="sub-menu-item"
-                      onMouseEnter={(event) =>
-                        onHoverSubItem(item.docs?.length ? index : undefined)
+                      onMouseEnter={
+                        (event) => onHoverSubItem(index)
+                        // onHoverSubItem(item.docs?.length ? index : undefined)
                       }
                     >
                       <AppLink
@@ -72,7 +74,7 @@ export function HeaderMidMenuDropdownFull(props) {
                   {props.item.children?.map((item, index) => {
                     const docsShow = item.docs?.map((itemDoc, indexChild) => {
                       // Demo if product not connect API
-                      if (!process.env.NEXT_PUBLIC_HAS_API_DB_CONECT) {
+                      if (!isConnectAPI()) {
                         return (
                           <CardBlog
                             key={indexChild}

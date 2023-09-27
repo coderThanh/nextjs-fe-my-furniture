@@ -1,10 +1,10 @@
 {
-  "name": "my_blog",
+  "name": "furmi-fe",
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
-    "devapi": "env-cmd -f .env.dev next dev",
+    "local": "next dev",
+    "dev": "env-cmd -f .env.dev next dev",
     "build": "next build",
     "start": "next start",
     "lint": "next lint"

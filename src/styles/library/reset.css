@@ -126,7 +126,7 @@ blockquote:before,
 blockquote:after,
 q:before,
 q:after {
-  content: "";
+  content: '';
   content: none;
 }
 
@@ -152,7 +152,11 @@ textarea {
   outline: none;
 }
 
-input[type="radio"],
-input[type="checkbox"] {
+input[type='radio'],
+input[type='checkbox'] {
   width: fit-content;
+}
+
+a:hover {
+  color: currentColor;
 }

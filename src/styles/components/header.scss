@@ -28,6 +28,10 @@
         }
     }
 
+    .search-form {
+        padding: 20px 0;
+    }
+
 }
 
 
@@ -81,8 +85,8 @@ header {
         display: block;
         position: absolute;
         bottom: 0;
-        left: 12px;
-        right: 12px;
+        left: 0px;
+        right: 0px;
         height: 1px;
         background-color: var(--color-neutral3);
     }
@@ -247,6 +251,7 @@ header {
     display: none;
     visibility: hidden;
     opacity: 0;
+    transition: 220ms all;
 
     &.active {
         display: grid;
@@ -312,6 +317,12 @@ header {
     }
 }
 
+.mobile {
+    .header-mid-inner {
+        padding: 15px 0 0;
+    }
+}
+
 .header-mid-inner {
     display: flex;
     flex-direction: row;
@@ -344,8 +355,7 @@ body .windown-wrap {
 }
 
 .windown-logo {
-    border-bottom: 1px solid var(--border-color);
-    padding: 10px var(--content-px);
+    padding: 30px var(--content-px);
     display: flex;
     justify-content: center;
 }

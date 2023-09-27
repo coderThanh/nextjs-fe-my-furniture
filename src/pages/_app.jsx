@@ -4,17 +4,19 @@ import '@/styles/index.scss'
 
 import Head from 'next/head'
 import WrapProvider from '@/redux/provider'
+import AppAssets from '@/consts/assets'
 
 export default function App({ Component, pageProps }) {
   return (
     <>
       <Head>
         <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <link rel="icon" href={AppAssets.faviicon} />
       </Head>
 
       <style jsx global>{`
         :root {
-          --primary: #6cd2bc;
+          --primary: #ff6600;
           --on-primary: #fff;
           --primary-container: #205e61;
           --on-primary-container: #e5f2ef;
@@ -36,17 +38,17 @@ export default function App({ Component, pageProps }) {
 
           --background: #fff;
           --on-background: #636363;
-          --surface: #333946;
+          --surface: #041e37;
           --on-surface: #f6f7f8;
 
           --color-neutral1: #f6f7f8;
           --color-neutral2: #ccc;
           --color-neutral3: #eeeeee;
 
-          --color-title: #000;
+          --color-title: #041e37;
           --color-basic: #333;
           --link-basic: #333;
-          --link-hover: #6cd2bc;
+          --link-hover: #ff6600;
 
           --box-shadown1: 3px 0px 7px 1px rgb(0 0 0 / 5%);
           --box-shadown2: 0 0.75rem 6rem rgba(56, 65, 74, 0.03);
