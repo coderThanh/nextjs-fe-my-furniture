@@ -97,6 +97,18 @@ export function HeaderMidMenuDropdownFull(props) {
 
                       return (
                         <CardBlog
+                          slug={itemBlog?.slug}
+                          slugCate={
+                            itemBlog?.categories &&
+                            itemBlog?.categories?.length > 0
+                              ? itemBlog?.categories[0]?.slug
+                              : ''
+                          }
+                          slugStyle={
+                            itemBlog?.styles && itemBlog?.styles?.length > 0
+                              ? itemBlog?.styles[0]?.slug
+                              : ''
+                          }
                           key={indexChild}
                           isShowCate={true}
                           imgRadius={7}
