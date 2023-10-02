@@ -16,7 +16,7 @@ export const CART_CHECK_STATUS_TIME = 10000
 export const CART_COUNTDOWN_TIME = 600
 
 //
-export const LIMIT_FETCH = 12
+export const LIMIT_FETCH = 21
 export const LIMIT_RELATED_FETCH = 6
 export const LIMIT_CART_FETCH = 100
 
@@ -27,5 +27,6 @@ export const MEDIA_MAX_MD = 991
 export const MEDIA_MAX_LG = 1199
 
 //
-export const TITLE_PAGE = 'My blog'
-export const DESCRIPTION_PAGE = 'My blog'
+export const TITLE_PAGE = 'Furmi nơi chia sẻ những căn nhà đẹp, hợp xu hướng'
+export const DESCRIPTION_PAGE =
+  'Furmi nơi chia sẻ những căn nhà đẹp, hợp xu hướng'

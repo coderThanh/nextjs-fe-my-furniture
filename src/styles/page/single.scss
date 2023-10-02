@@ -79,6 +79,16 @@
     figcaption {
         text-align: center;
     }
+
+    .raw-html-embed {
+        text-align: center;
+        margin: 30px 0;
+        max-width: 100%;
+    }
+
+    iframe {
+        max-width: 100%;
+    }
 }
 
 .single-section {

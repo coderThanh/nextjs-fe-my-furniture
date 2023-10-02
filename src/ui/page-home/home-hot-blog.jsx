@@ -31,6 +31,8 @@ export function HomeHotBlog() {
                 class="slider-light"
                 loop={true}
                 pagination={true}
+                autoplay-delay={3000}
+                autoplay-pause-on-mouse-enter={true}
               >
                 {...blogs.map((item, index) => (
                   <swiper-slide key={index}>

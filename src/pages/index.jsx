@@ -4,20 +4,22 @@ import Gap from '@/components-root/gap'
 
 import SEO from '@/components-root/seo'
 import WrapSWRConfig from '@/components-root/swr-wrap'
+import { isConnectAPI } from '@/helpers'
 import { parseSEO } from '@/helpers/parseGQL'
 import {
   UseFallbackHomeBlogBy,
+  UseFallbackHomeBlogs,
   UseFallbackHomeHotBanner,
   UseFallbackHomeHotBlog,
   UseHomeSEO,
 } from '@/hooks'
 import Footer from '@/ui/footer'
+import HomeBlogs from '@/ui/page-home/home-blogs'
 import { HomeBlogsBy } from '@/ui/page-home/home-category-style-blog'
 import { HomePostByCategoryDemo } from '@/ui/page-home/home-demo-category-blog'
 import { HomeHotBlogDemo } from '@/ui/page-home/home-demo-hot-blog'
 import { HomeHotBlog } from '@/ui/page-home/home-hot-blog'
 import Header from '../ui/header'
-import { isConnectAPI } from '@/helpers'
 
 export default function Home({ fallback, seo }) {
   const wasConnectAPI = isConnectAPI()
@@ -34,6 +36,7 @@ export default function Home({ fallback, seo }) {
           <Gap large={30} small={20} />
           {wasConnectAPI && <HomeHotBlog />}
           {wasConnectAPI && <HomeBlogsBy />}
+          {wasConnectAPI && <HomeBlogs />}
           {!wasConnectAPI && <HomeHotBlogDemo />}
           {!wasConnectAPI && <HomePostByCategoryDemo title="Chuyện nhà" />}
           {!wasConnectAPI && <HomePostByCategoryDemo title="Xu hướng" />}
@@ -62,6 +65,7 @@ export async function getServerSideProps() {
   const fallbackHotBlog = await UseFallbackHomeHotBlog()
   const fallbackHotBanner = await UseFallbackHomeHotBanner()
   const fallbackBlogBy = await UseFallbackHomeBlogBy()
+  const fallbackBlogs = await UseFallbackHomeBlogs()
 
   return {
     props: {
@@ -70,6 +74,7 @@ export async function getServerSideProps() {
         ...fallbackHotBlog,
         ...fallbackHotBanner,
         ...fallbackBlogBy,
+        ...fallbackBlogs,
       },
     },
   }

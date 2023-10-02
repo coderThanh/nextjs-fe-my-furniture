@@ -79,7 +79,9 @@ export default function PostDetailPage({ fallback, blog }) {
                         {/* Content */}
                         <div
                           className="article-content"
-                          dangerouslySetInnerHTML={{ __html: blog?.content }}
+                          dangerouslySetInnerHTML={{
+                            __html: blog?.content ?? '',
+                          }}
                         />
                       </article>
                       {/* Tags */}

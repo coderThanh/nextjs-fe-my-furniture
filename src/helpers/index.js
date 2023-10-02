@@ -5,6 +5,11 @@ import dayjs from 'dayjs'
 export const isConnectAPI = () =>
   process.env.NEXT_PUBLIC_HAS_API_DB_CONECT == 'true'
 
+//  ------
+export const delay = (delayInms) => {
+  return new Promise((resolve) => setTimeout(resolve, delayInms))
+}
+
 // -------------------------Check login------------------------------------
 export const isLogin = () => !!getItemLocalStorage(TOKEN)
 

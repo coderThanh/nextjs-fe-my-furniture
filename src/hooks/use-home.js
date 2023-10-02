@@ -1,26 +1,28 @@
+import { LIMIT_FETCH } from '@/consts/const'
+import { isConnectAPI } from '@/helpers'
 import {
+  parseBlogByEntity,
+  parseBlogEnity,
+  parseImgEnity,
+} from '@/helpers/parseGQL'
+import { useSWRFetch } from '@/helpers/swr'
+import {
+  docBlogs,
   docHomeBlogBy,
   docHomeHotBanner,
   docHomeHotBlogs,
-  docHomeSEO,
 } from '@/services/graphql-query'
 import {
   useHomeBlogBy,
   useHomeHotBanner,
   useHomeHotBlogs,
+  useServerBlogList,
   useServerHomeBlogBy,
   useServerHomeHotBanner,
   useServerHomeHotBlogs,
   useServerHomeSEO,
 } from '@/services/hooks'
 import { unstable_serialize } from 'swr'
-import { useSWRFetch } from '@/helpers/swr'
-import {
-  parseBlogByEntity,
-  parseBlogEnity,
-  parseImgEnity,
-} from '@/helpers/parseGQL'
-import { isConnectAPI } from '@/helpers'
 
 //
 export const UseHomeSEO = async () => {
@@ -131,4 +133,24 @@ export const useFetchHomeBlogBy = () => {
   }
 
   return { isLoading, data }
+}
+
+//
+export const UseFallbackHomeBlogs = async () => {
+  const { fetch } = useServerBlogList()
+
+  const isAccept = isConnectAPI()
+
+  if (!isAccept) return
+
+  var options = {
+    limit: LIMIT_FETCH,
+    skip: 0,
+  }
+
+  var data = await fetch(options)
+
+  return {
+    [unstable_serialize([docBlogs, options])]: data,
+  }
 }

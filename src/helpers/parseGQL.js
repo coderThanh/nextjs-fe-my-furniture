@@ -120,7 +120,7 @@ export const parseBlogEnity = (blogGQL) => {
   var styles = []
   var categories = []
   var tags = []
-  var content
+  var content = ''
 
   // Replace NEXT_PUBLIC_HOST_IMG_API
   if (attributes?.content?.length > 0) {
@@ -203,7 +203,7 @@ export const parseBlogByEntity = (blogByItemGQL) => {
   var blogs = []
   var title = ''
   var slug = ''
-  var id
+  var id = ''
 
   if (blogByItemGQL?.category?.data) {
     const category = parseCategoryEnity(blogByItemGQL?.category?.data)

@@ -24,6 +24,8 @@ export function HomeHotBlogDemo() {
                   loop={true}
                   navigation={true}
                   pagination={true}
+                  autoplay-delay={3000}
+                  autoplay-pause-on-mouse-enter={true}
                 >
                   {...[1, 2, 3, 4].map((item, index) => (
                     <swiper-slide key={index}>
