@@ -6,38 +6,64 @@ export const getOptionsQuery = (query, searchField = [], isMerge = false) => {
 
   const pagination = {}
 
+  const sort = ['createdAt:desc']
+
   // limit
-  searchOption.limit = LIMIT_FETCH
+  pagination.limit = LIMIT_FETCH
 
   searchField.map((field) => {
-    if (query[field]) searchOption[field] = query[field]
-  })
+    if (field == 'keyword' && query[field]) {
+      searchOption['title'] = { contains: query[field] }
+      return
+    }
 
-  if (query?.limit) {
-    searchOption.limit = query.limit
-  }
+    if (field == 'categorySlug' && query[field]) {
+      searchOption['categories'] = { slug: { eq: query[field] } }
+
+      return
+    }
+
+    if (field == 'styleSlug' && query[field]) {
+      searchOption['styles'] = { slug: { eq: query[field] } }
+
+      return
+    }
+
+    if (field == 'tagSlug' && query[field]) {
+      searchOption['tags'] = { slug: { eq: query[field] } }
+
+      return
+    }
+
+    if (query[field]) searchOption[field] = { eq: query[field] }
+  })
 
   // sort
   if (query?.orderField && query?.order) {
-    searchOption.orderField = query.orderField
-    searchOption.order = query.order
+    sort.push(`${query.orderField}:${query.order}`)
   }
 
   // pagination
+  if (query?.limit) {
+    pagination.limit = query.limit
+  }
+
   if (query?.skip) {
-    pagination.skip = parseInt(query.skip)
+    pagination.start = parseInt(query.skip)
   }
 
   if (isMerge) {
     return {
       ...searchOption,
       ...pagination,
+      ...sort,
     }
   }
 
   return {
     searchOption: searchOption,
     pagination: pagination,
+    sort: sort,
   }
 }
 

@@ -25,7 +25,7 @@ export default function HeaderBottom() {
             >
               <AppLink
                 url={item.url}
-                classLink={'menu-link'}
+                className={'menu-link'}
                 target={item.target ? '_' + item.target : ''}
                 rel={item.rel}
               >

@@ -60,13 +60,15 @@ export default function CardBlog({
             >
               <AppLink
                 url={slugCate}
-                classLink={classNames(styles.cateName, 'blog-box-cate-name')}
+                title={cateTitle}
+                className={classNames(styles.cateName, 'blog-box-cate-name')}
               >
                 {cateTitle}
               </AppLink>
               <AppLink
                 url={slugStyle}
-                classLink={classNames(styles.cateSub, 'blog-box-cate-sub')}
+                title={styleTitle}
+                className={classNames(styles.cateSub, 'blog-box-cate-sub')}
               >
                 {styleTitle}
               </AppLink>
@@ -76,10 +78,11 @@ export default function CardBlog({
 
         <AppLink
           url={slug}
-          classLink={classNames(styles.imgWrap, 'blog-box-img')}
+          title={title}
+          className={classNames(styles.imgWrap, 'blog-box-img')}
         >
           <AppImage
-            src={thumbnail}
+            src={thumbnail ?? AppAssets.placeholderGray}
             ratio={imgRatio ?? 100}
             radius={imgRadius}
             alt={thumbnailAlt ?? title}
@@ -93,7 +96,8 @@ export default function CardBlog({
         >
           <AppLink
             url={slug}
-            classLink={classNames(styles.name, 'blog-box-name')}
+            title={title}
+            className={classNames(styles.name, 'blog-box-name')}
           >
             {title}
           </AppLink>

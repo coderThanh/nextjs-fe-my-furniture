@@ -12,7 +12,7 @@ export function HeaderMidMenuDropdown(props) {
             url={props.item.url}
             target={props.item.target ? '_' + props.item.target : ''}
             rel={props.item.rel}
-            classLink={classNames(classMenuLink, 'parent')}
+            className={classNames(classMenuLink, 'parent')}
           >
             {props.item.title}
           </AppLink>
@@ -26,7 +26,7 @@ export function HeaderMidMenuDropdown(props) {
             <AppLink
               key={index}
               url={child.url}
-              classLink={classNames(classChildrenLink, classMenuLink)}
+              className={classNames(classChildrenLink, classMenuLink)}
               target={child.target ? '_' + child.target : ''}
               rel={child.rel}
             >

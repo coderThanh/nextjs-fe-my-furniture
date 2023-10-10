@@ -1,5 +1,5 @@
 import { grapTransport } from '@/helpers/grapql'
-import { docsStyleDetail } from '@/services/graphql-query/style'
+import { docsStyleDetail } from '@/services/graphql-query'
 
 const { get } = grapTransport()
 

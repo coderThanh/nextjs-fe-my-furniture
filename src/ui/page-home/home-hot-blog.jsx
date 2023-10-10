@@ -14,10 +14,6 @@ export function HomeHotBlog() {
 
   const { isLoading: isLoaddingBlogs, data: blogs } = useFetchHomeHotBlog()
 
-  // useEffect(() => {
-  //   register()
-  // }, [])
-
   return (
     <div className="container">
       <div className={classNames('row row-equal', 'home-hot-blog')}>
@@ -55,7 +51,7 @@ export function HomeHotBlog() {
         ) : (
           ''
         )}
-        {!iLoadingBanner && (
+        {!iLoadingBanner && banner && (
           <div className={classNames('col col-12 col-md-3 d-none d-md-block')}>
             <div
               className="col-inner"
@@ -63,12 +59,17 @@ export function HomeHotBlog() {
                 position: 'relative',
               }}
             >
-              <AppLink>
+              <AppLink
+                slug={banner?.url}
+                title={banner?.title}
+                rel={banner?.rel}
+                target={banner?.target}
+              >
                 <Image
-                  src={banner?.url ?? AppAssets.placeholderGray}
+                  src={banner?.img?.url ?? AppAssets.placeholderGray}
                   fill={true}
                   sizes="100%"
-                  alt={''}
+                  alt={banner?.img?.alt}
                   priority={true}
                   style={{ borderRadius: 10, objectFit: 'cover' }}
                 />

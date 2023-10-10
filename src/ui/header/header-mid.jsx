@@ -31,7 +31,7 @@ export default function HeaderMid() {
         className={classNames('container', 'header-mid desk d-none d-lg-block')}
       >
         <div className={classNames('mid-inner')}>
-          <AppLink classLink={classNames('logo')} url={'/'}>
+          <AppLink className={classNames('logo')} url={'/'}>
             <AppImage
               src={AppAssets.imgLogoDark}
               alt={TITLE_PAGE}
@@ -74,7 +74,7 @@ export default function HeaderMid() {
                       url={item?.url}
                       target={item?.target}
                       rel={item?.target ? '_' + item?.target : ''}
-                      classLink={classNames(classMenuLink)}
+                      className={classNames(classMenuLink)}
                     >
                       {item?.title}
                     </AppLink>

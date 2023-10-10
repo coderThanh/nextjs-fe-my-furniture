@@ -8,7 +8,7 @@ import AppMaterialIcon, {
 import SEO from '@/components-root/seo'
 import WrapSWRConfig from '@/components-root/swr-wrap'
 import { ROUTER_URL } from '@/consts/router'
-import { formatDate, isConnectAPI, parseStringTitle } from '@/helpers'
+import { formatDate, isConnectAPI, toTitleCase } from '@/helpers'
 import { UseFallBackBlogDetail, UseFallBackBlogRealted } from '@/hooks'
 import UIBreadcrumb from '@/ui/breadcrumb'
 import Footer from '@/ui/footer'
@@ -22,7 +22,7 @@ export default function PostDetailPage({ fallback, blog }) {
       <WrapSWRConfig value={{ fallback: fallback }}>
         <Layout className="single-page">
           <Header />
-          <UIBreadcrumb name={parseStringTitle(blog?.title ?? '')} />
+          <UIBreadcrumb name={toTitleCase(blog?.title ?? '')} />
           {!blog && <Content404 />}
           {blog && (
             <section className="single-content">
@@ -34,7 +34,7 @@ export default function PostDetailPage({ fallback, blog }) {
                         {/* Header */}
                         <div className="article-head">
                           <h1 className="article-title">
-                            {parseStringTitle(blog?.title ?? '')}
+                            {toTitleCase(blog?.title ?? '')}
                           </h1>
                           <div className="article-meta">
                             <span className="article-time article-meta-item">
@@ -45,30 +45,68 @@ export default function PostDetailPage({ fallback, blog }) {
                               </AppMaterialIcon>
                               {formatDate(blog?.createdAt ?? Date.now())}
                             </span>
-                            <span className="article-cate article-meta-item">
-                              <AppMaterialIcon
-                                type={AppMaterialIconType.outlined}
-                              >
-                                attach_file
-                              </AppMaterialIcon>
-                              {blog?.categories?.map((item, index) => {
-                                return (
-                                  <AppLink
-                                    url={item?.slug ? item.slug : ''}
-                                    key={index}
-                                    classLink="cate-item"
+                            {blog?.categories?.length > 0 ? (
+                              <>
+                                <span className="article-cate article-meta-item">
+                                  <AppMaterialIcon
+                                    type={AppMaterialIconType.outlined}
                                   >
-                                    {index > 0 ? ', ' : ''}
-                                    {index == 0
-                                      ? parseStringTitle(item?.title) ?? ''
-                                      : ''}
-                                    {index > 0
-                                      ? item?.title.toLocaleLowerCase() ?? ''
-                                      : ''}
-                                  </AppLink>
-                                )
-                              })}
-                            </span>
+                                    attach_file
+                                  </AppMaterialIcon>
+                                  {blog?.categories?.map((item, index) => {
+                                    return (
+                                      <AppLink
+                                        url={item?.slug ? item.slug : ''}
+                                        key={index}
+                                        className="link-item"
+                                      >
+                                        {index > 0 ? ', ' : ''}
+                                        {index == 0
+                                          ? toTitleCase(item?.title) ?? ''
+                                          : ''}
+                                        {index > 0
+                                          ? item?.title.toLocaleLowerCase() ??
+                                            ''
+                                          : ''}
+                                      </AppLink>
+                                    )
+                                  })}
+                                </span>
+                              </>
+                            ) : (
+                              <></>
+                            )}
+                            {blog?.styles?.length > 0 ? (
+                              <>
+                                <span className="article-cate article-meta-item">
+                                  <AppMaterialIcon
+                                    type={AppMaterialIconType.outlined}
+                                  >
+                                    architecture
+                                  </AppMaterialIcon>
+                                  {blog?.styles?.map((item, index) => {
+                                    return (
+                                      <AppLink
+                                        url={item?.slug ? item.slug : ''}
+                                        key={index}
+                                        className="link-item"
+                                      >
+                                        {index > 0 ? ', ' : ''}
+                                        {index == 0
+                                          ? toTitleCase(item?.title) ?? ''
+                                          : ''}
+                                        {index > 0
+                                          ? item?.title.toLocaleLowerCase() ??
+                                            ''
+                                          : ''}
+                                      </AppLink>
+                                    )
+                                  })}
+                                </span>
+                              </>
+                            ) : (
+                              <></>
+                            )}
                           </div>
                           {blog?.expect?.length > 0 ? (
                             <p className="article-except">{blog.expect}</p>
@@ -102,7 +140,7 @@ export default function PostDetailPage({ fallback, blog }) {
                                         : ''
                                     }
                                     key={index}
-                                    classLink="tag-item"
+                                    className="tag-item"
                                   >
                                     {item?.title ?? ''}
                                   </AppLink>
@@ -143,9 +181,9 @@ export const getServerSideProps = async (context) => {
 
   if (data?.blog) {
     fallbackRelated = await UseFallBackBlogRealted(
-      data?.blog?.categories?.map((item) => item.id) ?? [],
-      data?.blog?.styles?.map((item) => item.id) ?? [],
-      data?.blog?.id ? [data?.blog?.id] : [],
+      data?.blog?.categories?.map((item) => item.id) ?? null,
+      data?.blog?.styles?.map((item) => item.id) ?? null,
+      data?.blog?.id ? [data?.blog?.id] : null,
     )
   }
 

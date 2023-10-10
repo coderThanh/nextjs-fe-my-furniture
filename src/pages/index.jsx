@@ -28,7 +28,7 @@ export default function Home({ fallback, seo }) {
 
   return (
     <>
-      <SEO pageTitle={parsedSEO.title} description={parsedSEO.description} />
+      <SEO pageTitle={parsedSEO?.title} description={parsedSEO?.description} />
 
       <WrapSWRConfig value={{ fallback: fallback }}>
         <Layout className="home-page">

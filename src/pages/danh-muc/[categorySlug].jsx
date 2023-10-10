@@ -1,8 +1,9 @@
 import Layout from '@/components-root/layout'
 import SEO from '@/components-root/seo'
 import WrapSWRConfig from '@/components-root/swr-wrap'
+import { toCapitalizeCase } from '@/helpers'
 import { parseCategoryEnity } from '@/helpers/parseGQL'
-import { UseFetchCategoryDetail } from '@/hooks'
+import { UseServerFetchCategoryDetail } from '@/hooks'
 import { UseFallBackArchiveBlog } from '@/hooks/use-blog'
 import BodyArchiveBlogs from '@/ui/archive-blog/archive-body-loop'
 import UIBreadcrumb from '@/ui/breadcrumb'
@@ -14,7 +15,10 @@ export default function CategoryPage({ fallback, category }) {
   return (
     <>
       <SEO
-        pageTitle={'Danh mục ' + (category?.title ? category?.title : '')}
+        pageTitle={
+          'Danh mục ' +
+          (category?.title ? toCapitalizeCase(category?.title) : '')
+        }
         description={category?.expect}
       />
 
@@ -24,7 +28,7 @@ export default function CategoryPage({ fallback, category }) {
           <UIBreadcrumb
             name={
               'Danh mục ' +
-              (category?.title ? category?.title?.toLocaleLowerCase() : '')
+              (category?.title ? toCapitalizeCase(category?.title) : '')
             }
           />
           <section className="archive-head">
@@ -51,7 +55,9 @@ export default function CategoryPage({ fallback, category }) {
 export async function getServerSideProps(context) {
   const fallbackBlogs = await UseFallBackArchiveBlog(context.query)
 
-  var categoryDetail = await UseFetchCategoryDetail(context.query?.categorySlug)
+  var categoryDetail = await UseServerFetchCategoryDetail(
+    context.query?.categorySlug,
+  )
 
   if (categoryDetail != null) {
     categoryDetail = parseCategoryEnity(categoryDetail)

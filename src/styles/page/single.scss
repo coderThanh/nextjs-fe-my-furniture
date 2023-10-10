@@ -1,3 +1,5 @@
+@use "@/styles/_breakpoints.scss" as _bp;
+
 .single-page {
     .layout-bg {
         background: var(--background);
@@ -20,7 +22,8 @@
     font-family: var(--font-family-title);
     font-size: var(--size-l2);
     letter-spacing: 0;
-    line-height: 1.3;
+    line-height: 1.5;
+    text-transform: capitalize;
 }
 
 .article-meta {
@@ -36,23 +39,24 @@
 
 
     .mater-icon {
-        margin-right: 3px;
+        margin-right: 5px;
     }
 }
 
 .article-cate {
-    .cate-item {
+    .link-item {
         color: var(--color-basic);
     }
 }
 
 .article-except {
-    font-weight: 600;
+    font-weight: 500;
     margin-top: 25px;
     margin-bottom: 25px;
     font-style: italic;
     color: var(--color-title);
     font-family: var(--font-family);
+    text-align: justify;
 }
 
 .article-content {
@@ -141,8 +145,16 @@
     }
 }
 
-@media only screen and (max-width: 768px) {
+@media #{_bp.$max-w-sm} {
     .single-relate-content {
         grid-template-columns: 1fr;
     }
+
+    .article-meta {
+        border: 1px dashed var(--color-neutral3);
+        padding: 14px;
+        display: flex;
+        flex-direction: column;
+    }
+
 }

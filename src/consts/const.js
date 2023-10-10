@@ -16,9 +16,10 @@ export const CART_CHECK_STATUS_TIME = 10000
 export const CART_COUNTDOWN_TIME = 600
 
 //
-export const LIMIT_FETCH = 21
+export const LIMIT_FETCH = 18 //18
 export const LIMIT_RELATED_FETCH = 6
 export const LIMIT_CART_FETCH = 100
+export const LIMIT_MENU_ITEM_FETCH = 100
 
 //
 export const MEDIA_MAX_XS = 576

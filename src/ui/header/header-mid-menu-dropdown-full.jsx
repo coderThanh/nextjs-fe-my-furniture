@@ -28,7 +28,7 @@ export function HeaderMidMenuDropdownFull(props) {
         title={
           <AppLink
             url={props.item.url}
-            classLink={classNames(classMenuLink, 'parent')}
+            className={classNames(classMenuLink, 'parent')}
           >
             {props.item.title}
           </AppLink>
@@ -57,7 +57,7 @@ export function HeaderMidMenuDropdownFull(props) {
                     >
                       <AppLink
                         url={item.url}
-                        classLink={classNames(
+                        className={classNames(
                           classChildrenLink,
                           classFull,
                           classMenuLink,

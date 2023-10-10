@@ -35,12 +35,22 @@ export const docHomeHotBanner = gql`
       data {
         attributes {
           hot_banner {
-            data {
-              id
-              attributes {
-                url
-                alternativeText
+            id
+            title
+            url
+            attributes {
+              img {
+                data {
+                  id
+                  attributes {
+                    url
+                    alternativeText
+                    caption
+                  }
+                }
               }
+              rel
+              target
             }
           }
         }

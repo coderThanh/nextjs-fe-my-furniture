@@ -1,5 +1,5 @@
 import { grapTransport } from '@/helpers/grapql'
-import { docsCategoryDetail } from '@/services/graphql-query/category'
+import { docsCategoryDetail } from '@/services/graphql-query'
 
 const { get } = grapTransport()
 

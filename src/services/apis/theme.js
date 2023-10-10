@@ -1,8 +1,5 @@
 import { grapTransport } from '@/helpers/grapql'
-import {
-  docsFooteScript,
-  docsFooterCopyRight,
-} from '@/services/graphql-query/theme'
+import { docsFooteScript, docsFooterCopyRight } from '@/services/graphql-query'
 
 const { get } = grapTransport()
 

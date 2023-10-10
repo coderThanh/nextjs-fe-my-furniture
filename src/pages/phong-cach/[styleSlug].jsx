@@ -1,6 +1,7 @@
 import Layout from '@/components-root/layout'
 import SEO from '@/components-root/seo'
 import WrapSWRConfig from '@/components-root/swr-wrap'
+import { toCapitalizeCase } from '@/helpers'
 import { parseStyleyEnity } from '@/helpers/parseGQL'
 import { UseFallBackArchiveBlog } from '@/hooks/use-blog'
 import { UseFetchStyleDetail } from '@/hooks/use-style'
@@ -15,7 +16,8 @@ export default function CategoryPage({ fallback, styleEntity }) {
     <>
       <SEO
         pageTitle={
-          'Phong cách ' + (styleEntity?.title ? styleEntity?.title : '')
+          'Phong cách ' +
+          (styleEntity?.title ? toCapitalizeCase(styleEntity?.title) : '')
         }
         description={styleEntity?.expect}
       />
@@ -26,9 +28,7 @@ export default function CategoryPage({ fallback, styleEntity }) {
           <UIBreadcrumb
             name={
               'Phong cách ' +
-              (styleEntity?.title
-                ? styleEntity?.title?.toLocaleLowerCase()
-                : '')
+              (styleEntity?.title ? toCapitalizeCase(styleEntity?.title) : '')
             }
           />
           <section className="archive-head">

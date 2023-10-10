@@ -1,8 +1,6 @@
 import Layout from '@/components-root/layout'
 import SEO from '@/components-root/seo'
 import WrapSWRConfig from '@/components-root/swr-wrap'
-import { parseCategoryEnity } from '@/helpers/parseGQL'
-import { UseFetchCategoryDetail } from '@/hooks'
 import { UseFallBackArchiveBlog } from '@/hooks/use-blog'
 import BodyArchiveBlogs from '@/ui/archive-blog/archive-body-loop'
 import UIBreadcrumb from '@/ui/breadcrumb'

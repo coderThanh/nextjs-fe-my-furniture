@@ -1,7 +1,7 @@
 import { isConnectAPI } from '@/helpers'
 import { useServerCategoryDetail } from '@/services/hooks'
 
-export const UseFetchCategoryDetail = async (slug) => {
+export const UseServerFetchCategoryDetail = async (slug) => {
   const { fetch } = useServerCategoryDetail()
 
   const isAccept = isConnectAPI()

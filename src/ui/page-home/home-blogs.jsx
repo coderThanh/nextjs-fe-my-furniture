@@ -20,7 +20,13 @@ export default function HomeBlogs({}) {
 
   var { data, isLoading } = useSWRFetch(
     docBlogs,
-    { limit: LIMIT_FETCH, skip: stSkip },
+    {
+      pagination: {
+        limit: LIMIT_FETCH,
+        start: stSkip,
+      },
+      sort: ['createdAt:desc'],
+    },
     fetch,
   )
 
@@ -45,7 +51,7 @@ export default function HomeBlogs({}) {
   useEffect(() => {
     if (data?.blogs?.meta?.pagination) {
       var pagination = parsePagination(data?.blogs?.meta?.pagination)
-      if (stBlogs.length >= pagination.total) {
+      if (stBlogs.length >= pagination?.total) {
         setIsFull(true)
       }
     }

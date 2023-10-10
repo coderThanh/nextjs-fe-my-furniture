@@ -16,7 +16,7 @@ export default function ListTitle(props) {
       >
         <AppLink
           url={props.url}
-          classLink={classNames('l-title-inner', styles.inner)}
+          className={classNames('l-title-inner', styles.inner)}
         >
           <div className={classNames('l-title-pref', styles.prefix)}>
             {props.iconMaterial}

@@ -18,14 +18,14 @@ export default function SingleBlogRelated({ blog }) {
               return (
                 <CardBlog
                   key={index}
-                  thumbnail={item.thumbnail.url}
+                  thumbnail={item?.thumbnail?.url}
                   imgRatio={56.2}
                   imgRadius={7}
                   type={CardBlogType.vertical}
                   isShowDate={true}
                   date={formatDate(item.createdAt ?? Date.now())}
-                  title={item.title}
-                  slug={item.slug}
+                  title={item?.title}
+                  slug={item?.slug}
                 />
               )
             })}

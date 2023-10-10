@@ -3,7 +3,7 @@ import { isConnectAPI } from '@/helpers'
 import {
   parseBlogByEntity,
   parseBlogEnity,
-  parseImgEnity,
+  parseLinkEntity,
 } from '@/helpers/parseGQL'
 import { useSWRFetch } from '@/helpers/swr'
 import {
@@ -95,10 +95,9 @@ export const useFetchHomeHotBanner = () => {
     isAccept ? fetch : () => {},
   )
 
-  if (data?.pageHome?.data?.attributes?.hot_banner?.data)
-    data = {
-      ...parseImgEnity(data?.pageHome?.data?.attributes?.hot_banner?.data),
-    }
+  if (data?.pageHome?.data?.attributes?.hot_banner) {
+    data = parseLinkEntity(data?.pageHome?.data?.attributes?.hot_banner)
+  }
 
   return { isLoading, data }
 }
@@ -144,8 +143,11 @@ export const UseFallbackHomeBlogs = async () => {
   if (!isAccept) return
 
   var options = {
-    limit: LIMIT_FETCH,
-    skip: 0,
+    pagination: {
+      limit: LIMIT_FETCH,
+      start: 0,
+    },
+    sort: ['createdAt:desc'],
   }
 
   var data = await fetch(options)

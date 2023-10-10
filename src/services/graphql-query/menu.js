@@ -5,7 +5,7 @@ export const docMenu = gql`
     $slug: String!
     $menuSize: Int!
     $isShowDataRelate: Boolean!
-    $dataSize: Int
+    $dataSize: Int!
   ) {
     menusMenuItems(
       filters: { root_menu: { slug: { eq: $slug } } }

@@ -3,17 +3,11 @@ import { BLOG_SEARCH_FIELD_NAME } from '@/consts/type'
 import { isConnectAPI } from '@/helpers'
 import { parseBlogEnity, parseQueryBlogList } from '@/helpers/parseGQL'
 import { getOptionsQuery, useSWRFetch } from '@/helpers/swr'
-import {
-  docBlogDetail,
-  docBlogs,
-  docBlogsRelated,
-} from '@/services/graphql-query'
+import { docBlogDetail, docBlogs } from '@/services/graphql-query'
 import {
   useBlogList,
-  useBlogRelatedList,
   useServerBlogDetail,
   useServerBlogList,
-  useServerBlogRelatedList,
 } from '@/services/hooks'
 import { useRouter } from 'next/router'
 import { unstable_serialize } from 'swr'
@@ -25,7 +19,7 @@ export const UseFallBackArchiveBlog = async (query) => {
   const isAccept = isConnectAPI()
   if (!isAccept) return {}
 
-  const options = getOptionsQuery(query, BLOG_SEARCH_FIELD_NAME, true)
+  const options = getOptionsQuery(query, BLOG_SEARCH_FIELD_NAME)
 
   const data = await fetch(options)
 
@@ -40,7 +34,7 @@ export const UseFetchArchiveBlog = () => {
 
   const { fetch } = useBlogList()
 
-  const options = getOptionsQuery(query, BLOG_SEARCH_FIELD_NAME, true)
+  const options = getOptionsQuery(query, BLOG_SEARCH_FIELD_NAME)
 
   var { isLoading, data } = useSWRFetch(
     isAccept ? docBlogs : null,
@@ -76,35 +70,84 @@ export const UseFallBackBlogDetail = async (slug) => {
 }
 
 // ----
-export const UseFallBackBlogRealted = async (catIDs, styleIDs, exceptIds) => {
-  const { fetch } = useServerBlogRelatedList()
+export const UseFallBackBlogRealted = async (catIDs, styleIds, exceptIds) => {
+  const { fetch } = useServerBlogList()
 
   const isAccept = isConnectAPI()
   if (!isAccept) return {}
 
-  const options = {
-    limit: LIMIT_RELATED_FETCH,
-    exceptIds: exceptIds,
-    categoryIds: catIDs,
-    styleIds: styleIDs,
+  var searchOption = {}
+
+  if (exceptIds?.length > 0) {
+    searchOption['id'] = { notIn: exceptIds }
+  }
+
+  if (catIDs?.length > 0) {
+    if (searchOption['or']) {
+      searchOption['or'].push({ categories: { id: { in: catIDs } } })
+    } else {
+      searchOption['or'] = [{ categories: { id: { in: catIDs } } }]
+    }
+  }
+
+  if (styleIds?.length > 0) {
+    if (searchOption['or']) {
+      searchOption['or'].push({ styles: { id: { in: styleIds } } })
+    } else {
+      searchOption['or'] = [{ styles: { id: { in: styleIds } } }]
+    }
+  }
+
+  var options = {
+    pagination: {
+      limit: LIMIT_RELATED_FETCH,
+    },
+    searchOption: searchOption,
+    sort: ['createdAt:desc'],
   }
 
   const data = await fetch(options)
 
-  return { [unstable_serialize([docBlogsRelated, options])]: data }
+  return { [unstable_serialize([docBlogs, options])]: data }
 }
 
 export const UseFetchBlogsRelated = (blog) => {
-  const { fetch } = useBlogRelatedList()
+  const { fetch } = useBlogList()
 
-  const options = {
-    limit: LIMIT_RELATED_FETCH,
-    exceptIds: blog?.id ? [blog?.id] : [],
-    categoryIds: blog?.categories?.map((item) => item.id) ?? [],
-    styleIds: blog?.styles?.map((item) => item.id) ?? [],
+  const catIDs = blog?.categories?.map((item) => item.id) ?? []
+  const styleIds = blog?.styles?.map((item) => item.id) ?? []
+
+  var searchOption = {}
+
+  if (blog?.id) {
+    searchOption['id'] = { notIn: [blog?.id] }
   }
 
-  const { isLoading, data } = useSWRFetch(docBlogsRelated, options, fetch)
+  if (catIDs?.length > 0) {
+    if (searchOption['or']) {
+      searchOption['or'].push({ categories: { id: { in: catIDs } } })
+    } else {
+      searchOption['or'] = [{ categories: { id: { in: catIDs } } }]
+    }
+  }
+
+  if (styleIds?.length > 0) {
+    if (searchOption['or']) {
+      searchOption['or'].push({ styles: { id: { in: styleIds } } })
+    } else {
+      searchOption['or'] = [{ styles: { id: { in: styleIds } } }]
+    }
+  }
+
+  var options = {
+    pagination: {
+      limit: LIMIT_RELATED_FETCH,
+    },
+    searchOption: searchOption,
+    sort: ['createdAt:desc'],
+  }
+
+  const { isLoading, data } = useSWRFetch(docBlogs, options, fetch)
 
   var blogs = []
 
@@ -112,5 +155,5 @@ export const UseFetchBlogsRelated = (blog) => {
     blogs = data?.blogs?.data?.map((item) => parseBlogEnity(item))
   }
 
-  return { isLoading, data: blogs }
+  return { isLoading: isLoading, data: blogs }
 }

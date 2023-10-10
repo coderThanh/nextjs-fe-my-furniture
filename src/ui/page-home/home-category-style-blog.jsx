@@ -2,7 +2,7 @@ import CardBlog, { CardBlogType } from '@/components-child/card-blog'
 import Gap from '@/components-root/gap'
 import AppLink from '@/components-root/link'
 import Loader from '@/components-root/loadder'
-import { parseStringTitle } from '@/helpers'
+import { toTitleCase } from '@/helpers'
 import { useFetchHomeBlogBy } from '@/hooks'
 import classNames from 'classnames'
 
@@ -27,8 +27,8 @@ export function HomeBlogsBy() {
                   <div className="col">
                     <div className="col-inner">
                       <div className={classNames('title_default')}>
-                        <h3>{parseStringTitle(item?.title)}</h3>
-                        <AppLink classLink="title-more" url={item?.slug}>
+                        <h3>{toTitleCase(item?.title)}</h3>
+                        <AppLink className="title-more" url={item?.slug}>
                           Xem tất cả
                         </AppLink>
                       </div>

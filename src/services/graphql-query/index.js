@@ -1,3 +1,6 @@
 export * from './home'
 export * from './menu'
 export * from './blog'
+export * from './style'
+export * from './theme'
+export * from './category'

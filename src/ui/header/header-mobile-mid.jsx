@@ -11,6 +11,7 @@ import WindownE from '@/components-root/windown'
 import WindownSecondE from '@/components-root/windown/windown-second'
 import AppAssets from '@/consts/assets'
 import { TITLE_PAGE } from '@/consts/const'
+import { isConnectAPI } from '@/helpers'
 import { useMenuHeaderMobile } from '@/hooks'
 import {
   classMenuIcon,
@@ -26,13 +27,15 @@ export default function HeaderMobileMid() {
   // fetch
   const { menuData } = useMenuHeaderMobile()
 
+  const wasConnectAPI = isConnectAPI()
+
   return (
     <>
       <div
         className={classNames('container', 'd-lg-none', 'header-mid mobile')}
       >
         <div className={classNames('header-mid-inner')}>
-          <AppLink classLink={classNames('logo')} url={'/'}>
+          <AppLink className={classNames('logo')} url={'/'}>
             <AppImage
               src={AppAssets.imgLogoDark}
               alt={TITLE_PAGE}
@@ -44,30 +47,34 @@ export default function HeaderMobileMid() {
           </AppLink>
           <div className={classNames(classNav, 'right')}>
             <div className={classNames(classNavInner)}>
-              <div className={classNames(classMenuItem)}>
-                <AppButton
-                  kind={AppButtonKind.default}
-                  color={AppButtonColor.white}
-                  className={classNames(classMenuIcon)}
-                >
-                  <>
-                    <IconHearth className={classNames('icon')} />
-                    <span className={classNames('number')}>0</span>
-                  </>
-                </AppButton>
-              </div>
-              <div className={classNames(classMenuItem)}>
-                <AppButton
-                  kind={AppButtonKind.default}
-                  color={AppButtonColor.white}
-                  className={classNames(classMenuIcon)}
-                >
-                  <>
-                    <IconCart className={classNames('icon')} />
-                    <span className={classNames('number')}>0</span>
-                  </>
-                </AppButton>
-              </div>
+              {!wasConnectAPI && (
+                <div className={classNames(classMenuItem)}>
+                  <AppButton
+                    kind={AppButtonKind.default}
+                    color={AppButtonColor.white}
+                    className={classNames(classMenuIcon)}
+                  >
+                    <>
+                      <IconHearth className={classNames('icon')} />
+                      <span className={classNames('number')}>0</span>
+                    </>
+                  </AppButton>
+                </div>
+              )}
+              {!wasConnectAPI && (
+                <div className={classNames(classMenuItem)}>
+                  <AppButton
+                    kind={AppButtonKind.default}
+                    color={AppButtonColor.white}
+                    className={classNames(classMenuIcon)}
+                  >
+                    <>
+                      <IconCart className={classNames('icon')} />
+                      <span className={classNames('number')}>0</span>
+                    </>
+                  </AppButton>
+                </div>
+              )}
               <div className={classNames(classMenuItem)}>
                 {/* Windown nav */}
                 <WindownE
@@ -87,7 +94,7 @@ export default function HeaderMobileMid() {
                 >
                   <>
                     <div className={classNames('windown-logo')}>
-                      <AppLink classLink={classNames('logo')} url={'/'}>
+                      <AppLink className={classNames('logo')} url={'/'}>
                         <AppImage
                           src={AppAssets.imgLogoDark}
                           alt={TITLE_PAGE}
@@ -137,7 +144,7 @@ export default function HeaderMobileMid() {
                                       >
                                         <AppLink
                                           url={children?.url}
-                                          classLink={classNames(classMenuLink)}
+                                          className={classNames(classMenuLink)}
                                         >
                                           {children?.title}
                                         </AppLink>
@@ -156,7 +163,7 @@ export default function HeaderMobileMid() {
                             >
                               <AppLink
                                 url={item?.url}
-                                classLink={classNames(classMenuLink)}
+                                className={classNames(classMenuLink)}
                               >
                                 {item?.title}
                               </AppLink>

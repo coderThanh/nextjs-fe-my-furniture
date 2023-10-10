@@ -23,6 +23,21 @@ export const parseImgEnity = (imgGQL) => {
   }
 }
 
+export const parseLinkEntity = (linkGQL) => {
+  if (!linkGQL) return null
+
+  const { attributes } = linkGQL ?? {}
+
+  return {
+    id: linkGQL?.id,
+    title: linkGQL?.title,
+    url: linkGQL?.url,
+    rel: attributes?.rel,
+    target: attributes?.target,
+    img: parseImgEnity(attributes?.img?.data),
+  }
+}
+
 export const parseMenu = (list = []) => {
   let loopMenu = list.map((item) => {
     return parseMenuItem(item)
@@ -103,6 +118,9 @@ export function parseMenuItem(args) {
 
 // parse content
 export const parseContentEditor = (content) => {
+  return content
+
+  // add host img, but strapi version current not neccesscery
   const regex = /<img(.*?src=["|'])(.*?)(["|'])/gm
 
   var result = content.replace(
@@ -242,6 +260,8 @@ export const parseBlogByEntity = (blogByItemGQL) => {
 
 // ---------
 export const parsePagination = (pagiGQL) => {
+  if (!pagiGQL) return
+
   return {
     limit: pagiGQL?.pageSize,
     total: pagiGQL?.total,
@@ -264,6 +284,8 @@ export const parseQueryBlogList = (blogsGQL, pagiGQL) => {
 
 // -----
 export const parseSEO = (seoGQL) => {
+  if (!seoGQL) return
+
   return {
     title: seoGQL?.metaTitle ?? '',
     description: seoGQL?.metaDescription ?? '',

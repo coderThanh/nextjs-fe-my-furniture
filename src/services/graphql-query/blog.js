@@ -1,37 +1,13 @@
 import { gql } from 'graphql-request'
 
 export const docBlogs = gql`
+  # Write your query or mutation here
   query blogs(
-    $limit: Int!
-    $skip: Int
-    $keyword: String
-    $categorySlug: String
-    $categoryIds: [ID]
-    $styleIds: [ID]
-    $styleSlug: String
-    $tagIds: [ID]
-    $tagSlug: String
-    $exceptIds: [ID]
+    $searchOption: BlogFiltersInput
+    $pagination: PaginationArg
+    $sort: [String]
   ) {
-    blogs(
-      pagination: { limit: $limit, start: $skip }
-      sort: "createdAt:desc"
-      filters: {
-        and: [
-          { id: { notIn: $exceptIds } }
-          { title: { contains: $keyword } }
-          {
-            categories: {
-              or: { slug: { eq: $categorySlug }, id: { in: $categoryIds } }
-            }
-          }
-          {
-            styles: { or: { slug: { eq: $styleSlug }, id: { in: $styleIds } } }
-          }
-          { tags: { or: { slug: { eq: $tagSlug }, id: { in: $tagIds } } } }
-        ]
-      }
-    ) {
+    blogs(pagination: $pagination, sort: $sort, filters: $searchOption) {
       data {
         ...blogEntity
       }
@@ -142,89 +118,6 @@ export const docBlogDetail = gql`
           content
         }
       }
-    }
-  }
-`
-
-// ----
-export const docBlogsRelated = gql`
-  query blogsRelated(
-    $limit: Int!
-    $skip: Int
-    $categoryIds: [ID]
-    $styleIds: [ID]
-    $exceptIds: [ID]
-  ) {
-    blogs(
-      pagination: { limit: $limit, start: $skip }
-      sort: "createdAt:desc"
-      filters: {
-        and: [
-          { id: { notIn: $exceptIds } }
-          {
-            or: [
-              { categories: { id: { in: $categoryIds } } }
-              { styles: { id: { in: $styleIds } } }
-            ]
-          }
-        ]
-      }
-    ) {
-      data {
-        ...blogEntity
-      }
-      meta {
-        pagination {
-          pageSize
-          total
-        }
-      }
-    }
-  }
-
-  fragment blogEntity on BlogEntity {
-    id
-    attributes {
-      createdAt
-      updatedAt
-      title
-      slug
-      styles(pagination: { limit: 1 }) {
-        data {
-          id
-          attributes {
-            title
-            slug
-          }
-        }
-      }
-      categories(pagination: { limit: 1 }) {
-        data {
-          id
-          attributes {
-            title
-            slug
-            thumbnail {
-              data {
-                ...thumEntity
-              }
-            }
-          }
-        }
-      }
-      thumbnail {
-        data {
-          ...thumEntity
-        }
-      }
-    }
-  }
-
-  fragment thumEntity on UploadFileEntity {
-    id
-    attributes {
-      url
-      alternativeText
     }
   }
 `

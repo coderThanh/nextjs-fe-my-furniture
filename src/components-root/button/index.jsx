@@ -31,7 +31,7 @@ export default function AppButton(props) {
     <>
       <AppLink
         url={props.url}
-        classLink={classNames(
+        className={classNames(
           'btn',
           props.className,
           styles.wrap,

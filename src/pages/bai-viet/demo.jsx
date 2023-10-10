@@ -52,7 +52,7 @@ export default function PostDetailPage() {
                               <AppLink
                                 url={ROUTER_URL.categoryDemo}
                                 key={index}
-                                classLink="cate-item "
+                                className="link-item "
                               >
                                 {index > 0 ? ', ' : ''}
 
@@ -326,7 +326,7 @@ export default function PostDetailPage() {
                           .fill(null)
                           .map((item, index) => {
                             return (
-                              <AppLink key={index} classLink="tag-item">
+                              <AppLink key={index} className="tag-item">
                                 tag {index}
                               </AppLink>
                             )

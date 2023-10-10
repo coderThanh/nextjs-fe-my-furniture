@@ -4,7 +4,7 @@ import {
   docHomeHotBanner,
   docHomeHotBlogs,
   docHomeSEO,
-} from '@/services/graphql-query/home'
+} from '@/services/graphql-query'
 
 const { get } = grapTransport()
 

@@ -5,6 +5,9 @@ import dayjs from 'dayjs'
 export const isConnectAPI = () =>
   process.env.NEXT_PUBLIC_HAS_API_DB_CONECT == 'true'
 
+export const isMaintainMode = () =>
+  process.env.NEXT_PUBLIC_IS_MAINTAIN_MODE == 'true'
+
 //  ------
 export const delay = (delayInms) => {
   return new Promise((resolve) => setTimeout(resolve, delayInms))
@@ -285,10 +288,26 @@ export const formatDate = (date) => {
 }
 
 // ------
-export const parseStringTitle = (text) => {
+export const toTitleCase = (text) => {
   if (!text) return text
 
   var result = text[0].toUpperCase() + text.slice(1).toLowerCase()
+
+  return result
+}
+
+// --------
+
+export const toCapitalizeCase = (text) => {
+  if (!text) return text
+
+  var listText = text.toString().split(' ')
+
+  listText = listText.map(
+    (item) => item[0].toUpperCase() + item.slice(1).toLowerCase(),
+  )
+
+  var result = listText.join(' ')
 
   return result
 }

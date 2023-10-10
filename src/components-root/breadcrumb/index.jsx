@@ -20,7 +20,7 @@ export default function BreadCrumb({ divider, listLink, name }) {
             >
               <AppLink
                 url={item.link}
-                classLink={classNames(styles.link, 'breadcrumb-link')}
+                className={classNames(styles.link, 'breadcrumb-link')}
               >
                 {item.name}
               </AppLink>

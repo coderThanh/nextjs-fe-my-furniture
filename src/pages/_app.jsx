@@ -1,21 +1,49 @@
-// import 'swiper/css'
-
 import '@/styles/index.scss'
 
-import Head from 'next/head'
-import WrapProvider from '@/redux/provider'
 import AppAssets from '@/consts/assets'
+import WrapProvider from '@/redux/provider'
+import Head from 'next/head'
+
+import { DESCRIPTION_PAGE, TITLE_PAGE } from '@/consts/const'
+import { Barlow_Condensed, Josefin_Sans, Open_Sans } from 'next/font/google'
+
+const opentSans = Open_Sans({
+  weight: ['300', '400', '500', '600', '700', '800'],
+  style: ['normal', 'italic'],
+  subsets: ['vietnamese'],
+})
+
+const josenfinSans = Josefin_Sans({
+  weight: ['300', '400', '500', '600', '700'],
+  style: ['normal', 'italic'],
+  subsets: ['vietnamese'],
+})
+
+const barlowCondesed = Barlow_Condensed({
+  weight: ['300', '400', '500', '600', '700', '800'],
+  style: ['normal', 'italic'],
+  subsets: ['vietnamese'],
+})
 
 export default function App({ Component, pageProps }) {
   return (
     <>
       <Head>
+        <title>{TITLE_PAGE}</title>
+        <meta name="description" content={DESCRIPTION_PAGE} />
+
         <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <link rel="icon" href={AppAssets.faviicon} />
+        <link rel="icon" href={AppAssets.faviIcon} />
       </Head>
 
       <style jsx global>{`
         :root {
+          // Fonts
+          --font-family: ${opentSans.style.fontFamily}, sans-serif;
+          --font-family-title: ${josenfinSans.style.fontFamily},
+            ${barlowCondesed.style.fontFamily}, sans-serif;
+
+          // Colors
           --primary: #ff6600;
           --on-primary: #fff;
           --primary-container: #205e61;
@@ -52,13 +80,6 @@ export default function App({ Component, pageProps }) {
 
           --box-shadown1: 3px 0px 7px 1px rgb(0 0 0 / 5%);
           --box-shadown2: 0 0.75rem 6rem rgba(56, 65, 74, 0.03);
-
-          --gap: 15px;
-
-          --button-heigh: 38px;
-          --input-height: 40px;
-          --opacity-bg: 7%;
-          --opacity: 72%;
         }
       `}</style>
 
