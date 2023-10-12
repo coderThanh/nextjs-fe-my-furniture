@@ -11,9 +11,4 @@ LICENSE
 .docker
 .gitlab
 .git
-
-# local env files
-.env
-.env*.local
-.env*.dev
-.env*.product
+.next
