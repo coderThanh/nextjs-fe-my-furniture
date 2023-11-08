@@ -38,7 +38,7 @@ export default function BodyArchiveBlogs() {
               <div className="post-wrap row row-gap-y row-gap-large">
                 {data?.items?.map((blog, index) => {
                   return (
-                    <div className="col col-12 col-sm-6 col-md-4" key={index}>
+                    <div className="col col-12 col-sm-6 col-lg-4" key={index}>
                       <div className="col-inner">
                         <CardBlog
                           thumbnail={blog?.thumbnail?.url}

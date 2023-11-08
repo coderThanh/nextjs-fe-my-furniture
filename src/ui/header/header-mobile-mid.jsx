@@ -50,8 +50,8 @@ export default function HeaderMobileMid() {
               {!wasConnectAPI && (
                 <div className={classNames(classMenuItem)}>
                   <AppButton
-                    kind={AppButtonKind.default}
-                    color={AppButtonColor.white}
+                    kind={AppButtonKind.text}
+                    color={AppButtonColor.dark}
                     className={classNames(classMenuIcon)}
                   >
                     <>
@@ -64,8 +64,8 @@ export default function HeaderMobileMid() {
               {!wasConnectAPI && (
                 <div className={classNames(classMenuItem)}>
                   <AppButton
-                    kind={AppButtonKind.default}
-                    color={AppButtonColor.white}
+                    kind={AppButtonKind.text}
+                    color={AppButtonColor.dark}
                     className={classNames(classMenuIcon)}
                   >
                     <>
@@ -82,8 +82,8 @@ export default function HeaderMobileMid() {
                   isShow={false}
                   before={
                     <AppButton
-                      kind={AppButtonKind.default}
-                      color={AppButtonColor.white}
+                      kind={AppButtonKind.text}
+                      color={AppButtonColor.dark}
                       className={classNames(classMenuIcon)}
                     >
                       <>

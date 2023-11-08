@@ -38,7 +38,7 @@ export default function CategoryPage() {
                 .fill(null)
                 .map((item, index) => {
                   return (
-                    <div className="col col-12 col-sm-6 col-md-4" key={index}>
+                    <div className="col col-12 col-sm-6 col-lg-4" key={index}>
                       <div className="col-inner">
                         <CardBlog
                           slug={ROUTER_URL.blogDetailDemo}

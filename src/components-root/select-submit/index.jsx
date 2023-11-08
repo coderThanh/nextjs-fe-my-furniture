@@ -1,6 +1,5 @@
 import classNames from 'classnames'
-import React from 'react'
-import { ChangeEvent, CSSProperties, ReactNode, useState } from 'react'
+import { useState } from 'react'
 import AppButton, { AppButtonColor, AppButtonKind } from '../button'
 
 import styles from './select-submit.module.scss'

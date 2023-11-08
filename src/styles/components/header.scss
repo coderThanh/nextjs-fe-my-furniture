@@ -145,6 +145,7 @@ header {
     justify-content: flex-start;
     align-items: center;
     flex-wrap: wrap;
+    overflow: hidden;
 
     .menu-link {
         color: var(--color-title);

@@ -27,7 +27,7 @@ export function HomePostByCategoryDemo(props) {
               .fill(null)
               .map((blog, index) => {
                 return (
-                  <div className="col col-12 col-sm-6 col-md-4" key={index}>
+                  <div className="col col-12 col-sm-6 col-lg-4" key={index}>
                     <div className="col-inner">
                       <CardBlog
                         slug={ROUTER_URL.blogDetailDemo}

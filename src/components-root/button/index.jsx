@@ -1,6 +1,4 @@
 import classNames from 'classnames'
-import { ReactElement } from 'react'
-import { Url } from 'url'
 import AppLink from '../link'
 
 import styles from './button.module.scss'
@@ -14,7 +12,9 @@ export const AppButtonKind = {
 export const AppButtonColor = {
   primary: 'primary',
   white: 'white',
+  whiteTransparent: 'whiteTransparent',
   dark: 'dark',
+  darkTransparent: 'darkTransparent',
   error: 'error',
   tertiary: 'tertiary',
   secondary: 'secondary',
@@ -41,20 +41,21 @@ export default function AppButton(props) {
             styles.outline + ' btn_outline',
           props.color == AppButtonColor.primary && styles.primary + ' primary',
           props.color == AppButtonColor.white && styles.white + ' white',
+          props.color == AppButtonColor.whiteTransparent &&
+            styles.whiteTransparent + ' white-transparent',
           props.color == AppButtonColor.dark && styles.dark + ' dark',
+          props.color == AppButtonColor.darkTransparent &&
+            styles.darkTransparent + ' dark-transparent',
           props.color == AppButtonColor.tertiary &&
             styles.tertiary + ' tertiary',
           props.color == AppButtonColor.error && styles.error + ' error',
           props.color == AppButtonColor.secondary &&
             styles.secondary + ' secondary',
+          props.size == AppButtonSize.small && styles.small + ' small',
         )}
       >
         <div
-          className={classNames(
-            'btn-inner',
-            styles.inner,
-            props.size == AppButtonSize.small && styles.small,
-          )}
+          className={classNames('btn-inner', styles.inner)}
           onClick={() => props.onClick && props.onClick()}
         >
           <div className={classNames(styles.content, 'btn-content')}>

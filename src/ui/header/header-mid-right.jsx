@@ -21,8 +21,8 @@ export default function HeaderMidRight({ isShowSearch, handleSearchClick }) {
       <div className={classNames('mid-nav_right')}>
         <div className={classNames(classMenuItem)}>
           <AppButton
-            kind={AppButtonKind.default}
-            color={isShowSearch ? AppButtonColor.dark : AppButtonColor.white}
+            kind={isShowSearch ? AppButtonKind.default : AppButtonKind.text}
+            color={AppButtonColor.dark}
             className={classNames('btn-icon')}
             onClick={handleSearchClick}
           >
@@ -35,8 +35,8 @@ export default function HeaderMidRight({ isShowSearch, handleSearchClick }) {
         {!isConnectedApi && (
           <div className={classNames(classMenuItem)}>
             <AppButton
-              kind={AppButtonKind.default}
-              color={AppButtonColor.white}
+              kind={AppButtonKind.text}
+              color={AppButtonColor.dark}
               className={classNames(classMenuIcon)}
             >
               <IconAccount className={classNames('icon')} />
@@ -46,8 +46,8 @@ export default function HeaderMidRight({ isShowSearch, handleSearchClick }) {
         {!isConnectedApi && (
           <div className={classNames(classMenuItem)}>
             <AppButton
-              kind={AppButtonKind.default}
-              color={AppButtonColor.white}
+              kind={AppButtonKind.text}
+              color={AppButtonColor.dark}
               className={classNames(classMenuIcon)}
             >
               <>
@@ -60,8 +60,8 @@ export default function HeaderMidRight({ isShowSearch, handleSearchClick }) {
         {!isConnectedApi && (
           <div className={classNames(classMenuItem)}>
             <AppButton
-              kind={AppButtonKind.default}
-              color={AppButtonColor.white}
+              kind={AppButtonKind.text}
+              color={AppButtonColor.dark}
               className={classNames(classMenuIcon)}
             >
               <>
