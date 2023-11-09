@@ -29,7 +29,7 @@
     }
 
     .search-form {
-        padding: 20px 0;
+        padding: calc(0.9rem - 5px) 0;
     }
 
 }
@@ -84,7 +84,7 @@ header {
         content: '';
         display: block;
         position: absolute;
-        bottom: 0;
+        bottom: -1px;
         left: 0px;
         right: 0px;
         height: 1px;
@@ -145,7 +145,6 @@ header {
     justify-content: flex-start;
     align-items: center;
     flex-wrap: wrap;
-    overflow: hidden;
 
     .menu-link {
         color: var(--color-title);
@@ -351,8 +350,8 @@ body .windown-wrap {
     --content-py: 15px;
     --menu-item-py: 16px;
     --content-w: 100%;
-    --content-mw: 900px;
-    --btn-close-color: var(--color-title);
+    --content-mw: 750px;
+    --btn-close-color: var(--on-surface);
 }
 
 .windown-logo {
@@ -450,6 +449,10 @@ body .windown-wrap {
 
     .nav .menu-link {
         padding: 15px 0;
+    }
+
+    body .windown-wrap {
+        --btn-close-color: var(--color-title);
     }
 }
 

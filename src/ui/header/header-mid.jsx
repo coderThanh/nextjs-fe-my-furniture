@@ -137,11 +137,12 @@ class VariantHeaderMiddle {
 
   static searchVariants = {
     onHidden: {
-      x: 100,
+      x: 30,
       opacity: 0,
       visibility: 'hidden',
       pointerEvents: 'none',
       width: 0,
+      display: 'none',
     },
     onShow: {
       x: 0,
@@ -149,6 +150,7 @@ class VariantHeaderMiddle {
       visibility: 'visible',
       pointerEvents: 'auto',
       width: '80%',
+      display: 'block',
     },
   }
 }

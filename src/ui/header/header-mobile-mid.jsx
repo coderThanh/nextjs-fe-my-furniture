@@ -22,8 +22,11 @@ import {
   classNavInner,
 } from '@/ui/header'
 import classNames from 'classnames'
+import { useState } from 'react'
 
 export default function HeaderMobileMid() {
+  const [stIsOpenAside, setIsOpenAside] = useState(false)
+
   // fetch
   const { menuData } = useMenuHeaderMobile()
 
@@ -79,7 +82,8 @@ export default function HeaderMobileMid() {
                 {/* Windown nav */}
                 <WindownE
                   classWrap="header-windown"
-                  isShow={false}
+                  isShow={stIsOpenAside}
+                  onClick={(isShow) => setIsOpenAside(isShow)}
                   before={
                     <AppButton
                       kind={AppButtonKind.text}
@@ -111,7 +115,7 @@ export default function HeaderMobileMid() {
 
                     <div className={classNames('windown-nav', 'nav')}>
                       <div className={classNames(classMenuItem, 'search')}>
-                        <Search />
+                        <Search onSubmit={() => setIsOpenAside(false)} />
                       </div>
 
                       {/* Nav item */}

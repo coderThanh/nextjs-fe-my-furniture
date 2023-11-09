@@ -13,6 +13,7 @@ const nextConfig = {
   images: {
     domains: [
       '127.0.0.1',
+      '116.118.50.104',
       'localhost',
       'unsplash.com',
       'images.unsplash.com',
