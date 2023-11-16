@@ -13,11 +13,12 @@ const nextConfig = {
   images: {
     domains: [
       '127.0.0.1',
-      '116.118.50.104',
       'localhost',
       'unsplash.com',
       'images.unsplash.com',
-      process.env.NEXT_PUBLIC_HOST_IMG_API ?? ''
+      '116.118.50.104',
+      'furmi.net',
+      'www.furmi.net',
     ],
     formats: ["image/avif", "image/webp"],
    
