@@ -1,10 +1,16 @@
-import classNames from 'classnames'
-import styles from './footer.module.scss'
-import { useCallback, useEffect, useRef, useState } from 'react'
-import { useFetchFooterCoypright, useFetchFooterScripts } from '@/hooks'
-import Script from 'next/script'
+'use client'
 
-export default function Footer() {
+import { useFooterScripts } from '@/services/hooks/hookTheme'
+import classNames from 'classnames'
+import Script from 'next/script'
+import { ReactNode, useCallback, useEffect, useRef, useState } from 'react'
+import styles from './footer.module.scss'
+
+type Props = {
+  children?: ReactNode
+}
+
+export default function FooterWrap({ children }: Props) {
   const [stHeight, setHeight] = useState(null)
   const refInner = useRef(null)
 
@@ -15,7 +21,11 @@ export default function Footer() {
     headerHeight && setHeight(headerHeight)
   }, [])
 
+  //
   useEffect(() => {
+    // first time
+    setHeightHeader()
+
     window.addEventListener('resize', setHeightHeader)
 
     return () => {
@@ -24,18 +34,13 @@ export default function Footer() {
   }, [setHeightHeader])
 
   // fetch
-  const { data, isLoading } = useFetchFooterCoypright()
 
-  const { data: dataScripts } = useFetchFooterScripts()
-
-  useEffect(() => {
-    setHeightHeader()
-  }, [setHeightHeader, isLoading, data])
+  const { data: dataScripts } = useFooterScripts()
 
   return (
     <>
       <footer
-        className={classNames(styles.wrap, 'footer-wrap ')}
+        className={classNames(styles.wrap, 'footer-wrap')}
         style={{
           height: stHeight,
         }}
@@ -55,20 +60,11 @@ export default function Footer() {
               : {}
           }
         >
-          <div className={classNames('', styles.innerWrap)}>
-            <div
-              className={classNames(styles.content, 'footer-content container')}
-            >
-              {!isLoading && data?.length > 0 ? (
-                <div dangerouslySetInnerHTML={{ __html: data }} />
-              ) : (
-                <p>Copyright 2023 Furmi</p>
-              )}
-            </div>
-            <span className={classNames(styles.bg, 'footer-bg')}></span>
-          </div>
+          {children}
         </div>
       </footer>
+
+      {/* Script Footer */}
       {dataScripts && (
         <Script
           type="text/javascript"

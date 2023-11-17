@@ -1,8 +1,11 @@
+import Footer from '@/app/(components)/footer'
+import { HomePostByCategoryDemo } from '@/app/(components)/page-home/home-demo-category-blog'
+import { HomeHotBlogDemo } from '@/app/(components)/page-home/home-demo-hot-blog'
+import Gap from '@/components-root/gap'
 import WrapSWRConfig from '@/components-root/swr-wrap'
 import { isConnectAPI } from '@/helpers'
 import { Metadata, ResolvingMetadata } from 'next'
 import Header from './(components)/header'
-import HeaderBottom from '@/app/(components)/header/header-bottom'
 
 // export const metadata: Metadata = {
 //   title: TITLE_PAGE,
@@ -39,18 +42,20 @@ export default function Home({}) {
     <>
       <WrapSWRConfig>
         <Header />
-        {/* 
+
         <Gap large={30} small={20} />
-        {wasConnectAPI && <HomeHotBlog />}
+        {/* {wasConnectAPI && <HomeHotBlog />}
         {wasConnectAPI && <HomeBlogsBy />}
-        {wasConnectAPI && <HomeBlogs />}
+        {wasConnectAPI && <HomeBlogs />} */}
+
+        {/* Demo UI  */}
         {!wasConnectAPI && <HomeHotBlogDemo />}
         {!wasConnectAPI && <HomePostByCategoryDemo title="Chuyện nhà" />}
         {!wasConnectAPI && <HomePostByCategoryDemo title="Xu hướng" />}
         {!wasConnectAPI && <HomePostByCategoryDemo title="Minimalism" />}
         {!wasConnectAPI && <HomePostByCategoryDemo title="Zen" />}
         <Gap large={70} medium={50} small={30} />
-        <Footer /> */}
+        <Footer />
       </WrapSWRConfig>
     </>
   )

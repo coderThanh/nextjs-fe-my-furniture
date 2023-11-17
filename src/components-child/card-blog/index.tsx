@@ -11,6 +11,30 @@ export const CardBlogType = {
   vertical: 'vertical',
 }
 
+type Props = {
+  thumbnail?: string
+  thumbnailAlt?: string
+  type?: 'default' | 'overlay' | 'vertical' | string
+  className?: string
+  isShowCate?: boolean
+  cateTitle?: string
+  styleTitle?: string
+  imgRatio?: number
+  imgRadius?: number
+  title?: string
+  isShowDate?: boolean
+  isShowView?: boolean
+  isShowDesc?: boolean
+  cateImg?: string
+  cateImgAlt?: string
+  slug?: string
+  desc?: string
+  date?: string
+  view?: string
+  slugCate?: string
+  slugStyle?: string
+}
+
 export default function CardBlog({
   thumbnail,
   thumbnailAlt,
@@ -33,7 +57,7 @@ export default function CardBlog({
   view,
   slugCate,
   slugStyle,
-}) {
+}: Props) {
   return (
     <>
       <div

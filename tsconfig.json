@@ -31,7 +31,8 @@
     "next-env.d.ts",
     ".next/types/**/*.ts",
     "**/*.ts",
-    "**/*.tsx"
+    "**/*.tsx",
+    "./declare-typescript/swiper-element.d.ts"
   ],
   "exclude": [
     "node_modules"

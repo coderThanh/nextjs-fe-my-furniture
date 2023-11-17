@@ -1,7 +1,7 @@
 import { ToastContainer, toast } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 
-const notifySuccess = (message) =>
+const notifySuccess = (message: string) =>
   toast.success(message, {
     position: 'top-center',
     autoClose: 3000,
@@ -12,7 +12,7 @@ const notifySuccess = (message) =>
     progress: undefined,
   })
 
-const notifyError = (message) =>
+const notifyError = (message: string) =>
   toast.error(message, {
     position: 'top-center',
     autoClose: 3000,
@@ -23,7 +23,7 @@ const notifyError = (message) =>
     progress: undefined,
   })
 
-const notifyInfo = (message) =>
+const notifyInfo = (message: string) =>
   toast.info(message, {
     position: 'top-center',
     autoClose: 3000,

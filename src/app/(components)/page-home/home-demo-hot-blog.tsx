@@ -1,3 +1,5 @@
+'use client'
+
 import CardBlog, { CardBlogType } from '@/components-child/card-blog'
 import AppLink from '@/components-root/link'
 import { ROUTER_URL } from '@/consts/router'
@@ -20,7 +22,7 @@ export function HomeHotBlogDemo() {
               <div className="col-inner">
                 <swiper-container
                   slides-per-view={1}
-                  class="slider-light"
+                  className="slider-light"
                   loop={true}
                   navigation={true}
                   pagination={true}

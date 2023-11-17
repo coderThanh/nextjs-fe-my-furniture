@@ -1,7 +1,14 @@
+'use client'
+
 import { MEDIA_MAX_SM, MEDIA_MAX_XS } from '@/consts/const'
 import classNames from 'classnames'
 
-export default function Gap({ large = 30, medium, small }) {
+type Props = {
+  large?: number
+  medium?: number
+  small?: number
+}
+export default function Gap({ large = 30, medium, small }: Props) {
   return (
     <>
       <style jsx>
