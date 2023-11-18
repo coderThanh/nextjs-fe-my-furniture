@@ -7,12 +7,19 @@ declare global {
     interface IntrinsicElements {
       'swiper-container': React.DetailedHTMLProps<
         React.HTMLAttributes<HTMLElement> & SwiperProps,
-        HTMLElement
+        HTMLElement,
+        SwiperContainerAttributes
       >
       'swiper-slide': React.DetailedHTMLProps<
         React.HTMLAttributes<HTMLElement> & SwiperSlideProps,
         HTMLElement
       >
+    }
+
+    interface SwiperContainerAttributes extends KebabObjectKeys<SwiperOptions> {
+      ref?: RefObject<SwiperRef>
+      children?: ReactNode
+      class?: string
     }
   }
 }

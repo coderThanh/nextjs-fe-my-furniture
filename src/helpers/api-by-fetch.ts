@@ -1,6 +1,4 @@
 export const restTransportByFetchBrowser = () => {
-  // get tokken cookies by nextjs
-
   const token = process.env.NEXT_PUBLIC_API_TOKEN
 
   const baseURL = `${process.env.NEXT_PUBLIC_HOST_API}:${process.env.NEXT_PUBLIC_HOST_PORT}`
@@ -17,7 +15,7 @@ export const restTransportByFetchBrowser = () => {
       method: 'POST',
       credentials: 'include',
       body: JSON.stringify({ query: query, variables: variables }),
-      cache: process.env.NODE_ENV == 'development' ? 'no-store' : null,
+      cache: process.env.NODE_ENV == 'development' ? 'no-store' : 'force-cache',
       headers: {
         Authorization: token ? `Bearer ${token}` : '',
         'Content-Type': 'application/json',
@@ -47,7 +45,7 @@ export const restTransportByFetchBrowser = () => {
     return await fetch(urlRequest.toString(), {
       method: 'GET',
       credentials: 'include',
-      cache: process.env.NODE_ENV == 'development' ? 'no-store' : null,
+      cache: process.env.NODE_ENV == 'development' ? 'no-store' : 'force-cache',
       headers: {
         Authorization: token ? `Bearer ${token}` : '',
       },
@@ -67,7 +65,7 @@ export const restTransportByFetchBrowser = () => {
       method: 'POST',
       credentials: 'include',
       body: JSON.stringify(data),
-      cache: process.env.NODE_ENV == 'development' ? 'no-store' : null,
+      cache: process.env.NODE_ENV == 'development' ? 'no-store' : 'force-cache',
       headers: {
         Authorization: token ? `Bearer ${token}` : '',
         'Content-Type': 'application/json',

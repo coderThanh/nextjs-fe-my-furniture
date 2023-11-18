@@ -3,7 +3,9 @@ import '@/styles/index.scss'
 import classNames from 'classnames'
 
 import Layout from '@/components-root/layout'
+
 import WrapProvider from '@/redux/provider'
+
 import { Barlow_Condensed, Josefin_Sans, Open_Sans } from 'next/font/google'
 
 export const barlowCondensed = Barlow_Condensed({
@@ -23,10 +25,10 @@ export const josenfinSans = Josefin_Sans({
   subsets: ['vietnamese'],
 })
 
-export default function RootLayout({ children, params }) {
+export default function RootLayout({ children }) {
   return (
-    <html lang="vi" dir="" className={classNames(barlowCondensed.className)}>
-      <body>
+    <html lang="vi" dir="">
+      <body className={classNames(barlowCondensed.className)}>
         <WrapProvider>
           <Layout>{children}</Layout>
         </WrapProvider>

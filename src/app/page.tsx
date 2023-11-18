@@ -4,8 +4,11 @@ import { HomeHotBlogDemo } from '@/app/(components)/page-home/home-demo-hot-blog
 import Gap from '@/components-root/gap'
 import WrapSWRConfig from '@/components-root/swr-wrap'
 import { isConnectAPI } from '@/helpers'
+import { UseHomeSEO } from '@/hooks/use-home'
 import { Metadata, ResolvingMetadata } from 'next'
 import Header from './(components)/header'
+import { getMetaRobots } from '@/helpers/method'
+import { HomeHotBlog } from '@/app/(components)/page-home/home-hot-blog'
 
 // export const metadata: Metadata = {
 //   title: TITLE_PAGE,
@@ -17,21 +20,20 @@ export async function generateMetadata(
   {},
   parent: ResolvingMetadata,
 ): Promise<Metadata> {
-  // const parsedSEO = parseSEO(seo?.pageHome?.data?.attributes?.seo)
-  // read route params
-  // const id = params.id
+  const data = await UseHomeSEO()
 
-  // fetch data
-  // const product = await fetch(`https://.../${id}`).then((res) => res.json())
+  console.log(data)
 
   // optionally access and extend (rather than replace) parent metadata
   const previousImages = (await parent).openGraph?.images || []
 
   return {
-    // title: product.title,
-    // openGraph: {
-    //   images: ['/some-specific-page-image.jpg', ...previousImages],
-    // },
+    title: data?.title,
+    description: data?.description,
+    openGraph: {
+      images: [data?.thumbnail?.url, ...previousImages],
+    },
+    robots: getMetaRobots(),
   }
 }
 
@@ -44,9 +46,11 @@ export default function Home({}) {
         <Header />
 
         <Gap large={30} small={20} />
-        {/* {wasConnectAPI && <HomeHotBlog />}
+        {wasConnectAPI && <HomeHotBlog />}
+        {/* 
         {wasConnectAPI && <HomeBlogsBy />}
-        {wasConnectAPI && <HomeBlogs />} */}
+        {wasConnectAPI && <HomeBlogs />}
+         */}
 
         {/* Demo UI  */}
         {!wasConnectAPI && <HomeHotBlogDemo />}
@@ -73,7 +77,7 @@ export default function Home({}) {
 //   }
 
 //   const resSEO = await UseHomeSEO()
-//   const fallbackHotBlog = await UseFallbackHomeHotBlog()
+//   const fallbackHotBlog = await UseServerHomeHotBlog()
 //   const fallbackHotBanner = await UseFallbackHomeHotBanner()
 //   const fallbackBlogBy = await UseFallbackHomeBlogBy()
 //   const fallbackBlogs = await UseFallbackHomeBlogs()

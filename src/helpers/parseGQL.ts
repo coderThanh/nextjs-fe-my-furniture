@@ -289,5 +289,6 @@ export const parseSEO = (seoGQL) => {
   return {
     title: seoGQL?.metaTitle ?? '',
     description: seoGQL?.metaDescription ?? '',
+    thumbnail: parseImgEnity(seoGQL?.metaImage?.data) ?? null,
   }
 }

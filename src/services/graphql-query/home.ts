@@ -157,9 +157,22 @@ export const docHomeSEO = gql`
           seo {
             metaTitle
             metaDescription
+            metaImage {
+              data {
+                ...thumEntity
+              }
+            }
           }
         }
       }
+    }
+  }
+
+  fragment thumEntity on UploadFileEntity {
+    id
+    attributes {
+      url
+      alternativeText
     }
   }
 `

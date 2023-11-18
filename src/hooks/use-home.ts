@@ -4,6 +4,7 @@ import {
   parseBlogByEntity,
   parseBlogEnity,
   parseLinkEntity,
+  parseSEO,
 } from '@/helpers/parseGQL'
 import { useSWRFetch } from '@/helpers/swr'
 import {
@@ -12,16 +13,14 @@ import {
   docHomeHotBanner,
   docHomeHotBlogs,
 } from '@/services/graphql-query'
-import { useServerBlogList } from '@/services/hooks/hookBlog'
+import { useServerBlogList } from '@/services/hooks/hookBlog-sv'
 import {
-  useHomeBlogBy,
-  useHomeHotBanner,
-  useHomeHotBlogs,
   useServerHomeBlogBy,
   useServerHomeHotBanner,
   useServerHomeHotBlogs,
   useServerHomeSEO,
-} from '@/services/hooks/hookHome'
+} from '@/services/hooks/hookHome-Sv'
+import { use } from 'react'
 
 import { unstable_serialize } from 'swr'
 
@@ -33,74 +32,51 @@ export const UseHomeSEO = async () => {
 
   if (!isAccept) return {}
 
-  const data = await fetch()
+  var data = await fetch()
 
-  return data
+  if (data?.data?.pageHome?.data?.attributes?.seo) {
+    data = parseSEO(data?.data?.pageHome?.data?.attributes?.seo)
+  }
+
+  return data ?? null
 }
 
 //
-export const UseFallbackHomeHotBlog = async () => {
+export const UseGetServerHomeHotBlog = () => {
   const { fetch } = useServerHomeHotBlogs()
 
   const isAccept = isConnectAPI()
+
   if (!isAccept) return {}
 
-  const data = await fetch()
+  var res = use(fetch())
 
-  return { [unstable_serialize([docHomeHotBlogs, {}])]: data }
-}
-
-//
-export const useFetchHomeHotBlog = () => {
-  const isAccept = isConnectAPI()
-
-  const { fetch } = useHomeHotBlogs()
-
-  var { data, isLoading } = useSWRFetch(
-    isAccept ? docHomeHotBlogs : null,
-    {},
-    isAccept ? fetch : () => {},
-  )
-
-  if (data?.pageHome?.data?.attributes?.hot_blogs?.data) {
-    data = data?.pageHome?.data?.attributes?.hot_blogs?.data?.map((item) =>
+  if (res?.data?.pageHome?.data?.attributes?.hot_blogs?.data) {
+    res = res?.data?.pageHome?.data?.attributes?.hot_blogs?.data?.map((item) =>
       parseBlogEnity(item),
     )
   }
 
-  return { isLoading, data }
+  return res
 }
 
 //
-export const UseFallbackHomeHotBanner = async () => {
+export const UseGetServerHomeHotBanner = () => {
   const { fetch } = useServerHomeHotBanner()
 
   const isAccept = isConnectAPI()
 
   if (!isAccept) return
 
-  const data = await fetch()
+  var res = use(fetch())
 
-  return { [unstable_serialize([docHomeHotBanner, {}])]: data }
-}
-
-//
-export const useFetchHomeHotBanner = () => {
-  const { fetch } = useHomeHotBanner()
-
-  const isAccept = isConnectAPI()
-
-  var { data, isLoading } = useSWRFetch(
-    isAccept ? docHomeHotBanner : null,
-    {},
-    isAccept ? fetch : () => {},
-  )
-
-  if (data?.pageHome?.data?.attributes?.hot_banner) {
-    data = parseLinkEntity(data?.pageHome?.data?.attributes?.hot_banner)
+  if (res?.data?.pageHome?.data?.attributes?.hot_banner) {
+    res = parseLinkEntity(res?.data?.pageHome?.data?.attributes?.hot_banner)
   }
 
-  return { isLoading, data }
+  console.log(res)
+
+  return res
 }
 
 //
@@ -118,7 +94,7 @@ export const UseFallbackHomeBlogBy = async () => {
 
 export const useFetchHomeBlogBy = () => {
   const isAccept = isConnectAPI()
-  const { fetch } = useHomeBlogBy()
+  const { fetch } = useServerHomeBlogBy()
 
   var { isLoading, data } = useSWRFetch(
     isAccept ? docHomeBlogBy : null,
