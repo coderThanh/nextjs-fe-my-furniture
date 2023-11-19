@@ -4,25 +4,19 @@ import {
   parseBlogByEntity,
   parseBlogEnity,
   parseLinkEntity,
+  parseQueryBlogList,
   parseSEO,
 } from '@/helpers/parseGQL'
-import { useSWRFetch } from '@/helpers/swr'
-import {
-  docBlogs,
-  docHomeBlogBy,
-  docHomeHotBanner,
-  docHomeHotBlogs,
-} from '@/services/graphql-query'
 import { useServerBlogList } from '@/services/hooks/hookBlog-sv'
+
 import {
   useServerHomeBlogBy,
   useServerHomeHotBanner,
   useServerHomeHotBlogs,
   useServerHomeSEO,
-} from '@/services/hooks/hookHome-Sv'
-import { use } from 'react'
+} from '@/services/hooks/hookHome-sv'
 
-import { unstable_serialize } from 'swr'
+import { use } from 'react'
 
 //
 export const UseHomeSEO = async () => {
@@ -32,13 +26,13 @@ export const UseHomeSEO = async () => {
 
   if (!isAccept) return {}
 
-  var data = await fetch()
+  var res = await fetch()
 
-  if (data?.data?.pageHome?.data?.attributes?.seo) {
-    data = parseSEO(data?.data?.pageHome?.data?.attributes?.seo)
+  if (res?.data?.pageHome?.data?.attributes?.seo) {
+    res = parseSEO(res?.data?.pageHome?.data?.attributes?.seo)
   }
 
-  return data ?? null
+  return res ?? null
 }
 
 //
@@ -74,52 +68,29 @@ export const UseGetServerHomeHotBanner = () => {
     res = parseLinkEntity(res?.data?.pageHome?.data?.attributes?.hot_banner)
   }
 
-  console.log(res)
+  return res
+}
+
+//
+export const useFetchServerHomeBlogBy = () => {
+  const { fetch } = useServerHomeBlogBy()
+
+  var res = use(fetch())
+
+  if (res?.data?.pageHome?.data?.attributes?.blog_by) {
+    res = res?.data?.pageHome?.data?.attributes?.blog_by.map((item) =>
+      parseBlogByEntity(item),
+    )
+  }
 
   return res
 }
 
 //
-export const UseFallbackHomeBlogBy = async () => {
-  const { fetch } = useServerHomeBlogBy()
-
-  const isAccept = isConnectAPI()
-
-  if (!isAccept) return
-
-  var data = await fetch()
-
-  return { [unstable_serialize([docHomeBlogBy, {}])]: data }
-}
-
-export const useFetchHomeBlogBy = () => {
-  const isAccept = isConnectAPI()
-  const { fetch } = useServerHomeBlogBy()
-
-  var { isLoading, data } = useSWRFetch(
-    isAccept ? docHomeBlogBy : null,
-    {},
-    isAccept ? fetch : () => {},
-  )
-
-  if (data?.pageHome?.data?.attributes?.blog_by) {
-    data = data?.pageHome?.data?.attributes?.blog_by.map((item) =>
-      parseBlogByEntity(item),
-    )
-  }
-
-  return { isLoading, data }
-}
-
-//
-export const UseFallbackHomeBlogs = async () => {
+export const UseFetchServerHomeBlogs = () => {
   const { fetch } = useServerBlogList()
 
-  const isAccept = isConnectAPI()
-
-  if (!isAccept) return
-
-  var options = {
+  const options = {
     pagination: {
       limit: LIMIT_FETCH,
       start: 0,
@@ -127,9 +98,16 @@ export const UseFallbackHomeBlogs = async () => {
     sort: ['createdAt:desc'],
   }
 
-  var data = await fetch(options)
+  const res = use(fetch(options))
 
-  return {
-    [unstable_serialize([docBlogs, options])]: data,
+  var data: any = {}
+
+  if (res?.data?.blogs?.data?.length > 0) {
+    data = parseQueryBlogList(
+      res?.data?.blogs?.data,
+      res?.data?.blogs?.meta?.pagination,
+    )
   }
+
+  return data
 }

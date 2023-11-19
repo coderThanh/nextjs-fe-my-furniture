@@ -31,14 +31,18 @@ const usePostAPI = (action) => {
           gRecaptchaToken,
         })
 
-        if (res) {
-          if (res?.message?.content) {
-            notifySuccess(res?.message?.content)
+        const json = await res.json()
+
+        if (json) return json
+
+        if (json) {
+          if (json?.message?.content) {
+            notifySuccess(json?.message?.content)
           }
-          return res
+          return json
         }
 
-        notifyError(res?.message?.content)
+        notifyError(json?.message?.content)
         return null
       } catch (errorAPI) {
         handleError(errorAPI, setError)
@@ -67,10 +71,12 @@ const useGetDetailById = (action) => {
         setLoading(true)
         setError(null)
 
-        const { data, errors, message, statusCode } = await action({
+        const res = await action({
           id,
           ...options,
         })
+
+        const { data, errors, message, statusCode } = await res.json()
 
         if (statusCode === 200) {
           return data
@@ -103,12 +109,15 @@ const useGetList = (action) => {
         setLoading(true)
         setError(null)
         let res = null
+
         res = await action({ ...searchOption, ...pagination })
 
-        if (res) {
-          return res.data
+        const { data, errors, message, statusCode } = await res.json()
+
+        if (data) {
+          return data
         }
-        handleError(res?.data?.errors, setError)
+        handleError(errors, setError)
         return null
       } catch (errorAPI) {
         handleError(errorAPI, setError)
@@ -146,10 +155,12 @@ const usePutAPIById = (action) => {
 
         delete param?.isRecaptcha
 
-        const { data, errors, message, statusCode } = await action({
+        const res = await action({
           ...param,
           gRecaptchaToken,
         })
+
+        const { data, errors, message, statusCode } = await res.json()
 
         if (statusCode === 200) {
           notifySuccess(message?.content)

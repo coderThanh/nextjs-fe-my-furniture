@@ -1,24 +1,16 @@
 import CardBlog, { CardBlogType } from '@/components-child/card-blog'
 import Gap from '@/components-root/gap'
 import AppLink from '@/components-root/link'
-import Loader from '@/components-root/loadder'
 import { toTitleCase } from '@/helpers'
-import { useFetchHomeBlogBy } from '@/hooks'
+import { useFetchServerHomeBlogBy } from '@/hooks/use-home'
 import classNames from 'classnames'
 
 export function HomeBlogsBy() {
-  const { isLoading, data } = useFetchHomeBlogBy()
+  const data = useFetchServerHomeBlogBy()
 
   return (
     <>
-      {isLoading && (
-        <>
-          <div className="container mt-60 mb-60">
-            <Loader />
-          </div>
-        </>
-      )}
-      {!isLoading && data?.length > 0
+      {data?.length > 0
         ? data?.map((item, index) => (
             <section className="home-posts" key={index}>
               <Gap large={50} small={30} />
