@@ -2,7 +2,12 @@ import classNames from 'classnames'
 import AppLink from '../link'
 import styles from './breadcrumb.module.scss'
 
-export default function BreadCrumb({ divider, listLink, name }) {
+type Props = {
+  divider?: string
+  listLink?: any[]
+  name?: string
+}
+export default function BreadCrumb({ divider, listLink, name }: Props) {
   const dividerContent = (
     <span className={classNames(styles.divi, 'breadcrumb-divi')}>
       {divider || ' / '}

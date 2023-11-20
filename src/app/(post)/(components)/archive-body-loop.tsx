@@ -1,42 +1,32 @@
 import CardBlog, { CardBlogType } from '@/components-child/card-blog'
 import { Content404 } from '@/components-root/404'
-import Loader from '@/components-root/loadder'
 import MsgDefault from '@/components-root/message'
-import { LIMIT_FETCH } from '@/consts/const'
-import { UseFetchArchiveBlog } from '@/hooks/use-blog'
-import { usePaginationFething } from '@/hooks/use-pagination'
+import { UseFetchServerArchiveBlog } from '@/hooks/use-blog'
 import UIPaination from '@/ui/pagination'
 
-export default function BodyArchiveBlogs() {
-  const { isLoading, data } = UseFetchArchiveBlog()
+type Props = {
+  searchOptions: { [key: string]: string | undefined }
+}
 
-  const { countOfPage, currPage, setCurrPage, paginatedData } =
-    usePaginationFething(LIMIT_FETCH)
+export default function BodyArchiveBlogs({ searchOptions }: Props) {
+  const { items, limit, total } = UseFetchServerArchiveBlog(searchOptions) ?? {}
 
   return (
     <>
-      {isLoading && (
-        <div
-          className="container"
-          style={{ marginTop: 100, minHeight: '70vh' }}
-        >
-          <Loader isCenter={true} />
-        </div>
-      )}
-      {!isLoading && !data && <Content404 />}
-      {!isLoading && data?.items?.length == 0 ? (
+      {!items && <Content404 />}
+      {items?.length == 0 ? (
         <div className="container">
           <MsgDefault text={'Không có bài viết nào'} />
         </div>
       ) : (
         <></>
       )}
-      {!isLoading && data?.items?.length > 0 ? (
+      {items?.length > 0 ? (
         <>
           <section className="archive-loop">
             <div className="container">
               <div className="post-wrap row row-gap-y row-gap-large">
-                {data?.items?.map((blog, index) => {
+                {items?.map((blog, index) => {
                   return (
                     <div className="col col-12 col-sm-6 col-lg-4" key={index}>
                       <div className="col-inner">
@@ -77,13 +67,9 @@ export default function BodyArchiveBlogs() {
               </div>
             </div>
           </section>
-          <UIPaination
-            totalItems={data.total}
-            countOfPage={countOfPage}
-            paginatedData={paginatedData}
-            currPage={currPage}
-            setCurrPage={setCurrPage}
-          />
+
+          {/* Pagination */}
+          <UIPaination totalItems={total} pageSize={limit} isScrollTop={true} />
         </>
       ) : (
         <></>
