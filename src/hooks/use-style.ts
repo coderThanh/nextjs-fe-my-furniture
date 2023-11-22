@@ -1,19 +1,24 @@
 import { isConnectAPI } from '@/helpers'
-import { useServerStyleDetail } from '@/services/hooks/hookStyle'
+import { parseStyleyEnity } from '@/helpers/parseGQL'
+import { useServerStyleDetail } from '@/services/hooks/hookStyle-sv'
+import { use } from 'react'
 
-export const UseFetchStyleDetail = async (slug) => {
+export const UseServerFetchStyleDetail = (slug) => {
   const { fetch } = useServerStyleDetail()
 
   const isAccept = isConnectAPI()
+
   if (!isAccept) return null
 
   const options = { slug: slug }
 
-  const res = await fetch(options)
+  const res = use(fetch(options))
 
-  if (res?.styles?.data?.length > 0) {
-    return res?.styles?.data[0]
+  var data = null
+
+  if (res?.data?.styles?.data?.length > 0) {
+    data = parseStyleyEnity(res?.data?.styles?.data[0])
   }
 
-  return null
+  return data
 }
