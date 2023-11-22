@@ -120,7 +120,9 @@ export function parseMenuItem(args) {
 export const parseContentEditor = (content) => {
   return content
 
+  // ---
   // add host img, but strapi version current not neccesscery
+  // ---
   const regex = /<img(.*?src=["|'])(.*?)(["|'])/gm
 
   var result = content.replace(

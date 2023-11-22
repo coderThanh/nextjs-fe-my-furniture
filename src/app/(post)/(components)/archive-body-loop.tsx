@@ -9,11 +9,13 @@ type Props = {
 }
 
 export default function BodyArchiveBlogs({ searchOptions }: Props) {
-  const { items, limit, total } = UseFetchServerArchiveBlog(searchOptions) ?? {}
+  const data = UseFetchServerArchiveBlog(searchOptions)
+
+  const { items, limit, total } = data ?? {}
 
   return (
     <>
-      {!items && <Content404 />}
+      {!data && <Content404 />}
       {items?.length == 0 ? (
         <div className="container">
           <MsgDefault text={'Không có bài viết nào'} />

@@ -1,5 +1,6 @@
+'use client'
+
 import Pagination from '@/components-root/pagination'
-import { useEffect } from 'react'
 
 export default function UIPainationDemo() {
   return (

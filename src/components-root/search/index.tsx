@@ -35,6 +35,8 @@ export default function Search({ classForm, styleForm, onSubmit }: Props) {
 
       query.keyword = stText
 
+      query.skip = ''
+
       const paramsString = serializerQueryOptions(query)
 
       router.push(

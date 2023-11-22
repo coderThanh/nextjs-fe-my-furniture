@@ -21,7 +21,7 @@ export const UseFetchServerArchiveBlog = (searchOption: {
 
   const res = use(fetch(options))
 
-  var data
+  var data = null
 
   if (res?.data?.blogs?.data && res?.data?.blogs?.meta?.pagination) {
     data = parseQueryBlogList(

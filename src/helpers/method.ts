@@ -19,7 +19,7 @@ export const getOptionsQuery = (
 
   const pagination: { [key: string]: any } = {}
 
-  const sort = ['createdAt:desc']
+  const sort = ['createdAt:DESC']
 
   // limit
   pagination.limit = LIMIT_FETCH
@@ -108,4 +108,36 @@ export function serializerQueryOptions(options: { [key: string]: any }) {
   }
 
   return params.toString()
+}
+
+//
+export const formatIntToSumary = (n) => {
+  if (typeof n !== 'number') return n
+  if (n < 1e3) return n
+  if (n >= 1e3 && n < 1e6) return +(n / 1e3).toFixed(1) + 'K'
+  if (n >= 1e6 && n < 1e9) return +(n / 1e6).toFixed(1) + 'M'
+  if (n >= 1e9 && n < 1e12) return +(n / 1e9).toFixed(1) + 'B'
+  if (n >= 1e12) return +(n / 1e12).toFixed(1) + 'T'
+}
+
+//
+export const formatPercent = (price, sellPrice) => {
+  if (typeof price !== 'number' && typeof sellPrice !== 'number') {
+    return
+  }
+  return `- ${Math.round((1 - sellPrice / price) * 100)}%`
+}
+
+//
+export function removeObjectKeyEmpty(object: { [key: string]: any }) {
+  var newObject = {}
+
+  for (const key in object) {
+    if (Object.hasOwnProperty.call(object, key)) {
+      if (object[key]) {
+        newObject[key] = object[key]
+      }
+    }
+  }
+  return newObject
 }
