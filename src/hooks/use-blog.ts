@@ -21,8 +21,6 @@ export const UseFetchServerArchiveBlog = (searchOption: {
 
   const res = use(fetch(options))
 
-  console.log(options)
-
   var data
 
   if (res?.data?.blogs?.data && res?.data?.blogs?.meta?.pagination) {

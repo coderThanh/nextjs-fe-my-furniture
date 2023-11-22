@@ -1,7 +1,9 @@
 import { isConnectAPI } from '@/helpers'
-import { useServerCategoryDetail } from '@/services/hooks/hookCategory'
+import { parseCategoryEnity } from '@/helpers/parseGQL'
+import { useServerCategoryDetail } from '@/services/hooks/hookCategory-sv'
+import { use } from 'react'
 
-export const UseServerFetchCategoryDetail = async (slug) => {
+export const UseServerFetchCategoryDetail = (slug: string) => {
   const { fetch } = useServerCategoryDetail()
 
   const isAccept = isConnectAPI()
@@ -9,11 +11,13 @@ export const UseServerFetchCategoryDetail = async (slug) => {
 
   const options = { slug: slug }
 
-  const res = await fetch(options)
+  const res = use(fetch(options))
 
-  if (res?.categories?.data?.length > 0) {
-    return res?.categories?.data[0]
+  var data = null
+
+  if (res?.data?.categories?.data?.length > 0) {
+    data = parseCategoryEnity(res?.data?.categories?.data[0])
   }
 
-  return null
+  return data
 }

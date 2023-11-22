@@ -1,11 +1,11 @@
+import { ROUTER_URL } from '@/consts/router'
+import { isConnectAPI } from '@/helpers'
+import { parseQueryOptions, serializerQueryOptions } from '@/helpers/method'
 import classNames from 'classnames'
+import { useRouter, useSearchParams } from 'next/navigation'
+import { CSSProperties, useCallback, useEffect, useState } from 'react'
 import { IconSearch } from '../../components-child/icon'
 import styles from './search.module.scss'
-import { CSSProperties, useCallback, useEffect, useState } from 'react'
-import { getQueryStringParameter, isConnectAPI } from '@/helpers'
-import { ROUTER_URL } from '@/consts/router'
-import { usePathname, useRouter, useSearchParams } from 'next/navigation'
-import { parseQueryOptions, serializerQueryOptions } from '@/helpers/method'
 
 type Props = {
   classForm?: string
@@ -15,7 +15,6 @@ type Props = {
 export default function Search({ classForm, styleForm, onSubmit }: Props) {
   const router = useRouter()
   const searchParams = useSearchParams()
-  const pathName = usePathname()
 
   const query = parseQueryOptions(searchParams)
 
@@ -38,16 +37,18 @@ export default function Search({ classForm, styleForm, onSubmit }: Props) {
 
       const paramsString = serializerQueryOptions(query)
 
-      router.push(`${pathName}${paramsString ? '?' + paramsString : ''}`)
+      router.push(
+        `${ROUTER_URL.searchBlog}${paramsString ? '?' + paramsString : ''}`,
+      )
     },
-    [onSubmit, pathName, query, router, stText],
+    [onSubmit, query, router, stText],
   )
 
   useEffect(() => {
     if (query?.keyword) {
       setText(query.keyword)
     }
-  }, [query])
+  }, [query?.keyword])
 
   return (
     <>
