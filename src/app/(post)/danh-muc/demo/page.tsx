@@ -4,8 +4,8 @@ import Footer from '@/app/(components)/footer'
 import Header from '@/app/(components)/header'
 import CardBlog, { CardBlogType } from '@/components-child/card-blog'
 import { ROUTER_URL } from '@/consts/router'
-import UIBreadcrumb from '@/ui/breadcrumb'
-import UIPainationDemo from '@/ui/pagination/pagination-demo'
+import UIBreadcrumb from '@/app/(components)/breadcrumb'
+import UIPainationDemo from '@/app/(components)/pagination/pagination-demo'
 import classNames from 'classnames'
 
 export default function CategoryPage() {

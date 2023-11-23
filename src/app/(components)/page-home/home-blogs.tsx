@@ -26,7 +26,7 @@ export default function HomeBlogsShow({ data }: Props) {
 
   // Set sticky on sctroll
   const ref = useRef(null)
-  const isInview = useInView(ref, { once: stIsFull }) // stop handle if full
+  const isInview = useInView(ref, { once: stIsFull, margin: '500px' }) // stop handle if full
 
   //
   const { data: fetched, isLoading } = useSWRFetch(

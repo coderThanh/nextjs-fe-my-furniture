@@ -4,7 +4,7 @@ import BodyArchiveBlogs from '@/app/(post)/(components)/archive-body-loop'
 import WrapSWRConfig from '@/components-root/swr-wrap'
 import { DESCRIPTION_PAGE, TITLE_PAGE } from '@/consts/const'
 import { getMetaRobots } from '@/helpers/method'
-import UIBreadcrumb from '@/ui/breadcrumb'
+import UIBreadcrumb from '@/app/(components)/breadcrumb'
 import classNames from 'classnames'
 
 import { Metadata } from 'next'

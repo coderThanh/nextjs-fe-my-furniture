@@ -4,7 +4,7 @@ import { Content404 } from '@/components-root/404'
 import MsgDefault from '@/components-root/message'
 import { formatDate } from '@/helpers'
 import { UseFetchServerArchiveBlog } from '@/hooks/use-blog'
-import UIPaination from '@/ui/pagination'
+import UIPaination from '@/app/(components)/pagination'
 
 type Props = {
   searchOptions: { [key: string]: string | undefined }

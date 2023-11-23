@@ -38,15 +38,11 @@ const useUploadFile = () => {
       )
 
       if (statusCode === 200) {
-        notifySuccess({
-          message: title,
-        })
+        notifySuccess(title)
         return data
       }
 
-      notifyError({
-        message: title,
-      })
+      notifyError(title)
 
       return undefined
     } catch (errorAPI) {

@@ -3,7 +3,7 @@ import { parseCategoryEnity } from '@/helpers/parseGQL'
 import { useServerCategoryDetail } from '@/services/hooks/hookCategory-sv'
 import { use } from 'react'
 
-export const UseServerFetchCategoryDetail = (slug: string) => {
+export const UseServerFetchCategoryDetail = async (slug: string) => {
   const { fetch } = useServerCategoryDetail()
 
   const isAccept = isConnectAPI()
@@ -11,7 +11,7 @@ export const UseServerFetchCategoryDetail = (slug: string) => {
 
   const options = { slug: slug }
 
-  const res = use(fetch(options))
+  const res = await fetch(options)
 
   var data = null
 

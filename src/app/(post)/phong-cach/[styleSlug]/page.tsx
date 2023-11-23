@@ -3,20 +3,39 @@ import Header from '@/app/(components)/header'
 import BodyArchiveBlogs from '@/app/(post)/(components)/archive-body-loop'
 import WrapSWRConfig from '@/components-root/swr-wrap'
 import { toTitleCase } from '@/helpers'
-import { UseServerFetchCategoryDetail } from '@/hooks/use-category'
+import { getMetaRobots } from '@/helpers/method'
 import { UseServerFetchStyleDetail } from '@/hooks/use-style'
-import UIBreadcrumb from '@/ui/breadcrumb'
+import UIBreadcrumb from '@/app/(components)/breadcrumb'
 import classNames from 'classnames'
+import { Metadata, ResolvingMetadata } from 'next'
 
 type Props = {
   params: { styleSlug: string }
   searchParams: { [key: string]: string | undefined }
 }
 
-export default function CategoryPage({ searchParams, params }: Props) {
+export async function generateMetadata(
+  { params }: Props,
+  parent: ResolvingMetadata,
+): Promise<Metadata> {
+  var data = await UseServerFetchStyleDetail(params?.styleSlug ?? '')
+
+  const previousImages = (await parent).openGraph?.images || []
+
+  return {
+    title: data?.title,
+    description: data?.description,
+    openGraph: {
+      images: [data?.thumbnail?.url, ...previousImages],
+    },
+    robots: getMetaRobots(),
+  }
+}
+
+export default async function CategoryPage({ searchParams, params }: Props) {
   const queryOptions = { ...params, ...searchParams }
 
-  const style = UseServerFetchStyleDetail(params?.styleSlug ?? '')
+  const style = await UseServerFetchStyleDetail(params?.styleSlug ?? '')
 
   return (
     <>
