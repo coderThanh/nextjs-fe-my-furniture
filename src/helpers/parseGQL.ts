@@ -1,6 +1,7 @@
 import { ROUTER_URL } from '@/consts/router'
 import { MenuLinkType } from '@/consts/type'
 import { isConnectAPI } from '@/helpers'
+import { Route } from 'next'
 
 // ------ parseUrl - middleWare
 export const middleWareUrl = (url) => {
@@ -31,7 +32,7 @@ export const parseLinkEntity = (linkGQL) => {
   return {
     id: linkGQL?.id,
     title: linkGQL?.title,
-    url: linkGQL?.url,
+    url: linkGQL?.url as Route,
     rel: attributes?.rel,
     target: attributes?.target,
     img: parseImgEnity(attributes?.img?.data),
@@ -103,7 +104,7 @@ export function parseMenuItem(args) {
 
   return {
     id: parseInt(args?.id),
-    url: outUrl,
+    url: outUrl as Route,
     parentId: attributes?.parent?.data?.id,
     title: attributes?.title,
     order: attributes?.order,
@@ -167,7 +168,7 @@ export const parseBlogEnity = (blogGQL) => {
     createdAt: attributes?.createdAt,
     updatedAt: attributes?.updatedAt,
     slug: attributes?.slug
-      ? `${ROUTER_URL.blogDetail}/${attributes?.slug}`
+      ? (`${ROUTER_URL.blogDetail}/${attributes?.slug}` as Route)
       : null,
     thumbnail: parseImgEnity(attributes?.thumbnail?.data),
     styles: styles,
@@ -185,7 +186,7 @@ export const parseCategoryEnity = (categoryGQL) => {
   return {
     title: attributes?.title ?? null,
     slug: attributes?.slug
-      ? `${ROUTER_URL.category}/${attributes?.slug}`
+      ? (`${ROUTER_URL.category}/${attributes?.slug}` as Route)
       : null,
     id: parseInt(categoryGQL.id),
     thumbnail: parseImgEnity(attributes?.thumbnail?.data) ?? null,
@@ -200,7 +201,9 @@ export const parseStyleyEnity = (styleGQL) => {
 
   return {
     title: attributes?.title ?? null,
-    slug: attributes?.slug ? `${ROUTER_URL.style}/${attributes?.slug}` : null,
+    slug: attributes?.slug
+      ? (`${ROUTER_URL.style}/${attributes?.slug}` as Route)
+      : null,
     id: parseInt(styleGQL.id),
     expect: attributes?.expect ?? null,
     content: attributes?.content ?? null,
@@ -213,7 +216,7 @@ export const parseTagEnity = (tagGQL) => {
 
   return {
     title: attributes?.title ?? null,
-    slug: attributes?.slug ?? null,
+    slug: (attributes?.slug as Route) ?? null,
     id: parseInt(tagGQL.id),
   }
 }

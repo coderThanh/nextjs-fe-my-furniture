@@ -3,10 +3,11 @@
 import AppLink from '@/components-root/link'
 import { isCurrentUrl } from '@/helpers'
 import classNames from 'classnames'
+import { Route } from 'next'
 import { usePathname } from 'next/navigation'
 
 type Props = {
-  url?: string
+  url?: Route
   target?: string
   rel?: string
   title?: string

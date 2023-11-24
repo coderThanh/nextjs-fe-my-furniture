@@ -4,6 +4,7 @@ import AppImage from '../../components-root/img'
 import AppAssets from '@/consts/assets'
 import AppLink from '../../components-root/link'
 import styles from './card-blog.module.scss'
+import { Route } from 'next'
 
 export const CardBlogType = {
   default: 'default',
@@ -27,12 +28,12 @@ type Props = {
   isShowDesc?: boolean
   cateImg?: string
   cateImgAlt?: string
-  slug?: string
+  slug?: Route
   desc?: string
   date?: string
   view?: string
-  slugCate?: string
-  slugStyle?: string
+  slugCate?: Route
+  slugStyle?: Route
 }
 
 export default function CardBlog({

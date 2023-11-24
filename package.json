@@ -19,7 +19,6 @@
     "dayjs": "^1.11.9",
     "env-cmd": "^10.1.0",
     "eslint": "8.36.0",
-    "eslint-config-next": "13.2.4",
     "framer-motion": "^10.8.5",
     "graphql": "^16.6.0",
     "graphql-request": "^6.1.0",
@@ -35,6 +34,7 @@
   },
   "devDependencies": {
     "@svgr/webpack": "^7.0.0",
+    "eslint-config-next": "^14.0.3",
     "sass": "^1.59.3",
     "typescript": "^5.2.0-dev.20230725"
   }

@@ -17,7 +17,9 @@ export default function BlogTagArea({ data }: Props) {
               return (
                 <AppLink
                   url={
-                    item?.slug ? `${ROUTER_URL.blogs}?tagSlug=${item.slug}` : ''
+                    item?.slug
+                      ? `${ROUTER_URL.blogs}?tagSlug=${item.slug}`
+                      : ('' as any)
                   }
                   key={index}
                   className="tag-item"

@@ -1,8 +1,9 @@
+import { Route } from 'next'
 import Link from 'next/link'
 import { HTMLAttributeAnchorTarget, ReactNode } from 'react'
 
 type Props = {
-  url?: string
+  url?: Route
   className?: string
   target?: HTMLAttributeAnchorTarget
   rel?: string

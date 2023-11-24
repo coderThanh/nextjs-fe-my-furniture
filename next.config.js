@@ -5,7 +5,7 @@ const path = require("path");
 const nextConfig = {
   reactStrictMode: true,
   experimental: {
-    typedRoutes: false,
+    typedRoutes: true,
   },
   sassOptions: {
     includePaths: [path.join(__dirname, "styles")],

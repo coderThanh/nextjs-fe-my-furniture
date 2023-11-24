@@ -6,6 +6,7 @@ import { useRouter, useSearchParams } from 'next/navigation'
 import { CSSProperties, useCallback, useEffect, useState } from 'react'
 import { IconSearch } from '../../components-child/icon'
 import styles from './search.module.scss'
+import { Route } from 'next'
 
 type Props = {
   classForm?: string
@@ -29,7 +30,7 @@ export default function Search({ classForm, styleForm, onSubmit }: Props) {
       onSubmit && onSubmit()
 
       if (!isConnect) {
-        router.push(ROUTER_URL.searchBlogDemo)
+        router.push(ROUTER_URL.searchBlogDemo as Route)
         return
       }
 
@@ -40,7 +41,9 @@ export default function Search({ classForm, styleForm, onSubmit }: Props) {
       const paramsString = serializerQueryOptions(query)
 
       router.push(
-        `${ROUTER_URL.searchBlog}${paramsString ? '?' + paramsString : ''}`,
+        `${ROUTER_URL.searchBlog}${
+          paramsString ? '?' + paramsString : ''
+        }` as Route,
       )
     },
     [onSubmit, query, router, stText],
