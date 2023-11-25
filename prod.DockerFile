@@ -29,6 +29,9 @@ COPY . .
 
 # Environment variables must be present at build time
 # https://github.com/vercel/next.js/discussions/14030
+ARG NEXT_PUBLIC_DOMAIN
+ENV NEXT_PUBLIC_DOMAIN=${NEXT_PUBLIC_DOMAIN}
+
 ARG NEXT_PUBLIC_HOST_API
 ENV NEXT_PUBLIC_HOST_API=${NEXT_PUBLIC_HOST_API}
 ARG NEXT_PUBLIC_HOST_PORT
@@ -83,6 +86,9 @@ COPY --from=builder --chown=nextjs:nodejs /app/.next/standalone ./
 COPY --from=builder --chown=nextjs:nodejs /app/.next/static ./.next/static
 
 # Environment variables must be redefined at run time
+ARG NEXT_PUBLIC_DOMAIN
+ENV NEXT_PUBLIC_DOMAIN=${NEXT_PUBLIC_DOMAIN}
+
 ARG NEXT_PUBLIC_HOST_API
 ENV NEXT_PUBLIC_HOST_API=${NEXT_PUBLIC_HOST_API}
 ARG NEXT_PUBLIC_HOST_PORT
