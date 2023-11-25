@@ -6,7 +6,7 @@ import { useServerMenuList } from '@/services/hooks/hookMenus'
 import { use } from 'react'
 
 export const useSVMenuHeaderMiddle = () => {
-  var menuData = []
+  var menuData: any[] = []
 
   const { fetch } = useServerMenuList()
 
@@ -36,7 +36,7 @@ export const useSVMenuHeaderMiddle = () => {
 
 //
 export const useSVMenuHeaderMobile = () => {
-  var menuData = []
+  var menuData: any[] = []
 
   const { fetch } = useServerMenuList()
 
@@ -57,7 +57,7 @@ export const useSVMenuHeaderMobile = () => {
 
   if (!wasConnectAPI) {
     menuData.push(...data_menu_mobile)
-  } else if (isConnectAPI && menuParsed) {
+  } else if (wasConnectAPI && menuParsed) {
     menuData.push(...menuParsed)
   }
 
@@ -67,7 +67,7 @@ export const useSVMenuHeaderMobile = () => {
 //
 export const useSVMenuHeaderBottom = () => {
   // menu
-  var menuData = []
+  var menuData: any[] = []
 
   const { fetch } = useServerMenuList()
 

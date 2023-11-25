@@ -1,4 +1,4 @@
-/* eslint-disable @next/next/no-img-element */
+import UIBreadcrumb from '@/app/(components)/breadcrumb'
 import Footer from '@/app/(components)/footer'
 import Header from '@/app/(components)/header'
 import BlogHeadArea from '@/app/(post)/(components)/blog-head'
@@ -6,7 +6,6 @@ import BlogTagArea from '@/app/(post)/(components)/blog-tag'
 import CardBlog, { CardBlogType } from '@/components-child/card-blog'
 import Gap from '@/components-root/gap'
 import { formatDate } from '@/helpers'
-import UIBreadcrumb from '@/app/(components)/breadcrumb'
 
 export default function PostDetailPage() {
   const title =

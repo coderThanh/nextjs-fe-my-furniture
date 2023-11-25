@@ -6,12 +6,14 @@ import classNames from 'classnames'
 export default function HomeBlogs({}) {
   const data = UseFetchServerHomeBlogs()
 
+  const { items } = data ?? {}
+
   return (
     <>
       <section className="home-posts">
         <Gap large={50} small={30} />
         <div className="container">
-          {data?.items?.length > 0 ? (
+          {items && items?.length > 0 ? (
             <div className="row ">
               <div className="col">
                 <div className="col-inner">
@@ -25,7 +27,7 @@ export default function HomeBlogs({}) {
             <></>
           )}
 
-          <HomeBlogsShow data={data?.items ?? []} />
+          <HomeBlogsShow data={items ?? []} />
         </div>
       </section>
     </>

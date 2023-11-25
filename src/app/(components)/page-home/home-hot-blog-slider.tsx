@@ -33,7 +33,7 @@ export default function HomeHotBlogSlider({ data }: Props) {
               slug={item.slug}
             />
           </swiper-slide>
-        ))}
+        )) as any[]}
       </swiper-container>
     </>
   )

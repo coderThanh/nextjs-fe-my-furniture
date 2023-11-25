@@ -5,10 +5,10 @@ export const useServerGetList = (action: Function) => {
     // const startTime = new Date().getTime();
 
     try {
-      let res = null
+      let res: any = null
       res = await action({ ...searchOption, ...pagination })
 
-      const json = await res.json()
+      const json = await res?.json()
 
       if (json) return json
 
@@ -31,7 +31,7 @@ export const useServerGetDetailById = (action: Function) => {
         ...options,
       })
 
-      const json = await res.json()
+      const json = await res?.json()
 
       if (json) return json
 
@@ -52,7 +52,7 @@ export const useServerPostAPI = (action: Function) => {
         ...body,
       })
 
-      const json = await res.json()
+      const json = await res?.json()
 
       if (json) return json
 

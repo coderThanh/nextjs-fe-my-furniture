@@ -1,7 +1,7 @@
 import { ROUTER_URL } from '@/consts/router'
 import { MenuSubLayoutType } from '@/consts/type'
 
-export const data_menu_mid = [
+export const data_menu_mid: any[] = [
   {
     children: [
       {
@@ -95,7 +95,7 @@ export const data_menu_mid = [
   { title: 'Tìm kiếm', url: ROUTER_URL.searchBlogDemo, target: '' },
 ]
 
-export const data_menu_mobile = [
+export const data_menu_mobile: any[] = [
   {
     children: [
       {
@@ -260,7 +260,7 @@ export const data_menu_mobile = [
   { title: 'Liên hệ', url: ROUTER_URL.categoryDemo, target: '' },
 ]
 
-export const data_menu_bottom = [
+export const data_menu_bottom: any[] = [
   { title: 'Trang chủ', url: '/', target: '' },
   {
     title: 'Chuyện nhà link',

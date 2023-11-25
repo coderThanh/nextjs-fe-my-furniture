@@ -1,8 +1,12 @@
 import { LIMIT_RELATED_FETCH } from '@/consts/const'
 import { BLOG_SEARCH_FIELD_NAME } from '@/consts/type'
-import { isConnectAPI } from '@/helpers'
 import { getOptionsQuery } from '@/helpers/method'
-import { parseBlogEnity, parseQueryBlogList } from '@/helpers/parseGQL'
+import {
+  BlogEntity,
+  QueryList,
+  parseBlogEnity,
+  parseQueryBlogList,
+} from '@/helpers/parseGQL'
 import {
   useServerBlogDetail,
   useServerBlogList,
@@ -18,7 +22,7 @@ export const UseFetchServerArchiveBlog = (searchOption: {
 
   const res = use(fetch(options))
 
-  var data = null
+  var data: QueryList<BlogEntity> | null = null
 
   if (res?.data?.blogs?.data && res?.data?.blogs?.meta?.pagination) {
     data = parseQueryBlogList(
@@ -36,7 +40,7 @@ export const UseFetchServerBlogDetail = async (slug: string) => {
 
   const res = await fetch({ slug: slug })
 
-  var data = null
+  var data: BlogEntity | null = null
 
   if (res?.data?.blogs?.data?.length > 0) {
     data = parseBlogEnity(res?.data?.blogs?.data[0])
@@ -46,8 +50,6 @@ export const UseFetchServerBlogDetail = async (slug: string) => {
 }
 
 export const UseFetchServerBlogsRelated = async (blog) => {
-  // const { fetch } = useBlogList()
-
   const { fetch } = useServerBlogList()
 
   const catIDs = blog?.categories?.map((item) => item.id) ?? []
@@ -85,7 +87,7 @@ export const UseFetchServerBlogsRelated = async (blog) => {
 
   var res = await fetch(options)
 
-  var blogs = null
+  var blogs: BlogEntity[] | null = null
 
   if (res?.data?.blogs?.data?.length > 0) {
     blogs = res?.data?.blogs?.data?.map((item) => parseBlogEnity(item))

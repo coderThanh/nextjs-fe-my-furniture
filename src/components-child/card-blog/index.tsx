@@ -28,12 +28,12 @@ type Props = {
   isShowDesc?: boolean
   cateImg?: string
   cateImgAlt?: string
-  slug?: Route
+  slug?: Route | null
   desc?: string
   date?: string
   view?: string
-  slugCate?: Route
-  slugStyle?: Route
+  slugCate?: Route | null
+  slugStyle?: Route | null
 }
 
 export default function CardBlog({

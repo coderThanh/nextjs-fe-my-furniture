@@ -1,10 +1,10 @@
+import UIPaination from '@/app/(components)/pagination'
 import SearchTitle from '@/app/(post)/(components)/search-title'
 import CardBlog, { CardBlogType } from '@/components-child/card-blog'
 import { Content404 } from '@/components-root/404'
 import MsgDefault from '@/components-root/message'
 import { formatDate } from '@/helpers'
 import { UseFetchServerArchiveBlog } from '@/hooks/use-blog'
-import UIPaination from '@/app/(components)/pagination'
 
 type Props = {
   searchOptions: { [key: string]: string | undefined }
@@ -13,7 +13,7 @@ type Props = {
 export default function BodySearchBlogs({ searchOptions }: Props) {
   const data = UseFetchServerArchiveBlog(searchOptions)
 
-  const { items, limit, total } = data ?? {}
+  const { items, limit, total } = data ?? ({} as any)
 
   return (
     <>
@@ -36,7 +36,7 @@ export default function BodySearchBlogs({ searchOptions }: Props) {
           <section className="search-loop">
             <div className="container">
               <div className="post-wrap row row-gap-y justify-content-center">
-                {data?.items?.map((blog, index) => {
+                {items?.map((blog, index) => {
                   return (
                     <div className="col col-12 col-sm-12  col-lg-9" key={index}>
                       <div className="col-inner">

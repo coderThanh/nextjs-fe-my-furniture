@@ -108,11 +108,11 @@ const useGetList = (action) => {
       try {
         setLoading(true)
         setError(null)
-        let res = null
+        let res: any = null
 
         res = await action({ ...searchOption, ...pagination })
 
-        const { data, errors, message, statusCode } = await res.json()
+        const { data, errors, message, statusCode } = await res?.json()
 
         if (data) {
           return data

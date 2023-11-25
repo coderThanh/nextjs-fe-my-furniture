@@ -3,7 +3,7 @@ import Link from 'next/link'
 import { HTMLAttributeAnchorTarget, ReactNode } from 'react'
 
 type Props = {
-  url?: Route
+  url?: Route | null
   className?: string
   target?: HTMLAttributeAnchorTarget
   rel?: string

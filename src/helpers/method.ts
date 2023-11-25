@@ -12,7 +12,7 @@ export const getMetaRobots: any = (isNofollow?: boolean) => {
 
 export const getOptionsQuery = (
   query: { [key: string]: any },
-  searchField = [],
+  searchField: any[] = [],
   isMerge = false,
 ) => {
   const searchOption: { [key: string]: any } = {}
@@ -82,11 +82,11 @@ export const getOptionsQuery = (
 
 //
 export const parseQueryOptions = (
-  searchParams: ReadonlyURLSearchParams,
+  searchParams?: ReadonlyURLSearchParams | null,
 ): { [key: string]: any } => {
   const query: { [key: string]: any } = {}
 
-  searchParams.forEach((value, key) => {
+  searchParams?.forEach((value, key) => {
     query[key] = value
   })
 

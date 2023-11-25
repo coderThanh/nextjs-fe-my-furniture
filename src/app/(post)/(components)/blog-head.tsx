@@ -30,7 +30,7 @@ export default function BlogHeadArea({
             </AppMaterialIcon>
             {createdAt}
           </span>
-          {categories?.length > 0 ? (
+          {categories && categories?.length > 0 ? (
             <>
               <span className="article-cate article-meta-item">
                 <AppMaterialIcon type={AppMaterialIconType.outlined}>
@@ -54,7 +54,7 @@ export default function BlogHeadArea({
           ) : (
             <></>
           )}
-          {styles?.length > 0 ? (
+          {styles && styles?.length > 0 ? (
             <>
               <span className="article-cate article-meta-item">
                 <AppMaterialIcon type={AppMaterialIconType.outlined}>
@@ -79,7 +79,7 @@ export default function BlogHeadArea({
             <></>
           )}
         </div>
-        {expect?.length > 0 ? (
+        {expect && expect?.length > 0 ? (
           <p className="article-except">{expect}</p>
         ) : (
           <></>

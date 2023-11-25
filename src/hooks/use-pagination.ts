@@ -46,12 +46,12 @@ export const usePaginationFething = (pageCountInit: number) => {
   const pathName = usePathname()
   var searchParams = useSearchParams()
 
-  const options = parseQueryOptions(searchParams)
+  const options = parseQueryOptions(searchParams ?? null)
   const optionsString = serializerQueryOptions(options)
 
   var pageStartInit = 1
 
-  var skip = searchParams.get('skip') ?? '0'
+  var skip = searchParams?.get('skip') ?? '0'
 
   pageStartInit = Math.ceil(parseInt(skip) / pageCountInit) + 1
 
@@ -92,7 +92,7 @@ export const usePaginationFethingSSR = (pageCountInit = LIMIT_FETCH) => {
 
   var pageStartInit = 1
 
-  if (searchParams.get('skip')) {
+  if (searchParams?.get('skip')) {
     pageStartInit =
       Math.ceil(parseInt(searchParams.get('skip')!) / pageCountInit) + 1
   }
@@ -101,7 +101,7 @@ export const usePaginationFethingSSR = (pageCountInit = LIMIT_FETCH) => {
   const [countOfPage, setCountOfPage] = useState(pageCountInit)
 
   useEffect(() => {
-    if (searchParams.get('skip')) {
+    if (searchParams?.get('skip')) {
       var pageStartInit =
         Math.ceil(parseInt(searchParams.get('skip')!) / pageCountInit) + 1
 

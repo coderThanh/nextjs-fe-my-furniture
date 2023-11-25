@@ -24,7 +24,7 @@ import { TITLE_PAGE } from '@/consts/const'
 import { isConnectAPI } from '@/helpers'
 
 import classNames from 'classnames'
-import { useState } from 'react'
+import { ReactNode, useState } from 'react'
 
 type Props = {
   data: any[]
@@ -123,7 +123,7 @@ export default function HeaderMobileMid({ data }: Props) {
 
                       {/* Nav item */}
                       {data?.map((item, index) => {
-                        var content = null
+                        var content: ReactNode = null
 
                         if (item?.children?.length > 0) {
                           content = (

@@ -18,7 +18,7 @@ export async function generateMetadata(
   { params, searchParams }: Props,
   parent: ResolvingMetadata,
 ): Promise<Metadata> {
-  var data = await UseServerFetchCategoryDetail(params.categorySlug)
+  var data: any = await UseServerFetchCategoryDetail(params.categorySlug)
 
   const previousImages = (await parent).openGraph?.images || []
 

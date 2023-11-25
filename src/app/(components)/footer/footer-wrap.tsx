@@ -11,8 +11,8 @@ type Props = {
 }
 
 export default function FooterWrap({ children }: Props) {
-  const [stHeight, setHeight] = useState(null)
-  const refInner = useRef(null)
+  const [stHeight, setHeight] = useState<any>(null)
+  const refInner = useRef<any>(null)
 
   // Check resize chagne height
   const setHeightHeader = useCallback(() => {

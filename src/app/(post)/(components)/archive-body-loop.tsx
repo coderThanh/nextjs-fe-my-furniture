@@ -11,7 +11,7 @@ type Props = {
 export default function BodyArchiveBlogs({ searchOptions }: Props) {
   const data = UseFetchServerArchiveBlog(searchOptions)
 
-  const { items, limit, total } = data ?? {}
+  const { items, limit, total } = data ?? ({} as any)
 
   return (
     <>

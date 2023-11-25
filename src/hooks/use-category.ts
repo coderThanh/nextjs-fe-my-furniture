@@ -1,5 +1,5 @@
 import { isConnectAPI } from '@/helpers'
-import { parseCategoryEnity } from '@/helpers/parseGQL'
+import { CategoryEntity, parseCategoryEnity } from '@/helpers/parseGQL'
 import { useServerCategoryDetail } from '@/services/hooks/hookCategory-sv'
 import { use } from 'react'
 
@@ -13,7 +13,7 @@ export const UseServerFetchCategoryDetail = async (slug: string) => {
 
   const res = await fetch(options)
 
-  var data = null
+  var data: CategoryEntity | null = null
 
   if (res?.data?.categories?.data?.length > 0) {
     data = parseCategoryEnity(res?.data?.categories?.data[0])

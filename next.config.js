@@ -3,6 +3,7 @@
 const path = require("path");
 
 const nextConfig = {
+  output: "standalone", // use in docker / product ev
   reactStrictMode: true,
   experimental: {
     typedRoutes: true,
@@ -50,7 +51,6 @@ const nextConfig = {
     formats: ["image/avif", "image/webp"],
    
   },
-  output: "standalone", // use in docker / product ev
   webpack(config) {
     // Grab the existing rule that handles SVG imports
     const fileLoaderRule = config.module.rules.find((rule) =>

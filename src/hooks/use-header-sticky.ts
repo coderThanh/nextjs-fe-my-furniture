@@ -3,7 +3,7 @@ import { useCallback, useEffect, useRef, useState } from 'react'
 
 export const useHeaderSticky = () => {
   // Windown scroll to sticky
-  const headerRef = useRef(null)
+  const headerRef = useRef<any>(null)
 
   const [headerHeight, setHeaderHeight] = useState(0)
   const [stIsSticky, setIsSticky] = useState(false)

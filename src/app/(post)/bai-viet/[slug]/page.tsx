@@ -24,7 +24,7 @@ export async function generateMetadata(
   parent: ResolvingMetadata,
 ): Promise<Metadata> {
   // hook
-  var data = await UseFetchServerBlogDetail(params.slug)
+  var data: any | null = await UseFetchServerBlogDetail(params.slug)
 
   const previousImages = (await parent).openGraph?.images || []
 
@@ -43,7 +43,7 @@ export default async function BlogDetailPage({ params }: Props) {
   const blog = await UseFetchServerBlogDetail(params.slug)
 
   const { title, createdAt, styles, categories, tags, expect, content } =
-    blog ?? {}
+    blog ?? ({} as any)
 
   const blogsRelated = await UseFetchServerBlogsRelated(blog)
 
@@ -86,7 +86,7 @@ export default async function BlogDetailPage({ params }: Props) {
                     )}
 
                     {/* Related */}
-                    <SingleBlogRelated data={blogsRelated} />
+                    <SingleBlogRelated data={blogsRelated ?? []} />
                   </div>
                 </div>
               </div>

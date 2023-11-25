@@ -18,7 +18,8 @@ export async function generateMetadata(
   { params }: Props,
   parent: ResolvingMetadata,
 ): Promise<Metadata> {
-  var data = await UseServerFetchStyleDetail(params?.styleSlug ?? '')
+  var data =
+    (await UseServerFetchStyleDetail(params?.styleSlug ?? '')) ?? ({} as any)
 
   const previousImages = (await parent).openGraph?.images || []
 

@@ -12,6 +12,7 @@ import {
   classMenuSubFull,
 } from '.'
 import CardBlog from '../../../components-child/card-blog'
+import { Route } from 'next'
 
 export function HeaderMidMenuDropdownFull(props) {
   const [stateIndexDocsShow, setIndexDocShow] = useState()
@@ -102,12 +103,12 @@ export function HeaderMidMenuDropdownFull(props) {
                             itemBlog?.categories &&
                             itemBlog?.categories?.length > 0
                               ? itemBlog?.categories[0]?.slug
-                              : ''
+                              : ('' as Route)
                           }
                           slugStyle={
                             itemBlog?.styles && itemBlog?.styles?.length > 0
                               ? itemBlog?.styles[0]?.slug
-                              : ''
+                              : ('' as Route)
                           }
                           key={indexChild}
                           isShowCate={true}

@@ -1,6 +1,9 @@
 import { LIMIT_FETCH } from '@/consts/const'
 import { isConnectAPI } from '@/helpers'
 import {
+  BlogEntity,
+  QueryList,
+  SeoEntity,
   parseBlogByEntity,
   parseBlogEnity,
   parseLinkEntity,
@@ -26,7 +29,7 @@ export const UseHomeSEO = async () => {
 
   if (!isAccept) return {}
 
-  var res = await fetch()
+  var res: any = await fetch()
 
   if (res?.data?.pageHome?.data?.attributes?.seo) {
     res = parseSEO(res?.data?.pageHome?.data?.attributes?.seo)
@@ -100,7 +103,7 @@ export const UseFetchServerHomeBlogs = () => {
 
   const res = use(fetch(options))
 
-  var data: any = {}
+  var data: QueryList<BlogEntity> | null = null
 
   if (res?.data?.blogs?.data?.length > 0) {
     data = parseQueryBlogList(

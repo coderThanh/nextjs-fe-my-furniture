@@ -22,9 +22,9 @@ export const setItemLocalStorage = (key, value) =>
     ? localStorage.setItem(key, JSON.stringify(value))
     : null
 
-export const getItemLocalStorage = (key = null) =>
+export const getItemLocalStorage = (key: string | null = null) =>
   typeof localStorage !== 'undefined' && key
-    ? JSON.parse(localStorage.getItem(key))
+    ? JSON.parse(localStorage.getItem(key) ?? '""')
     : null
 
 export const removeItemLocalStorage = (key = null, options) => {
@@ -106,7 +106,7 @@ export const getSentenceFromCamelCase = (message) => {
  * @returns
  */
 export const getRegExp = (type) => {
-  let regex = null
+  let regex: any = null
   switch (type) {
     case 'email':
       regex = /[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,15}/g
@@ -267,7 +267,7 @@ export function parseVietnameseRemoveSign(string) {
     .replace(p, (c) => b.charAt(a.indexOf(c)))
 }
 
-export const isCurrentUrl = (url: String, routerUrl: string) => {
+export const isCurrentUrl = (url: string, routerUrl: string) => {
   var isCurrent = false
   const indexQuery = routerUrl.toString().indexOf('?')
 

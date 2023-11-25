@@ -19,7 +19,7 @@ export default function SearchTitle({ total }: Props) {
                 <h1 className={'search-title'}>
                   Tìm thấy {total ? total.toLocaleString() : ''} kết quả với từ
                   khóa &quot;
-                  {searchParams.get('keyword')}&quot;
+                  {searchParams?.get('keyword')}&quot;
                 </h1>
               </div>
             </div>

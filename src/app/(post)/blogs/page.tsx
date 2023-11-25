@@ -9,6 +9,8 @@ import classNames from 'classnames'
 
 import { Metadata } from 'next'
 
+// Config route segment
+
 export const metadata: Metadata = {
   title: TITLE_PAGE,
   description: DESCRIPTION_PAGE,

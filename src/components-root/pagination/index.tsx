@@ -31,15 +31,14 @@ export default function Pagination({
 
   const totalPage = Math.ceil(totalItems / countOfPage)
 
-  var listNumberShow = Array.from({ length: totalPage }, (_, i) => i + 1)
-
-  const numberAround = Math.ceil(showLength / 2)
-  const lastIndex = listNumberShow.length
-
+  // var listNumberShow = Array.from({ length: totalPage }, (_, i) => i + 1)
   var listNumberShow: (number | null)[] = Array.from(
     { length: totalPage },
     (_, i) => i + 1,
   )
+
+  const numberAround = Math.ceil(showLength / 2)
+  const lastIndex = listNumberShow.length
 
   if (totalPage > showLength) {
     // case start list

@@ -14,7 +14,14 @@ export const middleWareUrl = (url) => {
   return url
 }
 
-export const parseImgEnity = (imgGQL) => {
+//
+export type ImgEntity = {
+  id: number
+  alt?: string
+  url?: string
+}
+
+export const parseImgEnity = (imgGQL): ImgEntity | null => {
   if (!imgGQL) return null
 
   return {
@@ -24,7 +31,20 @@ export const parseImgEnity = (imgGQL) => {
   }
 }
 
-export const parseLinkEntity = (linkGQL) => {
+//
+export type LinkEntity = {
+  id: number
+  title?: string
+  url?: Route
+  rel?: string
+  target?: string
+}
+
+interface LinkMenuEntity extends LinkEntity {
+  img?: ImgEntity | null
+}
+
+export const parseLinkEntity = (linkGQL): LinkMenuEntity | null => {
   if (!linkGQL) return null
 
   const { attributes } = linkGQL ?? {}
@@ -40,7 +60,7 @@ export const parseLinkEntity = (linkGQL) => {
 }
 
 export const parseMenu = (list = []) => {
-  let loopMenu = list.map((item) => {
+  let loopMenu: any[] = list.map((item) => {
     return parseMenuItem(item)
   })
 
@@ -118,7 +138,7 @@ export function parseMenuItem(args) {
 }
 
 // parse content
-export const parseContentEditor = (content) => {
+export const parseContentEditor = (content: string) => {
   return content
 
   // ---
@@ -135,12 +155,27 @@ export const parseContentEditor = (content) => {
 }
 
 // parse data
-export const parseBlogEnity = (blogGQL) => {
+
+export type BlogEntity = {
+  id: number
+  title?: string
+  createdAt?: string
+  updatedAt?: string
+  slug?: Route
+  thumbnail?: ImgEntity | null
+  styles?: StyleEntity[]
+  categories?: CategoryEntity[]
+  tags?: TagEntity[]
+  expect?: string
+  content?: string
+}
+
+export const parseBlogEnity = (blogGQL): BlogEntity => {
   const { attributes } = blogGQL || {}
 
-  var styles = []
-  var categories = []
-  var tags = []
+  var styles: any[] = []
+  var categories: any[] = []
+  var tags: any[] = []
   var content = ''
 
   // Replace NEXT_PUBLIC_HOST_IMG_API
@@ -169,7 +204,7 @@ export const parseBlogEnity = (blogGQL) => {
     updatedAt: attributes?.updatedAt,
     slug: attributes?.slug
       ? (`${ROUTER_URL.blogDetail}/${attributes?.slug}` as Route)
-      : null,
+      : undefined,
     thumbnail: parseImgEnity(attributes?.thumbnail?.data),
     styles: styles,
     categories: categories,
@@ -180,15 +215,25 @@ export const parseBlogEnity = (blogGQL) => {
 }
 
 // parse data
-export const parseCategoryEnity = (categoryGQL) => {
+
+export type CategoryEntity = {
+  id: number
+  title?: string
+  slug?: Route
+  thumbnail?: ImgEntity | null
+  expect?: string
+  content?: string
+}
+
+export const parseCategoryEnity = (categoryGQL): CategoryEntity | null => {
   const { attributes } = categoryGQL || {}
 
   return {
+    id: parseInt(categoryGQL.id),
     title: attributes?.title ?? null,
     slug: attributes?.slug
       ? (`${ROUTER_URL.category}/${attributes?.slug}` as Route)
-      : null,
-    id: parseInt(categoryGQL.id),
+      : undefined,
     thumbnail: parseImgEnity(attributes?.thumbnail?.data) ?? null,
     expect: attributes?.expect ?? null,
     content: attributes?.content ?? null,
@@ -196,7 +241,17 @@ export const parseCategoryEnity = (categoryGQL) => {
 }
 
 // parse data
-export const parseStyleyEnity = (styleGQL) => {
+
+export type StyleEntity = {
+  id: number
+  title?: string
+  slug?: Route | null
+  thumbnail?: ImgEntity | null
+  expect?: string
+  content?: string
+}
+
+export const parseStyleyEnity = (styleGQL): StyleEntity | null => {
   const { attributes } = styleGQL || {}
 
   return {
@@ -211,29 +266,35 @@ export const parseStyleyEnity = (styleGQL) => {
 }
 
 // parse data
-export const parseTagEnity = (tagGQL) => {
+export type TagEntity = {
+  id: number
+  title?: string
+  slug?: Route
+}
+
+export const parseTagEnity = (tagGQL): TagEntity | null => {
   const { attributes } = tagGQL || {}
 
   return {
+    id: parseInt(tagGQL.id),
     title: attributes?.title ?? null,
     slug: (attributes?.slug as Route) ?? null,
-    id: parseInt(tagGQL.id),
   }
 }
 
 // parse data
 export const parseBlogByEntity = (blogByItemGQL) => {
-  var blogs = []
-  var title = ''
-  var slug = ''
-  var id: string | number = ''
+  var blogs: BlogEntity[] = []
+  var title: string | undefined | null = ''
+  var slug: string | Route | null | undefined = ''
+  var id: string | number | undefined = ''
 
   if (blogByItemGQL?.category?.data) {
     const category = parseCategoryEnity(blogByItemGQL?.category?.data)
 
-    id = category.id
-    title = category.title
-    slug = category.slug
+    id = category?.id
+    title = category?.title
+    slug = category?.slug
 
     if (blogByItemGQL?.category?.data?.attributes?.blogs?.data) {
       blogs = blogByItemGQL?.category?.data?.attributes?.blogs?.data?.map(
@@ -244,9 +305,9 @@ export const parseBlogByEntity = (blogByItemGQL) => {
   } else if (blogByItemGQL?.style?.data) {
     const style = parseStyleyEnity(blogByItemGQL?.style?.data)
 
-    id = style.id
-    title = style.title
-    slug = style.slug
+    id = style?.id
+    title = style?.title
+    slug = style?.slug
 
     if (blogByItemGQL?.style?.data?.attributes?.blogs?.data) {
       blogs = blogByItemGQL?.style?.data?.attributes?.blogs?.data?.map((item) =>
@@ -256,16 +317,17 @@ export const parseBlogByEntity = (blogByItemGQL) => {
   }
 
   return {
+    id: id,
     title: title,
     slug: slug,
     blogs: blogs,
-    id: id,
   }
 }
 
 // ---------
+
 export const parsePagination = (pagiGQL) => {
-  if (!pagiGQL) return
+  if (!pagiGQL) return null
 
   return {
     limit: pagiGQL?.pageSize,
@@ -274,7 +336,16 @@ export const parsePagination = (pagiGQL) => {
 }
 
 // ---------
-export const parseQueryBlogList = (blogsGQL, pagiGQL) => {
+export type QueryList<T> = {
+  items?: T[]
+  limit?: number
+  total?: number
+}
+
+export const parseQueryBlogList = (
+  blogsGQL,
+  pagiGQL,
+): QueryList<BlogEntity> => {
   var items = []
 
   if (blogsGQL) {
@@ -288,6 +359,12 @@ export const parseQueryBlogList = (blogsGQL, pagiGQL) => {
 }
 
 // -----
+export type SeoEntity = {
+  title?: string
+  description?: string
+  thumbnail?: ImgEntity | null
+}
+
 export const parseSEO = (seoGQL) => {
   if (!seoGQL) return
 

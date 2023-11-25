@@ -7,7 +7,7 @@ import { Route } from 'next'
 import { usePathname } from 'next/navigation'
 
 type Props = {
-  url?: Route
+  url?: Route | string | any
   target?: string
   rel?: string
   title?: string
@@ -20,7 +20,7 @@ export default function MenuItem({ url, target, rel, title }: Props) {
     <>
       <div
         className={classNames('menu-item', {
-          current: isCurrentUrl(url, pathName),
+          current: isCurrentUrl(url, pathName ?? ''),
         })}
       >
         <AppLink

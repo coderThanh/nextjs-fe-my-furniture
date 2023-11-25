@@ -3,5 +3,5 @@ type Props = {
   isError?: boolean
 }
 export default function MsgDefault({ text, isError }: Props) {
-  return <p style={{ color: isError ? 'red' : null }}>{text}</p>
+  return <p style={{ color: isError ? 'red' : undefined }}>{text}</p>
 }
