@@ -6,6 +6,7 @@ import WrapProvider from '@/redux/provider'
 
 import { barlowCondensed } from '@/app/fonts'
 import { Metadata } from 'next'
+import { ReactNode } from 'react'
 
 //
 export const dynamic = 'force-dynamic'
@@ -18,7 +19,7 @@ export const metadata: Metadata = {
 }
 
 //
-export default function RootLayout({ children }) {
+export default function RootLayout({ children }: { children: ReactNode }) {
   return (
     <html lang="vi" dir="" className={barlowCondensed.className}>
       <body>

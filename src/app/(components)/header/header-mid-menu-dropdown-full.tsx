@@ -14,10 +14,10 @@ import {
 import CardBlog from '../../../components-child/card-blog'
 import { Route } from 'next'
 
-export function HeaderMidMenuDropdownFull(props) {
-  const [stateIndexDocsShow, setIndexDocShow] = useState()
+export function HeaderMidMenuDropdownFull(props: any) {
+  const [stateIndexDocsShow, setIndexDocShow] = useState<null | number>()
 
-  function onHoverSubItem(docIndex) {
+  function onHoverSubItem(docIndex: number) {
     if (docIndex != undefined) {
       setIndexDocShow(docIndex)
     }
@@ -47,7 +47,7 @@ export function HeaderMidMenuDropdownFull(props) {
                   <div className={classNames('sub-title')}>
                     {props.item.title}
                   </div>
-                  {props.item.children?.map((item, index) => (
+                  {props.item.children?.map((item: any, index: number) => (
                     <div
                       key={index}
                       className="sub-menu-item"
@@ -72,76 +72,78 @@ export function HeaderMidMenuDropdownFull(props) {
               </div>
               <div className="col col-md-10">
                 <div className={classNames('sub-showcase')}>
-                  {props.item.children?.map((item, index) => {
-                    const docsShow = item.docs?.map((itemDoc, indexChild) => {
-                      // Demo if product not connect API
-                      if (!isConnectAPI()) {
+                  {props.item.children?.map((item: any, index: number) => {
+                    const docsShow = item.docs?.map(
+                      (itemDoc: any, indexChild: number) => {
+                        // Demo if product not connect API
+                        if (!isConnectAPI()) {
+                          return (
+                            <CardBlog
+                              key={indexChild}
+                              isShowCate={true}
+                              imgRadius={7}
+                              thumbnail={`/images/products/prd_${Math.min(
+                                indexChild + 1,
+                                7,
+                              )}.jpg`}
+                              title={
+                                'Nhà ống hẹp 3.35m sửa một chút và thêm tầng, không gian đã thay đổi hoàn toàn'
+                              }
+                              cateTitle={'Category name'}
+                              styleTitle={'Style name'}
+                            />
+                          )
+                        }
+
+                        const itemBlog = parseBlogEnity(itemDoc)
+
                         return (
                           <CardBlog
+                            slug={itemBlog?.slug}
+                            slugCate={
+                              itemBlog?.categories &&
+                              itemBlog?.categories?.length > 0
+                                ? itemBlog?.categories[0]?.slug
+                                : ('' as Route)
+                            }
+                            slugStyle={
+                              itemBlog?.styles && itemBlog?.styles?.length > 0
+                                ? itemBlog?.styles[0]?.slug
+                                : ('' as Route)
+                            }
                             key={indexChild}
                             isShowCate={true}
                             imgRadius={7}
-                            thumbnail={`/images/products/prd_${Math.min(
-                              indexChild + 1,
-                              7,
-                            )}.jpg`}
-                            title={
-                              'Nhà ống hẹp 3.35m sửa một chút và thêm tầng, không gian đã thay đổi hoàn toàn'
+                            imgRatio={60}
+                            thumbnail={itemBlog?.thumbnail?.url}
+                            title={itemBlog?.title}
+                            cateTitle={
+                              itemBlog?.categories &&
+                              itemBlog?.categories?.length > 0
+                                ? itemBlog?.categories[0]?.title
+                                : ''
                             }
-                            cateTitle={'Category name'}
-                            styleTitle={'Style name'}
+                            cateImgAlt={
+                              itemBlog?.categories &&
+                              itemBlog?.categories?.length > 0
+                                ? itemBlog?.categories[0]?.title
+                                : ''
+                            }
+                            cateImg={
+                              itemBlog?.categories &&
+                              itemBlog?.categories?.length > 0
+                                ? itemBlog?.categories[0]?.thumbnail?.url
+                                : ''
+                            }
+                            styleTitle={
+                              itemBlog?.styles && itemBlog?.styles?.length > 0
+                                ? itemBlog?.styles[0]?.title
+                                : ''
+                            }
                           />
                         )
-                      }
-
-                      const itemBlog = parseBlogEnity(itemDoc)
-
-                      return (
-                        <CardBlog
-                          slug={itemBlog?.slug}
-                          slugCate={
-                            itemBlog?.categories &&
-                            itemBlog?.categories?.length > 0
-                              ? itemBlog?.categories[0]?.slug
-                              : ('' as Route)
-                          }
-                          slugStyle={
-                            itemBlog?.styles && itemBlog?.styles?.length > 0
-                              ? itemBlog?.styles[0]?.slug
-                              : ('' as Route)
-                          }
-                          key={indexChild}
-                          isShowCate={true}
-                          imgRadius={7}
-                          imgRatio={60}
-                          thumbnail={itemBlog?.thumbnail?.url}
-                          title={itemBlog?.title}
-                          cateTitle={
-                            itemBlog?.categories &&
-                            itemBlog?.categories?.length > 0
-                              ? itemBlog?.categories[0]?.title
-                              : ''
-                          }
-                          cateImgAlt={
-                            itemBlog?.categories &&
-                            itemBlog?.categories?.length > 0
-                              ? itemBlog?.categories[0]?.title
-                              : ''
-                          }
-                          cateImg={
-                            itemBlog?.categories &&
-                            itemBlog?.categories?.length > 0
-                              ? itemBlog?.categories[0]?.thumbnail?.url
-                              : ''
-                          }
-                          styleTitle={
-                            itemBlog?.styles && itemBlog?.styles?.length > 0
-                              ? itemBlog?.styles[0]?.title
-                              : ''
-                          }
-                        />
-                      )
-                    })
+                      },
+                    )
 
                     if (
                       (item.docs && item?.docs.length <= 0) ||

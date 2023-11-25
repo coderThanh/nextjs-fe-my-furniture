@@ -3,7 +3,7 @@ import AppLink from '@/components-root/link'
 import classNames from 'classnames'
 import { classChildrenLink, classMenuLink, classMenuSub } from '.'
 
-export function HeaderMidMenuDropdown(props) {
+export function HeaderMidMenuDropdown(props: any) {
   return (
     <>
       <HeaderMenuDropDown
@@ -22,7 +22,7 @@ export function HeaderMidMenuDropdown(props) {
         isOpen={false}
       >
         <>
-          {props.item.children?.map((child, index) => (
+          {props.item.children?.map((child: any, index: number) => (
             <AppLink
               key={index}
               url={child.url}
