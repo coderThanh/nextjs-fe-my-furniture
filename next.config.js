@@ -39,6 +39,17 @@ const nextConfig = {
      {
         protocol: 'https',
         hostname: 'furmi.net',
+        port: '444'
+      },
+     {
+        protocol: 'https',
+        hostname: 'www.furmi.net',
+        port: '444'
+      },
+     {
+        protocol: 'http',
+        hostname: 'www.furmi.net',
+        port: '444'
       },
       // '127.0.0.1',
       // 'localhost',
