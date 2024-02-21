@@ -26,7 +26,7 @@ export const getOptionsQuery = (
 
   searchField.map((field) => {
     if (field == 'keyword' && query[field]) {
-      searchOption['title'] = { contains: query[field] }
+      searchOption['title'] = { containsi: query[field] }
       return
     }
 
