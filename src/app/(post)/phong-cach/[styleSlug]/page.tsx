@@ -8,6 +8,7 @@ import { UseServerFetchStyleDetail } from '@/hooks/use-style'
 import UIBreadcrumb from '@/app/(components)/breadcrumb'
 import classNames from 'classnames'
 import { Metadata, ResolvingMetadata } from 'next'
+import { StyleEntity } from '@/helpers/parseGQL'
 
 type Props = {
   params: { styleSlug: string }
@@ -18,17 +19,12 @@ export async function generateMetadata(
   { params }: Props,
   parent: ResolvingMetadata,
 ): Promise<Metadata> {
-  var data =
+  var data: StyleEntity =
     (await UseServerFetchStyleDetail(params?.styleSlug ?? '')) ?? ({} as any)
-
-  const previousImages = (await parent).openGraph?.images || []
 
   return {
     title: data?.title,
-    description: data?.description,
-    openGraph: {
-      images: [data?.thumbnail?.url, ...previousImages],
-    },
+    description: data?.expect,
     robots: getMetaRobots(),
   }
 }

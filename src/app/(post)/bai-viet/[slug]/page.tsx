@@ -9,6 +9,7 @@ import Gap from '@/components-root/gap'
 import WrapSWRConfig from '@/components-root/swr-wrap'
 import { formatDate, toTitleCase } from '@/helpers'
 import { getMetaRobots } from '@/helpers/method'
+import { BlogEntity } from '@/helpers/parseGQL'
 import {
   UseFetchServerBlogDetail,
   UseFetchServerBlogsRelated,
@@ -24,7 +25,7 @@ export async function generateMetadata(
   parent: ResolvingMetadata,
 ): Promise<Metadata> {
   // hook
-  var data: any | null = await UseFetchServerBlogDetail(params.slug)
+  var data: BlogEntity | null = await UseFetchServerBlogDetail(params.slug)
 
   const previousImages = (await parent).openGraph?.images || []
 
@@ -32,7 +33,7 @@ export async function generateMetadata(
     title: data?.title,
     description: data?.expect,
     openGraph: {
-      images: [data?.thumbnail?.url, ...previousImages],
+      images: [data?.thumbnail?.url ?? '', ...previousImages],
     },
     robots: getMetaRobots(),
   }

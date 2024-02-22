@@ -32,7 +32,7 @@ export async function generateMetadata(
     title: data?.title,
     description: data?.description,
     openGraph: {
-      images: [data?.thumbnail?.url, ...previousImages],
+      images: [data?.thumbnail?.url ?? '', ...previousImages],
     },
     robots: getMetaRobots(),
   }

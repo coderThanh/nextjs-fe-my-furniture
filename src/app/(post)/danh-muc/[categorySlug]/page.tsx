@@ -8,6 +8,7 @@ import { UseServerFetchCategoryDetail } from '@/hooks/use-category'
 import UIBreadcrumb from '@/app/(components)/breadcrumb'
 import classNames from 'classnames'
 import { Metadata, ResolvingMetadata } from 'next'
+import { CategoryEntity } from '@/helpers/parseGQL'
 
 type Props = {
   params: { categorySlug: string }
@@ -18,15 +19,17 @@ export async function generateMetadata(
   { params, searchParams }: Props,
   parent: ResolvingMetadata,
 ): Promise<Metadata> {
-  var data: any = await UseServerFetchCategoryDetail(params.categorySlug)
+  var data: CategoryEntity | null = await UseServerFetchCategoryDetail(
+    params.categorySlug,
+  )
 
   const previousImages = (await parent).openGraph?.images || []
 
   return {
     title: data?.title,
-    description: data?.description,
+    description: data?.expect,
     openGraph: {
-      images: [data?.thumbnail?.url, ...previousImages],
+      images: [data?.thumbnail?.url ?? '', ...previousImages],
     },
     robots: getMetaRobots(),
   }
