@@ -78,10 +78,17 @@
     img {
         display: flex;
         max-width: 100%;
+
+        &+figcaption {
+            background-color: var(--color-neutral1);
+            padding: 14px;
+            margin-top: calc(var(--mb) * -1);
+        }
     }
 
     figcaption {
         text-align: center;
+
     }
 
     .raw-html-embed {
