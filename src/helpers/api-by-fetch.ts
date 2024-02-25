@@ -20,6 +20,12 @@ export const restTransportByFetchBrowser = () => {
         Authorization: token ? `Bearer ${token}` : '',
         'Content-Type': 'application/json',
       },
+      next:
+        process.env.NODE_ENV == 'development'
+          ? {}
+          : {
+              revalidate: 1200,
+            },
       ...config,
     })
   }
@@ -49,6 +55,12 @@ export const restTransportByFetchBrowser = () => {
       headers: {
         Authorization: token ? `Bearer ${token}` : '',
       },
+      next:
+        process.env.NODE_ENV == 'development'
+          ? {}
+          : {
+              revalidate: 1200,
+            },
       ...config,
     })
   }
