@@ -262,7 +262,6 @@ export default function PostDetailPage() {
 
   return (
     <>
-      <Header />
       <UIBreadcrumb name="Nhà trong ngõ nhỏ nhưng có đến 4 mặt tiền, không ồn ào và rất sáng sủa" />
       <section className="single-content">
         <div className="section-inner container">
@@ -323,7 +322,6 @@ export default function PostDetailPage() {
         </div>
       </section>
       <Gap large={100} />
-      <Footer />
     </>
   )
 }
