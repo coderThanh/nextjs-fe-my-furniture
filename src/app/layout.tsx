@@ -19,7 +19,7 @@ export const metadata: Metadata = {
 //
 export default function RootLayout({ children }: { children: ReactNode }) {
   return (
-    <html lang="vi" dir="" className={barlowCondensed.className}>
+    <html lang="vi" className={barlowCondensed.className}>
       <body>
         <WrapProvider>
           <Layout>{children}</Layout>

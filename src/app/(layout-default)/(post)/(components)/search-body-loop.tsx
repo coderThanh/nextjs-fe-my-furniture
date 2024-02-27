@@ -1,5 +1,5 @@
 import UIPaination from '@/app/(components)/pagination'
-import SearchTitle from '@/app/(post)/(components)/search-title'
+import SearchTitle from '@/app/(layout-default)/(post)/(components)/search-title'
 import CardBlog, { CardBlogType } from '@/components-child/card-blog'
 import { Content404 } from '@/components-root/404'
 import MsgDefault from '@/components-root/message'

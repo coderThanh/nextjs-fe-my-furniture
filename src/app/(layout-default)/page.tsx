@@ -10,7 +10,6 @@ import { isConnectAPI } from '@/helpers'
 import { getMetaRobots } from '@/helpers/method'
 import { UseHomeSEO } from '@/hooks/use-home'
 import { Metadata, ResolvingMetadata } from 'next'
-import Header from './(components)/header'
 
 // Example metadata
 // export const metadata: Metadata = {
@@ -44,8 +43,6 @@ export default function Home({}) {
   return (
     <>
       <WrapSWRConfig>
-        <Header />
-
         <Gap large={30} small={20} />
         {wasConnectAPI && <HomeHotBlog />}
         {wasConnectAPI && <HomeBlogsBy />}

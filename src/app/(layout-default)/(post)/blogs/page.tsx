@@ -1,6 +1,6 @@
 import Footer from '@/app/(components)/footer'
 import Header from '@/app/(components)/header'
-import BodyArchiveBlogs from '@/app/(post)/(components)/archive-body-loop'
+import BodyArchiveBlogs from '@/app/(layout-default)/(post)/(components)/archive-body-loop'
 import WrapSWRConfig from '@/components-root/swr-wrap'
 import { DESCRIPTION_PAGE, TITLE_PAGE } from '@/consts/const'
 import { getMetaRobots } from '@/helpers/method'
@@ -25,7 +25,6 @@ export default function CategoryPage({ searchParams }: Props) {
   return (
     <>
       <WrapSWRConfig value={{}}>
-        <Header />
         <UIBreadcrumb name={'Bài viết mới'} />
         <section className="archive-head">
           <div className="container">
@@ -39,7 +38,6 @@ export default function CategoryPage({ searchParams }: Props) {
           </div>
         </section>
         <BodyArchiveBlogs searchOptions={searchParams} />
-        <Footer />
       </WrapSWRConfig>
     </>
   )

@@ -1,3 +1,5 @@
+'use client'
+
 import Footer from '@/app/(components)/footer'
 import Header from '@/app/(components)/header'
 import CardBlog, { CardBlogType } from '@/components-child/card-blog'
@@ -6,43 +8,40 @@ import UIBreadcrumb from '@/app/(components)/breadcrumb'
 import UIPainationDemo from '@/app/(components)/pagination/pagination-demo'
 import classNames from 'classnames'
 
-export default function SearchPage() {
+export default function CategoryPage() {
   return (
     <>
-      <Header />
-      <UIBreadcrumb name={'Search'} />
-      <section className="search-head">
+      <UIBreadcrumb name={'Archive name'} />
+      <section className="archive-head">
         <div className="container">
-          <div className="row justify-content-center">
-            <div className="col col-12 col-sm-12 col-lg-9">
+          <div className="row">
+            <div className="col">
               <div className="col-inner">
-                <h1 className={classNames('search-title')}>
-                  Tìm thấy 52073 kết quả với từ khóa &quot;search key&quot;
-                </h1>
+                <h1 className={classNames('archive-title')}>Read our blog</h1>
               </div>
             </div>
           </div>
         </div>
       </section>
-      <section className="search-loop">
+      <section className="archive-loop">
         <div className="container">
-          <div className="post-wrap row row-gap-y justify-content-center">
+          <div className="post-wrap row row-gap-y row-gap-large">
             {Array(8)
               .fill(null)
               .map((item, index) => {
                 return (
-                  <div className="col col-12  col-lg-9" key={index}>
+                  <div className="col col-12 col-sm-6 col-lg-4" key={index}>
                     <div className="col-inner">
                       <CardBlog
                         slug={ROUTER_URL.blogDetailDemo}
                         thumbnail={`/images/blogs/blog_${index + 1}.jpg`}
                         imgRatio={56.2}
                         imgRadius={10}
-                        type={CardBlogType.vertical}
+                        type={CardBlogType.default}
+                        isShowCate={true}
                         title="'Giảm vật liệu công nghiệp, tăng chất liệu tự nhiên - cách KTS thay đổi không gian sống cho gia chủ"
-                        isShowCate={false}
-                        isShowDate={true}
-                        date={'13/09/2023'}
+                        cateTitle="Category name"
+                        styleTitle="Style name"
                       />
                     </div>
                   </div>
@@ -52,7 +51,6 @@ export default function SearchPage() {
         </div>
       </section>
       <UIPainationDemo />
-      <Footer />
     </>
   )
 }

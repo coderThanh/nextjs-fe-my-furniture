@@ -1,9 +1,8 @@
 import UIBreadcrumb from '@/app/(components)/breadcrumb'
 import Footer from '@/app/(components)/footer'
-import Header from '@/app/(components)/header'
-import BlogHeadArea from '@/app/(post)/(components)/blog-head'
-import SingleBlogRelated from '@/app/(post)/(components)/blog-related'
-import BlogTagArea from '@/app/(post)/(components)/blog-tag'
+import BlogHeadArea from '@/app/(layout-default)/(post)/(components)/blog-head'
+import SingleBlogRelated from '@/app/(layout-default)/(post)/(components)/blog-related'
+import BlogTagArea from '@/app/(layout-default)/(post)/(components)/blog-tag'
 import { Content404 } from '@/components-root/404'
 import Gap from '@/components-root/gap'
 import WrapSWRConfig from '@/components-root/swr-wrap'
@@ -51,7 +50,6 @@ export default async function BlogDetailPage({ params }: Props) {
   return (
     <>
       <WrapSWRConfig>
-        <Header />
         <UIBreadcrumb name={toTitleCase(title ?? '')} />
         {!blog && <Content404 />}
         {blog && (

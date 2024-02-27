@@ -1,8 +1,6 @@
-import Footer from '@/app/(components)/footer'
-import Header from '@/app/(components)/header'
-import BodySearchBlogs from '@/app/(post)/(components)/search-body-loop'
-import WrapSWRConfig from '@/components-root/swr-wrap'
 import UIBreadcrumb from '@/app/(components)/breadcrumb'
+import BodySearchBlogs from '@/app/(layout-default)/(post)/(components)/search-body-loop'
+import WrapSWRConfig from '@/components-root/swr-wrap'
 import { Metadata } from 'next'
 
 export const metadata: Metadata = {
@@ -17,10 +15,8 @@ export default function SearchPage({ searchParams }: Props) {
   return (
     <>
       <WrapSWRConfig value={{}}>
-        <Header />
         <UIBreadcrumb name={'Tìm kiếm'} />
         <BodySearchBlogs searchOptions={searchParams} />
-        <Footer />
       </WrapSWRConfig>
     </>
   )

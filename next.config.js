@@ -42,6 +42,11 @@ const nextConfig = {
         port: '444'
       },
      {
+        protocol: 'http',
+        hostname: 'furmi.net',
+        port: '444'
+      },
+     {
         protocol: 'https',
         hostname: 'www.furmi.net',
         port: '444'
@@ -61,6 +66,9 @@ const nextConfig = {
     ],
     formats: ["image/avif", "image/webp"],
    
+  },
+   compiler: {
+    styledComponents: true,
   },
   webpack(config) {
     // Grab the existing rule that handles SVG imports
