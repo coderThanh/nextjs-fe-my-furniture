@@ -15,7 +15,7 @@ export const restTransportByFetchBrowser = () => {
       method: 'POST',
       credentials: 'include',
       body: JSON.stringify({ query: query, variables: variables }),
-      cache: process.env.NODE_ENV == 'development' ? 'no-store' : 'reload',
+      cache: process.env.NODE_ENV == 'development' ? 'no-store' : undefined,
       headers: {
         Authorization: token ? `Bearer ${token}` : '',
         'Content-Type': 'application/json',
@@ -51,7 +51,7 @@ export const restTransportByFetchBrowser = () => {
     return await fetch(urlRequest.toString(), {
       method: 'GET',
       credentials: 'include',
-      cache: process.env.NODE_ENV == 'development' ? 'no-store' : 'reload',
+      cache: process.env.NODE_ENV == 'development' ? 'no-store' : undefined,
       headers: {
         Authorization: token ? `Bearer ${token}` : '',
       },
