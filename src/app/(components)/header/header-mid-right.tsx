@@ -2,7 +2,6 @@ import AppButton, {
   AppButtonColor,
   AppButtonKind,
 } from '@/components-root/button'
-
 import {
   IconAccount,
   IconCart,
@@ -10,8 +9,9 @@ import {
   IconHearth,
   IconSearch,
 } from '@/components-child/icon'
-import classNames from 'classnames'
 import { classMenuIcon, classMenuItem } from '.'
+
+import classNames from 'classnames'
 import { isConnectAPI } from '@/helpers'
 
 export default function HeaderMidRight({ isShowSearch, handleSearchClick }) {

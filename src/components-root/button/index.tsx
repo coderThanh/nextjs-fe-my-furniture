@@ -1,6 +1,7 @@
-import classNames from 'classnames'
-import AppLink from '../link'
+import { MouseEventHandler, ReactElement } from 'react'
 
+import AppLink from '@/components-root/link'
+import classNames from 'classnames'
 import styles from './button.module.scss'
 
 export const AppButtonKind = {
@@ -25,12 +26,30 @@ export const AppButtonSize = {
   small: 'small',
 }
 
+type AppButtonProps = {
+  kind?: 'text' | 'outline' | 'default' |string
+  color?:
+    | 'primary'
+    | 'white'
+    | 'whiteTransparent'
+    | 'dark'
+    | 'darkTransparent'
+    | 'error'
+    | 'tertiary'
+    | 'secondary'| string
+  url?: string
+  className?: string
+  text?: string
+  size?: 'default' | 'small'
+  children?: ReactElement
+  onClick?: MouseEventHandler<HTMLDivElement>
+}
+
 // HTMLDivElement
-export default function AppButton(props) {
+export default function AppButton(props: AppButtonProps) {
   return (
     <>
       <AppLink
-        url={props.url}
         className={classNames(
           'btn',
           props.className,
@@ -53,10 +72,11 @@ export default function AppButton(props) {
             styles.secondary + ' secondary',
           props.size == AppButtonSize.small && styles.small + ' small',
         )}
+        url={props.url as any}
       >
         <div
           className={classNames('btn-inner', styles.inner)}
-          onClick={() => props.onClick && props.onClick()}
+          onClick={(event) => props.onClick && props.onClick(event)}
         >
           <div className={classNames(styles.content, 'btn-content')}>
             {props.children}

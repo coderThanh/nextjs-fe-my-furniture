@@ -1,6 +1,6 @@
 import { Route } from 'next'
 import Link from 'next/link'
-import { HTMLAttributeAnchorTarget, ReactNode } from 'react'
+import { CSSProperties, HTMLAttributeAnchorTarget, ReactNode } from 'react'
 
 type Props = {
   url?: Route | null
@@ -9,6 +9,7 @@ type Props = {
   rel?: string
   children?: ReactNode
   title?: string
+  style?: CSSProperties
 }
 export default function AppLink({
   url,
@@ -17,23 +18,29 @@ export default function AppLink({
   rel,
   children,
   title,
+  style,
   ...args
 }: Props) {
   return (
     <>
       {url && (
         <Link
-          title={title}
           className={className}
           href={url}
-          target={target}
           rel={rel}
+          style={style}
+          target={target}
+          title={title}
           {...args}
         >
           {children}
         </Link>
       )}
-      {!url && <div className={className}>{children}</div>}
+      {!url && (
+        <div className={className} style={style}>
+          {children}
+        </div>
+      )}
     </>
   )
 }
